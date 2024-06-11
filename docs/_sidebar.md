@@ -1,8 +1,8 @@
 - [Overview](/)
 - <br/>
 - [Docs by Language](/language/)
-  - [JavaScript](https://github.com/use-contiguity/javascript)
-  - [Python](https://github.com/use-contiguity/javascript)
+  - [JavaScript](https://github.com/contiguity/javascript)
+  - [Python](https://github.com/contiguity/python)
 - <br/>
 - [API Reference](/api-reference/)
 - <br/>

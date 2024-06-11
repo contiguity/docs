@@ -17,7 +17,7 @@ Contiguity was designed to not be required to follow certain 'regulations', i.e 
 ?> Contiguity will offer Contiguity Compliance, a service meant to take the burden of managing compliance with privacy/communications laws, in late-2024.
 
 ### Secure your tokens at all times
-It is advisable to never use your account token in production. You can generate throwaway tokens in the [dashboard](https://contiguity.co/dashboard/tokens), that can easily be revoked in the end of misuse by an unauthorized third party.
+It is advisable to never use your account token in production. You can generate throwaway tokens in the [dashboard](https://contiguity.co/dashboard), that can easily be revoked in the end of misuse by an unauthorized third party.
 
 !> If your account token leaks, your only option to mediate the situation is emailing support@contiguity.co
 
@@ -28,7 +28,7 @@ In our free tier, users get (per month):
 
 | Text   	| Email  	| Call  	| Identity 	|
 |--------	|--------	|-------	|----------	|
-| 1,000 	| 5,000 	| 10 mins	| 5 requests    	|
+| 500 	| 1,000 	| 10 mins	| 5 requests    	|
 
 When paying for usage, Contiguity offers simple and affordable pricing for each product:
 

@@ -1,3 +1,3 @@
-- [Sign Up](https://contiguity.co/onboard)
+- [Sign Up](https://contiguity.co/onboard/begin)
 - [Playground](https://playground.contiguity.co/)
 - [Discord](https://discord.gg/Z9K5XAsS7H)
