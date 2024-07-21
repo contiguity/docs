@@ -6,6 +6,17 @@
   - <a href="#/api-reference/text/get" title="Contiguity Docs | Get text"><span class="http-method GET">GET</span>Get text</a>
   - <a href="#/api-reference/text/receive" title="Contiguity Docs | Receive text"><span class="http-method WH">WH</span>Receive text</a>
   - <br/>
+  - <b>iMessage</b>
+  - <a href="#/api-reference/imessage/send" title="Contiguity Docs | Send iMessage"><span class="http-method POST">POST</span>Send iMessage</a>
+  - <a href="#/api-reference/imessage/get" title="Contiguity Docs | Get iMessage"><span class="http-method GET">GET</span>Get iMessage</a>
+  - <a href="#/api-reference/imessage/receive" title="Contiguity Docs | Receive iMessage"><span class="http-method WH">WH</span>Receive iMessage</a>
+  - <br/>
+  - <b>Message Intents</b>
+  - <a href="#/api-reference/message-intents/generate" title="Contiguity Docs | Generate Intent"><span class="http-method POST">POST</span>Generate Intent</a>
+  - <a href="#/api-reference/message-intents/send" title="Contiguity Docs | Send Intent"><span class="http-method POST">POST</span>Send Intent</a>
+  -  <a href="#/api-reference/message-intents/receive" title="Contiguity Docs | Receiving Intents"><span class="http-method WH">WH</span>Receiving Intents</a>
+  - <a href="#/api-reference/message-intents/use" title="Contiguity Docs | Use Intent"><span class="http-method GET">GET</span>Use Intent</a>
+  - <br/>
   - <b>OTP</b>
   - <a href="#/api-reference/otp/send" title="Contiguity Docs | Send OTP"><span class="http-method POST">POST</span>Send OTP</a>
   - <a href="#/api-reference/otp/resend" title="Contiguity Docs | Resend OTP"><span class="http-method POST">POST</span>Resend OTP</a>

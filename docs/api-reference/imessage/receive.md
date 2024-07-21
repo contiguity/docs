@@ -1,5 +1,5 @@
 
-# Receive texts (Enterprise)
+# Receive iMessage (Enterprise)
 Contiguity Enterprise customers who lease Text or iMessage nodes can optionally receive messages, which are forwarded by Contiguity to your application via simple HTTP POST requests.
 
 Your webhook endpoint can be configured in your Enterprise portal.
@@ -16,8 +16,9 @@ Your webhook endpoint can be configured in your Enterprise portal.
   - `to` (string): Your phone number
   - `message` (string): Sender's message content
   - `time` (number): Unix timestamp
+- `type` (string): iMessage or SMS
 
-#### Forwarded Message (Text) Format Example
+#### Forwarded iMessage Format Example
 
 ```json
 {
@@ -28,10 +29,9 @@ Your webhook endpoint can be configured in your Enterprise portal.
     "to": "+112552552555",
     "message": "how's it going?",
     "time": 1713601200
-  }
+  },
+  "type": "imessage"
 }
 ```
 
 Contiguity expects a 200 response when sending webhook notifications.
-
-**Contiguity will soon allow seperate webhooks for iMessage & SMS/RCS**

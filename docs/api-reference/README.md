@@ -46,7 +46,7 @@ While Contiguity's API can scale and is meant to handle millions of requests, it
 ### Respect local laws
 Contiguity was designed to not be required to follow certain 'regulations', i.e A2P 10DLC registration in the US. However, it is still up to you, the user, to follow all laws applicable to you (i.e, in the US, CAN-SPAM) - not Contiguity's.
 
-?> Contiguity will offer Contiguity Compliance, a service meant to take the burden of managing compliance with privacy/communications laws, in late-2024/
+?> Contiguity has launched Contiguity Compliance, an Enterprise service meant to take the burden of managing compliance with privacy/communications laws. Learn more  **[here](https://contiguity.co/compliance)**
 
 ### Secure your tokens at all times
 It is advisable to never use your account token in production. You can generate throwaway tokens in the [dashboard](https://contiguity.co/dashboard), that can easily be revoked in the end of misuse by an unauthorized third party.
