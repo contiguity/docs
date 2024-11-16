@@ -1,9 +1,9 @@
 {
   "$schema": "https://mintlify.com/schema.json",
-  "name": "Starter Kit",
+  "name": "Documentation",
   "logo": {
-    "dark": "/logo/dark.svg",
-    "light": "/logo/light.svg"
+    "dark": "/logo/black.svg",
+    "light": "/logo/white.svg"
   },
   "favicon": "/favicon.svg",
   "colors": {
@@ -18,12 +18,12 @@
   "topbarLinks": [
     {
       "name": "Support",
-      "url": "mailto:hi@mintlify.com"
+      "url": "mailto:help@contiguity.support"
     }
   ],
   "topbarCtaButton": {
     "name": "Dashboard",
-    "url": "https://dashboard.mintlify.com"
+    "url": "https://contiguity.co/dashboard"
   },
   "tabs": [
     {
@@ -35,17 +35,12 @@
     {
       "name": "Documentation",
       "icon": "book-open-cover",
-      "url": "https://mintlify.com/docs"
+      "url": "https://docs.contiguity.co"
     },
     {
-      "name": "Community",
-      "icon": "slack",
-      "url": "https://mintlify.com/community"
-    },
-    {
-      "name": "Blog",
-      "icon": "newspaper",
-      "url": "https://mintlify.com/blog"
+      "name": "Discord",
+      "icon": "discord",
+      "url": "https://discord.gg/Z9K5XAsS7H"
     }
   ],
   "navigation": [
@@ -58,34 +53,101 @@
       ]
     },
     {
-      "group": "Essentials",
+      "group": "Products",
       "pages": [
-        "essentials/markdown",
-        "essentials/code",
-        "essentials/images",
-        "essentials/settings",
-        "essentials/navigation",
-        "essentials/reusable-snippets"
+        "products/text",
+        "products/imessage",
+        "products/whatsapp",
+        "products/email",
+        "products/base",
+        "products/identity",
+        "products/analytics",
+        "products/message-intents"
       ]
     },
     {
-      "group": "API Documentation",
+      "group": "API Reference",
       "pages": [
-        "api-reference/introduction"
+        "api-reference/authentication",
+        "api-reference/errors",
+        "api-reference/rate-limits"
       ]
     },
     {
-      "group": "Endpoint Examples",
+      "group": "Text API",
       "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/delete"
+        "api-reference/text/send-message",
+        "api-reference/text/get-message",
+        "api-reference/text/list-messages"
+      ]
+    },
+    {
+      "group": "iMessage API",
+      "pages": [
+        "api-reference/imessage/send-message",
+        "api-reference/imessage/get-message",
+        "api-reference/imessage/list-messages"
+      ]
+    },
+    {
+      "group": "WhatsApp API",
+      "pages": [
+        "api-reference/whatsapp/send-message",
+        "api-reference/whatsapp/get-message",
+        "api-reference/whatsapp/list-messages"
+      ]
+    },
+    {
+      "group": "Email API",
+      "pages": [
+        "api-reference/email/send-email",
+        "api-reference/email/get-email",
+        "api-reference/email/list-emails"
+      ]
+    },
+    {
+      "group": "Base API",
+      "pages": [
+        "api-reference/base/create-record",
+        "api-reference/base/get-record",
+        "api-reference/base/update-record",
+        "api-reference/base/delete-record",
+        "api-reference/base/list-records"
+      ]
+    },
+    {
+      "group": "Identity API",
+      "pages": [
+        "api-reference/identity/create-user",
+        "api-reference/identity/get-user",
+        "api-reference/identity/update-user",
+        "api-reference/identity/delete-user",
+        "api-reference/identity/list-users"
+      ]
+    },
+    {
+      "group": "Analytics API",
+      "pages": [
+        "api-reference/analytics/track-event",
+        "api-reference/analytics/get-event",
+        "api-reference/analytics/list-events",
+        "api-reference/analytics/get-metrics"
+      ]
+    },
+    {
+      "group": "Message Intents API",
+      "pages": [
+        "api-reference/message-intents/create-intent",
+        "api-reference/message-intents/get-intent",
+        "api-reference/message-intents/update-intent",
+        "api-reference/message-intents/delete-intent",
+        "api-reference/message-intents/list-intents"
       ]
     }
   ],
   "footerSocials": {
-    "x": "https://x.com/mintlify",
-    "github": "https://github.com/mintlify",
-    "linkedin": "https://www.linkedin.com/company/mintsearch"
+    "x": "https://x.com/contiguityco",
+    "github": "https://github.com/contiguityco",
+    "linkedin": "https://www.linkedin.com/company/contiguityco"
   }
 }
