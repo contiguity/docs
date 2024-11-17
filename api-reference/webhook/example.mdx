@@ -1,0 +1,52 @@
+---
+title: "Example Webhook Data"
+sidebarTitle: "Example Event - v1"
+description: "Here you can find the format of the data that Contiguity sends to your webhook endpoint, and some example payloads."
+---
+
+<Warning>
+    This page is for the v1 webhook format, which is no longer used for users registered after November 1st, 2024. For the v2 format, see [Example Webhook Data - v2](/api-reference/webhook/example-v2).
+</Warning>
+
+## Data Format
+```json
+{
+    "message": "" // a human-readable event description
+    "crumbs": {
+        "from": "", // who sent the message to your number
+        "to": "", // which number of yours the message was sent to
+        "message": "", // the body of the message
+        "timestamp": "", // unix timestamp
+        "type": "sms" || "whatsapp" || "imessage"
+    }
+}
+```
+
+This format doesn't support identity, and was only available for users requiring incoming message events.
+
+## Example Payloads
+```json
+{
+    "message": "Incoming message received",
+    "crumbs": {
+        "from": "+1234567890",
+        "to": "1234567890",
+        "message": "Hello, world!",
+        "timestamp": 1715878400,
+        "type": "sms"
+    }
+}
+```
+
+```json
+{
+    "message": "Incoming message received",
+    "crumbs": {
+        "from": "+1234567890",
+        "to": "1234567890",
+        "message": "Hello, world!",
+        "timestamp": 1715878400,
+        "type": "whatsapp"
+    }
+}
+```

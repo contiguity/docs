@@ -1,0 +1,98 @@
+---
+title: "Query | Fetching Data"
+description: "Query your data with ease."
+---
+
+## Basic Queries
+
+<Tabs>
+  <Tab title="JavaScript">
+    ```javascript
+    const results = await myBase.fetch({
+        "is_awesome": true,
+        "age": 25
+    })
+    ```
+  </Tab>
+  <Tab title="Python">
+    ```python
+    results = my_base.fetch({
+        "is_awesome": True,
+        "age": 25
+    })
+    ```
+  </Tab>
+</Tabs>
+
+## Query Operators
+
+The following operators can be used to create complex queries:
+
+| Operator | Description | Example |
+|----------|-------------|---------|
+| `?ne` | Not equal | `{"age?ne": 25}` |
+| `?lt` | Less than | `{"age?lt": 25}` |
+| `?gt` | Greater than | `{"age?gt": 25}` |
+| `?lte` | Less than or equal | `{"age?lte": 25}` |
+| `?gte` | Greater than or equal | `{"age?gte": 25}` |
+| `?pfx` | Prefix | `{"name?pfx": "Jo"}` |
+| `?r` | Range | `{"age?r": [18, 30]}` |
+| `?contains` | Contains | `{"tags?contains": "javascript"}` |
+| `?not_contains` | Not contains | `{"tags?not_contains": "python"}` |
+
+### Complex Query Example
+
+<Tabs>
+  <Tab title="JavaScript">
+    ```javascript
+    const results = await myBase.fetch({
+        "age?gte": 18,
+        "age?lt": 30,
+        "tags?contains": "active",
+        "email?pfx": "john"
+    })
+    ```
+  </Tab>
+  <Tab title="Python">
+    ```python
+    results = my_base.fetch({
+        "age?gte": 18,
+        "age?lt": 30,
+        "tags?contains": "active",
+        "email?pfx": "john"
+    })
+    ```
+  </Tab>
+</Tabs>
+
+## Pagination
+
+<Tabs>
+  <Tab title="JavaScript">
+    ```javascript
+    let lastKey = undefined
+    do {
+        const results = await myBase.fetch(query, {
+            limit: 1000,
+            last: lastKey
+        })
+        // Process results.items
+        lastKey = results.last
+    } while (lastKey)
+    ```
+  </Tab>
+  <Tab title="Python">
+    ```python
+    last_key = None
+    while True:
+        results = my_base.fetch(query, 
+            limit=1000,
+            last=last_key
+        )
+        # Process results.items
+        if not results.last:
+            break
+        last_key = results.last
+    ```
+  </Tab>
+</Tabs>

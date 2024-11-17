@@ -1,0 +1,124 @@
+---
+title: "CRUD using the Base SDK"
+sidebarTitle: "C.R.U.D"
+description: "Create, Read, Update, and Delete your JSON data."
+---
+
+## Creating a Base
+
+First, create a Base instance to start working with your data:
+
+<Tabs>
+  <Tab title="JavaScript">
+    ```javascript
+    const myBase = db.Base("my-awesome-base")
+    ```
+  </Tab>
+  <Tab title="Python">
+    ```python
+    my_base = db.Base("my-awesome-base")
+    ```
+  </Tab>
+</Tabs>
+
+## Adding Data
+
+### Single Item (PUT)
+
+<Tabs>
+  <Tab title="JavaScript">
+    ```javascript
+    const item = {
+        name: "Contiguity",
+        is_awesome: true,
+        coolness_level: 9000
+    }
+    await myBase.put(item, "unique-key-1")
+    ```
+  </Tab>
+  <Tab title="Python">
+    ```python
+    item = {
+        "name": "Contiguity",
+        "is_awesome": True,
+        "coolness_level": 9000
+    }
+    my_base.put(item, "unique-key-1")
+    ```
+  </Tab>
+</Tabs>
+
+### Multiple Items (PUT Many)
+
+<Tabs>
+  <Tab title="JavaScript">
+    ```javascript
+    const items = [
+        { name: "Item 1", value: 100 },
+        { name: "Item 2", value: 200 }
+    ]
+    await myBase.putMany(items)
+    ```
+  </Tab>
+  <Tab title="Python">
+    ```python
+    items = [
+        {"name": "Item 1", "value": 100},
+        {"name": "Item 2", "value": 200}
+    ]
+    my_base.put(items)
+    ```
+  </Tab>
+</Tabs>
+
+## Reading Data (GET)
+
+<Tabs>
+  <Tab title="JavaScript">
+    ```javascript
+    const item = await myBase.get("unique-key-1")
+    console.log(item.name) // Outputs: Contiguity
+    ```
+  </Tab>
+  <Tab title="Python">
+    ```python
+    item = my_base.get("unique-key-1")
+    print(item["name"])  # Outputs: Contiguity
+    ```
+  </Tab>
+</Tabs>
+
+## Updating Data (PATCH)
+
+<Tabs>
+  <Tab title="JavaScript">
+    ```javascript
+    await myBase.update({
+        coolness_level: 9001
+    }, "unique-key-1")
+    ```
+  </Tab>
+  <Tab title="Python">
+    ```python
+    my_base.update({
+        "coolness_level": 9001
+    }, "unique-key-1")
+    ```
+  </Tab>
+</Tabs>
+
+## Deleting Data (DELETE)
+
+<Tabs>
+  <Tab title="JavaScript">
+    ```javascript
+    await myBase.delete("unique-key-1")
+    ```
+  </Tab>
+  <Tab title="Python">
+    ```python
+    my_base.delete("unique-key-1")
+    ```
+  </Tab>
+</Tabs>
+

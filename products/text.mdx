@@ -1,0 +1,87 @@
+---
+title: 'Text'
+description: "Send text messages to your users at scale, using Contiguity."
+---
+## Installing the SDK
+<Steps>
+  <Step title="Install the SDK">
+    Contiguity is working on adding several SDKs over the coming months, including ones for Swift, Java, Dart, and more.
+
+    <Tabs>
+      <Tab title="JavaScript">
+        Use `npm` to install `@contiguity/javascript`
+
+        ```bash
+        npm i @contiguity/javascript
+        ```
+      </Tab>
+      <Tab title="Python">
+        Use `pip` to install `contiguity`
+        ```bash
+        pip install contiguity
+        ```
+      </Tab>
+    </Tabs>
+  </Step>
+
+  <Step title="Initialize the Client">
+    After installation, import Contiguity into your project and give it your token.
+
+    <Tabs>
+      <Tab title="JavaScript">
+        ```javascript
+        const contiguity = require('@contiguity/javascript')
+        const client = contiguity.login("your token here")
+        ```
+
+        You can also initialize it with the optional 'debug' flag, which logs additional information to the console.
+
+        ```javascript
+        const client = contiguity.login("your token here", true)
+        ```
+      </Tab>
+      <Tab title="Python">
+        ```python
+        import contiguity
+        client = contiguity.login("your_token_here")
+        ```
+
+        You can also initialize it with the optional 'debug' flag:
+
+        ```python
+        client = contiguity.login("your_token_here", True)
+        ```
+      </Tab>
+    </Tabs>
+  </Step>
+</Steps>
+
+## Sending a message
+As long as you provide Contiguity a valid token, and provide valid inputs, sending texts will be a breeze.
+
+<Note>
+  Contiguity expects the recipient phone number to be formatted in E.164. You can attempt to pass numbers in formats like NANP, and the SDKs will try their best to convert it.
+</Note>
+
+<Tabs>
+  <Tab title="JavaScript">
+    ```javascript
+    const object = {
+        to: "+15555555555",
+        message: "I sent this text using Contiguity"
+    }
+
+    await client.send.text(object)
+    ```
+  </Tab>
+  <Tab title="Python">
+    ```python
+    text_object = {
+        "to": "+15555555555",
+        "message": "I sent this text using Contiguity"
+    }
+
+    client.send.text(text_object)
+    ```
+  </Tab>
+</Tabs>

@@ -1,0 +1,43 @@
+---
+title: "Verification Reports"
+description: "Fetch verification reports and access detailed identity data."
+---
+
+Verification Reports are generated upon completion of a Verification Session. Even if a Verification Session fails or requires input, a Verification Report will still be generated with a unique Verification Report ID.
+
+## Data Privacy
+Verification Reports contain sensitive information about the user. This includes images of their identity document, their selfie, and extracted data from the document. You should not store this information yourself, and should instead fetch it on a need-based basis from Contiguity.
+
+## Fetching a Verification Report
+You can fetch a Verification Report using the `client.identity.verificationReports.get` method.
+
+<Tabs>
+    <Tab title="JavaScript">
+        ```javascript
+        const verificationReport = await client.identity.verificationReports.get("vr_id");
+        ```
+    </Tab>
+    <Tab title="Python">
+        ```python
+        verification_report = client.identity.verificationReports.get("vr_id")
+        ```
+    </Tab>
+</Tabs>
+
+## Redacting a Verification Report
+When you no longer need Identity Data from a Verification Report, or a user requests that you delete their data, you can redact the Verification Report. This will redact the data from the Verification Report, keeping only the Verification Report ID and metadata.
+
+Redact a Verification Report using the `client.identity.verificationReports.redact` method.
+
+<Tabs>
+    <Tab title="JavaScript">
+        ```javascript
+        await client.identity.verificationReports.redact("vr_id");
+        ```
+    </Tab>
+    <Tab title="Python">
+        ```python
+        client.identity.verificationReports.redact("vr_id")
+        ```
+    </Tab>
+</Tabs>

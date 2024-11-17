@@ -1,0 +1,54 @@
+---
+title: "Base"
+sidebarTitle: "Getting Started"
+description: "A NoSQL database that doesn't need a computer science degree."
+---
+
+## Getting Started
+
+<Steps>
+  <Step title="Install the SDK">
+    <Tabs>
+      <Tab title="JavaScript">
+        Use `npm` to install the Base SDK:
+        ```bash
+        npm install @contiguity/base
+        ```
+      </Tab>
+      <Tab title="Python">
+        Use `pip` to install the Base SDK:
+        ```bash
+        pip install contiguity_base
+        ```
+      </Tab>
+    </Tabs>
+  </Step>
+
+  <Step title="Initialize the Client">
+    After installation, import Base into your project and initialize it with your API key and project ID.
+
+    <Tabs>
+      <Tab title="JavaScript">
+        ```javascript
+        // Using CommonJS
+        const contiguity = require('@contiguity/base')
+        const db = contiguity.db("your-api-key", "your-project-id")
+
+        // Using ES Modules
+        import contiguity from '@contiguity/base'
+        const db = contiguity.db("your-api-key", "your-project-id")
+        ```
+      </Tab>
+      <Tab title="Python">
+        ```python
+        from contiguity_base import connect
+        db = connect("your-api-key", "your-project-id")
+        ```
+      </Tab>
+    </Tabs>
+
+    <Note>
+      You can get an API key from the [Dashboard](https://contiguity.co/dashboard/base). You can get the project ID when you create a new project, or when you click on the project in the Dashboard.
+    </Note>
+  </Step>
+</Steps>

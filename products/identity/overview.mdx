@@ -1,0 +1,72 @@
+---
+title: "Identity"
+sidebarTitle: "Overview"
+description: "Verify your users are who they say they are."
+---
+
+## Overview
+Contiguity Identity provides a seamless solution for verifying identities, preventing fraud, and ensuring trust and safety globally. With Contiguity Identity, you can:
+
+- Authenticate government-issued identity documents from over 100 countries.
+- Match identity documents to selfies, making it harder for fraudsters to use stolen identities.
+- Access detailed verification reports with extracted document data and view collected images, risk analyitics, and more.
+
+All this is delivered through our conversion-optimized UI, eliminating the need for you to build your own interface.
+
+<Warning>
+    Using Contiguity Identity requires you to have an Identity Entitlement. Without it, you will not be able to access Identity. You can request an entitlement in the Dashboard, which has its own onboarding process.
+</Warning>
+
+
+## Unsupported Use Cases
+Contiguity Identity must not be used for the following purposes:
+
+- **Reselling or Distributing Services or Data:** You cannot resell Contiguity Identity as a standalone ID verification service or distribute the data obtained from it to third parties. For instance, if your main business involves selling ID verification services to other companies, this is prohibited.
+- **Handling Personal Health Information (PHI):** If you are a HIPAA-covered entity, you cannot use Contiguity Identity to verify or store PHI protected under the Health Insurance Portability and Accountability Act of 1996. This restriction applies to businesses handling data covered by US HIPAA.
+- **Determining Eligibility for Credit, Employment, Housing, or Insurance:** You cannot use Contiguity Identity for purposes covered by the US Fair Credit Reporting Act (FCRA), such as assessing eligibility for credit, housing, employment, or insurance. This applies to businesses using Identity for activities under the FCRA.
+- **Verifying Minors:** You are not allowed to verify individuals who are minors or under the age of 16.
+
+## Best Practices
+1. **Limit how much information about verifications you store.**
+Whenever possible, store only references to the verification (Verification Report ID, Verification Session ID, etc.), and use the API to fetch sensitive information when you need it. This simplifies your integration, limits your exposure in case of a data breach, and helps you comply with strict privacy laws like GDPR.
+
+2. **Limit how many verification sessions a user can start.**
+To prevent fraudsters from abusing your verification flow and incurring charges on your account, we recommend that you limit the number of times a user can verify themselves.
+
+3. **Offer a verification method other than Identity.**
+Contiguity Identity may not be able to verify all of your users. For example, a user might decline to be verified using biometric technology, attempt to verify with an unsupported document type, or not be covered by Identity’s verification checks. We recommend providing alternative ways to verify your users, such as contacting your support team. In some jurisdictions, privacy laws (such as GDPR) might require you to offer a non-biometric verification option for users who decline to consent to using their biometric information.
+
+### Privacy & Data (Required)
+Contiguity Identity has to collect senstive information, like facial and identity document images. Ensure that your privacy policy tells your customers about all the ways you may use / reuse their Identity Data, and that it is shared with Contiguity. Below is a sample paragraph you can use in your privacy policy:
+
+> We use Contiguity Identity for identity verification. Contiguity collects photos of identity documents, facial images ('selfies'), and extracts data from them (e.g. name, date of birth, document number, address). Contiguity shares this information with us and also uses this information to operate and improve the services they provide, including for fraud detection. You can learn more about Contiguity and read their consumer privacy policy at https://contiguity.co/legal/consumer. 
+
+You must also provide a link to your Privacy Policy to Contiguity. 
+
+## API Availability
+Contiguity Identity is currently available to developers in the following countries below.
+
+#### North America
+<Tooltip tip="United States">🇺🇸</Tooltip> <Tooltip tip="Canada">🇨🇦</Tooltip> <Tooltip tip="Mexico">🇲🇽</Tooltip>
+
+#### Europe
+<Tooltip tip="United Kingdom">🇬🇧</Tooltip> <Tooltip tip="France">🇫🇷</Tooltip> <Tooltip tip="Germany">🇩🇪</Tooltip> <Tooltip tip="Russia">🇷🇺</Tooltip> <Tooltip tip="Italy">🇮🇹</Tooltip> <Tooltip tip="Spain">🇪🇸</Tooltip> <Tooltip tip="Netherlands">🇳🇱</Tooltip> <Tooltip tip="Sweden">🇸🇪</Tooltip> <Tooltip tip="Switzerland">🇨🇭</Tooltip> <Tooltip tip="Belgium">🇧🇪</Tooltip> <Tooltip tip="Austria">🇦🇹</Tooltip> <Tooltip tip="Denmark">🇩🇰</Tooltip> <Tooltip tip="Norway">🇳🇴</Tooltip> <Tooltip tip="Ireland">🇮🇪</Tooltip> <Tooltip tip="Finland">🇫🇮</Tooltip> <Tooltip tip="Portugal">🇵🇹</Tooltip> <Tooltip tip="Greece">🇬🇷</Tooltip> <Tooltip tip="Czech Republic">🇨🇿</Tooltip> <Tooltip tip="Poland">🇵🇱</Tooltip> <Tooltip tip="Hungary">🇭🇺</Tooltip> <Tooltip tip="Romania">🇷🇴</Tooltip> <Tooltip tip="Slovakia">🇸🇰</Tooltip> <Tooltip tip="Slovenia">🇸🇮</Tooltip> <Tooltip tip="Bulgaria">🇧🇬</Tooltip> <Tooltip tip="Croatia">🇭🇷</Tooltip> <Tooltip tip="Lithuania">🇱🇹</Tooltip> <Tooltip tip="Latvia">🇱🇻</Tooltip> <Tooltip tip="Estonia">🇪🇪</Tooltip> <Tooltip tip="Luxembourg">🇱🇺</Tooltip> <Tooltip tip="Cyprus">🇨🇾</Tooltip> <Tooltip tip="Iceland">🇮🇸</Tooltip> <Tooltip tip="Malta">🇲🇹</Tooltip> <Tooltip tip="Monaco">🇲🇨</Tooltip> <Tooltip tip="Andorra">🇦🇩</Tooltip> <Tooltip tip="Albania">🇦🇱</Tooltip>
+
+#### Middle East
+<Tooltip tip="United Arab Emirates">🇦🇪</Tooltip> <Tooltip tip="Israel">🇮🇱</Tooltip> <Tooltip tip="Turkey">🇹🇷</Tooltip> <Tooltip tip="Saudi Arabia">🇸🇦</Tooltip> <Tooltip tip="Qatar">🇶🇦</Tooltip>
+
+#### Asia
+<Tooltip tip="China">🇨🇳</Tooltip> <Tooltip tip="Singapore">🇸🇬</Tooltip> <Tooltip tip="Japan">🇯🇵</Tooltip> <Tooltip tip="South Korea">🇰🇷</Tooltip>
+
+#### Oceania
+<Tooltip tip="Australia">🇦🇺</Tooltip> <Tooltip tip="New Zealand">🇳🇿</Tooltip>
+
+#### South America
+<Tooltip tip="Argentina">🇦🇷</Tooltip> <Tooltip tip="Brazil">🇧🇷</Tooltip>
+
+Don't see your country listed? It's possible that we support it, but it's not yet listed here. You can always join our [Discord](https://discord.gg/Z9K5XAsS7H) or email us at help@contiguity.support.
+
+----
+Customers can access Contiguity Identity to verify their identity in nearly all countries, with the exception of:
+
+<Tooltip tip="Ukraine">🇺🇦</Tooltip> <Tooltip tip="Iran">🇮🇷</Tooltip> <Tooltip tip="Cuba">🇨🇺</Tooltip> <Tooltip tip="North Korea">🇰🇵</Tooltip> <Tooltip tip="Sudan">🇸🇩</Tooltip> <Tooltip tip="Syria">🇸🇾</Tooltip> <Tooltip tip="Yemen">🇾🇪</Tooltip> <Tooltip tip="Somalia">🇸🇴</Tooltip> <Tooltip tip="Libya">🇱🇾</Tooltip> <Tooltip tip="Iraq">🇮🇶</Tooltip> <Tooltip tip="Afghanistan">🇦🇫</Tooltip>

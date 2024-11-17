@@ -1,0 +1,257 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Contiguity Message Intents API",
+        "description": "API documentation for using Contiguity Message Intents, a service designed to replicate the Apple For Business experience. This enterprise-only feature utilizes special URLs and iMessage infrastructure to create interactive message previews.",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "https://api.contiguity.co"
+        }
+    ],
+    "paths": {
+        "/enterprise/message/generate": {
+            "post": {
+                "summary": "Generate a Message Intent (Enterprise-only)",
+                "description": "Generate a special URL that creates an interactive message preview when sent via iMessage.",
+                "operationId": "generateMessageIntent",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "toNumber",
+                                    "fromNumber",
+                                    "embedText",
+                                    "imageURL",
+                                    "companyName",
+                                    "option"
+                                ],
+                                "properties": {
+                                    "toNumber": {
+                                        "type": "string",
+                                        "description": "The recipient's phone number",
+                                        "example": "+1234567890"
+                                    },
+                                    "fromNumber": {
+                                        "type": "string",
+                                        "description": "The sender's phone number (used to reopen conversation after option selection)",
+                                        "example": "+0987654321"
+                                    },
+                                    "embedText": {
+                                        "type": "string",
+                                        "description": "The Message Intent's title (should be fairly short)",
+                                        "example": "Contact a representative"
+                                    },
+                                    "imageURL": {
+                                        "type": "string",
+                                        "description": "URL to an image (must be less than 150px by 150px, 149px works best)",
+                                        "example": "https://example.com/image.jpg?w=149px&h=149px"
+                                    },
+                                    "companyName": {
+                                        "type": "string",
+                                        "description": "Your company's name",
+                                        "example": "Twilio"
+                                    },
+                                    "option": {
+                                        "type": "string",
+                                        "description": "Identifier for this Message Intent",
+                                        "example": "contact_rep"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Message Intent generated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "integer",
+                                            "example": 200
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Generated Message Intent"
+                                        },
+                                        "url": {
+                                            "type": "string",
+                                            "description": "The generated message intent URL",
+                                            "example": "https://api.contiguity.co/enterprise/message/intent?id=xxxxxx&fromNumber=string&toNumber=string&companyName=Twilio&option=text&embedText=title&imageURL=image"
+                                        },
+                                        "options": {
+                                            "type": "object",
+                                            "properties": {
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Twilio"
+                                                },
+                                                "to": {
+                                                    "type": "string",
+                                                    "example": "string"
+                                                },
+                                                "from": {
+                                                    "type": "string",
+                                                    "example": "string"
+                                                },
+                                                "id": {
+                                                    "type": "string",
+                                                    "example": "f033895f34162765431fba4259bc42b7fcf"
+                                                },
+                                                "option": {
+                                                    "type": "string",
+                                                    "example": "contact_rep"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Missing or invalid parameters"
+                    },
+                    "401": {
+                        "description": "Invalid or suspended token provided, or ineligible account"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/send/text": {
+            "post": {
+                "summary": "Send a Message Intent (Enterprise-only)",
+                "description": "Send a generated Message Intent URL via iMessage.\n\nThe recipient's phone number must be in E.164 format with country codes. Only set `intent` to true when sending Message Intents, and do not include any other text with the intent.",
+                "operationId": "sendMessageIntent",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "to",
+                                    "message",
+                                    "beta_features"
+                                ],
+                                "properties": {
+                                    "to": {
+                                        "type": "string",
+                                        "description": "Recipient's phone number in E.164 format",
+                                        "example": "+1234567890"
+                                    },
+                                    "message": {
+                                        "type": "string",
+                                        "description": "The Message Intent URL generated",
+                                        "example": "https://api.contiguity.co/enterprise/message/intent?id=xxxxxx&fromNumber=string&toNumber=string&companyName=Twilio&option=text&embedText=title&imageURL=image"
+                                    },
+                                    "beta_features": {
+                                        "type": "object",
+                                        "required": ["imessage", "intent"],
+                                        "properties": {
+                                            "from": {
+                                                "type": "string",
+                                                "description": "The number you'd like to send from (iMessage)",
+                                                "example": "+1234567890"
+                                            },
+                                            "imessage": {
+                                                "type": "boolean",
+                                                "description": "Must be true for Message Intents",
+                                                "example": true
+                                            },
+                                            "fallback": {
+                                                "type": "boolean",
+                                                "description": "Currently unavailable",
+                                                "example": false
+                                            },
+                                            "intent": {
+                                                "type": "boolean",
+                                                "description": "Must be true for Message Intents",
+                                                "example": true
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Message Intent sent successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Successfully sent"
+                                        },
+                                        "crumbs": {
+                                            "type": "object",
+                                            "properties": {
+                                                "plan": {
+                                                    "type": "string",
+                                                    "example": "unlimited"
+                                                },
+                                                "quota": {
+                                                    "type": "integer",
+                                                    "example": 12
+                                                },
+                                                "type": {
+                                                    "type": "string",
+                                                    "example": "imessage"
+                                                },
+                                                "ad": {
+                                                    "type": "boolean",
+                                                    "example": false
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Missing parameters"
+                    },
+                    "401": {
+                        "description": "Invalid or suspended token"
+                    },
+                    "500": {
+                        "description": "Sending failed or internal errors occurred"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "description": "Authentication using a Bearer Token. Specify `Authorization: Token YOUR_TOKEN`. `Bearer` is allowed."
+            }
+        }
+    }
+}

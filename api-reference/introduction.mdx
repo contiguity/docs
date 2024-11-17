@@ -1,0 +1,85 @@
+---
+title: 'Introduction'
+description: "We can't wait to see what you build with Contiguity's API."
+---
+
+## Getting Started
+Use of Contiguity's services requires an account to be made with Contiguity. This, apart from needing a connection to the internet, is all you need to begin using Contiguity.
+
+<CardGroup cols={1}>
+  <Card
+    title="Create an Account"
+    icon="user-plus"
+    href="https://contiguity.co/onboard/begin"
+  >
+    Sign up for a Contiguity account to access our services
+  </Card>
+</CardGroup>
+
+<Note>
+    The API accepts **both** JSON and form-encoded data. Make sure you set the `Content-Type` header.
+</Note>
+
+## Base URLs
+When sending requests, the base URL for your requests will likely be:
+```
+https://api.contiguity.co/
+```
+
+However, for some data or requests, you may encounter base URLs such as:
+<AccordionGroup>
+  <Accordion title="orwell.contiguity.co">
+    You'd make requests here if you're fetching data from our analytics platform, Orwell.
+  </Accordion>
+
+  <Accordion title="api.identity.contiguity.co">
+    You'd make requests here when using our identity service, Identity.
+  </Accordion>
+
+  <Accordion title="api.base.contiguity.co">
+    You'd make requests here when using our NoSQL database service, Base.
+  </Accordion>
+
+  <Accordion title="api.compliance.contiguity.co">
+    You'd make requests here when using our regulatory compliance service, Compliance.
+  </Accordion>
+</AccordionGroup>
+
+We'll let you know if you're sending a request to a base URL different from `api.contiguity.co`.
+
+## Authentication
+When using the API, attach an `X-API-KEY` header that's equal to `Token YOUR_TOKEN_HERE` in each request.
+
+<Note>
+    Authentication is required for most endpoints Contiguity provides.
+</Note>
+
+## API Best Practices
+
+### Avoid "spamming" the API
+While Contiguity's API can scale and is meant to handle millions of requests, it still rate limits users beyond a certain amount of requests per second. Avoid, for example, polling `/otp/verify` with every digit your user types - instead wait for all 6 digits before requesting verification.
+
+### Respect local laws
+Contiguity was designed to not be required to follow certain 'regulations', i.e A2P 10DLC registration in the US. However, it is still up to you, the user, to follow all laws applicable to you (i.e, in the US, CAN-SPAM) - not Contiguity's.
+
+<Card
+    title="Compliance"
+    icon="scale-balanced"
+    href="https://contiguity.co/compliance"
+  >
+    Contiguity has launched Contiguity Compliance, an Enterprise service meant to take the burden of managing compliance with privacy/communications laws.
+</Card>
+
+### Secure your tokens at all times
+It is advisable to never use your account token in production. You can generate throwaway tokens in the [dashboard](https://contiguity.co/dashboard), that can easily be revoked in the end of misuse by an unauthorized third party.
+
+<Card
+    title="Account Token Leak"
+    icon="lock"
+    href="mailto:support@contiguity.co"
+  >
+    If your account token leaks, your only option to mediate the situation is emailing help@contiguity.support immediately.
+</Card>
+
+## API Status
+Contiguity strives for >99.98% uptime. In the event Contiguity begins to return any `5xx` error, check Contiguity's [status page](https://status.contiguity.co). If an incident hasn't been marked as `Investigating`, please notify Contiguity immediately via email (help@contiguity.support) or [Discord](https://discord.gg/pCuTaY84Vy)

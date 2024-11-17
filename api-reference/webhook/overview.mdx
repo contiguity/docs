@@ -1,0 +1,189 @@
+---
+title: "Overview"
+description: "Listen to events from Contiguity on your webhook endpoint, like incoming messages, completed Identity verifications, and more to automatically trigger reactions."
+---
+
+When building applications using Contiguity's API, you might want your applications to receive events as they occur. This way, you can automatically trigger reactions to certain events. 
+
+Webhooks are extremely powerful -- for example, you could to automatically send a thank you message to a user when they successfully verify their identity. Or, you could build a chatbot that replies to incoming messages.
+
+## Getting Started
+To get started with Contiguity Webhooks, you'll need to:
+
+1. Create a webhook endpoint that receives POST requests and is secured with HTTPS.
+2. Test your webhook endpoint by sending a test request with sample data.
+3. Register your webhook endpoint with Contiguity using the [Dashboard](https://dashboard.contiguity.co) or [API](https://docs.contiguity.co/api-reference/webhook/register).
+
+<Note>
+    As of November 1st, 2024, webhook endpoints must be secured with HTTPS to protect sensitive data, like Identity verification reports. Webhook Signing will be available in Q1 2025.
+</Note>
+
+## Creating a Webhook Endpoint
+
+<Tabs>
+  <Tab title="Node.js">
+    ```javascript
+    const express = require('express');
+    const app = express();
+    app.use(express.json());
+
+    app.post('/contiguity/webhook', (req, res) => {
+      const event = req.body;
+
+      switch (event.type) {
+        case 'communications.incoming.sms':
+          // Handle incoming SMS
+          console.log('Received SMS:', event.data);
+          break;
+        
+        case 'communications.incoming.imessage':
+          // Handle incoming iMessage
+          console.log('Received iMessage:', event.data);
+          break;
+        
+        case 'identity.verification_session.verified':
+          // Handle verified identity session
+          console.log('Identity verified:', event.data);
+          break;
+
+        default:
+          console.log('Unhandled event:', event.type);
+      }
+
+      res.status(200).send('OK');
+    });
+
+    app.listen(3000, () => {
+      console.log('Webhook server running on port 3000');
+    });
+    ```
+  </Tab>
+
+  <Tab title="Python">
+    ```python
+    from flask import Flask, request
+    app = Flask(__name__)
+
+    @app.route('/contiguity/webhook', methods=['POST'])
+    def webhook():
+        event = request.json
+
+        match event['type']:
+            case 'communications.incoming.sms':
+                # Handle incoming SMS
+                print(f"Received SMS: {event['data']}")
+            
+            case 'communications.incoming.imessage':
+                # Handle incoming iMessage
+                print(f"Received iMessage: {event['data']}")
+            
+            case 'identity.verification_session.verified':
+                # Handle verified identity session
+                print(f"Identity verified: {event['data']}")
+                
+            case _:
+                print(f"Unhandled event: {event['type']}")
+
+        return 'OK', 200
+
+    if __name__ == '__main__':
+        app.run(port=3000)
+    ```
+  </Tab>
+
+  <Tab title="Go">
+    ```go
+    package main
+
+    import (
+        "encoding/json"
+        "fmt"
+        "net/http"
+    )
+
+    type Event struct {
+        Type string                 `json:"type"`
+        Data map[string]interface{} `json:"data"`
+    }
+
+    func webhookHandler(w http.ResponseWriter, r *http.Request) {
+        var event Event
+        if err := json.NewDecoder(r.Body).Decode(&event); err != nil {
+            http.Error(w, err.Error(), http.StatusBadRequest)
+            return
+        }
+
+        switch event.Type {
+        case "communications.incoming.sms":
+            // Handle incoming SMS
+            fmt.Printf("Received SMS: %v\n", event.Data)
+        
+        case "communications.incoming.imessage":
+            // Handle incoming iMessage
+            fmt.Printf("Received iMessage: %v\n", event.Data)
+        
+        case "identity.verification_session.verified":
+            // Handle verified identity session
+            fmt.Printf("Identity verified: %v\n", event.Data)
+            
+        default:
+            fmt.Printf("Unhandled event: %v\n", event.Type)
+        }
+
+        w.WriteHeader(http.StatusOK)
+        w.Write([]byte("OK"))
+    }
+
+    func main() {
+        http.HandleFunc("/contiguity/webhook", webhookHandler)
+        fmt.Println("Webhook server running on port 3000")
+        http.ListenAndServe(":3000", nil)
+    }
+    ```
+  </Tab>
+
+  <Tab title="Ruby">
+    ```ruby
+    require 'sinatra'
+    require 'json'
+
+    post '/contiguity/webhook' do
+      event = JSON.parse(request.body.read)
+
+      case event['type']
+      when 'communications.incoming.sms'
+        # Handle incoming SMS
+        puts "Received SMS: #{event['data']}"
+      
+      when 'communications.incoming.imessage'
+        # Handle incoming iMessage
+        puts "Received iMessage: #{event['data']}"
+      
+      when 'identity.verification_session.verified'
+        # Handle verified identity session
+        puts "Identity verified: #{event['data']}"
+      
+      else
+        puts "Unhandled event: #{event['type']}"
+      end
+
+      status 200
+      body 'OK'
+    end
+    ```
+  </Tab>
+</Tabs>
+
+## Best Practices
+
+### Quickly return a 2xx response
+Your webhook endpoint must quickly return a 2xx response (any successful HTTP status code) to Contiguity. If your webhook endpoint takes too long to respond, Contiguity may assume it's failed and retry sending the event at a later time.*
+For example, you should return a response **before** processing and replying to a user's message.
+
+<Warning>
+*Contiguity does not guarantee webhook retries. If you do not respond to a webhook event, or respond with a non-2xx status code, Contiguity may not retry certain events, or stop sending events to your endpoint entirely.
+</Warning>
+
+### Handle events asynchronously
+Configure your webhook endpoint to process incoming events with an asynchronous queue. You might encounter scalability issues if you choose to process events synchronously. Any large spike in webhook deliveries (for example, increased incoming messages or more identity verifications than usual) might overwhelm your endpoint host.
+Asynchronous queues allow you to process the concurrent events at a rate your system can support.

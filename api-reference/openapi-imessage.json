@@ -1,0 +1,132 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Contiguity iMessage API",
+        "description": "API documentation for using Contiguity's iMessage API. This enterprise-only feature allows sending iMessages through configured nodes in the Enterprise Portal.",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "https://api.contiguity.co"
+        }
+    ],
+    "paths": {
+        "/send/text": {
+            "post": {
+                "summary": "Send iMessage",
+                "description": "Send iMessages.",
+                "operationId": "sendIMessage",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "to",
+                                    "message",
+                                    "beta_features"
+                                ],
+                                "properties": {
+                                    "to": {
+                                        "type": "string",
+                                        "description": "Recipient's phone number in E.164 format",
+                                        "example": "+1234567890"
+                                    },
+                                    "message": {
+                                        "type": "string",
+                                        "description": "Content of the message",
+                                        "example": "Hello, this is a test iMessage."
+                                    },
+                                    "beta_features": {
+                                        "type": "object",
+                                        "required": ["imessage"],
+                                        "properties": {
+                                            "from": {
+                                                "type": "string",
+                                                "description": "The number you'd like to send from (iMessage)",
+                                                "example": "1234567890"
+                                            },
+                                            "imessage": {
+                                                "type": "boolean",
+                                                "description": "Enable iMessage sending",
+                                                "example": true
+                                            },
+                                            "fallback": {
+                                                "type": "boolean",
+                                                "description": "Should Contiguity send your message via SMS if iMessage fails?",
+                                                "example": false
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Message sent successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Successfully sent"
+                                        },
+                                        "crumbs": {
+                                            "type": "object",
+                                            "properties": {
+                                                "plan": {
+                                                    "type": "string",
+                                                    "example": "unlimited"
+                                                },
+                                                "quota": {
+                                                    "type": "integer",
+                                                    "example": 12
+                                                },
+                                                "type": {
+                                                    "type": "string",
+                                                    "example": "imessage"
+                                                },
+                                                "ad": {
+                                                    "type": "boolean",
+                                                    "example": false
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Missing parameters"
+                    },
+                    "401": {
+                        "description": "Invalid or suspended token"
+                    },
+                    "500": {
+                        "description": "Sending failed or internal errors occurred"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "description": "Authentication using a Bearer Token. Specify `Authorization: Token YOUR_TOKEN`. `Bearer` is allowed."
+            }
+        }
+    }
+}

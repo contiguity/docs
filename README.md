@@ -1,12 +1,32 @@
-<p align='center'><img src="https://contiguity.co/assets/icon-black.png" height="150px"/></p>
-<h1 align='center'>docs.contiguity.co</h1>
+# Mintlify Starter Kit
 
-<p align='center'>
-    <img display="inline-block" src="https://img.shields.io/badge/Runs%20on-Pages-black?style=for-the-badge" />
-    <img display="inline-block" src="https://img.shields.io/badge/Made%20with-Docsify-blue?style=for-the-badge" />
-</p>
-<p align='center'>Contiguity's official documentation, all in one place.</p>
+Click on `Use this template` to copy the Mintlify starter kit. The starter kit contains examples including
 
+- Guide pages
+- Navigation
+- Customizations
+- API Reference pages
+- Use of popular components
 
-## Find any issues?
-Feel free to open a PR to clarify / add / remove content! Or, open an issue and we'll fix it.
+### Development
+
+Install the [Mintlify CLI](https://www.npmjs.com/package/mintlify) to preview the documentation changes locally. To install, use the following command
+
+```
+npm i -g mintlify
+```
+
+Run the following command at the root of your documentation (where mint.json is)
+
+```
+mintlify dev
+```
+
+### Publishing Changes
+
+Install our Github App to autopropagate changes from youre repo to your deployment. Changes will be deployed to production automatically after pushing to the default branch. Find the link to install on your dashboard. 
+
+#### Troubleshooting
+
+- Mintlify dev isn't running - Run `mintlify install` it'll re-install dependencies.
+- Page loads as a 404 - Make sure you are running in a folder with `mint.json`

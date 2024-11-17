@@ -1,0 +1,268 @@
+---
+title: "Verification Sessions"
+description: "Create verification sessions and collect identity data."
+---
+
+## Before you begin
+
+1. Make sure your account is on a plan that supports Identity - either PAYG (Pay-As-You-Go), Unlimited, or Enterprise.
+2. Register for an Identity Entitlement in the Dashboard. This onboarding process is separate from your main Contiguity account onboarding.
+
+
+## How it's going to work
+Contiguity Identity handles the heavy lifting - all you need to do is redirect your customer to a unique session URL that Contiguity provides.
+
+<Steps>
+    <Step title="Add simple UI to your site">
+        Add a verification button to your webpage that pings your API to generate a verification session, and then redirects to Contiguity Identity.
+    </Step>
+    <Step title="Add a webhook to your account">
+        Listen to events as they occur in the verification flow, such as when a user submits their identity documents, or when the verification is complete.
+    </Step>
+    <Step title="Handle verification results">
+        Use the information Contiguity provides to you to do whatever you need to do.
+    </Step>
+</Steps>
+
+## Getting Started
+### Install the SDK 
+Contiguity is working on adding several SDKs over the coming months, including ones for Swift, Java, Dart, and more.
+
+SDKs not available in the language you need? You can use the [Identity API](/api-reference/identity) directly.
+
+<Steps>
+  <Step title="Install the SDK">
+    <Tabs>
+      <Tab title="JavaScript">
+        Use `npm` to install `@contiguity/javascript`
+
+        ```bash
+        npm i @contiguity/javascript
+        ```
+      </Tab>
+      <Tab title="Python">
+        Use `pip` to install `contiguity`
+        ```bash
+        pip install contiguity
+        ```
+      </Tab>
+    </Tabs>
+  </Step>
+
+  <Step title="Initialize the Client">
+    After installation, import Contiguity into your project and give it your token.
+
+    <Tabs>
+      <Tab title="JavaScript">
+        ```javascript
+        const contiguity = require('@contiguity/javascript')
+        const client = contiguity.login("your token here")
+        ```
+
+        You can also initialize it with the optional 'debug' flag, which logs additional information to the console.
+
+        ```javascript
+        const client = contiguity.login("your token here", true)
+        ```
+      </Tab>
+      <Tab title="Python">
+        ```python
+        import contiguity
+        client = contiguity.login("your_token_here")
+        ```
+
+        You can also initialize it with the optional 'debug' flag:
+
+        ```python
+        client = contiguity.login("your_token_here", True)
+        ```
+      </Tab>
+    </Tabs>
+  </Step>
+</Steps>
+
+### Create a Verification Session
+You will need a server-side endpoint to create a Verification Session, as this prevents malicious users from overriding verification options and incurring charges on your account. Add authentication to this endpoint by including a client reference in the session metadata, or by storing the Verification Session ID in your database.
+
+#### Example Request
+<Tabs>
+  <Tab title="JavaScript">
+    ```javascript
+    const verificationSession = await client.identity.verificationSessions.create({
+        type: "document",
+        options: {
+            allowed_document_types: ["passport", "id_card", "driving_license"], 
+            require_live_capture: true,
+            require_selfie: true,
+        },
+        return_url: "https://your-website.com/verify-callback"
+    })
+
+    return verificationSession.url // return ONLY the session URL to the frontend
+    ```
+  </Tab>
+  <Tab title="Python">
+    ```python
+    verification_session = client.identity.verificationSessions.create(
+        type="document",
+        options={
+            "allowed_document_types": ["passport", "id_card", "driving_license"],
+            "require_live_capture": True,
+            "require_selfie": True,
+        },
+        return_url="https://your-website.com/verify-callback"
+    )
+
+    return verification_session.url # return ONLY the session URL to the frontend
+    ```
+  </Tab>
+</Tabs>
+
+This will generate a Verification Session object, which contains a URL that you will need to redirect the user to begin the verification process.
+
+<Warning>
+    The session URL is single-use and expires after 24 hours. Don't store it, log it, embed it in a URL, or expose it to anyone other than the end user.
+</Warning>
+
+#### Parameters
+<AccordionGroup>
+    <Accordion title={`type`}>
+        The type of verification session to create. Currently, only `document` is supported.
+    </Accordion>
+    <Accordion title={`client_reference_id`}>
+        A unique identifier for the user. This is useful if you want to link the Verification Session to a user in your database.
+    </Accordion>
+    <Accordion title={`metadata`}>
+        Any key-value pairs you want to store with the verification session.
+    </Accordion>
+    <Accordion title={`options`}>
+        Options for the verification session.
+    </Accordion>
+    <Accordion title={`options.allowed_document_types`}>
+        An array of document types that the user can upload. Available options are `passport`, `id_card`, and `driving_license`.
+    </Accordion>
+    <Accordion title={`options.require_live_capture`}>
+        Whether to require the user to capture their document live with their device's camera.
+    </Accordion>
+    <Accordion title={`options.require_selfie`}>
+        Whether to require the user to take a selfie.
+    </Accordion>
+    <Accordion title={`options.verify_phone_number`}>
+        Whether to verify the user's phone number.
+    </Accordion>
+    <Accordion title={`options.verify_email`}>
+        Whether to verify the user's email.
+    </Accordion>
+    <Accordion title={`return_url`}>
+        The URL to redirect the user to after they complete the verification.
+    </Accordion>
+</AccordionGroup>
+
+### Get a Verification Session
+Sometimes, you may need to get a Verification Session that you previously created. You can do this by calling the `get` method on `verificationSessions` with the Verification Session ID.
+
+<Tabs>
+  <Tab title="JavaScript">
+    ```javascript
+    const verificationSession = await client.identity.verificationSessions.get("vs_id")
+    ```
+  </Tab>
+  <Tab title="Python">
+    ```python
+    verification_session = client.identity.verificationSessions.get("vs_id")
+    ```
+  </Tab>
+</Tabs>
+
+### Cancelling a Verification Session
+You can cancel a Verification Session using the `client.identity.verificationSessions.cancel` method.
+
+<Tabs>
+  <Tab title="JavaScript">
+    ```javascript
+    await client.identity.verificationSessions.cancel("vs_id");
+    ```
+  </Tab>
+  <Tab title="Python">
+    ```python
+    client.identity.verificationSessions.cancel("vs_id")
+    ```
+  </Tab>
+</Tabs>
+
+## Handling Verification Session Outcomes
+As listed in [Webhook v2 Events](https://localhost:3001/api-reference/webhook/example-v2#events), you can listen for events as they occur in the verification flow. Verification Session outcomes can be:
+
+- `identity.verification_session.verified`
+- `identity.verification_session.failed`
+- `identity.verification_session.requires_input`
+- `identity.verification_session.manually_approved`
+- `identity.verification_session.manually_denied`
+
+### Handling Successful Verification
+This event is sent when Contiguity has successfully verified the user's identity. You can use this event to mark the user as verified in your database, or to fetch more information about the user using the Verification Report ID.
+
+### Handling Verification Requires Input 
+An `identity.verification_session.requires_input` event is sent one at least one of the checks Contiguity performs failed. When receiving this event, you'll have access to `error.code` and `error.message` to help you understand why the verification requires your input.
+You can review the user's information in the Dashboard to approve or deny them at any time.
+
+#### Error Codes 
+<Tabs>
+    <Tab title="Session">
+        <AccordionGroup>
+            <Accordion title={`consent_declined`}>
+                The user declined to be verified by Contiguity.
+            </Accordion>
+            <Accordion title={`under_supported_age`}>
+                This user can't be verified because they are underage. Contiguity doesn't verify users under the age of majority in their country of residence.
+            </Accordion>
+            <Accordion title={`country_not_supported`}>
+                This user can't be verified because the ID from their country is not supported.
+            </Accordion>
+        </AccordionGroup>
+    </Tab>
+    <Tab title="Document">
+        <AccordionGroup>
+            <Accordion title={`document_expired`}>
+                The document the user uploaded is expired.
+            </Accordion>
+            <Accordion title={`document_type_not_supported`}>
+                The document the user uploaded is not supported.
+            </Accordion>
+        </AccordionGroup>
+    </Tab>
+    <Tab title="Selfie">
+        <AccordionGroup>
+            <Accordion title={`selfie_document_missing_photo`}>
+                The document the user uploaded does not have a photo of their face.
+            </Accordion>
+            <Accordion title={`selfie_document_mismatch`}>
+                The face on the document the user uploaded does not match their selfie.
+            </Accordion>
+            <Accordion title={`selfie_manipulated`}>
+                The selfie the user captured has been manipulated.
+            </Accordion>
+        </AccordionGroup>
+    </Tab>
+    <Tab title="Fraud Detection Triggered">
+        <AccordionGroup>
+            <Accordion title={`high_fraud_risk`}>
+                Contiguity uses advanced machine learning to detect and prevent fraud. The `high_fraud_risk` event is sent when our ML models have identified a potential concern about the user's authenticity. For example, this might occur if the user verified their phone number, but the carrier-provided data does not match their ID. Another example is if the user submitted documents and information while their activity originates from a country thousands of miles away that is deemed high-risk.
+
+                **Contiguity does not recommend manually approving users with high fraud risk.** However, machine learning is not perfect, and users may be incorrectly flagged. Make sure to request additional information from the user before approving them.
+            </Accordion>
+            <Accordion title={`reported_as_fraud`}>
+                Contiguity has seen this person before, and a previous Contiguity Identity user has reported them as potentially fraudulent to notify Contiguity and to better train our algorithms. Contiguity treats all fraud reports as high-risk.
+            </Accordion>
+        </AccordionGroup>
+    </Tab>
+</Tabs>
+
+Depending on your use case, you might want to allow your users to retry the verification if it fails. We recommend that you limit the amount of submission attempts.
+When handling this event, you might also consider notifying the user that their verification failed, opening a support ticket for them, or providing them an alternative verification method.
+
+### Handling Failed Verification
+The `identity.verification_session.failed` event is sent when Contiguity has failed to verify the user's identity, and believes that the user is not who they say they are, with accuracy greater than 99%. 
+This includes an obviously fake ID, attempting to circumvent selfie verification (i.e. using a printed out photo), or other obvious attempts to circumvent the verification process.
+
+You can use this event to notify the user that their verification failed, and to provide them with an alternative verification method.

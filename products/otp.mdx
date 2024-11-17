@@ -1,0 +1,155 @@
+---
+title: 'One-Time Passwords via SMS'
+sidebarTitle: "OTP"
+description: "Send and verify one-time passwords (OTPs) at scale, using Contiguity."
+---
+Contiguity offers a free OTP API that simplifies phone number verification using OTPs via SMS, which eliminates the need to develop custom logic. Gone are the days of paying for this simple feature.
+
+<Warning>
+    Contiguity still bills you for the text messages on our pay-as-you-go tier, includes them in Unlimited, and subtracts them from your quota if you're on the Free tier. 
+    
+    We don't charge extra for the OTP API.
+</Warning>
+
+## Installing the SDK
+<Steps>
+<Step title="Install the SDK">
+    Contiguity is working on adding several SDKs over the coming months, including ones for Swift, Java, Dart, and more.
+
+    <Tabs>
+      <Tab title="JavaScript">
+        Use `npm` to install `@contiguity/javascript`
+
+        ```bash
+        npm i @contiguity/javascript
+        ```
+      </Tab>
+      <Tab title="Python">
+        Use `pip` to install `contiguity`
+        ```bash
+        pip install contiguity
+        ```
+      </Tab>
+    </Tabs>
+  </Step>
+
+  <Step title="Initialize the Client">
+    After installation, import Contiguity into your project and give it your token.
+
+    <Tabs>
+      <Tab title="JavaScript">
+        ```javascript
+        const contiguity = require('@contiguity/javascript')
+        const client = contiguity.login("your token here")
+        ```
+
+        You can also initialize it with the optional 'debug' flag:
+
+        ```javascript
+        const client = contiguity.login("your token here", true)
+        ```
+      </Tab>
+      <Tab title="Python">
+        ```python
+        import contiguity
+        client = contiguity.login("your_token_here")
+        ```
+
+        You can also initialize it with the optional 'debug' flag:
+
+        ```python
+        client = contiguity.login("your_token_here", True)
+        ```
+      </Tab>
+    </Tabs>
+  </Step>
+</Steps>
+
+## Sending and Verifying OTPs
+<Steps>
+<Step title="Send an OTP">
+    To verify a user's phone number, you'll first need to send them an OTP.
+
+    <Tabs>
+      <Tab title="JavaScript">
+        ```javascript
+        const otp_id = await client.otp.send({ 
+            to: "+15555555555", 
+            language: "en", 
+            name: "Contiguity" 
+        })
+        ```
+      </Tab>
+      <Tab title="Python">
+        ```python
+        otp_id = client.otp.send({
+            'to': "+15555555555",
+            'language': "en",
+            'name': "Contiguity"
+        })
+        ```
+      </Tab>
+    </Tabs>
+
+    <Note>
+      The `name` parameter is optional, but recommended. It customizes the message to say "Your [name] code is...", e.g. "Your Twilio code is..."
+    </Note>
+  </Step>
+
+  <Step title="Verify the Code">
+    When your user inputs the code, verify it using the OTP ID from the previous step.
+
+    <Tabs>
+      <Tab title="JavaScript">
+        ```javascript
+        const verify = await client.otp.verify({
+            otp_id: otp_id,  // from the previous step
+            otp: input       // the 6 digits your user inputted
+        })
+        ```
+      </Tab>
+      <Tab title="Python">
+        ```python
+        verify = client.otp.verify({
+            'otp_id': otp_id,  # from the previous step
+            'otp': input       # the 6 digits your user inputted
+        })
+        ```
+      </Tab>
+    </Tabs>
+
+    <Note>
+      The verification will return a boolean (true/false). OTPs expire 15 minutes after sending.
+    </Note>
+  </Step>
+
+  <Step title="Resend if Needed">
+    If needed, you can resend an OTP using the original OTP ID.
+
+    <Tabs>
+      <Tab title="JavaScript">
+        ```javascript
+        const resend = await client.otp.resend({
+            otp_id: otp_id  // from the first step
+        })
+        ```
+      </Tab>
+      <Tab title="Python">
+        ```python
+        resend = client.otp.resend({
+            'otp_id': otp_id  # from the first step
+        })
+        ```
+      </Tab>
+    </Tabs>
+
+    <Note>
+      Resending an OTP does not renew its expiry time.
+    </Note>
+  </Step>
+</Steps>
+
+### Supported Languages
+Contiguity currently supports 33 languages for OTPs, including:
+
+ `English (en)`, `Afrikaans (af)`, `Arabic (ar)`, `Catalan (ca)`, `Chinese / Mandarin (zh)`, `Cantonese (zh-hk)`, `Croatian (hr)`, `Czech (cs)`, `Danish (da)`, `Dutch (nl)`, `Finnish (fi)`, `French (fr)`, `German (de)`, `Greek (el)`, `Hebrew (he)`, `Hindi (hi)`, `Hungarian (hu)`, `Indonesian (id)`, `Italian (it)`, `Japanese (ja)`, `Korean (ko)`, `Malay (ms)`, `Norwegian (nb)`, `Polish (pl)`, `Portuguese - Brazil (pt-br)`, `Portuguese (pt)`, `Romanian (ro)`, `Russian (ru)`, `Spanish (es)`, `Swedish (sv)`, `Tagalog (tl)`, `Thai (th)`, `Turkish (tr)`, and `Vietnamese (vi)`

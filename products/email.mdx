@@ -1,0 +1,125 @@
+---
+title: 'Email'
+description: "Send emails to your users at scale, using Contiguity."
+---
+## Installing the SDK
+<Steps>
+  <Step title="Install the SDK">
+    Contiguity is working on adding several SDKs over the coming months, including ones for Swift, Java, Dart, and more.
+
+    <Tabs>
+      <Tab title="JavaScript">
+        Use `npm` to install `@contiguity/javascript`
+
+        ```bash
+        npm i @contiguity/javascript
+        ```
+      </Tab>
+      <Tab title="Python">
+        Use `pip` to install `contiguity`
+        ```bash
+        pip install contiguity
+        ```
+      </Tab>
+    </Tabs>
+  </Step>
+
+  <Step title="Initialize the Client">
+    After installation, import Contiguity into your project and give it your token.
+
+    <Tabs>
+      <Tab title="JavaScript">
+        ```javascript
+        const contiguity = require('@contiguity/javascript')
+        const client = contiguity.login("your token here")
+        ```
+
+        You can also initialize it with the optional 'debug' flag:
+
+        ```javascript
+        const client = contiguity.login("your token here", true)
+        ```
+      </Tab>
+      <Tab title="Python">
+        ```python
+        import contiguity
+        client = contiguity.login("your_token_here")
+        ```
+
+        You can also initialize it with the optional 'debug' flag:
+
+        ```python
+        client = contiguity.login("your_token_here", True)
+        ```
+      </Tab>
+    </Tabs>
+  </Step>
+</Steps>
+
+## Sending an email
+As long as you provide Contiguity a valid token, and provide valid inputs, sending emails will be a breeze. Various email parameters can be configured in the [Dashboard](https://contiguity.co/dashboard/emails) such as tracking, custom domains, and more.
+
+<Note>
+    Contiguity supports, but not yet in the SDK, custom emails from your own domain. This is coming in December 2024.
+</Note>
+
+<Tabs>
+  <Tab title="JavaScript">
+    ```javascript
+    // HTML email
+    const object = {
+        to: "example@example.com",
+        from: "Contiguity", 
+        subject: "My first email!",
+        html: "<b>I sent an email using Contiguity</b>"
+    }
+
+    await client.send.email(object)
+    ```
+
+    Or, to send a plain text email:
+
+    ```javascript
+    // Plain text email
+    const object = {
+        to: "example@example.com",
+        from: "Contiguity",
+        subject: "My first email!",
+        text: "I sent an email using Contiguity"
+    }
+
+    await client.send.email(object)
+    ```
+
+    Optionally, use `replyTo` and `cc`.
+  </Tab>
+  <Tab title="Python">
+    ```python
+    # HTML email
+    email_object = {
+        "to": "example@example.com",
+        "from": "Contiguity",
+        "subject": "My first email!",
+        "html": "<b>I sent an email using Contiguity</b>"
+    }
+
+    client.send.email(email_object)
+    ```
+
+    Or, to send a plain text email:
+
+    ```python
+    # Plain text email
+    email_object = {
+        "to": "example@example.com",
+        "from": "Contiguity",
+        "subject": "My first email!",
+        "text": "I sent an email using Contiguity"
+    }
+
+    client.send.email(email_object)
+    ```
+
+    Optionally, use `replyTo` and `cc`. At the moment, `cc` only allows one email address.
+  </Tab>
+</Tabs>

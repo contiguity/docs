@@ -1,0 +1,132 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Contiguity WhatsApp API",
+        "description": "API documentation for using Contiguity's WhatsApp API. This enterprise-only feature allows sending WhatsApp messages through configured nodes in the Enterprise Portal.",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "https://api.contiguity.co"
+        }
+    ],
+    "paths": {
+        "/send/text": {
+            "post": {
+                "summary": "Send WhatsApp Message",
+                "description": "Send WhatsApp messages.",
+                "operationId": "sendWhatsAppMessage",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "to",
+                                    "message",
+                                    "beta_features"
+                                ],
+                                "properties": {
+                                    "to": {
+                                        "type": "string",
+                                        "description": "Recipient's phone number in E.164 format",
+                                        "example": "+1234567890"
+                                    },
+                                    "message": {
+                                        "type": "string",
+                                        "description": "Content of the message",
+                                        "example": "Hello, this is a test WhatsApp message."
+                                    },
+                                    "beta_features": {
+                                        "type": "object",
+                                        "required": ["whatsapp"],
+                                        "properties": {
+                                            "from": {
+                                                "type": "string",
+                                                "description": "The number you'd like to send from (WhatsApp)",
+                                                "example": "1234567890"
+                                            },
+                                            "whatsapp": {
+                                                "type": "boolean",
+                                                "description": "Enable WhatsApp sending",
+                                                "example": true
+                                            },
+                                            "fallback": {
+                                                "type": "boolean",
+                                                "description": "Should Contiguity send your message via SMS if WhatsApp fails?",
+                                                "example": false
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Message sent successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Successfully sent"
+                                        },
+                                        "crumbs": {
+                                            "type": "object",
+                                            "properties": {
+                                                "plan": {
+                                                    "type": "string",
+                                                    "example": "unlimited"
+                                                },
+                                                "quota": {
+                                                    "type": "integer",
+                                                    "example": 12
+                                                },
+                                                "type": {
+                                                    "type": "string",
+                                                    "example": "imessage"
+                                                },
+                                                "ad": {
+                                                    "type": "boolean",
+                                                    "example": false
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Missing parameters"
+                    },
+                    "401": {
+                        "description": "Invalid or suspended token"
+                    },
+                    "500": {
+                        "description": "Sending failed or internal errors occurred"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "description": "Authentication using a Bearer Token. Specify `Authorization: Token YOUR_TOKEN`. `Bearer` is allowed."
+            }
+        }
+    }
+}
