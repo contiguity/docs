@@ -89,7 +89,7 @@
         {
             "group": "SDK Documentation by Language",
             "pages": [
-                "sdk/javascript",
+                "sdk/js",
                 "sdk/python"
             ]
         },
@@ -162,6 +162,12 @@
             "pages": [
                 "api-reference/product/message-intents/generate",
                 "api-reference/product/message-intents/send"
+            ]
+        },
+        {
+            "group": "Enterprise",
+            "pages": [
+                "api-reference/enterprise/node-status"
             ]
         }
     ],
