@@ -30,17 +30,105 @@ Below are the events that Contiguity can send to your webhook endpoint. Use the 
 -----
 An incoming SMS message was received.
 
+```json
+{
+    "id": "evt_1234567890",
+    "type": "communications.incoming.sms",
+    "timestamp": 1726502400,
+    "api_version": "v2",
+    "data": {
+        "message": "Hello, how are you?",
+        "from": "+1234567890",
+        "to": "0987654321"
+    }
+}
+```
+
+
+### `communications.incoming.mms`
+-----
+An incoming MMS message was received.
+
+```json
+{
+    "id": "evt_1234567890",
+    "type": "communications.incoming.mms",
+    "timestamp": 1726502400,
+    "api_version": "v2",
+    "data": {
+        "message": "Here's a picture of a cat!",
+        "from": "+1234567890",
+        "to": "0987654321",
+        "attachments": [
+            {
+                "url": "https://example.com/cat.jpg",
+                "type": "image/jpeg"
+            }
+        ]
+    }
+}
+```
+
 ### `communications.incoming.whatsapp`
 -----
 An incoming WhatsApp message was received.
+
+
+```json
+{
+    "id": "evt_1234567890",
+    "type": "communications.incoming.whatsapp",
+    "timestamp": 1726502400,
+    "api_version": "v2",
+    "data": {
+        "message": "Hello, how are you?",
+        "from": "+1234567890",
+        "to": "0987654321"
+    }
+}
+```
 
 ### `communications.incoming.imessage`
 -----
 An incoming iMessage was received.
 
+```json
+{
+    "id": "evt_1234567890",
+    "type": "communications.incoming.imessage",
+    "timestamp": 1726502400,
+    "api_version": "v2",
+    "data": {
+        "message": "Hello, how are you?",
+        "from": "+1234567890",
+        "to": "0987654321"
+    }
+}
+```
+
 ### `communications.incoming.email`
 -----
 An incoming email was received.
+
+```json
+{
+    "id": "evt_1234567890",
+    "type": "communications.incoming.email",
+    "timestamp": 1726502400,
+    "api_version": "v2",
+    "data": {
+        "message_id": "xxx-xx-contiguity-email-xxxxx",
+        "to": "user@example.com",
+        "from": "support@example.com",
+        "subject": "Some subject",
+        "body": {
+            "type": "text",
+            "content": "Hello, how are you?",
+            "raw_body": "headers, body, etc."
+        }
+    }
+}
+```
 
 ### `identity.verification_session.started`
 -----
