@@ -48,7 +48,7 @@ However, for some data or requests, you may encounter base URLs such as:
 We'll let you know if you're sending a request to a base URL different from `api.contiguity.co`.
 
 ## Authentication
-When using the API, attach an `X-API-KEY` header that's equal to `Token YOUR_TOKEN_HERE` in each request.
+When using the API, attach an `Authorization` header that's equal to `Token YOUR_TOKEN_HERE` in each request.
 
 <Note>
     Authentication is required for most endpoints Contiguity provides.
@@ -83,3 +83,7 @@ It is advisable to never use your account token in production. You can generate 
 
 ## API Status
 Contiguity strives for >99.98% uptime. In the event Contiguity begins to return any `5xx` error, check Contiguity's [status page](https://status.contiguity.co). If an incident hasn't been marked as `Investigating`, please notify Contiguity immediately via email (help@contiguity.support) or [Discord](https://discord.gg/pCuTaY84Vy)
+
+import Snippet from '/snippets/mintlify.mdx';
+
+<Snippet />

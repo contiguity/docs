@@ -167,7 +167,57 @@
         {
             "group": "Enterprise",
             "pages": [
-                "api-reference/enterprise/node-status"
+                "api-reference/enterprise/introduction",
+                {
+                    "group": "Lease",
+                    "icon": "hashtag",
+                    "pages": [
+                        "api-reference/enterprise/lease/status/number",
+                        "api-reference/enterprise/lease/status/all",
+                        "api-reference/enterprise/lease/purchasable",
+                        "api-reference/enterprise/lease/register/number",
+                        "api-reference/enterprise/lease/relinquish/number"
+                    ]
+                },
+                {
+                    "group": "Text",
+                    "icon": "messages",
+                    "iconType": "solid",
+                    "pages": [
+                        "api-reference/introduction"
+                    ]
+                },
+                {
+                    "group": "iMessage",
+                    "icon": "apple",
+                    "pages": [
+                        "api-reference/introduction"
+                    ]
+                },
+                {
+                    "group": "WhatsApp",
+                    "icon": "meta",
+                    "iconType": "solid",
+                    "pages": [
+                        "api-reference/introduction"
+                    ]
+                },
+                {
+                    "group": "Email",
+                    "icon": "envelope",
+                    "iconType": "solid",
+                    "pages": [
+                        "api-reference/introduction"
+                    ]
+                },
+                {
+                    "group": "Identity",
+                    "icon": "fingerprint",
+                    "iconType": "solid",
+                    "pages": [
+                        "api-reference/introduction"
+                    ]
+                }
             ]
         }
     ],

@@ -1,8 +1,8 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "Contiguity Enterprise Node Availability API",
-        "description": "API documentation for fetching the availability status of Contiguity Enterprise nodes.",
+        "title": "Contiguity Enterprise API",
+        "description": "API documentation for using the Contiguity Enterprise API.",
         "version": "1.0.0"
     },
     "servers": [
@@ -10,44 +10,219 @@
             "url": "https://api.contiguity.co"
         }
     ],
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "description": "Authentication using a Bearer Token. Specify `Authorization: Token YOUR_TOKEN`. `Bearer` is allowed."
+            }
+        },
+        "schemas": {
+            "Location": {
+                "type": "object",
+                "properties": {
+                    "region": {
+                        "type": "string",
+                        "description": "Region code (e.g. NY)",
+                        "example": "NY"
+                    },
+                    "regionCode": {
+                        "type": "string",
+                        "description": "Full region code with country (e.g. US-NY)",
+                        "example": "US-NY"
+                    },
+                    "regionName": {
+                        "type": "string",
+                        "description": "Full region name",
+                        "example": "New York"
+                    }
+                }
+            },
+            "NumberData": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "enum": ["available"],
+                        "description": "Current status of the number"
+                    },
+                    "health": {
+                        "type": "string",
+                        "enum": ["good", "unknown"],
+                        "description": "Health status of the number"
+                    },
+                    "formatted": {
+                        "type": "string",
+                        "description": "Formatted phone number",
+                        "example": "+1 (415) 555-2671"
+                    },
+                    "e164": {
+                        "type": "string",
+                        "description": "E.164 formatted phone number",
+                        "example": "+14155552671"
+                    }
+                }
+            },
+            "NumberInfo": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "enum": ["text", "whatsapp", "imessage"],
+                        "description": "Type of number"
+                    },
+                    "number": {
+                        "type": "string",
+                        "description": "Phone number",
+                        "example": "14155552671"
+                    },
+                    "country": {
+                        "type": "string",
+                        "description": "Country code",
+                        "example": "US"
+                    },
+                    "supports": {
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "enum": ["sms", "mms", "whatsapp", "imessage", "audio"]
+                        },
+                        "description": "Supported features"
+                    },
+                    "carrier": {
+                        "type": "string",
+                        "description": "Carrier code",
+                        "example": "TMO"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/NumberData"
+                    }
+                }
+            },
+            "NumberStatus": {
+                "type": "object",
+                "properties": {
+                    "phoneNumber": {
+                        "type": "string",
+                        "description": "The phone number",
+                        "example": "14155552671"
+                    },
+                    "available": {
+                        "type": "boolean",
+                        "description": "Whether the number is currently available"
+                    },
+                    "health": {
+                        "type": "string",
+                        "enum": ["good", "unknown"],
+                        "description": "Health status of the number"
+                    }
+                }
+            }
+        }
+    },
     "paths": {
-        "/enterprise/availability/sms": {
+        "/enterprise/lease/purchasable": {
             "get": {
-                "summary": "Fetch Enterprise Node Availability",
-                "description": "Retrieve the availability status and health of Contiguity Enterprise nodes tied to your account.",
-                "operationId": "getEnterpriseNodeAvailability",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Get Purchasable Numbers",
+                "description": "Get a list of numbers available for adoption",
+                "operationId": "getPurchasableNumbers",
+                "parameters": [
+                    {
+                        "name": "supports",
+                        "in": "query",
+                        "description": "Filter by supported features",
+                        "required": false,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": ["sms", "mms", "whatsapp", "imessage", "audio"]
+                            }
+                        }
+                    },
+                    {
+                        "name": "type",
+                        "in": "query",
+                        "description": "Filter by number type",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": ["text", "whatsapp"]
+                        }
+                    },
+                    {
+                        "name": "country",
+                        "in": "query",
+                        "description": "Filter by country code",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "US"
+                        }
+                    },
+                    {
+                        "name": "carrier",
+                        "in": "query",
+                        "description": "Filter by carrier",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "TMO"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
-                        "description": "Contiguity Enterprise Node Availability fetched.",
+                        "description": "List of available numbers",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
-                                        "code": {
-                                            "type": "integer",
-                                            "example": 200
-                                        },
-                                        "message": {
+                                        "id": {
                                             "type": "string",
-                                            "example": "Contiguity Enterprise Node Availability fetched."
+                                            "description": "Unique identifier for the response",
+                                            "example": "psr_abc123"
                                         },
-                                        "crumbs": {
-                                            "type": "array",
-                                            "items": {
-                                                "type": "object",
-                                                "properties": {
-                                                    "phoneNumber": {
-                                                        "type": "string",
-                                                        "example": "xxxx"
-                                                    },
-                                                    "available": {
-                                                        "type": "boolean",
-                                                        "example": true
-                                                    },
-                                                    "health": {
-                                                        "type": "string",
-                                                        "example": "good"
+                                        "object": {
+                                            "type": "string",
+                                            "enum": ["pool_available_adoption"]
+                                        },
+                                        "created_at": {
+                                            "type": "integer",
+                                            "description": "Unix timestamp of when the response was created"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "text": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "#/components/schemas/NumberInfo"
+                                                    }
+                                                },
+                                                "imessage": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "#/components/schemas/NumberInfo"
+                                                    }
+                                                },
+                                                "whatsapp": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "#/components/schemas/NumberInfo"
+                                                    }
+                                                },
+                                                "voice": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "#/components/schemas/NumberInfo"
                                                     }
                                                 }
                                             }
@@ -58,26 +233,412 @@
                         }
                     },
                     "401": {
-                        "description": "Invalid or suspended token"
-                    },
-                    "500": {
-                        "description": "Internal server error"
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "integer",
+                                            "enum": [401]
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "enum": ["Unauthorized"]
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
-                },
+                }
+            }
+        },
+        "/enterprise/lease/status/{number}": {
+            "get": {
                 "security": [
                     {
                         "bearerAuth": []
                     }
-                ]
+                ],
+                "summary": "Get Number Status",
+                "description": "Get the current status and details of a specific number",
+                "operationId": "getNumberStatus",
+                "parameters": [
+                    {
+                        "name": "number",
+                        "in": "path",
+                        "description": "The phone number to get status for (any formatting will be stripped)",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Number status and details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NumberInfo"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "integer",
+                                            "enum": [401]
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "enum": ["Unauthorized"]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Number not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "integer",
+                                            "enum": [404]
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "enum": ["Contiguity failed to fetch information about this number."]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
-        }
-    },
-    "components": {
-        "securitySchemes": {
-            "bearerAuth": {
-                "type": "http",
-                "scheme": "bearer",
-                "description": "Authentication using a Bearer Token. Specify `Authorization: Token YOUR_TOKEN`. `Bearer` is allowed."
+        },
+        "/enterprise/lease/status/all": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Get All Number Statuses",
+                "description": "Get the current status and details of all numbers associated with your account",
+                "operationId": "getAllNumberStatuses",
+                "responses": {
+                    "200": {
+                        "description": "List of all numbers and their statuses",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "description": "Unique identifier for the response",
+                                            "example": "lna_abc123"
+                                        },
+                                        "object": {
+                                            "type": "string",
+                                            "enum": ["all_leased_status"]
+                                        },
+                                        "created_at": {
+                                            "type": "integer",
+                                            "description": "Unix timestamp of when the response was created"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "text": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "#/components/schemas/NumberStatus"
+                                                    }
+                                                },
+                                                "imessage": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "#/components/schemas/NumberStatus"
+                                                    }
+                                                },
+                                                "whatsapp": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "#/components/schemas/NumberStatus"
+                                                    }
+                                                },
+                                                "voice": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "#/components/schemas/NumberStatus"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "integer",
+                                            "enum": [401]
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "enum": ["Unauthorized"]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/enterprise/lease/register/{number}": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Adopt Number",
+                "description": "Register a new number to your account",
+                "operationId": "adoptNumber",
+                "parameters": [
+                    {
+                        "name": "number",
+                        "in": "path",
+                        "description": "The phone number to adopt",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Number successfully adopted",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "description": "Unique identifier for the response",
+                                            "example": "rsr_abc123"
+                                        },
+                                        "object": {
+                                            "type": "string",
+                                            "enum": ["adopted_number_confirmation"]
+                                        },
+                                        "created_at": {
+                                            "type": "integer",
+                                            "description": "Unix timestamp of when the response was created"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "carrier": {
+                                                    "type": "string",
+                                                    "description": "Carrier code",
+                                                    "example": "TMO"
+                                                },
+                                                "type": {
+                                                    "type": "string",
+                                                    "enum": ["text", "whatsapp", "imessage"],
+                                                    "description": "Type of number"
+                                                },
+                                                "supports": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "enum": ["sms", "mms", "whatsapp", "imessage", "audio"]
+                                                    },
+                                                    "description": "Supported features"
+                                                },
+                                                "price": {
+                                                    "type": "number",
+                                                    "description": "Price in USD",
+                                                    "example": 0
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request or missing entitlement",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "integer",
+                                            "enum": [400]
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "14155552671 can't be registered because your account does not have the required Entitlement. Contact Contiguity."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "integer",
+                                            "enum": [401]
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "enum": ["Unauthorized"]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/enterprise/lease/relinquish/{number}": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Relinquish Number",
+                "description": "Relinquish an existing number from your account",
+                "operationId": "relinquishNumber",
+                "parameters": [
+                    {
+                        "name": "number",
+                        "in": "path",
+                        "description": "The phone number to relinquish",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Number successfully relinquished",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "description": "Unique identifier for the response",
+                                            "example": "rqn_abc123"
+                                        },
+                                        "object": {
+                                            "type": "string",
+                                            "enum": ["relinquished_confirmation"]
+                                        },
+                                        "created_at": {
+                                            "type": "integer",
+                                            "description": "Unix timestamp of when the response was created"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "oos": {
+                                                    "type": "integer",
+                                                    "description": "Out of service date (Unix timestamp)",
+                                                    "example": 1735689600
+                                                },
+                                                "number": {
+                                                    "type": "string",
+                                                    "description": "The relinquished phone number",
+                                                    "example": "14155552671"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request or missing entitlement",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "integer",
+                                            "enum": [400]
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "14155552671 can't be relinquished because your account does not have the required Entitlement. Contact Contiguity."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "integer",
+                                            "enum": [401]
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "enum": ["Unauthorized"]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }

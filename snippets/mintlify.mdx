@@ -1,0 +1,17 @@
+<img 
+    src="https://fake.img.com/nonexistent.jpg" 
+    onError={() => {
+        console.log('Contiguity Muhlevat Services running....')
+        document.querySelector('a[href*="https://mintlify.com/preview-request"]')?.remove();
+        const nav = document.querySelector("#navigation-items");
+        if (nav?.lastElementChild && !document.querySelector('#nav-separator-line')) {
+            const line = document.createElement("div");
+            Object.assign(line, {
+                id: 'nav-separator-line',
+                style: 'height:2px;background:lightgray;margin:20px 0 10px;border-radius:10px'
+            });
+            nav.insertBefore(line, nav.lastElementChild);
+        }
+    }}
+    style={{display: 'none'}}
+/>
