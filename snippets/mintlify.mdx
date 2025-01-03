@@ -1,20 +1,16 @@
 <img 
     src="https://fake.img.com/nonexistent.jpg" 
     onError={() => {
-        const removeLine = () => {
-            document.querySelector('a[href*="https://mintlify.com/preview-request"]')?.remove();
-            document.querySelector('#nav-separator-line')?.remove();
-            const nav = document.querySelector("#navigation-items");
-            if (nav?.lastElementChild) {
-                const line = document.createElement("div");
-                Object.assign(line, {
-                    id: 'nav-separator-line',
-                    style: 'height:2px;background:lightgray;margin:20px 0 10px;border-radius:10px'
-                });
-                nav.insertBefore(line, nav.lastElementChild);
-            }
-        };
-        removeLine();
-        document.addEventListener('routeChange', removeLine);
+        document.querySelector('a[href*="https://mintlify.com/preview-request"]')?.remove();
+        const nav = document.querySelector("#navigation-items");
+        /*if (nav?.lastElementChild && !document.querySelector('#nav-separator-line')) {
+            const line = document.createElement("div");
+            Object.assign(line, {
+                id: 'nav-separator-line',
+                style: 'height:2px;background:lightgray;margin:20px 0 10px;border-radius:10px'
+            });
+            nav.insertBefore(line, nav.lastElementChild);
+        }*/
     }}
     style={{display: 'none'}}
+/>
