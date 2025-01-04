@@ -1,6 +1,6 @@
 {
     "$schema": "https://mintlify.com/schema.json",
-    "name": "Documentation",
+    "name": "Contiguity",
     "logo": {
         "dark": "/logo/white.svg",
         "light": "/logo/black.svg"
@@ -130,6 +130,8 @@
             "pages": [
                 {
                     "group": "Verification Sessions",
+                    "icon": "magnifying-glass",
+                    "iconType": "solid",
                     "pages": [
                         "api-reference/product/identity/vs/create",
                         "api-reference/product/identity/vs/get",
@@ -138,6 +140,8 @@
                 },
                 {
                     "group": "Verification Reports",
+                    "icon": "file",
+                    "iconType": "solid",
                     "pages": [
                         "api-reference/product/identity/vr/get",
                         "api-reference/product/identity/vr/redact"
@@ -146,28 +150,41 @@
             ]
         },
         {
-            "group": "iMessage",
-            "pages": [
-                "api-reference/product/imessage/send"
-            ]
-        },
-        {
-            "group": "WhatsApp",
-            "pages": [
-                "api-reference/product/whatsapp/send"
-            ]
-        },
-        {
-            "group": "Message Intents",
-            "pages": [
-                "api-reference/product/message-intents/generate",
-                "api-reference/product/message-intents/send"
-            ]
-        },
-        {
             "group": "Enterprise",
             "pages": [
                 "api-reference/enterprise/introduction",
+                {
+                    "group": "Text",
+                    "icon": "messages",
+                    "iconType": "solid",
+                    "pages": [
+                        "api-reference/enterprise/text/from"
+                    ]
+                },
+                {
+                    "group": "iMessage",
+                    "icon": "apple",
+                    "pages": [
+                        "api-reference/enterprise/imessage/send"
+                    ]
+                },
+                {
+                    "group": "WhatsApp",
+                    "icon": "meta",
+                    "iconType": "solid",
+                    "pages": [
+                        "api-reference/enterprise/whatsapp/send"
+                    ]
+                },
+                {
+                    "group": "Message Intents",
+                    "icon": "link",
+                    "iconType": "solid",
+                    "pages": [
+                        "api-reference/enterprise/message-intents/generate",
+                        "api-reference/enterprise/message-intents/send"
+                    ]
+                },
                 {
                     "group": "Lease",
                     "icon": "hashtag",
@@ -177,29 +194,6 @@
                         "api-reference/enterprise/lease/purchasable",
                         "api-reference/enterprise/lease/register/number",
                         "api-reference/enterprise/lease/relinquish/number"
-                    ]
-                },
-                {
-                    "group": "Text",
-                    "icon": "messages",
-                    "iconType": "solid",
-                    "pages": [
-                        "api-reference/introduction"
-                    ]
-                },
-                {
-                    "group": "iMessage",
-                    "icon": "apple",
-                    "pages": [
-                        "api-reference/introduction"
-                    ]
-                },
-                {
-                    "group": "WhatsApp",
-                    "icon": "meta",
-                    "iconType": "solid",
-                    "pages": [
-                        "api-reference/introduction"
                     ]
                 },
                 {
@@ -226,8 +220,6 @@
         "github": "https://github.com/contiguity"
     },
     "metadata": {
-        "og:title": "Contiguity | Developer Documentation",
-        "og:description": "Contiguity's official documentation for our API & SDKs",
         "og:url": "https://docs.contiguity.co",
         "og:image": "https://docs.contiguity.co/images/og-image-res.png",
         "og:type": "website",

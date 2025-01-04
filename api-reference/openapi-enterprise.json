@@ -153,7 +153,7 @@
                         "required": false,
                         "schema": {
                             "type": "string",
-                            "enum": ["text", "whatsapp"]
+                            "enum": ["text", "whatsapp", "imessage"]
                         }
                     },
                     {
@@ -163,7 +163,7 @@
                         "required": false,
                         "schema": {
                             "type": "string",
-                            "example": "US"
+                            "enum": ["US", "CA", "UK", "FR"]
                         }
                     },
                     {
@@ -173,7 +173,7 @@
                         "required": false,
                         "schema": {
                             "type": "string",
-                            "example": "TMO"
+                            "enum": ["TMO", "ATT", "CONTIGUITY"]
                         }
                     }
                 ],
@@ -269,7 +269,7 @@
                     {
                         "name": "number",
                         "in": "path",
-                        "description": "The phone number to get status for (any formatting will be stripped)",
+                        "description": "The phone number to get status for. Must be in E.164.",
                         "required": true,
                         "schema": {
                             "type": "string"
