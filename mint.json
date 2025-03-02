@@ -201,7 +201,7 @@
                     "icon": "envelope",
                     "iconType": "solid",
                     "pages": [
-                        "api-reference/introduction"
+                        "api-reference/enterprise/email/send"
                     ]
                 },
                 {
@@ -209,7 +209,7 @@
                     "icon": "fingerprint",
                     "iconType": "solid",
                     "pages": [
-                        "api-reference/introduction"
+                        "api-reference/enterprise/identity/overview"
                     ]
                 }
             ]

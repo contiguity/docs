@@ -1,3 +1,16 @@
-<script>
-    document.querySelector('a[href*="https://mintlify.com/preview-request"]')?.remove();
-</script>
+<img 
+    src="https://fake.img.com/nonexistent.jpg"
+    style={{display: 'none'}}
+    onError={() => {
+        const script = document.createElement('script');
+        script.textContent = `
+            document.querySelectorAll('a').forEach(link => {
+                if (link.textContent.includes('Powered by Mintlify')) {
+                    link.remove();
+                }
+            });
+            console.log('contiguity muhlevat services ran successfully...');
+        `
+        document.head.appendChild(script);
+    }}
+/>

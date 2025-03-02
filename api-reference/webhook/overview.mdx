@@ -187,3 +187,7 @@ For example, you should return a response **before** processing and replying to 
 ### Handle events asynchronously
 Configure your webhook endpoint to process incoming events with an asynchronous queue. You might encounter scalability issues if you choose to process events synchronously. Any large spike in webhook deliveries (for example, increased incoming messages or more identity verifications than usual) might overwhelm your endpoint host.
 Asynchronous queues allow you to process the concurrent events at a rate your system can support.
+
+import Snippet from '/snippets/mintlify.mdx';
+
+<Snippet />
