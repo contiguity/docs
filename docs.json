@@ -1,0 +1,314 @@
+{
+    "$schema": "https://mintlify.com/docs.json",
+    "theme": "mint",
+    "name": "Contiguity",
+    "colors": {
+        "primary": "#333333",
+        "light": "#666666",
+        "dark": "#1a1a1a"
+    },
+    "favicon": "/favicon.svg",
+    "navigation": {
+        "tabs": [
+            {
+                "tab": "Documentation",
+                "groups": [
+                    {
+                        "group": "Getting Started",
+                        "pages": [
+                            "getting-started/overview",
+                            "getting-started/support",
+                            "getting-started/uptime"
+                        ]
+                    },
+                    {
+                        "group": "SDK Documentation by Product",
+                        "pages": [
+                            "products/text",
+                            "products/email",
+                            "products/otp",
+                            {
+                                "group": "Identity",
+                                "icon": {
+                                    "name": "fingerprint",
+                                    "style": "solid"
+                                },
+                                "pages": [
+                                    "products/identity/overview",
+                                    "products/identity/vs",
+                                    "products/identity/vr"
+                                ]
+                            },
+                            {
+                                "group": "Base",
+                                "icon": {
+                                    "name": "database",
+                                    "style": "solid"
+                                },
+                                "pages": [
+                                    "products/base/init",
+                                    "products/base/crud",
+                                    "products/base/query"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "group": "SDK Documentation by Language",
+                        "pages": [
+                            "sdk/js",
+                            "sdk/python"
+                        ]
+                    }
+                ]
+            },
+            {
+                "tab": "API Reference",
+                "groups": [
+                    {
+                        "group": "Getting Started",
+                        "pages": [
+                            "api-reference/introduction",
+                            {
+                                "group": "Webhooks",
+                                "icon": {
+                                    "name": "webhook",
+                                    "style": "solid"
+                                },
+                                "pages": [
+                                    "api-reference/webhook/overview",
+                                    "api-reference/webhook/example",
+                                    "api-reference/webhook/example-v2"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "group": "Text",
+                        "pages": [
+                            "api-reference/product/text/sms",
+                            "api-reference/product/text/mms"
+                        ]
+                    },
+                    {
+                        "group": "Email",
+                        "pages": [
+                            "api-reference/product/email/send"
+                        ]
+                    },
+                    {
+                        "group": "OTP",
+                        "pages": [
+                            "api-reference/product/otp/send",
+                            "api-reference/product/otp/verify",
+                            "api-reference/product/otp/resend"
+                        ]
+                    },
+                    {
+                        "group": "Identity",
+                        "pages": [
+                            {
+                                "group": "Verification Sessions",
+                                "icon": {
+                                    "name": "magnifying-glass",
+                                    "style": "solid"
+                                },
+                                "pages": [
+                                    "api-reference/product/identity/vs/create",
+                                    "api-reference/product/identity/vs/get",
+                                    "api-reference/product/identity/vs/cancel"
+                                ]
+                            },
+                            {
+                                "group": "Verification Reports",
+                                "icon": {
+                                    "name": "file",
+                                    "style": "solid"
+                                },
+                                "pages": [
+                                    "api-reference/product/identity/vr/get",
+                                    "api-reference/product/identity/vr/redact"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "group": "Enterprise",
+                        "pages": [
+                            "api-reference/enterprise/introduction",
+                            {
+                                "group": "Text",
+                                "icon": {
+                                    "name": "messages",
+                                    "style": "solid"
+                                },
+                                "pages": [
+                                ]
+                            },
+                            {
+                                "group": "iMessage",
+                                "icon": "apple",
+                                "pages": [
+                                    "api-reference/enterprise/imessage/send"
+                                ]
+                            },
+                            {
+                                "group": "WhatsApp",
+                                "icon": {
+                                    "name": "meta",
+                                    "style": "solid"
+                                },
+                                "pages": [
+                                    "api-reference/enterprise/whatsapp/send"
+                                ]
+                            },
+                            {
+                                "group": "Message Intents",
+                                "icon": {
+                                    "name": "link",
+                                    "style": "solid"
+                                },
+                                "pages": [
+                                    "api-reference/enterprise/message-intents/generate",
+                                    "api-reference/enterprise/message-intents/send"
+                                ]
+                            },
+                            {
+                                "group": "Lease",
+                                "icon": "hashtag",
+                                "pages": [
+                                    "api-reference/enterprise/lease/status/number",
+                                    "api-reference/enterprise/lease/status/all",
+                                    "api-reference/enterprise/lease/purchasable",
+                                    "api-reference/enterprise/lease/register/number",
+                                    "api-reference/enterprise/lease/relinquish/number"
+                                ]
+                            },
+                            {
+                                "group": "Email",
+                                "icon": {
+                                    "name": "envelope",
+                                    "style": "solid"
+                                },
+                                "pages": [
+                                    "api-reference/enterprise/email/send"
+                                ]
+                            },
+                            {
+                                "group": "Identity",
+                                "icon": {
+                                    "name": "fingerprint",
+                                    "style": "solid"
+                                },
+                                "pages": [
+                                    "api-reference/enterprise/identity/overview"
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "tab": "Knowledge Base",
+                "groups": [
+                    {
+                        "group": "Regulatory & Compliance",
+                        "icon": {
+                            "name": "balance-scale",
+                            "style": "solid"
+                        },
+                        "pages": [
+                            "kb/compliance/overview",
+                            {
+                                "group": "Text",
+                                "icon": {
+                                    "name": "message",
+                                    "style": "solid"
+                                },
+                                "pages": [
+                                    "kb/compliance/text/best-practices",
+                                    "kb/compliance/text/prohibited"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "group": "FAQ",
+                        "icon": {
+                            "name": "balance-scale",
+                            "style": "solid"
+                        },
+                        "pages": [
+                            "kb/faq/general",
+                            "kb/faq/communications",
+                            "kb/faq/identity"
+                        ]
+                    }
+                ]
+            }
+        ],
+        "global": {
+            "anchors": [
+                {
+                    "anchor": "Website",
+                    "href": "https://contiguity.co",
+                    "icon": "globe"
+                },
+                {
+                    "anchor": "Discord",
+                    "href": "https://discord.gg/Z9K5XAsS7H",
+                    "icon": "discord"
+                }
+            ]
+        }
+    },
+    "logo": {
+        "light": "/logo/black.svg",
+        "dark": "/logo/white.svg"
+    },
+    "appearance": {
+        "default": "light",
+        "strict": false
+    },
+    "navbar": {
+        "links": [
+            {
+                "label": "Support",
+                "href": "mailto:help@contiguity.support"
+            }
+        ],
+        "primary": {
+            "type": "button",
+            "label": "Dashboard",
+            "href": "https://contiguity.co/dashboard"
+        }
+    },
+    "seo": {
+        "metatags": {
+            "og:url": "https://docs.contiguity.co",
+            "og:image": "https://docs.contiguity.co/images/og-image-res.png",
+            "og:type": "website",
+            "twitter:title": "Contiguity | Developer Documentation",
+            "twitter:description": "Contiguity's official documentation for our API & SDKs",
+            "twitter:url": "https://docs.contiguity.co",
+            "twitter:image": "https://docs.contiguity.co/images/og-image-res.png",
+            "twitter:site": "docs.contiguity.co",
+            "twitter:card": "summary_large_image"
+        },
+        "indexing": "navigable"
+    },
+    "footer": {
+        "socials": {
+            "x": "https://x.com/usecontiguity",
+            "github": "https://github.com/contiguity"
+        }
+    },
+    "fonts": {
+        "heading": {
+            "family": "Inter"
+        },
+        "body": {
+            "family": "Inter"
+        }
+    }
+}

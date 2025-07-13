@@ -1,0 +1,37 @@
+---
+title: "Best Practices"
+sidebarTitle: "Best Practices"
+description: "Contiguity's recommended best practices to ensure deliverability."
+icon: "lightbulb"
+iconType: "solid"
+mode: "wide"
+---
+
+Unfortunately, due to increasing numbers of spam each year, carriers have become more aggressive in blocking messages, which has made it more difficult for legitimate individuals and businesses to send messages.
+To maximize the chances of your message delivering, we recommend the following some basic guidelines:
+
+### Learn about prohibited content over SMS/MMS
+<CardGroup>
+  <Card href="/kb/compliance/text/prohibited#prohibited-topics" title="Prohibited Topics" icon="ban"/>
+  <Card href="/kb/compliance/text/prohibited#prohibited-keywords" title="Prohibited Keywords" icon="ban"/>
+</CardGroup>
+
+
+### Links
+<CardGroup>
+  <Card title="Don't send shortened links" icon="link-simple-slash">
+    Fraudsters use shortened links (bit.ly, tinyurl, etc.) to hide a link's true destination. Most carriers won't deliver messages that contain shortened links.
+  </Card>
+  <Card title="Ensure your domain reputation is high" icon="thumbs-up">
+    If a provider classifies your domain as malicious or spammy, some carriers won't deliver messages that contain links to it.
+  </Card>
+  <Card title="Ensure your domain uses HTTPS" icon="lock-keyhole"/>
+  <Card title="Avoid excessive redirects" icon="arrows-turn-to-dots"/>
+</CardGroup>
+
+Ideally, you should send links after a user has interacted with you (replied).
+Messages that contain links are more likely to be flagged as spam, which can ruin your domain's reputation with carriers -- especially if the message is reported as spam, the user replies "STOP," or you don't get a reply at all.
+
+import Landing from '/snippets/mintlify.mdx';
+
+<Landing />

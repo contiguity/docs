@@ -59,7 +59,7 @@
                                             "properties": {
                                                 "plan": {
                                                     "type": "string",
-                                                    "example": "payg"
+                                                    "example": "usage"
                                                 },
                                                 "quota": {
                                                     "type": "integer",

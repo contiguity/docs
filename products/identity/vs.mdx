@@ -1,12 +1,14 @@
 ---
 title: "Verification Sessions"
+icon: "face-viewfinder"
+iconType: "solid"
 description: "Create verification sessions and collect identity data."
 ---
 
 ## Before you begin
 
-1. Make sure your account is on a plan that supports Identity - either PAYG (Pay-As-You-Go), Unlimited, or Enterprise.
-2. Register for an Identity Entitlement in the Dashboard. This onboarding process is separate from your main Contiguity account onboarding.
+1. Make sure your account is on a plan that supports Identity - either Usage (Pay Per Use), Unlimited, or Enterprise.
+2. Register for an Identity Entitlement in the Console. This onboarding process is separate from your main Contiguity account onboarding.
 
 
 ## How it's going to work
@@ -204,7 +206,7 @@ This event is sent when Contiguity has successfully verified the user's identity
 
 ### Handling Verification Requires Input 
 An `identity.verification_session.requires_input` event is sent one at least one of the checks Contiguity performs failed. When receiving this event, you'll have access to `error.code` and `error.message` to help you understand why the verification requires your input.
-You can review the user's information in the Dashboard to approve or deny them at any time.
+You can review the user's information in the Console to approve or deny them at any time.
 
 #### Error Codes 
 <Tabs>

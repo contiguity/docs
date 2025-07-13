@@ -1,6 +1,8 @@
 ---
 title: 'Introduction'
-description: "We can't wait to see what you build with Contiguity's API."
+description: "Build using Contiguity's API."
+icon: "code"
+iconType: "solid"
 ---
 
 ## Getting Started
@@ -10,7 +12,7 @@ Use of Contiguity's services requires an account to be made with Contiguity. Thi
   <Card
     title="Create an Account"
     icon="user-plus"
-    href="https://contiguity.co/onboard/begin"
+    href="https://contiguity.com/onboarding/"
   >
     Sign up for a Contiguity account to access our services
   </Card>
@@ -23,29 +25,29 @@ Use of Contiguity's services requires an account to be made with Contiguity. Thi
 ## Base URLs
 When sending requests, the base URL for your requests will likely be:
 ```
-https://api.contiguity.co/
+https://api.contiguity.com/
 ```
 
 However, for some data or requests, you may encounter base URLs such as:
 <AccordionGroup>
-  <Accordion title="orwell.contiguity.co">
+  <Accordion title="orwell.contiguity.com">
     You'd make requests here if you're fetching data from our analytics platform, Orwell.
   </Accordion>
 
-  <Accordion title="api.identity.contiguity.co">
+  <Accordion title="api.identity.contiguity.com">
     You'd make requests here when using our identity service, Identity.
   </Accordion>
 
-  <Accordion title="api.base.contiguity.co">
+  <Accordion title="api.base.contiguity.com">
     You'd make requests here when using our NoSQL database service, Base.
   </Accordion>
 
-  <Accordion title="api.compliance.contiguity.co">
+  <Accordion title="api.compliance.contiguity.com">
     You'd make requests here when using our regulatory compliance service, Compliance.
   </Accordion>
 </AccordionGroup>
 
-We'll let you know if you're sending a request to a base URL different from `api.contiguity.co`.
+We'll let you know if you're sending a request to a base URL different from `api.contiguity.com`.
 
 ## Authentication
 When using the API, attach an `Authorization` header that's equal to `Token YOUR_TOKEN_HERE` in each request.
@@ -65,24 +67,24 @@ Contiguity was designed to not be required to follow certain 'regulations', i.e 
 <Card
     title="Compliance"
     icon="scale-balanced"
-    href="https://contiguity.co/compliance"
+    href="https://contiguity.com/compliance"
   >
     Contiguity has launched Contiguity Compliance, an Enterprise service meant to take the burden of managing compliance with privacy/communications laws.
 </Card>
 
 ### Secure your tokens at all times
-It is advisable to never use your account token in production. You can generate throwaway tokens in the [dashboard](https://contiguity.co/dashboard), that can easily be revoked in the end of misuse by an unauthorized third party.
+It is advisable to never use your account token in production. You can generate throwaway tokens in the [Console](https://console.contiguity.com/), that can easily be revoked in the end of misuse by an unauthorized third party.
 
 <Card
     title="Account Token Leak"
     icon="lock"
-    href="mailto:support@contiguity.co"
+    href="mailto:help@contiguity.support"
   >
     If your account token leaks, your only option to mediate the situation is emailing help@contiguity.support immediately.
 </Card>
 
 ## API Status
-Contiguity strives for >99.98% uptime. In the event Contiguity begins to return any `5xx` error, check Contiguity's [status page](https://status.contiguity.co). If an incident hasn't been marked as `Investigating`, please notify Contiguity immediately via email (help@contiguity.support) or [Discord](https://discord.gg/pCuTaY84Vy)
+Contiguity strives for >99.99% uptime. In the event Contiguity begins to return any `5xx` error, check Contiguity's [status page](https://status.contiguity.com). If an incident hasn't been marked as `Investigating`, please notify Contiguity immediately via email (help@contiguity.support) or [Discord](https://discord.gg/pCuTaY84Vy)
 
 import Snippet from '/snippets/mintlify.mdx';
 
