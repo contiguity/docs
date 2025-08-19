@@ -2,7 +2,7 @@
     "openapi": "3.0.0",
     "servers": [
         {
-            "url": "https://api.contiguity.com/domains/"
+            "url": "https://api.contiguity.com/domains"
         }
     ],
     "info": {
@@ -53,7 +53,7 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755581745570
+                                            "example": 1755637759133
                                         },
                                         "api_version": {
                                             "type": "string",
@@ -105,7 +105,7 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755581745570
+                                            "example": 1755637759133
                                         },
                                         "api_version": {
                                             "type": "string",
@@ -157,7 +157,7 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755581745570
+                                            "example": 1755637759133
                                         },
                                         "api_version": {
                                             "type": "string",
@@ -209,7 +209,7 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755581745570
+                                            "example": 1755637759133
                                         },
                                         "api_version": {
                                             "type": "string",
@@ -261,7 +261,7 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755581745570
+                                            "example": 1755637759133
                                         },
                                         "api_version": {
                                             "type": "string",
@@ -362,13 +362,19 @@
                                                             "type": "object",
                                                             "properties": {
                                                                 "name": {
-                                                                    "type": "string"
+                                                                    "type": "string",
+                                                                    "description": "MX record name",
+                                                                    "example": "@"
                                                                 },
                                                                 "value": {
-                                                                    "type": "string"
+                                                                    "type": "string",
+                                                                    "description": "MX record value",
+                                                                    "example": "inbound-smtp.us-east-1.amazonaws.com"
                                                                 },
                                                                 "purpose": {
-                                                                    "type": "string"
+                                                                    "type": "string",
+                                                                    "description": "MX record purpose",
+                                                                    "example": "Inbound Email"
                                                                 }
                                                             },
                                                             "required": [
@@ -384,13 +390,19 @@
                                                             "type": "object",
                                                             "properties": {
                                                                 "name": {
-                                                                    "type": "string"
+                                                                    "type": "string",
+                                                                    "description": "TXT record name",
+                                                                    "example": "contiguity"
                                                                 },
                                                                 "value": {
-                                                                    "type": "string"
+                                                                    "type": "string",
+                                                                    "description": "TXT record value",
+                                                                    "example": "v=spf1 include:amazonses.com ~all"
                                                                 },
                                                                 "purpose": {
-                                                                    "type": "string"
+                                                                    "type": "string",
+                                                                    "description": "TXT record purpose",
+                                                                    "example": "SPF Record"
                                                                 }
                                                             },
                                                             "required": [
@@ -406,13 +418,19 @@
                                                             "type": "object",
                                                             "properties": {
                                                                 "name": {
-                                                                    "type": "string"
+                                                                    "type": "string",
+                                                                    "description": "CNAME record name",
+                                                                    "example": "hsyetjmgaiftvruluqqd4auta4xyo7sa._domainkey.example.com"
                                                                 },
                                                                 "value": {
-                                                                    "type": "string"
+                                                                    "type": "string",
+                                                                    "description": "CNAME record value",
+                                                                    "example": "hsyetjmgaiftvruluqqd4auta4xyo7sa.dkim.amazonses.com"
                                                                 },
                                                                 "purpose": {
-                                                                    "type": "string"
+                                                                    "type": "string",
+                                                                    "description": "CNAME record purpose",
+                                                                    "example": "DKIM Authentication"
                                                                 }
                                                             },
                                                             "required": [
@@ -435,12 +453,18 @@
                                             "type": "string",
                                             "description": "AWS region (us-east-1 is the default and only currently supported region)",
                                             "example": "us-east-1"
+                                        },
+                                        "created_at": {
+                                            "type": "number",
+                                            "description": "Domain creation timestamp",
+                                            "example": 1755637604526
                                         }
                                     },
                                     "required": [
                                         "records",
                                         "status",
-                                        "region"
+                                        "region",
+                                        "created_at"
                                     ]
                                 }
                             }
@@ -459,7 +483,7 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755581745570
+                                            "example": 1755637759133
                                         },
                                         "api_version": {
                                             "type": "string",
@@ -511,7 +535,7 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755581745570
+                                            "example": 1755637759133
                                         },
                                         "api_version": {
                                             "type": "string",
@@ -563,7 +587,7 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755581745570
+                                            "example": 1755637759133
                                         },
                                         "api_version": {
                                             "type": "string",
@@ -615,7 +639,7 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755581745570
+                                            "example": 1755637759133
                                         },
                                         "api_version": {
                                             "type": "string",
@@ -694,6 +718,11 @@
                                             "type": "string",
                                             "description": "Domain ID"
                                         },
+                                        "created_at": {
+                                            "type": "number",
+                                            "description": "Domain creation timestamp",
+                                            "example": 1755637604526
+                                        },
                                         "records": {
                                             "type": "array",
                                             "items": {
@@ -705,13 +734,19 @@
                                                             "type": "object",
                                                             "properties": {
                                                                 "name": {
-                                                                    "type": "string"
+                                                                    "type": "string",
+                                                                    "description": "MX record name",
+                                                                    "example": "@"
                                                                 },
                                                                 "value": {
-                                                                    "type": "string"
+                                                                    "type": "string",
+                                                                    "description": "MX record value",
+                                                                    "example": "inbound-smtp.us-east-1.amazonaws.com"
                                                                 },
                                                                 "purpose": {
-                                                                    "type": "string"
+                                                                    "type": "string",
+                                                                    "description": "MX record purpose",
+                                                                    "example": "Inbound Email"
                                                                 }
                                                             },
                                                             "required": [
@@ -727,13 +762,19 @@
                                                             "type": "object",
                                                             "properties": {
                                                                 "name": {
-                                                                    "type": "string"
+                                                                    "type": "string",
+                                                                    "description": "TXT record name",
+                                                                    "example": "contiguity"
                                                                 },
                                                                 "value": {
-                                                                    "type": "string"
+                                                                    "type": "string",
+                                                                    "description": "TXT record value",
+                                                                    "example": "v=spf1 include:amazonses.com ~all"
                                                                 },
                                                                 "purpose": {
-                                                                    "type": "string"
+                                                                    "type": "string",
+                                                                    "description": "TXT record purpose",
+                                                                    "example": "SPF Record"
                                                                 }
                                                             },
                                                             "required": [
@@ -749,13 +790,19 @@
                                                             "type": "object",
                                                             "properties": {
                                                                 "name": {
-                                                                    "type": "string"
+                                                                    "type": "string",
+                                                                    "description": "CNAME record name",
+                                                                    "example": "hsyetjmgaiftvruluqqd4auta4xyo7sa._domainkey.example.com"
                                                                 },
                                                                 "value": {
-                                                                    "type": "string"
+                                                                    "type": "string",
+                                                                    "description": "CNAME record value",
+                                                                    "example": "hsyetjmgaiftvruluqqd4auta4xyo7sa.dkim.amazonses.com"
                                                                 },
                                                                 "purpose": {
-                                                                    "type": "string"
+                                                                    "type": "string",
+                                                                    "description": "CNAME record purpose",
+                                                                    "example": "DKIM Authentication"
                                                                 }
                                                             },
                                                             "required": [
@@ -776,22 +823,26 @@
                                         },
                                         "sending_allowed": {
                                             "type": "boolean",
-                                            "description": "Whether sending is allowed using this domain"
+                                            "description": "Whether sending is allowed using this domain",
+                                            "example": true
                                         },
                                         "verifications": {
                                             "type": "object",
                                             "properties": {
                                                 "dkim": {
                                                     "type": "string",
-                                                    "description": "DKIM configuration status"
+                                                    "description": "DKIM configuration status",
+                                                    "example": "success"
                                                 },
                                                 "mail_from": {
                                                     "type": "string",
-                                                    "description": "Mail-from domain verification status"
+                                                    "description": "Mail-from domain verification status",
+                                                    "example": "success"
                                                 },
                                                 "domain": {
                                                     "type": "string",
-                                                    "description": "Domain verification status"
+                                                    "description": "Domain verification status",
+                                                    "example": "verified"
                                                 }
                                             },
                                             "required": [
@@ -806,6 +857,7 @@
                                         "domain",
                                         "status",
                                         "id",
+                                        "created_at",
                                         "records",
                                         "region",
                                         "sending_allowed",
@@ -828,7 +880,7 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755581745570
+                                            "example": 1755637759133
                                         },
                                         "api_version": {
                                             "type": "string",
@@ -880,7 +932,7 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755581745570
+                                            "example": 1755637759133
                                         },
                                         "api_version": {
                                             "type": "string",
@@ -932,7 +984,7 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755581745570
+                                            "example": 1755637759133
                                         },
                                         "api_version": {
                                             "type": "string",
@@ -984,7 +1036,7 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755581745570
+                                            "example": 1755637759133
                                         },
                                         "api_version": {
                                             "type": "string",
@@ -1048,28 +1100,39 @@
                                                 "properties": {
                                                     "domain": {
                                                         "type": "string",
-                                                        "description": "The domain name"
+                                                        "description": "The domain name",
+                                                        "example": "example.com"
                                                     },
                                                     "status": {
                                                         "type": "string",
-                                                        "description": "Domain verification status"
+                                                        "description": "Domain verification status",
+                                                        "example": "verified"
+                                                    },
+                                                    "created_at": {
+                                                        "type": "number",
+                                                        "description": "Domain creation timestamp",
+                                                        "example": 1755637604526
                                                     },
                                                     "id": {
                                                         "type": "string",
-                                                        "description": "Domain ID"
+                                                        "description": "Domain ID",
+                                                        "example": "d_1234567890"
                                                     },
                                                     "region": {
                                                         "type": "string",
-                                                        "description": "AWS region"
+                                                        "description": "AWS region",
+                                                        "example": "us-east-1"
                                                     },
                                                     "sending_allowed": {
                                                         "type": "boolean",
-                                                        "description": "Whether sending is allowed"
+                                                        "description": "Whether sending is allowed",
+                                                        "example": true
                                                     }
                                                 },
                                                 "required": [
                                                     "domain",
                                                     "status",
+                                                    "created_at",
                                                     "id",
                                                     "region",
                                                     "sending_allowed"
@@ -1098,7 +1161,7 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755581745570
+                                            "example": 1755637759133
                                         },
                                         "api_version": {
                                             "type": "string",
@@ -1150,7 +1213,7 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755581745570
+                                            "example": 1755637759133
                                         },
                                         "api_version": {
                                             "type": "string",
@@ -1202,7 +1265,7 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755581745570
+                                            "example": 1755637759133
                                         },
                                         "api_version": {
                                             "type": "string",
@@ -1254,7 +1317,7 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755581745570
+                                            "example": 1755637759133
                                         },
                                         "api_version": {
                                             "type": "string",
