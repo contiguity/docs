@@ -53,7 +53,7 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755637759133
+                                            "example": 1755638101715
                                         },
                                         "api_version": {
                                             "type": "string",
@@ -105,7 +105,7 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755637759133
+                                            "example": 1755638101715
                                         },
                                         "api_version": {
                                             "type": "string",
@@ -157,7 +157,7 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755637759133
+                                            "example": 1755638101715
                                         },
                                         "api_version": {
                                             "type": "string",
@@ -209,7 +209,7 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755637759133
+                                            "example": 1755638101715
                                         },
                                         "api_version": {
                                             "type": "string",
@@ -261,7 +261,7 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755637759133
+                                            "example": 1755638101715
                                         },
                                         "api_version": {
                                             "type": "string",
@@ -420,7 +420,7 @@
                                                                 "name": {
                                                                     "type": "string",
                                                                     "description": "CNAME record name",
-                                                                    "example": "hsyetjmgaiftvruluqqd4auta4xyo7sa._domainkey.example.com"
+                                                                    "example": "hsyetjmgaiftvruluqqd4auta4xyo7sa._domainkey"
                                                                 },
                                                                 "value": {
                                                                     "type": "string",
@@ -483,7 +483,7 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755637759133
+                                            "example": 1755638101715
                                         },
                                         "api_version": {
                                             "type": "string",
@@ -535,7 +535,7 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755637759133
+                                            "example": 1755638101715
                                         },
                                         "api_version": {
                                             "type": "string",
@@ -587,7 +587,7 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755637759133
+                                            "example": 1755638101715
                                         },
                                         "api_version": {
                                             "type": "string",
@@ -639,7 +639,7 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755637759133
+                                            "example": 1755638101715
                                         },
                                         "api_version": {
                                             "type": "string",
@@ -792,7 +792,7 @@
                                                                 "name": {
                                                                     "type": "string",
                                                                     "description": "CNAME record name",
-                                                                    "example": "hsyetjmgaiftvruluqqd4auta4xyo7sa._domainkey.example.com"
+                                                                    "example": "hsyetjmgaiftvruluqqd4auta4xyo7sa._domainkey"
                                                                 },
                                                                 "value": {
                                                                     "type": "string",
@@ -880,7 +880,7 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755637759133
+                                            "example": 1755638101715
                                         },
                                         "api_version": {
                                             "type": "string",
@@ -932,7 +932,7 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755637759133
+                                            "example": 1755638101715
                                         },
                                         "api_version": {
                                             "type": "string",
@@ -984,7 +984,7 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755637759133
+                                            "example": 1755638101715
                                         },
                                         "api_version": {
                                             "type": "string",
@@ -1036,7 +1036,7 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755637759133
+                                            "example": 1755638101715
                                         },
                                         "api_version": {
                                             "type": "string",
@@ -1161,7 +1161,7 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755637759133
+                                            "example": 1755638101715
                                         },
                                         "api_version": {
                                             "type": "string",
@@ -1213,7 +1213,7 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755637759133
+                                            "example": 1755638101715
                                         },
                                         "api_version": {
                                             "type": "string",
@@ -1265,7 +1265,7 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755637759133
+                                            "example": 1755638101715
                                         },
                                         "api_version": {
                                             "type": "string",
@@ -1317,7 +1317,7 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755637759133
+                                            "example": 1755638101715
                                         },
                                         "api_version": {
                                             "type": "string",
