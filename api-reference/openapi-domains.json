@@ -2,12 +2,12 @@
     "openapi": "3.0.0",
     "servers": [
         {
-            "url": "https://api.contiguity.com/otp/"
+            "url": "https://api.contiguity.com/domains/"
         }
     ],
     "info": {
         "version": "v2025.8.19",
-        "title": "OTP API"
+        "title": "Domains API"
     },
     "components": {
         "securitySchemes": {
@@ -20,41 +20,28 @@
         "parameters": {}
     },
     "paths": {
-        "/verify": {
-            "post": {
+        "/{domain}": {
+            "delete": {
                 "security": [
                     {
                         "bearerAuth": []
                     }
                 ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "otp_id": {
-                                        "type": "string",
-                                        "description": "The OTP ID you received when sending the OTP",
-                                        "example": "otp_1234567890"
-                                    },
-                                    "otp": {
-                                        "type": "string",
-                                        "description": "The OTP inputted by the user",
-                                        "example": "123456"
-                                    }
-                                },
-                                "required": [
-                                    "otp_id",
-                                    "otp"
-                                ]
-                            }
-                        }
+                "parameters": [
+                    {
+                        "schema": {
+                            "type": "string",
+                            "description": "domain parameter"
+                        },
+                        "required": true,
+                        "description": "domain parameter",
+                        "name": "domain",
+                        "in": "path"
                     }
-                },
+                ],
                 "responses": {
                     "200": {
-                        "description": "Verify an OTP",
+                        "description": "Delete a domain from your account",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -79,14 +66,18 @@
                                         "data": {
                                             "type": "object",
                                             "properties": {
-                                                "verified": {
+                                                "success": {
                                                     "type": "boolean",
-                                                    "description": "Whether the OTP was verified or not",
-                                                    "example": true
+                                                    "description": "Whether the deletion was successful"
+                                                },
+                                                "message": {
+                                                    "type": "string",
+                                                    "description": "Success message"
                                                 }
                                             },
                                             "required": [
-                                                "verified"
+                                                "success",
+                                                "message"
                                             ]
                                         }
                                     },
@@ -310,13 +301,23 @@
                         }
                     }
                 }
-            }
-        },
-        "/new": {
+            },
             "post": {
                 "security": [
                     {
                         "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "type": "string",
+                            "description": "domain parameter"
+                        },
+                        "required": true,
+                        "description": "domain parameter",
+                        "name": "domain",
+                        "in": "path"
                     }
                 ],
                 "requestBody": {
@@ -325,34 +326,128 @@
                             "schema": {
                                 "type": "object",
                                 "properties": {
-                                    "to": {
+                                    "region": {
                                         "type": "string",
-                                        "description": "Recipient's phone number",
-                                        "example": "+1234567890"
+                                        "default": "us-east-1",
+                                        "description": "AWS region",
+                                        "example": "us-east-1"
                                     },
-                                    "language": {
+                                    "custom_return_path": {
                                         "type": "string",
-                                        "description": "Language of the OTP message",
-                                        "example": "en"
-                                    },
-                                    "name": {
-                                        "type": "string",
-                                        "description": "Your app's name (customizes message to 'Your [name] code is...')",
-                                        "example": "Contiguity"
+                                        "default": "contiguity",
+                                        "description": "Custom return path subdomain",
+                                        "example": "contiguity"
                                     }
-                                },
-                                "required": [
-                                    "to",
-                                    "language",
-                                    "name"
-                                ]
+                                }
                             }
                         }
                     }
                 },
                 "responses": {
                     "200": {
-                        "description": "Send a new OTP",
+                        "description": "Register a domain for email sending",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "records": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "MX": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "name": {
+                                                                    "type": "string"
+                                                                },
+                                                                "value": {
+                                                                    "type": "string"
+                                                                },
+                                                                "purpose": {
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "name",
+                                                                "value",
+                                                                "purpose"
+                                                            ]
+                                                        }
+                                                    },
+                                                    "TXT": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "name": {
+                                                                    "type": "string"
+                                                                },
+                                                                "value": {
+                                                                    "type": "string"
+                                                                },
+                                                                "purpose": {
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "name",
+                                                                "value",
+                                                                "purpose"
+                                                            ]
+                                                        }
+                                                    },
+                                                    "CNAME": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "name": {
+                                                                    "type": "string"
+                                                                },
+                                                                "value": {
+                                                                    "type": "string"
+                                                                },
+                                                                "purpose": {
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "name",
+                                                                "value",
+                                                                "purpose"
+                                                            ]
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "description": "DNS records grouped by type"
+                                        },
+                                        "status": {
+                                            "type": "string",
+                                            "description": "Domain verification status",
+                                            "example": "pending_verification"
+                                        },
+                                        "region": {
+                                            "type": "string",
+                                            "description": "AWS region (us-east-1 is the default and only currently supported region)",
+                                            "example": "us-east-1"
+                                        }
+                                    },
+                                    "required": [
+                                        "records",
+                                        "status",
+                                        "region"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -360,7 +455,7 @@
                                     "properties": {
                                         "id": {
                                             "type": "string",
-                                            "example": "req_xxxxxxxxxxxxxxxx"
+                                            "example": "err_xxxxxxxxxxxxxxxx"
                                         },
                                         "timestamp": {
                                             "type": "number",
@@ -372,19 +467,23 @@
                                         },
                                         "object": {
                                             "type": "string",
-                                            "example": "response"
+                                            "example": "error"
                                         },
                                         "data": {
                                             "type": "object",
                                             "properties": {
-                                                "otp_id": {
+                                                "error": {
                                                     "type": "string",
-                                                    "description": "The OTP's ID. Use it to refer to this verification in the future, such as when verifying the OTP or resending it.",
-                                                    "example": "otp_1234567890"
+                                                    "example": "Bad Request"
+                                                },
+                                                "status": {
+                                                    "type": "number",
+                                                    "example": 400
                                                 }
                                             },
                                             "required": [
-                                                "otp_id"
+                                                "error",
+                                                "status"
                                             ]
                                         }
                                     },
@@ -394,6 +493,323 @@
                                         "api_version",
                                         "object",
                                         "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "err_xxxxxxxxxxxxxxxx"
+                                        },
+                                        "timestamp": {
+                                            "type": "number",
+                                            "example": 1755581745570
+                                        },
+                                        "api_version": {
+                                            "type": "string",
+                                            "example": "v2025.8.19"
+                                        },
+                                        "object": {
+                                            "type": "string",
+                                            "example": "error"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "error": {
+                                                    "type": "string",
+                                                    "example": "Unauthorized"
+                                                },
+                                                "status": {
+                                                    "type": "number",
+                                                    "example": 401
+                                                }
+                                            },
+                                            "required": [
+                                                "error",
+                                                "status"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "timestamp",
+                                        "api_version",
+                                        "object",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "err_xxxxxxxxxxxxxxxx"
+                                        },
+                                        "timestamp": {
+                                            "type": "number",
+                                            "example": 1755581745570
+                                        },
+                                        "api_version": {
+                                            "type": "string",
+                                            "example": "v2025.8.19"
+                                        },
+                                        "object": {
+                                            "type": "string",
+                                            "example": "error"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "error": {
+                                                    "type": "string",
+                                                    "example": "Forbidden"
+                                                },
+                                                "status": {
+                                                    "type": "number",
+                                                    "example": 403
+                                                }
+                                            },
+                                            "required": [
+                                                "error",
+                                                "status"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "timestamp",
+                                        "api_version",
+                                        "object",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "err_xxxxxxxxxxxxxxxx"
+                                        },
+                                        "timestamp": {
+                                            "type": "number",
+                                            "example": 1755581745570
+                                        },
+                                        "api_version": {
+                                            "type": "string",
+                                            "example": "v2025.8.19"
+                                        },
+                                        "object": {
+                                            "type": "string",
+                                            "example": "error"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "error": {
+                                                    "type": "string",
+                                                    "example": "Internal Server Error"
+                                                },
+                                                "status": {
+                                                    "type": "number",
+                                                    "example": 500
+                                                }
+                                            },
+                                            "required": [
+                                                "error",
+                                                "status"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "timestamp",
+                                        "api_version",
+                                        "object",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "type": "string",
+                            "description": "domain parameter"
+                        },
+                        "required": true,
+                        "description": "domain parameter",
+                        "name": "domain",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Get domain verification status and DNS instructions",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "domain": {
+                                            "type": "string",
+                                            "description": "The domain name"
+                                        },
+                                        "status": {
+                                            "type": "string",
+                                            "description": "Domain verification status"
+                                        },
+                                        "id": {
+                                            "type": "string",
+                                            "description": "Domain ID"
+                                        },
+                                        "records": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "MX": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "name": {
+                                                                    "type": "string"
+                                                                },
+                                                                "value": {
+                                                                    "type": "string"
+                                                                },
+                                                                "purpose": {
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "name",
+                                                                "value",
+                                                                "purpose"
+                                                            ]
+                                                        }
+                                                    },
+                                                    "TXT": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "name": {
+                                                                    "type": "string"
+                                                                },
+                                                                "value": {
+                                                                    "type": "string"
+                                                                },
+                                                                "purpose": {
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "name",
+                                                                "value",
+                                                                "purpose"
+                                                            ]
+                                                        }
+                                                    },
+                                                    "CNAME": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "name": {
+                                                                    "type": "string"
+                                                                },
+                                                                "value": {
+                                                                    "type": "string"
+                                                                },
+                                                                "purpose": {
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "name",
+                                                                "value",
+                                                                "purpose"
+                                                            ]
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "description": "DNS records grouped by type"
+                                        },
+                                        "region": {
+                                            "type": "string",
+                                            "description": "AWS region (us-east-1 is the default and only currently supported region)",
+                                            "example": "us-east-1"
+                                        },
+                                        "sending_allowed": {
+                                            "type": "boolean",
+                                            "description": "Whether sending is allowed using this domain"
+                                        },
+                                        "verifications": {
+                                            "type": "object",
+                                            "properties": {
+                                                "dkim": {
+                                                    "type": "string",
+                                                    "description": "DKIM configuration status"
+                                                },
+                                                "mail_from": {
+                                                    "type": "string",
+                                                    "description": "Mail-from domain verification status"
+                                                },
+                                                "domain": {
+                                                    "type": "string",
+                                                    "description": "Domain verification status"
+                                                }
+                                            },
+                                            "required": [
+                                                "dkim",
+                                                "mail_from",
+                                                "domain"
+                                            ],
+                                            "description": "Verification status details"
+                                        }
+                                    },
+                                    "required": [
+                                        "domain",
+                                        "status",
+                                        "id",
+                                        "records",
+                                        "region",
+                                        "sending_allowed",
+                                        "verifications"
                                     ]
                                 }
                             }
@@ -610,76 +1026,60 @@
                 }
             }
         },
-        "/resend": {
-            "post": {
+        "/": {
+            "get": {
                 "security": [
                     {
                         "bearerAuth": []
                     }
                 ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "otp_id": {
-                                        "type": "string",
-                                        "description": "The OTP ID you received when sending the OTP",
-                                        "example": "otp_1234567890"
-                                    }
-                                },
-                                "required": [
-                                    "otp_id"
-                                ]
-                            }
-                        }
-                    }
-                },
                 "responses": {
                     "200": {
-                        "description": "Resend an OTP",
+                        "description": "List all domains owned by the user",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
-                                        "id": {
-                                            "type": "string",
-                                            "example": "req_xxxxxxxxxxxxxxxx"
-                                        },
-                                        "timestamp": {
-                                            "type": "number",
-                                            "example": 1755581745570
-                                        },
-                                        "api_version": {
-                                            "type": "string",
-                                            "example": "v2025.8.19"
-                                        },
-                                        "object": {
-                                            "type": "string",
-                                            "example": "response"
-                                        },
-                                        "data": {
-                                            "type": "object",
-                                            "properties": {
-                                                "resent": {
-                                                    "type": "boolean",
-                                                    "description": "Whether the OTP was resent",
-                                                    "example": true
-                                                }
+                                        "domains": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "domain": {
+                                                        "type": "string",
+                                                        "description": "The domain name"
+                                                    },
+                                                    "status": {
+                                                        "type": "string",
+                                                        "description": "Domain verification status"
+                                                    },
+                                                    "id": {
+                                                        "type": "string",
+                                                        "description": "Domain ID"
+                                                    },
+                                                    "region": {
+                                                        "type": "string",
+                                                        "description": "AWS region"
+                                                    },
+                                                    "sending_allowed": {
+                                                        "type": "boolean",
+                                                        "description": "Whether sending is allowed"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "domain",
+                                                    "status",
+                                                    "id",
+                                                    "region",
+                                                    "sending_allowed"
+                                                ]
                                             },
-                                            "required": [
-                                                "resent"
-                                            ]
+                                            "description": "List of user's domains"
                                         }
                                     },
                                     "required": [
-                                        "id",
-                                        "timestamp",
-                                        "api_version",
-                                        "object",
-                                        "data"
+                                        "domains"
                                     ]
                                 }
                             }

@@ -1,6 +1,6 @@
 ---
 title: 'Send a Text'
-openapi: "openapi-text POST /send/text"
+openapi: "openapi-send POST /text"
 sidebarTitle: 'Send a Text'
 icon: "message-sms"
 iconType: "solid"
@@ -8,6 +8,7 @@ iconType: "solid"
 <Warning>
 Phone numbers must be in E.164 format with country codes. The API will attempt to convert other formats like NANP, but will throw an error if conversion fails.
 </Warning>
+
 
 
 import Snippet from '/snippets/mintlify.mdx';

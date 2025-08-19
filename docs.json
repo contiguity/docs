@@ -85,6 +85,10 @@
                     },
                     {
                         "group": "Text",
+                        "icon": {
+                            "name": "message",
+                            "style": "solid"
+                        },
                         "pages": [
                             "api-reference/product/text/sms",
                             "api-reference/product/text/mms"
@@ -92,12 +96,33 @@
                     },
                     {
                         "group": "Email",
+                        "icon": {
+                            "name": "envelope",
+                            "style": "solid"
+                        },
                         "pages": [
-                            "api-reference/product/email/send"
+                            "api-reference/product/email/send",
+                            {
+                                "group": "Domains",
+                                "icon": {
+                                    "name": "globe",
+                                    "style": "solid"
+                                },
+                                "pages": [
+                                    "api-reference/product/email/domains/add",
+                                    "api-reference/product/email/domains/list",
+                                    "api-reference/product/email/domains/get",
+                                    "api-reference/product/email/domains/delete"
+                                ]
+                            }
                         ]
                     },
                     {
                         "group": "OTP",
+                        "icon": {
+                            "name": "key",
+                            "style": "solid"
+                        },
                         "pages": [
                             "api-reference/product/otp/send",
                             "api-reference/product/otp/verify",
@@ -106,6 +131,10 @@
                     },
                     {
                         "group": "Identity",
+                        "icon": {
+                            "name": "fingerprint",
+                            "style": "solid"
+                        },
                         "pages": [
                             {
                                 "group": "Verification Sessions",
@@ -133,77 +162,42 @@
                         ]
                     },
                     {
-                        "group": "Enterprise",
+                        "group": "iMessage",
+                        "icon": {
+                            "name": "apple",
+                            "style": "solid"
+                        },
                         "pages": [
-                            "api-reference/enterprise/introduction",
-                            {
-                                "group": "Text",
-                                "icon": {
-                                    "name": "messages",
-                                    "style": "solid"
-                                },
-                                "pages": [
-                                ]
-                            },
-                            {
-                                "group": "iMessage",
-                                "icon": "apple",
-                                "pages": [
-                                    "api-reference/enterprise/imessage/send"
-                                ]
-                            },
-                            {
-                                "group": "WhatsApp",
-                                "icon": {
-                                    "name": "meta",
-                                    "style": "solid"
-                                },
-                                "pages": [
-                                    "api-reference/enterprise/whatsapp/send"
-                                ]
-                            },
-                            {
-                                "group": "Message Intents",
-                                "icon": {
-                                    "name": "link",
-                                    "style": "solid"
-                                },
-                                "pages": [
-                                    "api-reference/enterprise/message-intents/generate",
-                                    "api-reference/enterprise/message-intents/send"
-                                ]
-                            },
-                            {
-                                "group": "Lease",
-                                "icon": "hashtag",
-                                "pages": [
-                                    "api-reference/enterprise/lease/status/number",
-                                    "api-reference/enterprise/lease/status/all",
-                                    "api-reference/enterprise/lease/purchasable",
-                                    "api-reference/enterprise/lease/register/number",
-                                    "api-reference/enterprise/lease/relinquish/number"
-                                ]
-                            },
-                            {
-                                "group": "Email",
-                                "icon": {
-                                    "name": "envelope",
-                                    "style": "solid"
-                                },
-                                "pages": [
-                                    "api-reference/enterprise/email/send"
-                                ]
-                            },
-                            {
-                                "group": "Identity",
-                                "icon": {
-                                    "name": "fingerprint",
-                                    "style": "solid"
-                                },
-                                "pages": [
-                                    "api-reference/enterprise/identity/overview"
-                                ]
-                            }
+                            "api-reference/product/imessage/send",
+                            "api-reference/product/imessage/typing",
+                            "api-reference/product/imessage/reactions"
+                        ]
+                    },
+                    {
+                        "group": "WhatsApp",
+                        "icon": {
+                            "name": "whatsapp",
+                            "style": "solid"
+                        },
+                        "pages": [
+                            "api-reference/product/whatsapp/send",
+                            "api-reference/product/whatsapp/typing",
+                            "api-reference/product/whatsapp/reactions"
+                        ]
+                    },
+                    {
+                        "group": "Lease",
+                        "icon": {
+                            "name": "sim-card",
+                            "style": "solid"
+                        },
+                        "pages": [
+                            "api-reference/product/leases/leases",
+                            "api-reference/product/leases/details",
+                            "api-reference/product/leases/lease",
+                            "api-reference/product/leases/leased-details",
+                            "api-reference/product/leases/leased-all",
+                            "api-reference/product/leases/terminate"
                         ]
                     }
                 ]

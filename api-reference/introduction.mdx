@@ -19,7 +19,7 @@ Use of Contiguity's services requires an account to be made with Contiguity. Thi
 </CardGroup>
 
 <Note>
-    The API accepts **both** JSON and form-encoded data. Make sure you set the `Content-Type` header.
+    The API only accepts JSON. Ensure you set the `Content-Type` header to `application/json` to avoid errors.
 </Note>
 
 ## Base URLs
@@ -38,7 +38,7 @@ However, for some data or requests, you may encounter base URLs such as:
     You'd make requests here when using our identity service, Identity.
   </Accordion>
 
-  <Accordion title="api.base.contiguity.com">
+  <Accordion title="api.base.contiguity.co">
     You'd make requests here when using our NoSQL database service, Base.
   </Accordion>
 
@@ -63,25 +63,6 @@ While Contiguity's API can scale and is meant to handle millions of requests, it
 
 ### Respect local laws
 Contiguity was designed to not be required to follow certain 'regulations', i.e A2P 10DLC registration in the US. However, it is still up to you, the user, to follow all laws applicable to you (i.e, in the US, CAN-SPAM) - not Contiguity's.
-
-<Card
-    title="Compliance"
-    icon="scale-balanced"
-    href="https://contiguity.com/compliance"
-  >
-    Contiguity has launched Contiguity Compliance, an Enterprise service meant to take the burden of managing compliance with privacy/communications laws.
-</Card>
-
-### Secure your tokens at all times
-It is advisable to never use your account token in production. You can generate throwaway tokens in the [Console](https://console.contiguity.com/), that can easily be revoked in the end of misuse by an unauthorized third party.
-
-<Card
-    title="Account Token Leak"
-    icon="lock"
-    href="mailto:help@contiguity.support"
-  >
-    If your account token leaks, your only option to mediate the situation is emailing help@contiguity.support immediately.
-</Card>
 
 ## API Status
 Contiguity strives for >99.99% uptime. In the event Contiguity begins to return any `5xx` error, check Contiguity's [status page](https://status.contiguity.com). If an incident hasn't been marked as `Investigating`, please notify Contiguity immediately via email (help@contiguity.support) or [Discord](https://discord.gg/pCuTaY84Vy)
