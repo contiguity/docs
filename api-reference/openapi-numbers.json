@@ -2,11 +2,11 @@
     "openapi": "3.0.0",
     "servers": [
         {
-            "url": "https://api.contiguity.com/numbers/"
+            "url": "https://api.contiguity.com/numbers"
         }
     ],
     "info": {
-        "version": "v2025.8.19",
+        "version": "v2025.8.20",
         "title": "Leasing API"
     },
     "components": {
@@ -37,18 +37,19 @@
                                     "properties": {
                                         "id": {
                                             "type": "string",
-                                            "description": "Response ID",
-                                            "example": "afl_1234567890"
-                                        },
-                                        "object": {
-                                            "type": "string",
-                                            "description": "Response type",
-                                            "example": "lease_availability"
+                                            "example": "req_xxxxxxxxxxxxxxxx"
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "description": "Response timestamp",
-                                            "example": 1718851200
+                                            "example": 1755722229870
+                                        },
+                                        "api_version": {
+                                            "type": "string",
+                                            "example": "v2025.8.20"
+                                        },
+                                        "object": {
+                                            "type": "string",
+                                            "example": "response"
                                         },
                                         "data": {
                                             "type": "object",
@@ -285,8 +286,9 @@
                                     },
                                     "required": [
                                         "id",
-                                        "object",
                                         "timestamp",
+                                        "api_version",
+                                        "object",
                                         "data"
                                     ]
                                 }
@@ -306,11 +308,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755584163120
+                                            "example": 1755722229870
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.8.19"
+                                            "example": "v2025.8.20"
                                         },
                                         "object": {
                                             "type": "string",
@@ -358,11 +360,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755584163120
+                                            "example": 1755722229870
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.8.19"
+                                            "example": "v2025.8.20"
                                         },
                                         "object": {
                                             "type": "string",
@@ -410,11 +412,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755584163120
+                                            "example": 1755722229870
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.8.19"
+                                            "example": "v2025.8.20"
                                         },
                                         "object": {
                                             "type": "string",
@@ -462,11 +464,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755584163120
+                                            "example": 1755722229870
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.8.19"
+                                            "example": "v2025.8.20"
                                         },
                                         "object": {
                                             "type": "string",
@@ -515,10 +517,11 @@
                     {
                         "schema": {
                             "type": "string",
-                            "description": "number parameter"
+                            "description": "Phone number in E.164 format",
+                            "example": "+13059478667"
                         },
                         "required": true,
-                        "description": "number parameter",
+                        "description": "Phone number in E.164 format",
                         "name": "number",
                         "in": "path"
                     }
@@ -533,18 +536,19 @@
                                     "properties": {
                                         "id": {
                                             "type": "string",
-                                            "description": "Response ID",
-                                            "example": "lsd_1234567890"
-                                        },
-                                        "object": {
-                                            "type": "string",
-                                            "description": "Response type",
-                                            "example": "leasing_disclosure"
+                                            "example": "req_xxxxxxxxxxxxxxxx"
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "description": "Response timestamp",
-                                            "example": 1718851200
+                                            "example": 1755722229870
+                                        },
+                                        "api_version": {
+                                            "type": "string",
+                                            "example": "v2025.8.20"
+                                        },
+                                        "object": {
+                                            "type": "string",
+                                            "example": "response"
                                         },
                                         "data": {
                                             "type": "object",
@@ -757,8 +761,9 @@
                                     },
                                     "required": [
                                         "id",
-                                        "object",
                                         "timestamp",
+                                        "api_version",
+                                        "object",
                                         "data"
                                     ]
                                 }
@@ -778,11 +783,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755584163120
+                                            "example": 1755722229870
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.8.19"
+                                            "example": "v2025.8.20"
                                         },
                                         "object": {
                                             "type": "string",
@@ -830,11 +835,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755584163120
+                                            "example": 1755722229870
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.8.19"
+                                            "example": "v2025.8.20"
                                         },
                                         "object": {
                                             "type": "string",
@@ -882,11 +887,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755584163120
+                                            "example": 1755722229870
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.8.19"
+                                            "example": "v2025.8.20"
                                         },
                                         "object": {
                                             "type": "string",
@@ -934,11 +939,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755584163120
+                                            "example": 1755722229870
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.8.19"
+                                            "example": "v2025.8.20"
                                         },
                                         "object": {
                                             "type": "string",
@@ -985,10 +990,11 @@
                     {
                         "schema": {
                             "type": "string",
-                            "description": "number parameter"
+                            "description": "Phone number in E.164 format",
+                            "example": "+13059478667"
                         },
                         "required": true,
-                        "description": "number parameter",
+                        "description": "Phone number in E.164 format",
                         "name": "number",
                         "in": "path"
                     }
@@ -1023,18 +1029,19 @@
                                     "properties": {
                                         "id": {
                                             "type": "string",
-                                            "description": "Response ID",
-                                            "example": "lsd_1234567890"
-                                        },
-                                        "object": {
-                                            "type": "string",
-                                            "description": "Response type",
-                                            "example": "lease_created"
+                                            "example": "req_xxxxxxxxxxxxxxxx"
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "description": "Response timestamp",
-                                            "example": 1718851200
+                                            "example": 1755722229870
+                                        },
+                                        "api_version": {
+                                            "type": "string",
+                                            "example": "v2025.8.20"
+                                        },
+                                        "object": {
+                                            "type": "string",
+                                            "example": "response"
                                         },
                                         "data": {
                                             "type": "object",
@@ -1141,8 +1148,9 @@
                                     },
                                     "required": [
                                         "id",
-                                        "object",
                                         "timestamp",
+                                        "api_version",
+                                        "object",
                                         "data"
                                     ]
                                 }
@@ -1162,11 +1170,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755584163120
+                                            "example": 1755722229870
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.8.19"
+                                            "example": "v2025.8.20"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1214,11 +1222,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755584163120
+                                            "example": 1755722229870
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.8.19"
+                                            "example": "v2025.8.20"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1266,11 +1274,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755584163120
+                                            "example": 1755722229870
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.8.19"
+                                            "example": "v2025.8.20"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1318,11 +1326,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755584163120
+                                            "example": 1755722229870
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.8.19"
+                                            "example": "v2025.8.20"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1377,18 +1385,19 @@
                                     "properties": {
                                         "id": {
                                             "type": "string",
-                                            "description": "Response ID",
-                                            "example": "lsd_1234567890"
-                                        },
-                                        "object": {
-                                            "type": "string",
-                                            "description": "Response type",
-                                            "example": "leased_numbers"
+                                            "example": "req_xxxxxxxxxxxxxxxx"
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "description": "Response timestamp",
-                                            "example": 1718851200
+                                            "example": 1755722229870
+                                        },
+                                        "api_version": {
+                                            "type": "string",
+                                            "example": "v2025.8.20"
+                                        },
+                                        "object": {
+                                            "type": "string",
+                                            "example": "response"
                                         },
                                         "data": {
                                             "type": "object",
@@ -1684,8 +1693,9 @@
                                     },
                                     "required": [
                                         "id",
-                                        "object",
                                         "timestamp",
+                                        "api_version",
+                                        "object",
                                         "data"
                                     ]
                                 }
@@ -1705,11 +1715,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755584163120
+                                            "example": 1755722229870
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.8.19"
+                                            "example": "v2025.8.20"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1757,11 +1767,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755584163120
+                                            "example": 1755722229870
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.8.19"
+                                            "example": "v2025.8.20"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1809,11 +1819,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755584163120
+                                            "example": 1755722229870
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.8.19"
+                                            "example": "v2025.8.20"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1861,11 +1871,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755584163120
+                                            "example": 1755722229870
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.8.19"
+                                            "example": "v2025.8.20"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1914,10 +1924,11 @@
                     {
                         "schema": {
                             "type": "string",
-                            "description": "number parameter"
+                            "description": "Phone number in E.164 format",
+                            "example": "+13059478667"
                         },
                         "required": true,
-                        "description": "number parameter",
+                        "description": "Phone number in E.164 format",
                         "name": "number",
                         "in": "path"
                     }
@@ -1932,18 +1943,19 @@
                                     "properties": {
                                         "id": {
                                             "type": "string",
-                                            "description": "Response ID",
-                                            "example": "lsd_1234567890"
-                                        },
-                                        "object": {
-                                            "type": "string",
-                                            "description": "Response type",
-                                            "example": "leased_number_details"
+                                            "example": "req_xxxxxxxxxxxxxxxx"
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "description": "Response timestamp",
-                                            "example": 1718851200
+                                            "example": 1755722229870
+                                        },
+                                        "api_version": {
+                                            "type": "string",
+                                            "example": "v2025.8.20"
+                                        },
+                                        "object": {
+                                            "type": "string",
+                                            "example": "response"
                                         },
                                         "data": {
                                             "type": "object",
@@ -2221,8 +2233,9 @@
                                     },
                                     "required": [
                                         "id",
-                                        "object",
                                         "timestamp",
+                                        "api_version",
+                                        "object",
                                         "data"
                                     ]
                                 }
@@ -2242,11 +2255,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755584163120
+                                            "example": 1755722229870
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.8.19"
+                                            "example": "v2025.8.20"
                                         },
                                         "object": {
                                             "type": "string",
@@ -2294,11 +2307,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755584163120
+                                            "example": 1755722229870
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.8.19"
+                                            "example": "v2025.8.20"
                                         },
                                         "object": {
                                             "type": "string",
@@ -2346,11 +2359,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755584163120
+                                            "example": 1755722229870
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.8.19"
+                                            "example": "v2025.8.20"
                                         },
                                         "object": {
                                             "type": "string",
@@ -2398,11 +2411,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755584163120
+                                            "example": 1755722229870
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.8.19"
+                                            "example": "v2025.8.20"
                                         },
                                         "object": {
                                             "type": "string",
@@ -2449,10 +2462,11 @@
                     {
                         "schema": {
                             "type": "string",
-                            "description": "number parameter"
+                            "description": "Phone number in E.164 format",
+                            "example": "+13059478667"
                         },
                         "required": true,
-                        "description": "number parameter",
+                        "description": "Phone number in E.164 format",
                         "name": "number",
                         "in": "path"
                     }
@@ -2467,18 +2481,19 @@
                                     "properties": {
                                         "id": {
                                             "type": "string",
-                                            "description": "Response ID",
-                                            "example": "afl_1234567890"
-                                        },
-                                        "object": {
-                                            "type": "string",
-                                            "description": "Response type",
-                                            "example": "lease_terminated"
+                                            "example": "req_xxxxxxxxxxxxxxxx"
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "description": "Response timestamp",
-                                            "example": 1718851200
+                                            "example": 1755722229870
+                                        },
+                                        "api_version": {
+                                            "type": "string",
+                                            "example": "v2025.8.20"
+                                        },
+                                        "object": {
+                                            "type": "string",
+                                            "example": "response"
                                         },
                                         "data": {
                                             "type": "object",
@@ -2519,8 +2534,9 @@
                                     },
                                     "required": [
                                         "id",
-                                        "object",
                                         "timestamp",
+                                        "api_version",
+                                        "object",
                                         "data"
                                     ]
                                 }
@@ -2540,11 +2556,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755584163120
+                                            "example": 1755722229870
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.8.19"
+                                            "example": "v2025.8.20"
                                         },
                                         "object": {
                                             "type": "string",
@@ -2592,11 +2608,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755584163120
+                                            "example": 1755722229870
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.8.19"
+                                            "example": "v2025.8.20"
                                         },
                                         "object": {
                                             "type": "string",
@@ -2644,11 +2660,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755584163120
+                                            "example": 1755722229870
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.8.19"
+                                            "example": "v2025.8.20"
                                         },
                                         "object": {
                                             "type": "string",
@@ -2696,11 +2712,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755584163120
+                                            "example": 1755722229870
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.8.19"
+                                            "example": "v2025.8.20"
                                         },
                                         "object": {
                                             "type": "string",

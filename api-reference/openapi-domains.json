@@ -6,7 +6,7 @@
         }
     ],
     "info": {
-        "version": "v2025.8.19",
+        "version": "v2025.8.20",
         "title": "Domains API"
     },
     "components": {
@@ -31,10 +31,11 @@
                     {
                         "schema": {
                             "type": "string",
-                            "description": "domain parameter"
+                            "description": "The domain to delete",
+                            "example": "example.com"
                         },
                         "required": true,
-                        "description": "domain parameter",
+                        "description": "The domain to delete",
                         "name": "domain",
                         "in": "path"
                     }
@@ -53,11 +54,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755638101715
+                                            "example": 1755722229870
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.8.19"
+                                            "example": "v2025.8.20"
                                         },
                                         "object": {
                                             "type": "string",
@@ -105,11 +106,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755638101715
+                                            "example": 1755722229870
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.8.19"
+                                            "example": "v2025.8.20"
                                         },
                                         "object": {
                                             "type": "string",
@@ -157,11 +158,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755638101715
+                                            "example": 1755722229870
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.8.19"
+                                            "example": "v2025.8.20"
                                         },
                                         "object": {
                                             "type": "string",
@@ -209,11 +210,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755638101715
+                                            "example": 1755722229870
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.8.19"
+                                            "example": "v2025.8.20"
                                         },
                                         "object": {
                                             "type": "string",
@@ -261,11 +262,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755638101715
+                                            "example": 1755722229870
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.8.19"
+                                            "example": "v2025.8.20"
                                         },
                                         "object": {
                                             "type": "string",
@@ -312,10 +313,11 @@
                     {
                         "schema": {
                             "type": "string",
-                            "description": "domain parameter"
+                            "description": "Domain to register",
+                            "example": "example.com"
                         },
                         "required": true,
-                        "description": "domain parameter",
+                        "description": "Domain to register",
                         "name": "domain",
                         "in": "path"
                     }
@@ -351,120 +353,148 @@
                                 "schema": {
                                     "type": "object",
                                     "properties": {
-                                        "records": {
-                                            "type": "array",
-                                            "items": {
-                                                "type": "object",
-                                                "properties": {
-                                                    "MX": {
-                                                        "type": "array",
-                                                        "items": {
-                                                            "type": "object",
-                                                            "properties": {
-                                                                "name": {
-                                                                    "type": "string",
-                                                                    "description": "MX record name",
-                                                                    "example": "@"
-                                                                },
-                                                                "value": {
-                                                                    "type": "string",
-                                                                    "description": "MX record value",
-                                                                    "example": "inbound-smtp.us-east-1.amazonaws.com"
-                                                                },
-                                                                "purpose": {
-                                                                    "type": "string",
-                                                                    "description": "MX record purpose",
-                                                                    "example": "Inbound Email"
+                                        "id": {
+                                            "type": "string",
+                                            "example": "req_xxxxxxxxxxxxxxxx"
+                                        },
+                                        "timestamp": {
+                                            "type": "number",
+                                            "example": 1755722229870
+                                        },
+                                        "api_version": {
+                                            "type": "string",
+                                            "example": "v2025.8.20"
+                                        },
+                                        "object": {
+                                            "type": "string",
+                                            "example": "response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "records": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "MX": {
+                                                                "type": "array",
+                                                                "items": {
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "name": {
+                                                                            "type": "string",
+                                                                            "description": "MX record name",
+                                                                            "example": "@"
+                                                                        },
+                                                                        "value": {
+                                                                            "type": "string",
+                                                                            "description": "MX record value",
+                                                                            "example": "inbound-smtp.us-east-1.amazonaws.com"
+                                                                        },
+                                                                        "purpose": {
+                                                                            "type": "string",
+                                                                            "description": "MX record purpose",
+                                                                            "example": "Inbound Email"
+                                                                        }
+                                                                    },
+                                                                    "required": [
+                                                                        "name",
+                                                                        "value",
+                                                                        "purpose"
+                                                                    ]
                                                                 }
                                                             },
-                                                            "required": [
-                                                                "name",
-                                                                "value",
-                                                                "purpose"
-                                                            ]
+                                                            "TXT": {
+                                                                "type": "array",
+                                                                "items": {
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "name": {
+                                                                            "type": "string",
+                                                                            "description": "TXT record name",
+                                                                            "example": "contiguity"
+                                                                        },
+                                                                        "value": {
+                                                                            "type": "string",
+                                                                            "description": "TXT record value",
+                                                                            "example": "v=spf1 include:amazonses.com ~all"
+                                                                        },
+                                                                        "purpose": {
+                                                                            "type": "string",
+                                                                            "description": "TXT record purpose",
+                                                                            "example": "SPF Record"
+                                                                        }
+                                                                    },
+                                                                    "required": [
+                                                                        "name",
+                                                                        "value",
+                                                                        "purpose"
+                                                                    ]
+                                                                }
+                                                            },
+                                                            "CNAME": {
+                                                                "type": "array",
+                                                                "items": {
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "name": {
+                                                                            "type": "string",
+                                                                            "description": "CNAME record name",
+                                                                            "example": "hsyetjmgaiftvruluqqd4auta4xyo7sa._domainkey"
+                                                                        },
+                                                                        "value": {
+                                                                            "type": "string",
+                                                                            "description": "CNAME record value",
+                                                                            "example": "hsyetjmgaiftvruluqqd4auta4xyo7sa.dkim.amazonses.com"
+                                                                        },
+                                                                        "purpose": {
+                                                                            "type": "string",
+                                                                            "description": "CNAME record purpose",
+                                                                            "example": "DKIM Authentication"
+                                                                        }
+                                                                    },
+                                                                    "required": [
+                                                                        "name",
+                                                                        "value",
+                                                                        "purpose"
+                                                                    ]
+                                                                }
+                                                            }
                                                         }
                                                     },
-                                                    "TXT": {
-                                                        "type": "array",
-                                                        "items": {
-                                                            "type": "object",
-                                                            "properties": {
-                                                                "name": {
-                                                                    "type": "string",
-                                                                    "description": "TXT record name",
-                                                                    "example": "contiguity"
-                                                                },
-                                                                "value": {
-                                                                    "type": "string",
-                                                                    "description": "TXT record value",
-                                                                    "example": "v=spf1 include:amazonses.com ~all"
-                                                                },
-                                                                "purpose": {
-                                                                    "type": "string",
-                                                                    "description": "TXT record purpose",
-                                                                    "example": "SPF Record"
-                                                                }
-                                                            },
-                                                            "required": [
-                                                                "name",
-                                                                "value",
-                                                                "purpose"
-                                                            ]
-                                                        }
-                                                    },
-                                                    "CNAME": {
-                                                        "type": "array",
-                                                        "items": {
-                                                            "type": "object",
-                                                            "properties": {
-                                                                "name": {
-                                                                    "type": "string",
-                                                                    "description": "CNAME record name",
-                                                                    "example": "hsyetjmgaiftvruluqqd4auta4xyo7sa._domainkey"
-                                                                },
-                                                                "value": {
-                                                                    "type": "string",
-                                                                    "description": "CNAME record value",
-                                                                    "example": "hsyetjmgaiftvruluqqd4auta4xyo7sa.dkim.amazonses.com"
-                                                                },
-                                                                "purpose": {
-                                                                    "type": "string",
-                                                                    "description": "CNAME record purpose",
-                                                                    "example": "DKIM Authentication"
-                                                                }
-                                                            },
-                                                            "required": [
-                                                                "name",
-                                                                "value",
-                                                                "purpose"
-                                                            ]
-                                                        }
-                                                    }
+                                                    "description": "DNS records grouped by type"
+                                                },
+                                                "status": {
+                                                    "type": "string",
+                                                    "description": "Domain verification status",
+                                                    "example": "pending_verification"
+                                                },
+                                                "region": {
+                                                    "type": "string",
+                                                    "description": "AWS region (us-east-1 is the default and only currently supported region)",
+                                                    "example": "us-east-1"
+                                                },
+                                                "created_at": {
+                                                    "type": "number",
+                                                    "description": "Domain creation timestamp",
+                                                    "example": 1755637604526
                                                 }
                                             },
-                                            "description": "DNS records grouped by type"
-                                        },
-                                        "status": {
-                                            "type": "string",
-                                            "description": "Domain verification status",
-                                            "example": "pending_verification"
-                                        },
-                                        "region": {
-                                            "type": "string",
-                                            "description": "AWS region (us-east-1 is the default and only currently supported region)",
-                                            "example": "us-east-1"
-                                        },
-                                        "created_at": {
-                                            "type": "number",
-                                            "description": "Domain creation timestamp",
-                                            "example": 1755637604526
+                                            "required": [
+                                                "records",
+                                                "status",
+                                                "region",
+                                                "created_at"
+                                            ]
                                         }
                                     },
                                     "required": [
-                                        "records",
-                                        "status",
-                                        "region",
-                                        "created_at"
+                                        "id",
+                                        "timestamp",
+                                        "api_version",
+                                        "object",
+                                        "data"
                                     ]
                                 }
                             }
@@ -483,11 +513,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755638101715
+                                            "example": 1755722229870
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.8.19"
+                                            "example": "v2025.8.20"
                                         },
                                         "object": {
                                             "type": "string",
@@ -535,11 +565,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755638101715
+                                            "example": 1755722229870
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.8.19"
+                                            "example": "v2025.8.20"
                                         },
                                         "object": {
                                             "type": "string",
@@ -587,11 +617,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755638101715
+                                            "example": 1755722229870
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.8.19"
+                                            "example": "v2025.8.20"
                                         },
                                         "object": {
                                             "type": "string",
@@ -639,11 +669,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755638101715
+                                            "example": 1755722229870
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.8.19"
+                                            "example": "v2025.8.20"
                                         },
                                         "object": {
                                             "type": "string",
@@ -690,178 +720,207 @@
                     {
                         "schema": {
                             "type": "string",
-                            "description": "domain parameter"
+                            "description": "The domain to get info for",
+                            "example": "example.com"
                         },
                         "required": true,
-                        "description": "domain parameter",
+                        "description": "The domain to get info for",
                         "name": "domain",
                         "in": "path"
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "Get domain verification status and DNS instructions",
+                        "description": "Get specific domain info",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
-                                        "domain": {
-                                            "type": "string",
-                                            "description": "The domain name"
-                                        },
-                                        "status": {
-                                            "type": "string",
-                                            "description": "Domain verification status"
-                                        },
                                         "id": {
                                             "type": "string",
-                                            "description": "Domain ID"
+                                            "example": "req_xxxxxxxxxxxxxxxx"
                                         },
-                                        "created_at": {
+                                        "timestamp": {
                                             "type": "number",
-                                            "description": "Domain creation timestamp",
-                                            "example": 1755637604526
+                                            "example": 1755722229870
                                         },
-                                        "records": {
-                                            "type": "array",
-                                            "items": {
-                                                "type": "object",
-                                                "properties": {
-                                                    "MX": {
-                                                        "type": "array",
-                                                        "items": {
-                                                            "type": "object",
-                                                            "properties": {
-                                                                "name": {
-                                                                    "type": "string",
-                                                                    "description": "MX record name",
-                                                                    "example": "@"
-                                                                },
-                                                                "value": {
-                                                                    "type": "string",
-                                                                    "description": "MX record value",
-                                                                    "example": "inbound-smtp.us-east-1.amazonaws.com"
-                                                                },
-                                                                "purpose": {
-                                                                    "type": "string",
-                                                                    "description": "MX record purpose",
-                                                                    "example": "Inbound Email"
-                                                                }
-                                                            },
-                                                            "required": [
-                                                                "name",
-                                                                "value",
-                                                                "purpose"
-                                                            ]
-                                                        }
-                                                    },
-                                                    "TXT": {
-                                                        "type": "array",
-                                                        "items": {
-                                                            "type": "object",
-                                                            "properties": {
-                                                                "name": {
-                                                                    "type": "string",
-                                                                    "description": "TXT record name",
-                                                                    "example": "contiguity"
-                                                                },
-                                                                "value": {
-                                                                    "type": "string",
-                                                                    "description": "TXT record value",
-                                                                    "example": "v=spf1 include:amazonses.com ~all"
-                                                                },
-                                                                "purpose": {
-                                                                    "type": "string",
-                                                                    "description": "TXT record purpose",
-                                                                    "example": "SPF Record"
-                                                                }
-                                                            },
-                                                            "required": [
-                                                                "name",
-                                                                "value",
-                                                                "purpose"
-                                                            ]
-                                                        }
-                                                    },
-                                                    "CNAME": {
-                                                        "type": "array",
-                                                        "items": {
-                                                            "type": "object",
-                                                            "properties": {
-                                                                "name": {
-                                                                    "type": "string",
-                                                                    "description": "CNAME record name",
-                                                                    "example": "hsyetjmgaiftvruluqqd4auta4xyo7sa._domainkey"
-                                                                },
-                                                                "value": {
-                                                                    "type": "string",
-                                                                    "description": "CNAME record value",
-                                                                    "example": "hsyetjmgaiftvruluqqd4auta4xyo7sa.dkim.amazonses.com"
-                                                                },
-                                                                "purpose": {
-                                                                    "type": "string",
-                                                                    "description": "CNAME record purpose",
-                                                                    "example": "DKIM Authentication"
-                                                                }
-                                                            },
-                                                            "required": [
-                                                                "name",
-                                                                "value",
-                                                                "purpose"
-                                                            ]
-                                                        }
-                                                    }
-                                                }
-                                            },
-                                            "description": "DNS records grouped by type"
-                                        },
-                                        "region": {
+                                        "api_version": {
                                             "type": "string",
-                                            "description": "AWS region (us-east-1 is the default and only currently supported region)",
-                                            "example": "us-east-1"
+                                            "example": "v2025.8.20"
                                         },
-                                        "sending_allowed": {
-                                            "type": "boolean",
-                                            "description": "Whether sending is allowed using this domain",
-                                            "example": true
+                                        "object": {
+                                            "type": "string",
+                                            "example": "response"
                                         },
-                                        "verifications": {
+                                        "data": {
                                             "type": "object",
                                             "properties": {
-                                                "dkim": {
-                                                    "type": "string",
-                                                    "description": "DKIM configuration status",
-                                                    "example": "success"
-                                                },
-                                                "mail_from": {
-                                                    "type": "string",
-                                                    "description": "Mail-from domain verification status",
-                                                    "example": "success"
-                                                },
                                                 "domain": {
                                                     "type": "string",
-                                                    "description": "Domain verification status",
-                                                    "example": "verified"
+                                                    "description": "The domain name"
+                                                },
+                                                "status": {
+                                                    "type": "string",
+                                                    "description": "Domain verification status"
+                                                },
+                                                "id": {
+                                                    "type": "string",
+                                                    "description": "Domain ID"
+                                                },
+                                                "created_at": {
+                                                    "type": "number",
+                                                    "description": "Domain creation timestamp",
+                                                    "example": 1755637604526
+                                                },
+                                                "records": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "MX": {
+                                                                "type": "array",
+                                                                "items": {
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "name": {
+                                                                            "type": "string",
+                                                                            "description": "MX record name",
+                                                                            "example": "@"
+                                                                        },
+                                                                        "value": {
+                                                                            "type": "string",
+                                                                            "description": "MX record value",
+                                                                            "example": "inbound-smtp.us-east-1.amazonaws.com"
+                                                                        },
+                                                                        "purpose": {
+                                                                            "type": "string",
+                                                                            "description": "MX record purpose",
+                                                                            "example": "Inbound Email"
+                                                                        }
+                                                                    },
+                                                                    "required": [
+                                                                        "name",
+                                                                        "value",
+                                                                        "purpose"
+                                                                    ]
+                                                                }
+                                                            },
+                                                            "TXT": {
+                                                                "type": "array",
+                                                                "items": {
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "name": {
+                                                                            "type": "string",
+                                                                            "description": "TXT record name",
+                                                                            "example": "contiguity"
+                                                                        },
+                                                                        "value": {
+                                                                            "type": "string",
+                                                                            "description": "TXT record value",
+                                                                            "example": "v=spf1 include:amazonses.com ~all"
+                                                                        },
+                                                                        "purpose": {
+                                                                            "type": "string",
+                                                                            "description": "TXT record purpose",
+                                                                            "example": "SPF Record"
+                                                                        }
+                                                                    },
+                                                                    "required": [
+                                                                        "name",
+                                                                        "value",
+                                                                        "purpose"
+                                                                    ]
+                                                                }
+                                                            },
+                                                            "CNAME": {
+                                                                "type": "array",
+                                                                "items": {
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "name": {
+                                                                            "type": "string",
+                                                                            "description": "CNAME record name",
+                                                                            "example": "hsyetjmgaiftvruluqqd4auta4xyo7sa._domainkey"
+                                                                        },
+                                                                        "value": {
+                                                                            "type": "string",
+                                                                            "description": "CNAME record value",
+                                                                            "example": "hsyetjmgaiftvruluqqd4auta4xyo7sa.dkim.amazonses.com"
+                                                                        },
+                                                                        "purpose": {
+                                                                            "type": "string",
+                                                                            "description": "CNAME record purpose",
+                                                                            "example": "DKIM Authentication"
+                                                                        }
+                                                                    },
+                                                                    "required": [
+                                                                        "name",
+                                                                        "value",
+                                                                        "purpose"
+                                                                    ]
+                                                                }
+                                                            }
+                                                        }
+                                                    },
+                                                    "description": "DNS records grouped by type"
+                                                },
+                                                "region": {
+                                                    "type": "string",
+                                                    "description": "AWS region (us-east-1 is the default and only currently supported region)",
+                                                    "example": "us-east-1"
+                                                },
+                                                "sending_allowed": {
+                                                    "type": "boolean",
+                                                    "description": "Whether sending is allowed using this domain",
+                                                    "example": true
+                                                },
+                                                "verifications": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "dkim": {
+                                                            "type": "string",
+                                                            "description": "DKIM configuration status",
+                                                            "example": "success"
+                                                        },
+                                                        "mail_from": {
+                                                            "type": "string",
+                                                            "description": "Mail-from domain verification status",
+                                                            "example": "success"
+                                                        },
+                                                        "domain": {
+                                                            "type": "string",
+                                                            "description": "Domain verification status",
+                                                            "example": "verified"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "dkim",
+                                                        "mail_from",
+                                                        "domain"
+                                                    ],
+                                                    "description": "Verification status details"
                                                 }
                                             },
                                             "required": [
-                                                "dkim",
-                                                "mail_from",
-                                                "domain"
-                                            ],
-                                            "description": "Verification status details"
+                                                "domain",
+                                                "status",
+                                                "id",
+                                                "created_at",
+                                                "records",
+                                                "region",
+                                                "sending_allowed",
+                                                "verifications"
+                                            ]
                                         }
                                     },
                                     "required": [
-                                        "domain",
-                                        "status",
                                         "id",
-                                        "created_at",
-                                        "records",
-                                        "region",
-                                        "sending_allowed",
-                                        "verifications"
+                                        "timestamp",
+                                        "api_version",
+                                        "object",
+                                        "data"
                                     ]
                                 }
                             }
@@ -880,11 +939,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755638101715
+                                            "example": 1755722229870
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.8.19"
+                                            "example": "v2025.8.20"
                                         },
                                         "object": {
                                             "type": "string",
@@ -932,11 +991,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755638101715
+                                            "example": 1755722229870
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.8.19"
+                                            "example": "v2025.8.20"
                                         },
                                         "object": {
                                             "type": "string",
@@ -984,11 +1043,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755638101715
+                                            "example": 1755722229870
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.8.19"
+                                            "example": "v2025.8.20"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1036,11 +1095,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755638101715
+                                            "example": 1755722229870
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.8.19"
+                                            "example": "v2025.8.20"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1093,56 +1152,84 @@
                                 "schema": {
                                     "type": "object",
                                     "properties": {
-                                        "domains": {
-                                            "type": "array",
-                                            "items": {
-                                                "type": "object",
-                                                "properties": {
-                                                    "domain": {
-                                                        "type": "string",
-                                                        "description": "The domain name",
-                                                        "example": "example.com"
+                                        "id": {
+                                            "type": "string",
+                                            "example": "req_xxxxxxxxxxxxxxxx"
+                                        },
+                                        "timestamp": {
+                                            "type": "number",
+                                            "example": 1755722229870
+                                        },
+                                        "api_version": {
+                                            "type": "string",
+                                            "example": "v2025.8.20"
+                                        },
+                                        "object": {
+                                            "type": "string",
+                                            "example": "response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "domains": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "domain": {
+                                                                "type": "string",
+                                                                "description": "The domain name",
+                                                                "example": "example.com"
+                                                            },
+                                                            "status": {
+                                                                "type": "string",
+                                                                "description": "Domain verification status",
+                                                                "example": "verified"
+                                                            },
+                                                            "created_at": {
+                                                                "type": "number",
+                                                                "description": "Domain creation timestamp",
+                                                                "example": 1755637604526
+                                                            },
+                                                            "id": {
+                                                                "type": "string",
+                                                                "description": "Domain ID",
+                                                                "example": "d_1234567890"
+                                                            },
+                                                            "region": {
+                                                                "type": "string",
+                                                                "description": "AWS region",
+                                                                "example": "us-east-1"
+                                                            },
+                                                            "sending_allowed": {
+                                                                "type": "boolean",
+                                                                "description": "Whether sending is allowed",
+                                                                "example": true
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "domain",
+                                                            "status",
+                                                            "created_at",
+                                                            "id",
+                                                            "region",
+                                                            "sending_allowed"
+                                                        ]
                                                     },
-                                                    "status": {
-                                                        "type": "string",
-                                                        "description": "Domain verification status",
-                                                        "example": "verified"
-                                                    },
-                                                    "created_at": {
-                                                        "type": "number",
-                                                        "description": "Domain creation timestamp",
-                                                        "example": 1755637604526
-                                                    },
-                                                    "id": {
-                                                        "type": "string",
-                                                        "description": "Domain ID",
-                                                        "example": "d_1234567890"
-                                                    },
-                                                    "region": {
-                                                        "type": "string",
-                                                        "description": "AWS region",
-                                                        "example": "us-east-1"
-                                                    },
-                                                    "sending_allowed": {
-                                                        "type": "boolean",
-                                                        "description": "Whether sending is allowed",
-                                                        "example": true
-                                                    }
-                                                },
-                                                "required": [
-                                                    "domain",
-                                                    "status",
-                                                    "created_at",
-                                                    "id",
-                                                    "region",
-                                                    "sending_allowed"
-                                                ]
+                                                    "description": "List of user's domains"
+                                                }
                                             },
-                                            "description": "List of user's domains"
+                                            "required": [
+                                                "domains"
+                                            ]
                                         }
                                     },
                                     "required": [
-                                        "domains"
+                                        "id",
+                                        "timestamp",
+                                        "api_version",
+                                        "object",
+                                        "data"
                                     ]
                                 }
                             }
@@ -1161,11 +1248,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755638101715
+                                            "example": 1755722229870
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.8.19"
+                                            "example": "v2025.8.20"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1213,11 +1300,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755638101715
+                                            "example": 1755722229870
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.8.19"
+                                            "example": "v2025.8.20"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1265,11 +1352,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755638101715
+                                            "example": 1755722229870
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.8.19"
+                                            "example": "v2025.8.20"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1317,11 +1404,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1755638101715
+                                            "example": 1755722229870
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.8.19"
+                                            "example": "v2025.8.20"
                                         },
                                         "object": {
                                             "type": "string",
