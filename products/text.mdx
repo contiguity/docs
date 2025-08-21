@@ -4,79 +4,64 @@ icon: "message"
 iconType: "solid"
 description: "Send text messages to your users at scale, using Contiguity."
 ---
-## Installing the SDK
-<Steps>
-  <Step title="Install the SDK">
-    Contiguity is working on adding several SDKs over the coming months, including ones for Swift, Java, Dart, and more.
-
-    <Tabs>
-      <Tab title="JavaScript">
-        Use `npm` to install `@contiguity/javascript`
-
-        ```bash
-        npm i @contiguity/javascript
-        ```
-      </Tab>
-      <Tab title="Python">
-        Use `pip` to install `contiguity`
-        ```bash
-        pip install contiguity
-        ```
-      </Tab>
-    </Tabs>
-  </Step>
-
-  <Step title="Initialize the Client">
-    After installation, import Contiguity into your project and give it your token.
-
-    <Tabs>
-      <Tab title="JavaScript">
-        ```javascript
-        const contiguity = require('@contiguity/javascript')
-        const client = contiguity.login("your token here")
-        ```
-
-        You can also initialize it with the optional 'debug' flag, which logs additional information to the console.
-
-        ```javascript
-        const client = contiguity.login("your token here", true)
-        ```
-      </Tab>
-      <Tab title="Python">
-        ```python
-        import contiguity
-        client = contiguity.login("your_token_here")
-        ```
-
-        You can also initialize it with the optional 'debug' flag:
-
-        ```python
-        client = contiguity.login("your_token_here", True)
-        ```
-      </Tab>
-    </Tabs>
-  </Step>
-</Steps>
-
-## Sending a message
-As long as you provide Contiguity a valid token, and provide valid inputs, sending texts will be a breeze.
-
-<Note>
-  Contiguity expects the recipient phone number to be formatted in E.164. You can attempt to pass numbers in formats like NANP, and the SDKs will try their best to convert it.
-</Note>
+import InstallJS from '/snippets/install-js.mdx';
+import InstallPY from '/snippets/install-py.mdx';
 
 <Tabs>
-  <Tab title="JavaScript">
-    ```javascript
-    const object = {
-        to: "+15555555555",
-        message: "I sent this text using Contiguity"
-    }
+  <Tab title="JavaScript" icon="js">
+    <InstallJS />
+    
+    ## Sending a message
+    As long as you provide Contiguity a valid token, and provide valid inputs, sending texts will be a breeze.
 
-    await client.send.text(object)
+    <Note>
+      Contiguity expects the recipient phone number to be formatted in E.164. You can attempt to pass numbers in formats like NANP, and the SDKs will try their best to convert it.
+    </Note>
+
+    ```typescript
+    const res = await contiguity.text.send({
+      to: "+1234567890",
+      message: "Hello from Contiguity!",
+      // from: "+15555555555" // if you lease a number from Contiguity, you can provide it here
+    });
     ```
+
+    ### Response
+    <ResponseField name="message_id" type="string">
+      Unique identifier for the sent text message, used for tracking and delivery status.
+    </ResponseField>
+
+    <ResponseField name="metadata" type="object">
+      Request metadata including ID, timestamp, and API version.
+    </ResponseField>
+
+    ## Parameters
+
+    ### text.send(params)
+
+    <ParamField body="to" type="string" required>
+      The recipient's phone number in E.164 format (e.g., "+1234567890").
+    </ParamField>
+
+    <ParamField body="message" type="string" required>
+      The text message content to send to the recipient.
+    </ParamField>
+
+    <ParamField body="from" type="string">
+      Optionally, if you lease a number from Contiguity, you can provide it here to send from.
+    </ParamField>
   </Tab>
-  <Tab title="Python">
+  
+  <Tab title="Python" icon="python">
+    <InstallPY />
+    
+    ## Sending a message
+    As long as you provide Contiguity a valid token, and provide valid inputs, sending texts will be a breeze.
+
+    <Note>
+      Contiguity expects the recipient phone number to be formatted in E.164. You can attempt to pass numbers in formats like NANP, and the SDKs will try their best to convert it.
+    </Note>
+
     ```python
     text_object = {
         "to": "+15555555555",
@@ -85,6 +70,22 @@ As long as you provide Contiguity a valid token, and provide valid inputs, sendi
 
     client.send.text(text_object)
     ```
+
+    ## Parameters
+
+    ### text.send(params)
+
+    <ParamField body="to" type="string" required>
+      The recipient's phone number in E.164 format (e.g., "+15555555555").
+    </ParamField>
+
+    <ParamField body="message" type="string" required>
+      The text message content to send to the recipient.
+    </ParamField>
+
+    <ParamField body="from" type="string">
+      Optionally, if you lease a number from Contiguity, you can provide it here to send from.
+    </ParamField>
   </Tab>
 </Tabs>
 

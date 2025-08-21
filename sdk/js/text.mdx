@@ -1,0 +1,47 @@
+---
+title: 'Text'
+icon: "message"
+iconType: "solid"
+description: "Send text messages using the Contiguity JavaScript SDK."
+---
+
+<Note>
+  Contiguity expects the recipient phone number to be formatted in E.164. You can attempt to pass numbers in formats like NANP, and the SDKs will try their best to convert it.
+</Note>
+
+```typescript
+const res = await contiguity.text.send({
+  to: "+1234567890",
+  message: "Hello from Contiguity!",
+  // from: "+15555555555" // if you lease a number from Contiguity, you can provide it here
+});
+```
+
+## Parameters
+
+### text.send(params)
+
+<ParamField body="to" type="string" required>
+  The recipient's phone number in E.164 format (e.g., "+1234567890").
+</ParamField>
+
+<ParamField body="message" type="string" required>
+  The text message content to send to the recipient.
+</ParamField>
+
+<ParamField body="from" type="string">
+  Optionally, if you lease a number from Contiguity, you can provide it here to send from.
+</ParamField>
+
+### Response
+<ResponseField name="message_id" type="string">
+  Unique identifier for the sent text message, used for tracking and delivery status.
+</ResponseField>
+
+<ResponseField name="metadata" type="object">
+  Request metadata including ID, timestamp, and API version.
+</ResponseField>
+
+import Snippet from '/snippets/mintlify.mdx';
+
+<Snippet />

@@ -1,0 +1,35 @@
+## Installing the SDK
+
+<Steps>
+  <Step title="Install the SDK">
+    <Tabs>
+      <Tab title="Bun">
+        ```bash
+        bun add contiguity
+        ```
+      </Tab>
+      <Tab title="pnpm">
+        ```bash
+        pnpm add contiguity
+        ```
+      </Tab>
+      <Tab title="npm">
+        ```bash
+        npm install contiguity
+        ```
+      </Tab>
+      <Tab title="Yarn">
+        ```bash
+        yarn add contiguity
+        ```
+      </Tab>
+    </Tabs>
+  </Step>
+
+  <Step title="Initialize the Client">
+    ```typescript
+    import { Contiguity } from "contiguity";
+    const contiguity = new Contiguity("contiguity_sk_...your_token...");
+    ```
+  </Step>
+</Steps>

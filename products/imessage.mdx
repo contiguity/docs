@@ -1,0 +1,149 @@
+---
+title: 'iMessage'
+icon: "apple"
+iconType: "solid"
+description: "Send iMessage messages to your users with fallback support, using Contiguity."
+---
+import InstallJS from '/snippets/install-js.mdx';
+import InstallPY from '/snippets/install-py.mdx';
+
+<Tabs>
+  <Tab title="JavaScript" icon="js">
+    <InstallJS />
+
+    ## Sending an iMessage
+    Send rich iMessage content to your users with automatic fallback to SMS when iMessage is not available.
+
+    <Note>
+      iMessage messages require the recipient to have an Apple device with iMessage enabled. If iMessage is not available, you can configure automatic fallback to SMS.
+    </Note>
+
+    ```typescript
+    const res = await contiguity.imessage.send({
+      to: "+1234567890",
+      message: "Hello via iMessage!",
+      // from: "+15555555555",
+      fallback: { 
+        when: ["imessage_unsupported", "imessage_fails"], 
+        from: "+15555555555" 
+      },
+      attachments: ["https://example.com/image.png"]
+    });
+    ```
+
+    ### Response
+    <ResponseField name="message_id" type="string">
+      Unique identifier for the sent iMessage, used for tracking delivery status.
+    </ResponseField>
+
+    <ResponseField name="metadata" type="object">
+      Request metadata including ID, timestamp, and API version.
+    </ResponseField>
+
+    You can also send a simple iMessage without attachments:
+
+    ```typescript
+    const res = await contiguity.imessage.send({
+      to: "+1234567890",
+      message: "Hello from your app!"
+    });
+    ```
+
+    ## Typing Indicators
+    Show typing indicators to create a more interactive messaging experience.
+
+    Start typing indicator:
+    ```typescript
+    const res = await contiguity.imessage.typing({
+      to: "+1234567890", 
+      action: "start"
+    });
+    ```
+
+    ### Response
+    <ResponseField name="status" type="string">
+      Current status of the typing indicator action (e.g., "started", "stopped").
+    </ResponseField>
+
+    <ResponseField name="metadata" type="object">
+      Request metadata including ID, timestamp, and API version.
+    </ResponseField>
+
+    Stop typing indicator:
+    ```typescript
+    const res = await contiguity.imessage.typing({
+      to: "+1234567890", 
+      action: "stop"
+    });
+    ```
+
+    ## Parameters
+
+    ### imessage.send(params)
+
+<ParamField body="to" type="string" required>
+  The recipient's phone number in E.164 format (e.g., "+1234567890").
+</ParamField>
+
+<ParamField body="message" type="string" required>
+  The message content to send via iMessage.
+</ParamField>
+
+<ParamField body="from" type="string">
+  Optional leased phone number to use as the sender. Must be a number you have leased from Contiguity.
+</ParamField>
+
+<ParamField body="fallback" type="object">
+  Fallback configuration for when iMessage is not available.
+  
+  <Expandable title="Fallback object properties">
+    <ParamField body="fallback.when" type="string[]">
+      Array of conditions that trigger fallback. Options: `"imessage_unsupported"`, `"imessage_fails"`.
+    </ParamField>
+    
+    <ParamField body="fallback.from" type="string">
+      Optional sender number to use for fallback SMS delivery.
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+<ParamField body="attachments" type="string[]">
+  Array of attachment URLs to include with the message. Supports images and other media.
+</ParamField>
+
+### imessage.typing(params)
+
+<ParamField body="to" type="string" required>
+  The recipient's phone number in E.164 format (e.g., "+1234567890").
+</ParamField>
+
+<ParamField body="action" type="string" required>
+  The typing indicator action. Options: `"start"` to show typing, `"stop"` to hide typing.
+</ParamField>
+
+    <ParamField body="from" type="string">
+      Optional leased phone number to use as the sender.
+    </ParamField>
+  </Tab>
+  
+  <Tab title="Python" icon="python">
+    <InstallPY />
+    
+    ## Sending an iMessage
+    ```python
+    # Python SDK examples coming soon
+    ```
+    
+    ## Typing Indicators
+    ```python
+    # Python SDK examples coming soon
+    ```
+    
+    ## Parameters
+    Python SDK documentation coming soon.
+  </Tab>
+</Tabs>
+
+import Snippet from '/snippets/mintlify.mdx';
+
+<Snippet />

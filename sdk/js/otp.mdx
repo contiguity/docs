@@ -1,0 +1,131 @@
+---
+title: 'One-Time Passwords'
+sidebarTitle: "OTP"
+icon: "key"
+iconType: "solid"
+description: "Send and verify OTPs using the Contiguity JavaScript SDK."
+---
+
+Contiguity offers a free OTP API that simplifies phone number verification using OTPs via SMS, which eliminates the need to develop custom logic. Gone are the days of paying for this simple feature.
+
+<Warning>
+    Contiguity still bills you for the text messages on our Usage tier, includes them in Unlimited, and subtracts them from your quota if you're on the Free tier. 
+    
+    We don't charge extra for the OTP API.
+</Warning>
+
+## Sending and Verifying OTPs
+<Steps>
+<Step title="Send an OTP">
+    To verify a user's phone number, you'll first need to send them an OTP.
+
+    ```typescript
+    const res = await contiguity.otp.new({ 
+        to: "+1234567890", 
+        language: "en", 
+        name: "MyApp" 
+    });
+    ```
+
+    <Note>
+      The `name` parameter is optional, but recommended. It customizes the message to say "Your [name] code is...", e.g. "Your Twilio code is..."
+    </Note>
+  </Step>
+
+  <Step title="Verify the Code">
+    When your user inputs the code, verify it using the OTP ID from the previous step.
+
+    ```typescript
+    const res = await contiguity.otp.verify({ 
+        otp_id: "otp_123", 
+        otp: "123456" 
+    });
+    ```
+
+    <Note>
+      The verification will return a boolean (true/false). OTPs expire 15 minutes after sending.
+    </Note>
+  </Step>
+
+  <Step title="Resend if Needed">
+    If needed, you can resend an OTP using the original OTP ID.
+
+    ```typescript
+    const res = await contiguity.otp.resend({ 
+        otp_id: "otp_123" 
+    });
+    ```
+
+    <Note>
+      Resending an OTP does not renew its expiry time.
+    </Note>
+  </Step>
+</Steps>
+
+## Parameters
+
+### otp.new(params)
+
+<ParamField body="to" type="string" required>
+  The recipient's phone number in E.164 format (e.g., "+1234567890").
+</ParamField>
+
+<ParamField body="language" type="string" required>
+  The language code for the OTP message. See supported languages below.
+</ParamField>
+
+<ParamField body="name" type="string" required>
+  The name of your application or service. This will be included in the OTP message as "Your [name] code is...".
+</ParamField>
+
+### Response
+<ResponseField name="otp_id" type="string">
+  Unique identifier for the generated OTP, used for verification and resending.
+</ResponseField>
+
+<ResponseField name="metadata" type="object">
+  Request metadata including ID, timestamp, and API version.
+</ResponseField>
+
+### otp.verify(params)
+
+<ParamField body="otp_id" type="string" required>
+  The unique OTP identifier returned from the `otp.new()` call.
+</ParamField>
+
+<ParamField body="otp" type="string" required>
+  The 6-digit verification code entered by the user.
+</ParamField>
+
+### Response
+<ResponseField name="verified" type="boolean">
+  Indicates whether the OTP was successfully verified. Returns `true` if valid, `false` if invalid or expired.
+</ResponseField>
+
+<ResponseField name="metadata" type="object">
+  Request metadata including ID, timestamp, and API version.
+</ResponseField>
+
+### otp.resend(params)
+
+<ParamField body="otp_id" type="string" required>
+  The unique OTP identifier from the original `otp.new()` call.
+</ParamField>
+
+### Response
+<ResponseField name="resent" type="boolean">
+  Indicates whether the OTP was successfully resent to the original phone number.
+</ResponseField>
+
+<ResponseField name="metadata" type="object">
+  Request metadata including ID, timestamp, and API version.
+</ResponseField>
+
+## Supported Languages
+Contiguity currently supports 33 languages for OTPs, including:
+
+ `English (en)`, `Afrikaans (af)`, `Arabic (ar)`, `Catalan (ca)`, `Chinese / Mandarin (zh)`, `Cantonese (zh-hk)`, `Croatian (hr)`, `Czech (cs)`, `Danish (da)`, `Dutch (nl)`, `Finnish (fi)`, `French (fr)`, `German (de)`, `Greek (el)`, `Hebrew (he)`, `Hindi (hi)`, `Hungarian (hu)`, `Indonesian (id)`, `Italian (it)`, `Japanese (ja)`, `Korean (ko)`, `Malay (ms)`, `Norwegian (nb)`, `Polish (pl)`, `Portuguese - Brazil (pt-br)`, `Portuguese (pt)`, `Romanian (ro)`, `Russian (ru)`, `Spanish (es)`, `Swedish (sv)`, `Tagalog (tl)`, `Thai (th)`, `Turkish (tr)`, and `Vietnamese (vi)`
+
+import Snippet from '/snippets/mintlify.mdx';
+
+<Snippet />

@@ -1,0 +1,227 @@
+---
+title: 'Number Leasing'
+sidebarTitle: "Leases"
+icon: "sim-card"
+iconType: "solid"
+description: "Lease phone numbers using the Contiguity JavaScript SDK."
+---
+
+## Managing Number Leases
+Lease phone numbers to use as dedicated senders for your messages, improving deliverability and brand recognition.
+
+## Check Available Numbers
+View available phone numbers that can be leased for your account.
+
+```typescript
+const res = await contiguity.lease.available();
+```
+
+### Parameters
+No parameters required.
+
+### Response
+<ResponseField name="available" type="boolean">
+  Indicates if there are numbers available for leasing.
+</ResponseField>
+
+<ResponseField name="numbers" type="object[]">
+  Array of available phone numbers with their details.
+</ResponseField>
+
+<ResponseField name="metadata" type="object">
+  Request metadata including ID, timestamp, and API version.
+</ResponseField>
+
+## Get Number Details
+Get detailed information about a specific phone number, including capabilities and pricing.
+
+```typescript
+const res = await contiguity.lease.get({ 
+  number: "+1234567890" 
+});
+```
+
+### Parameters
+
+<ParamField body="number" type="string" required>
+  The phone number to get details for, in E.164 format (e.g., "+1234567890").
+</ParamField>
+
+### Response
+<ResponseField name="number" type="object">
+  Phone number details and formatting information.
+  <Expandable title="Properties">
+    <ResponseField name="formatted" type="string">
+      The formatted phone number string.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="capabilities" type="string[]">
+  Array of supported capabilities for this number (e.g., ["sms", "voice"]).
+</ResponseField>
+
+<ResponseField name="pricing" type="object">
+  Pricing information for leasing this number.
+</ResponseField>
+
+<ResponseField name="metadata" type="object">
+  Request metadata including ID, timestamp, and API version.
+</ResponseField>
+
+## Lease a Number
+Create a lease for a phone number to use it as a sender.
+
+```typescript
+const res = await contiguity.lease.create({ 
+  number: "+1234567890",
+  billing_method: "monthly" // or "service_contract"
+});
+```
+
+You can also lease a number with default billing:
+
+```typescript
+const res = await contiguity.lease.create({ 
+  number: "+1234567890"
+});
+```
+
+### Parameters
+
+<ParamField body="number" type="string" required>
+  The phone number to lease, in E.164 format (e.g., "+1234567890").
+</ParamField>
+
+<ParamField body="billing_method" type="string">
+  The billing method for the lease. Options: `"monthly"` for recurring monthly charges, `"service_contract"` for contract-based billing.
+</ParamField>
+
+### Response
+<ResponseField name="lease_id" type="string">
+  Unique identifier for the created lease.
+</ResponseField>
+
+<ResponseField name="status" type="string">
+  Current status of the lease (e.g., "active", "pending").
+</ResponseField>
+
+<ResponseField name="billing" type="object">
+  Billing information and configuration for the lease.
+</ResponseField>
+
+<ResponseField name="metadata" type="object">
+  Request metadata including ID, timestamp, and API version.
+</ResponseField>
+
+## View Leased Numbers
+Get a list of all numbers you currently have leased.
+
+```typescript
+const res = await contiguity.lease.leased();
+```
+
+### Parameters
+No parameters required.
+
+### Response
+<ResponseField name="leased" type="boolean">
+  Indicates if any numbers are currently leased.
+</ResponseField>
+
+<ResponseField name="numbers" type="object[]">
+  Array of currently leased phone numbers with their details.
+</ResponseField>
+
+<ResponseField name="metadata" type="object">
+  Request metadata including ID, timestamp, and API version.
+</ResponseField>
+
+## Get Lease Details
+Get detailed information about a specific lease.
+
+```typescript
+const res = await contiguity.lease.details({ 
+  number: "+1234567890" 
+});
+```
+
+### Parameters
+
+<ParamField body="number" type="string" required>
+  The leased phone number to get details for, in E.164 format (e.g., "+1234567890").
+</ParamField>
+
+### Response
+<ResponseField name="lease_id" type="string">
+  Unique identifier for the lease.
+</ResponseField>
+
+<ResponseField name="lease_status" type="string">
+  Current status of the lease (e.g., "active", "expired", "terminated").
+</ResponseField>
+
+<ResponseField name="billing" type="object">
+  Billing information and current charges for the lease.
+</ResponseField>
+
+<ResponseField name="metadata" type="object">
+  Request metadata including ID, timestamp, and API version.
+</ResponseField>
+
+## Terminate a Lease
+End a lease for a phone number when you no longer need it.
+
+```typescript
+const res = await contiguity.lease.terminate({ 
+  number: "+1234567890" 
+});
+```
+
+### Parameters
+
+<ParamField body="number" type="string" required>
+  The leased phone number to terminate, in E.164 format (e.g., "+1234567890").
+</ParamField>
+
+### Response
+<ResponseField name="lease_id" type="string">
+  Unique identifier for the terminated lease.
+</ResponseField>
+
+<ResponseField name="status" type="string">
+  Confirmation status of the termination (e.g., "terminated").
+</ResponseField>
+
+<ResponseField name="terminated_at" type="timestamp">
+  ISO 8601 formatted timestamp of when the lease was terminated.
+</ResponseField>
+
+<ResponseField name="metadata" type="object">
+  Request metadata including ID, timestamp, and API version.
+</ResponseField>
+
+
+
+## Using Leased Numbers
+Once you have a leased number, you can use it as the `from` parameter in your messaging:
+
+```typescript
+// Use leased number as sender for SMS
+const res = await contiguity.text.send({
+  to: "+1234567890",
+  message: "Hello from your dedicated number!",
+  from: "+15555555555" // your leased number
+});
+
+// Use leased number as sender for iMessage
+const res = await contiguity.imessage.send({
+  to: "+1234567890",
+  message: "Hello via iMessage!",
+  from: "+15555555555" // your leased number
+});
+```
+
+import Snippet from '/snippets/mintlify.mdx';
+
+<Snippet />

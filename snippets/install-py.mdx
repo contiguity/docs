@@ -1,0 +1,22 @@
+## Installing the SDK
+
+<Steps>
+  <Step title="Install the SDK">
+    ```bash
+    pip install contiguity
+    ```
+  </Step>
+
+  <Step title="Initialize the Client">
+    ```python
+    import contiguity
+    client = contiguity.login("your_token_here")
+    ```
+
+    You can also initialize it with the optional 'debug' flag:
+
+    ```python
+    client = contiguity.login("your_token_here", True)
+    ```
+  </Step>
+</Steps>

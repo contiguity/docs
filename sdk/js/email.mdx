@@ -1,0 +1,97 @@
+---
+title: 'Email'
+icon: "envelope"
+iconType: "solid"
+description: "Send emails using the Contiguity JavaScript SDK."
+---
+
+```typescript
+const res = await contiguity.email.send({
+  to: ["user@example.com", "ops@example.com"],
+  from: "Your App <no-reply@yourapp.com>",
+  subject: "Welcome!",
+  body: { html: "<h1>Hello</h1>" },
+  reply_to: "support@yourapp.com",
+  cc: "manager@example.com"
+});
+```
+
+You can also send a simple email with just the required fields:
+
+```typescript
+const res = await contiguity.email.send({
+  to: "user@example.com",
+  from: "Your App <no-reply@yourapp.com>",
+  subject: "Hello from Contiguity!",
+  body: { text: "This is a plain text email." }
+});
+```
+
+## Parameters
+
+### email.send(params)
+
+<ParamField body="to" type="string | string[]" required>
+  The recipient's email address or an array of email addresses.
+</ParamField>
+
+<ParamField body="from" type="string" required>
+  The sender's email address. Can include a display name: `"Your App <no-reply@yourapp.com>"`
+</ParamField>
+
+<ParamField body="subject" type="string" required>
+  The email subject line.
+</ParamField>
+
+<ParamField body="body" type="object" required>
+  The email content. Must contain either `text`, `html`, or both.
+  
+  <Expandable title="Body object properties">
+    <ParamField body="body.text" type="string">
+      Plain text version of the email content.
+    </ParamField>
+    
+    <ParamField body="body.html" type="string">
+      HTML version of the email content.
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+<ParamField body="reply_to" type="string">
+  Email address for replies. If not specified, replies will go to the `from` address.
+</ParamField>
+
+<ParamField body="cc" type="string | string[]">
+  Carbon copy recipients. Can be a single email address or an array of addresses.
+</ParamField>
+
+<ParamField body="bcc" type="string | string[]">
+  Blind carbon copy recipients. Can be a single email address or an array of addresses.
+</ParamField>
+
+<ParamField body="headers" type="object[]">
+  Custom email headers as an array of objects with `name` and `value` properties.
+  
+  <Expandable title="Header object structure">
+    <ParamField body="headers[].name" type="string" required>
+      The header name (e.g., "X-Campaign").
+    </ParamField>
+    
+    <ParamField body="headers[].value" type="string" required>
+      The header value.
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+### Response
+<ResponseField name="email_id" type="string">
+  Unique identifier for the sent email, used for tracking delivery status and analytics.
+</ResponseField>
+
+<ResponseField name="metadata" type="object">
+  Request metadata including ID, timestamp, and API version.
+</ResponseField>
+
+import Snippet from '/snippets/mintlify.mdx';
+
+<Snippet />

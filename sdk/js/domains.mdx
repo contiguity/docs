@@ -1,0 +1,189 @@
+---
+title: 'Email Domains'
+sidebarTitle: "Domains"
+icon: "globe"
+iconType: "solid"
+description: "Manage custom email domains using the Contiguity JavaScript SDK."
+---
+
+## Managing Email Domains
+Use your own custom domains to send emails, improving deliverability and maintaining brand consistency.
+
+## List All Domains
+View all domains currently registered with your account.
+
+```typescript
+const res = await contiguity.domains.list();
+```
+
+### Parameters
+No parameters required.
+
+### Response
+<ResponseField name="domains" type="object[]">
+  Array of all domains registered with your account, including their verification status and configuration details.
+</ResponseField>
+
+<ResponseField name="metadata" type="object">
+  Request metadata including ID, timestamp, and API version.
+</ResponseField>
+
+## Get Domain Details
+Get detailed information about a specific domain, including verification status and DNS records.
+
+```typescript
+const res = await contiguity.domains.get({ 
+  domain: "example.com" 
+});
+```
+
+### Parameters
+
+<ParamField body="domain" type="string" required>
+  The domain name to get details for (e.g., "example.com").
+</ParamField>
+
+### Response
+<ResponseField name="status" type="string">
+  Current verification status of the domain (e.g., "verified", "pending", "failed").
+</ResponseField>
+
+<ResponseField name="records" type="object[]">
+  Array of DNS records required for domain verification and email sending.
+</ResponseField>
+
+<ResponseField name="verifications" type="object">
+  Detailed verification status for each DNS record type (DKIM, SPF, DMARC).
+</ResponseField>
+
+<ResponseField name="metadata" type="object">
+  Request metadata including ID, timestamp, and API version.
+</ResponseField>
+
+## Register a Domain
+Add a new domain to your account for sending emails.
+
+```typescript
+const res = await contiguity.domains.register({ 
+  domain: "example.com", 
+  region: "us-east-1", 
+  custom_return_path: "mail" 
+});
+```
+
+You can also register a domain with minimal configuration:
+
+```typescript
+const res = await contiguity.domains.register({ 
+  domain: "example.com"
+});
+```
+
+### Parameters
+
+<ParamField body="domain" type="string" required>
+  The domain name to register (e.g., "example.com"). Must be a valid domain you own.
+</ParamField>
+
+<ParamField body="region" type="string">
+  AWS region for domain setup. Common options: `"us-east-1"`, `"us-west-2"`, `"eu-west-1"`. Defaults to `"us-east-1"` if not specified.
+</ParamField>
+
+<ParamField body="custom_return_path" type="string">
+  Custom return path subdomain for bounce handling. If set to `"mail"`, bounce emails will be handled at `mail.yourdomain.com`.
+</ParamField>
+
+### Response
+<ResponseField name="status" type="string">
+  Registration status of the domain (e.g., "registered", "pending_verification").
+</ResponseField>
+
+<ResponseField name="records" type="object[]">
+  Array of DNS records that must be added to your domain's DNS settings for verification.
+  
+  <Expandable title="DNS Record Properties">
+    <ResponseField name="type" type="string">
+      Type of DNS record (e.g., "CNAME", "TXT", "MX").
+    </ResponseField>
+    
+    <ResponseField name="name" type="string">
+      DNS record name/host that should be added.
+    </ResponseField>
+    
+    <ResponseField name="value" type="string">
+      DNS record value that should be set.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="metadata" type="object">
+  Request metadata including ID, timestamp, and API version.
+</ResponseField>
+
+## Delete a Domain
+Remove a domain from your account when it's no longer needed.
+
+```typescript
+const res = await contiguity.domains.delete({ 
+  domain: "example.com" 
+});
+```
+
+### Parameters
+
+<ParamField body="domain" type="string" required>
+  The domain name to delete from your account (e.g., "example.com").
+</ParamField>
+
+### Response
+<ResponseField name="success" type="boolean">
+  Indicates whether the domain was successfully deleted.
+</ResponseField>
+
+<ResponseField name="message" type="string">
+  Confirmation message about the deletion status.
+</ResponseField>
+
+<ResponseField name="metadata" type="object">
+  Request metadata including ID, timestamp, and API version.
+</ResponseField>
+
+
+
+## Using Custom Domains
+Once your domain is verified, you can use it to send emails with your brand:
+
+```typescript
+// Send email from your custom domain
+const res = await contiguity.email.send({
+  to: "user@example.com",
+  from: "Your App <hello@yourdomain.com>", // Use your verified domain
+  subject: "Welcome to our platform!",
+  body: { 
+    html: "<h1>Welcome!</h1><p>Thanks for joining us.</p>",
+    text: "Welcome! Thanks for joining us."
+  },
+  reply_to: "support@yourdomain.com"
+});
+```
+
+## Domain Verification
+After registering a domain, you'll need to:
+
+1. **Add DNS records** provided in the registration response to your domain's DNS settings
+2. **Verify ownership** by ensuring the DNS records are properly configured
+3. **Wait for verification** which typically takes a few minutes to complete
+
+The verification status can be checked using the `domains.get()` method.
+
+<Note>
+  Make sure to add all required DNS records (DKIM, SPF, DMARC) to ensure optimal email deliverability and to prevent your emails from being marked as spam.
+</Note>
+
+<Warning>
+  Deleting a domain will immediately stop all email sending from that domain. Make sure to update your email configurations before removing a domain.
+</Warning>
+
+import Snippet from '/snippets/mintlify.mdx';
+
+<Snippet />

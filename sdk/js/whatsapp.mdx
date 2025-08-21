@@ -1,0 +1,124 @@
+---
+title: 'WhatsApp'
+icon: "whatsapp"
+iconType: "solid"
+description: "Send WhatsApp messages with the Contiguity JavaScript SDK."
+---
+
+## Sending a WhatsApp Message
+Send rich WhatsApp content to your users with automatic fallback to SMS when WhatsApp is not available.
+
+<Note>
+  WhatsApp messages require the recipient to have WhatsApp installed and active. If WhatsApp is not available, you can configure automatic fallback to SMS.
+</Note>
+
+```typescript
+const res = await contiguity.whatsapp.send({
+  to: "+1234567890",
+  message: "Hello via WhatsApp!",
+  // from: "+15555555555",
+  fallback: { 
+    when: ["whatsapp_unsupported", "whatsapp_fails"], 
+    from: "+15555555555" 
+  },
+  attachments: ["https://example.com/image.png"]
+});
+```
+
+You can also send a simple WhatsApp message without attachments:
+
+```typescript
+const res = await contiguity.whatsapp.send({
+  to: "+1234567890",
+  message: "Hello from your app!"
+});
+```
+
+## Typing Indicators
+Show typing indicators to create a more interactive messaging experience.
+
+Start typing indicator:
+```typescript
+const res = await contiguity.whatsapp.typing({
+  to: "+1234567890", 
+  action: "start"
+});
+```
+
+Stop typing indicator:
+```typescript
+const res = await contiguity.whatsapp.typing({
+  to: "+1234567890", 
+  action: "stop"
+});
+```
+
+## Parameters
+
+### whatsapp.send(params)
+
+<ParamField body="to" type="string" required>
+  The recipient's phone number in E.164 format (e.g., "+1234567890").
+</ParamField>
+
+<ParamField body="message" type="string" required>
+  The message content to send via WhatsApp.
+</ParamField>
+
+<ParamField body="from" type="string">
+  Optional leased phone number to use as the sender. Must be a number you have leased from Contiguity.
+</ParamField>
+
+<ParamField body="fallback" type="object">
+  Fallback configuration for when WhatsApp is not available.
+  
+  <Expandable title="Fallback object properties">
+    <ParamField body="fallback.when" type="string[]">
+      Array of conditions that trigger fallback. Options: `"whatsapp_unsupported"`, `"whatsapp_fails"`.
+    </ParamField>
+    
+    <ParamField body="fallback.from" type="string">
+      Optional sender number to use for fallback SMS delivery.
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+<ParamField body="attachments" type="string[]">
+  Array of attachment URLs to include with the message. Supports images and other media.
+</ParamField>
+
+### Response
+<ResponseField name="message_id" type="string">
+  Unique identifier for the sent WhatsApp message, used for tracking delivery status.
+</ResponseField>
+
+<ResponseField name="metadata" type="object">
+  Request metadata including ID, timestamp, and API version.
+</ResponseField>
+
+### whatsapp.typing(params)
+
+<ParamField body="to" type="string" required>
+  The recipient's phone number in E.164 format (e.g., "+1234567890").
+</ParamField>
+
+<ParamField body="action" type="string" required>
+  The typing indicator action. Options: `"start"` to show typing, `"stop"` to hide typing.
+</ParamField>
+
+<ParamField body="from" type="string">
+  Optional leased phone number to use as the sender.
+</ParamField>
+
+### Response
+<ResponseField name="status" type="string">
+  Current status of the typing indicator action (e.g., "started", "stopped").
+</ResponseField>
+
+<ResponseField name="metadata" type="object">
+  Request metadata including ID, timestamp, and API version.
+</ResponseField>
+
+import Snippet from '/snippets/mintlify.mdx';
+
+<Snippet />

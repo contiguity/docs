@@ -27,6 +27,7 @@
                             "products/text",
                             "products/email",
                             "products/otp",
+                            "products/domains",
                             {
                                 "group": "Identity",
                                 "icon": {
@@ -39,6 +40,9 @@
                                     "products/identity/vr"
                                 ]
                             },
+                            "products/imessage",
+                            "products/whatsapp",
+                            "products/leases",    
                             {
                                 "group": "Base",
                                 "icon": {
@@ -56,7 +60,23 @@
                     {
                         "group": "SDK Documentation by Language",
                         "pages": [
-                            "sdk/js",
+                            {
+                                "group": "JavaScript",
+                                "icon": {
+                                    "name": "js",
+                                    "style": "brands"
+                                },
+                                "pages": [
+                                    "sdk/js/overview",
+                                    "sdk/js/text",
+                                    "sdk/js/email",
+                                    "sdk/js/otp",
+                                    "sdk/js/domains",
+                                    "sdk/js/imessage",
+                                    "sdk/js/whatsapp",
+                                    "sdk/js/leases"
+                                ]
+                            },
                             "sdk/python"
                         ]
                     }

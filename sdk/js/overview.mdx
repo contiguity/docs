@@ -1,0 +1,109 @@
+---
+title: 'JavaScript SDK Overview'
+sidebarTitle: "Overview"
+icon: "flag-checkered"
+iconType: "solid"
+description: "Get started with the Contiguity JavaScript SDK."
+---
+import InstallJS from '/snippets/install-js.mdx';
+
+<InstallJS />
+
+## Initialization
+
+The SDK accepts a token and optional configuration:
+
+```typescript
+import { Contiguity } from "contiguity";
+
+// Basic initialization
+const contiguity = new Contiguity("contiguity_sk_...your_token...");
+
+// With options
+const contiguity = new Contiguity("contiguity_sk_...your_token...", {
+    raw: false,    // Return data in top level of response (default)
+    debug: false   // Disable debug logging (default)
+});
+```
+
+### Options
+
+<ParamField body="raw" type="boolean" default="false">
+  When `true`, returns raw API responses with metadata at the top level and data nested inside a `data` object. When `false`, returns cleaned responses with metadata separate.
+</ParamField>
+
+<ParamField body="debug" type="boolean" default="false">
+  When `true`, enables extra logging for debugging purposes.
+</ParamField>
+
+## Quick Start
+
+Once initialized, you can start using the SDK immediately:
+
+```typescript
+// Send a text message
+await contiguity.text.send({
+    to: "+1234567890",
+    message: "Hello from Contiguity!"
+});
+
+// Send an email
+await contiguity.email.send({
+    to: "user@example.com",
+    from: "Your App <no-reply@yourapp.com>",
+    subject: "Welcome!",
+    body: { text: "Welcome to our platform!" }
+});
+```
+
+## Response Format
+
+The SDK returns different response formats depending on the `raw` option:
+
+### Default Format (`raw: false`)
+
+Clean responses with metadata separate from the main data:
+
+```typescript
+{
+    // Method-specific response data
+    message_id?: string,
+    email_id?: string,
+    otp_id?: string,
+    // ... other response fields
+    
+    // Metadata included with every response
+    metadata: {
+        id: string,
+        timestamp: string,
+        api_version: string,
+        object: string,
+    }
+}
+```
+
+### Raw Format (`raw: true`)
+
+Raw API responses with metadata at the top level and data nested:
+
+```typescript
+{
+    // Metadata at top level
+    id: string,
+    timestamp: string,
+    api_version: string,
+    object: string,
+    
+    // All response data nested in data object
+    data: {
+        message_id?: string,
+        email_id?: string,
+        otp_id?: string,
+        // ... other response fields
+    }
+}
+```
+
+import Snippet from '/snippets/mintlify.mdx';
+
+<Snippet />
