@@ -297,16 +297,22 @@
             "href": "https://contiguity.co/dashboard"
         }
     },
+    "api": {
+        "playground": { "display": "interactive" },
+        "examples": {
+            "defaults": "required"
+        }
+    },
     "seo": {
         "metatags": {
-            "og:url": "https://docs.contiguity.co",
-            "og:image": "https://docs.contiguity.co/images/og-image-res.png",
+            "og:url": "https://docs.contiguity.com",
+            "og:image": "https://docs.contiguity.com/images/og-image-res.png",
             "og:type": "website",
             "twitter:title": "Contiguity | Developer Documentation",
             "twitter:description": "Contiguity's official documentation for our API & SDKs",
-            "twitter:url": "https://docs.contiguity.co",
-            "twitter:image": "https://docs.contiguity.co/images/og-image-res.png",
-            "twitter:site": "docs.contiguity.co",
+            "twitter:url": "https://docs.contiguity.com",
+            "twitter:image": "https://docs.contiguity.com/images/og-image-res.png",
+            "twitter:site": "docs.contiguity.com",
             "twitter:card": "summary_large_image"
         },
         "indexing": "navigable"
