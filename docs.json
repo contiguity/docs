@@ -294,7 +294,7 @@
         "primary": {
             "type": "button",
             "label": "Dashboard",
-            "href": "https://contiguity.co/dashboard"
+            "href": "https://console.contiguity.com"
         }
     },
     "api": {
