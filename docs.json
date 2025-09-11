@@ -190,7 +190,9 @@
                         "pages": [
                             "api-reference/product/imessage/send",
                             "api-reference/product/imessage/typing",
-                            "api-reference/product/imessage/reactions"
+                            "api-reference/product/imessage/reactions",
+                            "api-reference/product/imessage/read",
+                            "api-reference/product/imessage/history"
                         ]
                     },
                     {

@@ -1,0 +1,496 @@
+{
+    "openapi": "3.0.0",
+    "servers": [
+        {
+            "url": "https://api.contiguity.com/conversations"
+        }
+    ],
+    "info": {
+        "version": "v2025.9.11",
+        "title": "Conversations API"
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer"
+            }
+        },
+        "schemas": {},
+        "parameters": {}
+    },
+    "paths": {
+        "/history/imessage/{to}/{from}/{limit}": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "type": "string",
+                            "description": "Recipient's iMessage address. Must be in E.164 format.",
+                            "example": "+1234567890"
+                        },
+                        "required": true,
+                        "description": "Recipient's iMessage address. Must be in E.164 format.",
+                        "name": "to",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "type": "string",
+                            "description": "Leased iMessage number that has been used to send messages to the recipient. Must be in E.164 format.",
+                            "example": "+15555555555"
+                        },
+                        "required": true,
+                        "description": "Leased iMessage number that has been used to send messages to the recipient. Must be in E.164 format.",
+                        "name": "from",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "type": "number",
+                            "default": 20,
+                            "description": "Limit of how many messages to return, default is 20. Should never exceed 200.",
+                            "example": 20
+                        },
+                        "required": false,
+                        "description": "Limit of how many messages to return, default is 20. Should never exceed 200.",
+                        "name": "limit",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Get iMessage conversation history for a thread",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "req_xxxxxxxxxxxxxxxx"
+                                        },
+                                        "timestamp": {
+                                            "type": "number",
+                                            "example": 1757565707434
+                                        },
+                                        "api_version": {
+                                            "type": "string",
+                                            "example": "v2025.9.11"
+                                        },
+                                        "object": {
+                                            "type": "string",
+                                            "example": "response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "conversation": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "to": {
+                                                                "type": "string",
+                                                                "description": "Recipient's iMessage address. Must be in E.164 format.",
+                                                                "example": "+1234567890"
+                                                            },
+                                                            "from": {
+                                                                "type": "string",
+                                                                "description": "Leased iMessage number that has been used to send messages to the recipient. Must be in E.164 format.",
+                                                                "example": "+15555555555"
+                                                            },
+                                                            "message": {
+                                                                "type": "string",
+                                                                "description": "Message content.",
+                                                                "example": "Hello, world!"
+                                                            },
+                                                            "timestamp": {
+                                                                "type": "number",
+                                                                "description": "Timestamp (when the message was sent).",
+                                                                "example": 1757550304652
+                                                            },
+                                                            "read": {
+                                                                "type": "number",
+                                                                "description": "Timestamp (when the message was read).",
+                                                                "example": 1757550304652
+                                                            },
+                                                            "delivery": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "status": {
+                                                                        "type": "string",
+                                                                        "description": "Status of the delivery (delivered, failed, delayed).",
+                                                                        "example": "delivered"
+                                                                    },
+                                                                    "delayed": {
+                                                                        "type": "boolean",
+                                                                        "description": "Whether the message was delayed.",
+                                                                        "example": false
+                                                                    },
+                                                                    "timestamp": {
+                                                                        "type": "number",
+                                                                        "description": "Timestamp (when the message was delivered).",
+                                                                        "example": 1757550304652
+                                                                    }
+                                                                },
+                                                                "required": [
+                                                                    "status",
+                                                                    "delayed",
+                                                                    "timestamp"
+                                                                ]
+                                                            },
+                                                            "risk": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "auto_reported_as_spam": {
+                                                                        "type": "boolean",
+                                                                        "description": "Whether the message was automatically labeled as spam by Apple.",
+                                                                        "example": true
+                                                                    },
+                                                                    "marked_as_spam": {
+                                                                        "type": "boolean",
+                                                                        "description": "Whether the message was marked as spam by the user.",
+                                                                        "example": false
+                                                                    }
+                                                                },
+                                                                "required": [
+                                                                    "auto_reported_as_spam",
+                                                                    "marked_as_spam"
+                                                                ]
+                                                            },
+                                                            "attachments": {
+                                                                "type": "array",
+                                                                "items": {
+                                                                    "type": "string"
+                                                                },
+                                                                "description": "URLs of the attachments.",
+                                                                "example": []
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "to",
+                                                            "from",
+                                                            "message",
+                                                            "timestamp",
+                                                            "read",
+                                                            "delivery",
+                                                            "risk",
+                                                            "attachments"
+                                                        ]
+                                                    }
+                                                },
+                                                "reactions": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "reaction": {
+                                                                "type": "string",
+                                                                "description": "Reaction name (love, like, dislike, laugh, emphasize, question).",
+                                                                "example": "love"
+                                                            },
+                                                            "on": {
+                                                                "type": "string",
+                                                                "description": "Message content.",
+                                                                "example": "Hello, world!"
+                                                            },
+                                                            "timestamp": {
+                                                                "type": "number",
+                                                                "description": "Timestamp of the reaction.",
+                                                                "example": 1757550304652
+                                                            },
+                                                            "action": {
+                                                                "type": "string",
+                                                                "description": "Action of the reaction.",
+                                                                "example": "added"
+                                                            },
+                                                            "from": {
+                                                                "type": "string",
+                                                                "description": "Leased iMessage number that has been used to send the reaction. Must be in E.164 format.",
+                                                                "example": "+15555555555"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "reaction",
+                                                            "on",
+                                                            "timestamp",
+                                                            "action",
+                                                            "from"
+                                                        ]
+                                                    }
+                                                },
+                                                "chat": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "filtered": {
+                                                            "type": "boolean",
+                                                            "description": "Whether the conversation was filtered by Apple.",
+                                                            "example": false
+                                                        },
+                                                        "chat_marked_as_spam": {
+                                                            "type": "boolean",
+                                                            "description": "Whether the chat was automatically labeled as spam by Apple.",
+                                                            "example": false
+                                                        },
+                                                        "limit": {
+                                                            "type": "number",
+                                                            "description": "Message return limit.",
+                                                            "example": 20
+                                                        },
+                                                        "total": {
+                                                            "type": "number",
+                                                            "description": "Total number of messages in the conversation.",
+                                                            "example": 382
+                                                        },
+                                                        "count": {
+                                                            "type": "number",
+                                                            "description": "Number of messages returned.",
+                                                            "example": 20
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "filtered",
+                                                        "chat_marked_as_spam",
+                                                        "limit",
+                                                        "total",
+                                                        "count"
+                                                    ]
+                                                }
+                                            },
+                                            "required": [
+                                                "conversation",
+                                                "reactions",
+                                                "chat"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "timestamp",
+                                        "api_version",
+                                        "object",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "err_xxxxxxxxxxxxxxxx"
+                                        },
+                                        "timestamp": {
+                                            "type": "number",
+                                            "example": 1757565707434
+                                        },
+                                        "api_version": {
+                                            "type": "string",
+                                            "example": "v2025.9.11"
+                                        },
+                                        "object": {
+                                            "type": "string",
+                                            "example": "error"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "error": {
+                                                    "type": "string",
+                                                    "example": "Bad Request"
+                                                },
+                                                "status": {
+                                                    "type": "number",
+                                                    "example": 400
+                                                }
+                                            },
+                                            "required": [
+                                                "error",
+                                                "status"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "timestamp",
+                                        "api_version",
+                                        "object",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "err_xxxxxxxxxxxxxxxx"
+                                        },
+                                        "timestamp": {
+                                            "type": "number",
+                                            "example": 1757565707434
+                                        },
+                                        "api_version": {
+                                            "type": "string",
+                                            "example": "v2025.9.11"
+                                        },
+                                        "object": {
+                                            "type": "string",
+                                            "example": "error"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "error": {
+                                                    "type": "string",
+                                                    "example": "Unauthorized"
+                                                },
+                                                "status": {
+                                                    "type": "number",
+                                                    "example": 401
+                                                }
+                                            },
+                                            "required": [
+                                                "error",
+                                                "status"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "timestamp",
+                                        "api_version",
+                                        "object",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "err_xxxxxxxxxxxxxxxx"
+                                        },
+                                        "timestamp": {
+                                            "type": "number",
+                                            "example": 1757565707434
+                                        },
+                                        "api_version": {
+                                            "type": "string",
+                                            "example": "v2025.9.11"
+                                        },
+                                        "object": {
+                                            "type": "string",
+                                            "example": "error"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "error": {
+                                                    "type": "string",
+                                                    "example": "Forbidden"
+                                                },
+                                                "status": {
+                                                    "type": "number",
+                                                    "example": 403
+                                                }
+                                            },
+                                            "required": [
+                                                "error",
+                                                "status"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "timestamp",
+                                        "api_version",
+                                        "object",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "err_xxxxxxxxxxxxxxxx"
+                                        },
+                                        "timestamp": {
+                                            "type": "number",
+                                            "example": 1757565707434
+                                        },
+                                        "api_version": {
+                                            "type": "string",
+                                            "example": "v2025.9.11"
+                                        },
+                                        "object": {
+                                            "type": "string",
+                                            "example": "error"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "error": {
+                                                    "type": "string",
+                                                    "example": "Internal Server Error"
+                                                },
+                                                "status": {
+                                                    "type": "number",
+                                                    "example": 500
+                                                }
+                                            },
+                                            "required": [
+                                                "error",
+                                                "status"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "timestamp",
+                                        "api_version",
+                                        "object",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
