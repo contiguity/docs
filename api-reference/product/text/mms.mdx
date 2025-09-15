@@ -1,13 +1,35 @@
 ---
 title: 'Send Media'
-openapi: "openapi-text POST /send/mms"
-sidebarTitle: 'Send Media'
+openapi: "openapi-send POST /text"
+sidebarTitle: 'Send Attachments'
 icon: "message-image"
 iconType: "solid"
 ---
+<Danger>
+MMS is in public beta. We're still understanding the limits of our implementation – if you encounter any issues, join our Discord!
+
+**Note**: MMS is limited to 5MB (cumulative), across 3 attachments.
+</Danger>
+
+<Tip>
+Contiguity will full supports jpeg/jpg, png, and gif. We will accept & attempt to send a number of other content types, however depending on the carrier and device of the end user these messages may not be successfully received.
+</Tip>
+
+<Check>
+Confirmed file types that work:
+- Images (JPEG, JPG, PNG, GIF)
+- Videos (MP4, MOV)
+- Audio (MP3)
+- Documents (PDF)
+</Check>
 <Warning>
-Phone numbers must be in E.164 format with country codes. The API will attempt to convert other formats like NANP, but will throw an error if conversion fails.
+File types that experience issues:
+- WEBP
+- _Some_ images?
+- SVGs
 </Warning>
+
+This endpoint is the same as [Send a Text](/api-reference/product/text/sms). To send attachments, pass them in the `attachments` parameter.
 
 
 

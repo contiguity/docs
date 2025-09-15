@@ -1,0 +1,79 @@
+---
+title: "Migrating to V2"
+sidebarTitle: "Migration"
+description: "Learn how to migrate to our new platform."
+icon: "box"
+iconType: "solid"
+mode: "wide"
+---
+
+## Getting Started
+
+<Steps>
+    <Step title="Create an account">
+        Create an account over at [console.contiguity.com](https://console.contiguity.com) – this is our new dashboard!
+    </Step>
+    <Step title="Generate a new API token">
+        Generate a new API token or use the default one in the [Console](https://console.contiguity.com/dashboard/tokens).
+    </Step>
+</Steps>
+
+
+## Update your code
+
+<Tabs>
+    <Tab title="HTTP" icon="globe">
+        Our v2 API is now on `api.contiguity.com`. Update your base URL to this, and use the your API token in the `Authorization` header.
+        ```http
+        https://api.contiguity.com
+        ```
+    </Tab>
+    <Tab title="JavaScript" icon="js">
+        Our v2 SDK is now `contiguity`, instead of `@contiguity/javascript`. Update your import to this. We've also switched around some methods.
+        ```javascript
+        import { Contiguity } from "contiguity";
+        const contiguity = new Contiguity("contiguity_sk_...your_token...");
+        ```
+
+        Switched methods:
+        ```javascript
+        // v1
+        const res = await contiguity.send.text({
+            to: "+1234567890",
+            message: "Hello from Contiguity!"
+        });
+        ```
+
+        ```javascript
+        // v2
+        const res = await contiguity.text.send({
+            to: "+1234567890",
+            message: "Hello from Contiguity!"
+            // no more beta_features, just pass from: {} & attachments[]
+        });
+        ```
+
+        See our [JavaScript SDK documentation](/sdk/js/overview) for more details.
+    </Tab>
+    <Tab title="Python" icon="python">
+        We're working on our new Python SDK. For now, you can use our API with any HTTP client you like.
+        ```python
+        # ... coming soon ...
+        ```
+
+        See our [Python SDK documentation](/sdk/python) for more details.
+    </Tab>
+</Tabs>
+
+## Update your webhooks
+
+Our webhook format has changed. Update your webhook to use the new format defined in [our v2 webhook documentation](/api-reference/webhook/example-v2).
+
+## All set!
+We've worked to make this migration as smooth as possible. If you run into any issues, feel free to email our support at [help@contiguity.support](mailto:help@contiguity.support) or join our Discord server.
+
+Our new platform is built to be more flexible and scalable, and already supports more than 5x more features than v1. We're excited to see what you build with it!
+
+import Snippet from '/snippets/mintlify.mdx';
+
+<Snippet />
