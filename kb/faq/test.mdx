@@ -1,0 +1,325 @@
+---
+title: "Wide page title"
+mode: "wide"
+---
+
+
+export const Supported = (props) => <Icon icon="badge-check" iconType="solid" color="#22c55e" size={16} {...props}/>;
+export const Warning = (props) => <Icon icon="triangle-exclamation" iconType="solid" color="#f59e0b" size={16} {...props}/>;
+export const Blocked = (props) => <Icon icon="square-xmark" iconType="solid" color="#ef4444" size={16} {...props}/>;
+export const Unknown = (props) => <Icon icon="circle-question" iconType="solid" color="#6b7280" size={16} {...props}/>;
+export const Filler = (props) => <span style={{ color: "transparent", opacity: 0 }} size={16} {...props}>--------------------------------</span>;
+export const MiniFiller = (props) => <span style={{ color: "transparent", opacity: 0 }} size={16} {...props}>---</span>;
+
+<Callout icon="table" color="grey" iconType="regular">
+**Legend:**
+
+| **Status** | **Icon** | **Description** |
+| --------- | ------- | ----------------- |
+| Supported | <MiniFiller/><Supported /><MiniFiller/> | Available and reliable in most cases |
+| Warning | <MiniFiller/><Warning /><MiniFiller/> | Limited, inconsistent, or carrier-dependent |
+| Unavailable | <MiniFiller/><Blocked /><MiniFiller/> | Not supported and/or blocked |
+| Unknown | <MiniFiller/><Unknown /><MiniFiller/> | Not tested or varies significantly |
+</Callout>
+
+<Info>
+iMessage & WhatsApp are supported in most countries, except in jurisdictions under comprehensive U.S. sanctions (for example: Cuba, Iran, North Korea, Syria) or where the country has blocked them (for example: Russia has blocked WhatsApp).
+</Info>
+
+<Note>
+Generally, if Contiguity supports a country, we support both inbound and outbound.
+</Note>
+
+---
+
+## North America
+
+| 🏳️ | Country or Territory | SMS | iMessage | WhatsApp |
+|---|---|---|---|---|
+| 🇺🇸 | United States <Filler /> | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇧🇿 | Belize | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇧🇲 | Bermuda | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇨🇦 | Canada | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇨🇷 | Costa Rica | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇸🇻 | El Salvador | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇬🇱 | Greenland | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇬🇹 | Guatemala | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇭🇳 | Honduras | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇲🇽 | Mexico | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇳🇮 | Nicaragua | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇵🇦 | Panama | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇵🇲 | Saint Pierre & Miquelon | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+
+---
+
+## Caribbean
+
+| 🏳️ | Country or Territory | SMS | iMessage | WhatsApp |
+|---|---|---|---|---|
+| 🇦🇮 | Anguilla <Filler /> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇦🇬 | Antigua & Barbuda | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇦🇼 | Aruba | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇧🇸 | Bahamas | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇧🇧 | Barbados | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇧🇶 | Bonaire | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇻🇬 | British Virgin Islands | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇰🇾 | Cayman Islands | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇨🇺 | <Tooltip tip="Delivery inconsistent; filtering/blocks common">Cuba</Tooltip> | <MiniFiller/><Warning /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Blocked /><MiniFiller/> |
+| 🇨🇼 | Curaçao | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇩🇲 | Dominica | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇩🇴 | Dominican Republic | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇬🇩 | Grenada | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇬🇵 | Guadeloupe | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇭🇹 | Haiti | <MiniFiller/><Warning /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Blocked /><MiniFiller/> |
+| 🇯🇲 | Jamaica | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇲🇶 | Martinique | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇲🇸 | Montserrat | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇵🇷 | Puerto Rico | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇧🇱 | Saint Barthélemy | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇰🇳 | Saint Kitts & Nevis | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇱🇨 | Saint Lucia | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇲🇫 | Saint Martin | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇻🇨 | St. Vincent & Grenadines | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇧🇶 | Saba | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇸🇽 | Sint Maarten | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇧🇶 | Sint Eustatius | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇹🇹 | Trinidad & Tobago | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇹🇨 | Turks & Caicos | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇻🇮 | U.S. Virgin Islands | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+
+---
+
+## South America
+
+| 🏳️ | Country or Territory | SMS | iMessage | WhatsApp |
+|---|---|---|---|---|
+| 🇦🇷 | Argentina <Filler /> | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇧🇴 | Bolivia | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇧🇷 | <Tooltip tip="Frequent silent drops on Vivo/TIM/Claro">Brazil</Tooltip> | <MiniFiller/><Warning /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇨🇱 | Chile | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇨🇴 | Colombia | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇪🇨 | Ecuador | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇫🇰 | Falkland Islands | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇬🇫 | French Guiana | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇬🇾 | Guyana | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇵🇾 | Paraguay | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇵🇪 | Peru | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇬🇸 | South Georgia & South Sandwich Islands | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇸🇷 | Suriname | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇺🇾 | Uruguay | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇻🇪 | Venezuela | <MiniFiller/><Warning /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Warning /><MiniFiller/> |
+
+---
+
+## Europe
+
+| 🏳️ | Country or Territory | SMS | iMessage | WhatsApp |
+|---|---|---|---|---|
+| 🇦🇱 | Albania <Filler /> | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇦🇩 | Andorra | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇦🇹 | Austria | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇧🇾 | Belarus | <MiniFiller/><Warning /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Warning /><MiniFiller/> |
+| 🇧🇪 | Belgium | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇧🇦 | Bosnia & Herzegovina | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇧🇬 | Bulgaria | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇭🇷 | Croatia | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇨🇾 | Cyprus | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇨🇿 | Czechia | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇩🇰 | Denmark | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇪🇪 | Estonia | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇫🇴 | Faroe Islands | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇫🇮 | Finland | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇦🇽 | Åland Islands | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇫🇷 | France | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇵🇹 | Azores | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇵🇹 | Madeira | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇪🇸 | Canary Islands | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇩🇪 | Germany | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇬🇮 | Gibraltar | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇬🇷 | Greece | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇬🇬 | Guernsey | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇭🇺 | Hungary | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇮🇸 | Iceland | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇮🇪 | Ireland | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇮🇲 | Isle of Man | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇮🇹 | Italy | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇯🇪 | Jersey | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇽🇰 | Kosovo | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇱🇻 | Latvia | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇱🇮 | Liechtenstein | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇱🇹 | Lithuania | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇱🇺 | Luxembourg | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇲🇹 | Malta | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇲🇩 | Moldova | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇲🇨 | Monaco | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇲🇪 | Montenegro | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇳🇱 | Netherlands | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇲🇰 | North Macedonia | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇳🇴 | Norway | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇵🇱 | Poland | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇵🇹 | Portugal | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇷🇴 | Romania | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇷🇺 | Russia | <MiniFiller/><Warning /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Warning /><MiniFiller/> |
+| 🇸🇲 | San Marino | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇷🇸 | Serbia | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇸🇰 | Slovakia | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇸🇮 | Slovenia | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇪🇸 | Spain | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇸🇯 | Svalbard & Jan Mayen | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇸🇪 | Sweden | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇨🇭 | Switzerland | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇺🇦 | Ukraine | <MiniFiller/><Warning /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Warning /><MiniFiller/> |
+| 🇬🇧 | United Kingdom | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇻🇦 | Vatican City | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+
+---
+
+## Africa
+
+| 🏳️ | Country or Territory | SMS | iMessage | WhatsApp |
+|---|---|---|---|---|
+| 🇩🇿 | Algeria <Filler /> | <MiniFiller/><Warning /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇦🇴 | Angola | <MiniFiller/><Warning /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇧🇯 | Benin | <MiniFiller/><Warning /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇧🇼 | Botswana | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇧🇫 | Burkina Faso | <MiniFiller/><Warning /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇧🇮 | Burundi | <MiniFiller/><Warning /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇨🇻 | Cabo Verde | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇨🇲 | Cameroon | <MiniFiller/><Warning /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇨🇫 | Central African Rep. | <MiniFiller/><Warning /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇹🇩 | Chad | <MiniFiller/><Warning /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇰🇲 | Comoros | <MiniFiller/><Warning /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇨🇩 | Democratic Republic of the Congo | <MiniFiller/><Warning /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇨🇬 | Republic of the Congo | <MiniFiller/><Warning /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇨🇮 | Côte d'Ivoire | <MiniFiller/><Warning /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇩🇯 | Djibouti | <MiniFiller/><Warning /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇪🇬 | Egypt | <MiniFiller/><Warning /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇬🇶 | Equatorial Guinea | <MiniFiller/><Warning /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇪🇷 | Eritrea | <MiniFiller/><Warning /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Blocked /><MiniFiller/> |
+| 🇸🇿 | Eswatini | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇪🇹 | Ethiopia | <MiniFiller/><Warning /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Warning /><MiniFiller/> |
+| 🇬🇦 | Gabon | <MiniFiller/><Warning /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇬🇲 | Gambia | <MiniFiller/><Warning /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇬🇭 | Ghana | <MiniFiller/><Warning /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇬🇳 | Guinea | <MiniFiller/><Warning /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇬🇼 | Guinea-Bissau | <MiniFiller/><Warning /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇰🇪 | Kenya | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇱🇸 | Lesotho | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇱🇷 | Liberia | <MiniFiller/><Warning /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇱🇾 | Libya | <MiniFiller/><Warning /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Blocked /><MiniFiller/> |
+| 🇲🇬 | Madagascar | <MiniFiller/><Warning /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇲🇼 | Malawi | <MiniFiller/><Warning /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇲🇱 | Mali | <MiniFiller/><Warning /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇲🇷 | Mauritania | <MiniFiller/><Warning /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇲🇺 | Mauritius | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇲🇦 | Morocco | <MiniFiller/><Warning /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇲🇿 | Mozambique | <MiniFiller/><Warning /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇳🇦 | Namibia | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇳🇪 | Niger | <MiniFiller/><Warning /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇳🇬 | Nigeria | <MiniFiller/><Warning /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇷🇼 | Rwanda | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇸🇹 | São Tomé & Príncipe | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇸🇳 | Senegal | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇸🇨 | Seychelles | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇸🇱 | Sierra Leone | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇸🇴 | Somalia | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇿🇦 | South Africa | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇸🇸 | South Sudan | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇸🇩 | Sudan | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇹🇿 | Tanzania | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇹🇬 | Togo | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇹🇳 | Tunisia | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇺🇬 | Uganda | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇪🇭 | Western Sahara | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇿🇲 | Zambia | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇿🇼 | Zimbabwe | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇾🇹 | Mayotte | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇷🇪 | Réunion | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇸🇭 | St. Helena | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇮🇴 | British Indian Ocean Territory | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇹🇫 | French Southern Territories | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇪🇸 | Ceuta | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇪🇸 | Melilla | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+
+---
+
+## Asia & the Middle East
+
+| 🏳️ | Country or Territory | SMS | iMessage | WhatsApp |
+|---|---|---|---|---|
+| 🇦🇫 | Afghanistan <Filler /> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇦🇲 | Armenia | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇦🇿 | Azerbaijan | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/>| <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇧🇭 | Bahrain | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇧🇩 | Bangladesh | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/>| <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇧🇹 | Bhutan | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇧🇳 | Brunei | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇰🇭 | Cambodia | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇨🇳 | China | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇬🇪 | Georgia | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇭🇰 | Hong Kong | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇮🇳 | India | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇮🇩 | Indonesia | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇮🇷 | Iran | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇮🇶 | Iraq | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇮🇱 | Israel | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇯🇵 | Japan | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇯🇴 | Jordan | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇰🇿 | Kazakhstan | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇰🇼 | Kuwait | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇰🇬 | Kyrgyzstan | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇱🇦 | Laos | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇱🇧 | Lebanon | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇲🇴 | Macau | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇲🇾 | Malaysia | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇲🇻 | Maldives | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇲🇳 | Mongolia | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇲🇲 | Myanmar | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇳🇵 | Nepal | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇰🇵 | North Korea | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇴🇲 | Oman | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇵🇰 | Pakistan | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇵🇸 | Palestine | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇵🇭 | Philippines | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇶🇦 | Qatar | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇸🇦 | Saudi Arabia | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇸🇬 | Singapore | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇰🇷 | South Korea | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇱🇰 | Sri Lanka | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇸🇾 | Syria | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇹🇼 | Taiwan | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇹🇯 | Tajikistan | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇹🇭 | Thailand | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇹🇱 | Timor-Leste | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇹🇷 | Turkey | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇹🇲 | Turkmenistan | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇦🇪 | United Arab Emirates | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Warning /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇺🇿 | Uzbekistan | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇻🇳 | Vietnam | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇾🇪 | Yemen | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+
+---
+
+## Oceania
+
+| 🏳️ | Country or Territory | SMS | iMessage | WhatsApp |
+|---|---|---|---|---|
+| 🇦🇺 | Australia <Filler /> | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇫🇯 | Fiji | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇰🇮 | Kiribati | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇲🇭 | Marshall Islands | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇫🇲 | Micronesia | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇳🇿 | New Zealand | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+| 🇵🇼 | Palau | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇵🇬 | Papua New Guinea | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇼🇸 | Samoa | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇸🇧 | Solomon Islands | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇹🇴 | Tonga | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇹🇻 | Tuvalu | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇻🇺 | Vanuatu | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇦🇸 | American Samoa | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇨🇰 | Cook Islands | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇵🇫 | French Polynesia | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇳🇨 | New Caledonia | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> | <MiniFiller/><Unknown /><MiniFiller/> |
+| 🇬🇺 | Guam | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> | <MiniFiller/><Supported /><MiniFiller/> |
+

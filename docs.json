@@ -17,7 +17,7 @@
         ]
     },
     "banner": {
-        "content": "**Action required:** We've launched our new platform! Migrate to V2 by October 10th, 2025. Instructions available in our [migration guide](/getting-started/migration).",
+        "content": "**Action required:** We're beginning to shutdown our old platform. Please migrate to our new platform ASAP. Instructions available in our [migration guide](/getting-started/migration).",
         "dismissible": true
     },
     "favicon": "/favicon.svg",
