@@ -159,21 +159,41 @@ An incoming email was received.
 
 ```json
 {
-    "id": "evt_1234567890",
-    "type": "email.incoming",
+  "id": "evt_d61aCHRo18",
+  "type": "email.incoming",
+  "timestamp": 1726502400,
+  "api_version": "v2025.12.7",
+  "data": {
+    "email_id": "in_email_xxx",
+    "from": { "name": "Sender", "address": "sender@example.com", "complete": "Sender <sender@example.com>" },
+    "to": { "name": null, "address": "user@example.com", "complete": "<user@example.com>" },
+    "cc": [],
+    "bcc": [],
+    "reply_to": null,
+    "subject": "Hello",
+    "body": {
+      "text": "Hello world",
+      "html": "<p>Hello world</p>",
+      "raw": "raw MIME email"
+    },
     "timestamp": 1726502400,
-    "api_version": "v2025.8.21",
-    "data": {
-        "message_id": "xxx-xx-contiguity-email-xxxxx",
-        "to": "user@example.com",
-        "from": "support@example.com",
-        "subject": "Some subject",
-        "body": {
-            "type": "text",
-            "content": "Hello, how are you?",
-            "raw_body": "headers, body, etc."
-        }
-    }
+    "headers": {
+      "return-path": [
+        { "address": "sender@example.com", "name": "" }
+      ]
+    },
+    "in_reply_to": "<msg_prior@example.com>",
+    "references": ["<msg_prior@example.com>"],
+    "attachments": [
+      {
+        "id": "att_abc",
+        "filename": "file.png",
+        "content_type": "image/png",
+        "size": 12345,
+        "url": "https://api.contiguity.com/attachments/email/in_email_xxx/file.png"
+      }
+    ]
+  }
 }
 ```
 
