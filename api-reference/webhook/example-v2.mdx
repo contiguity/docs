@@ -153,6 +153,24 @@ When the requested number is unavailable, a random number is used instead.
 }
 ```
 
+### `otp.reverse.verified`
+-----
+A user has verified their phone number using a Reverse OTP.
+
+```json
+{
+  "id": "evt_dgUIkRo18",
+  "type": "otp.reverse.verified", 
+  "timestamp": 1726502400,
+  "api_version": "v2025.12.10",
+  "data": {
+    "otp_id": "r_otp_123456",
+    "number": "+15551234567",
+    "status": "verified",
+  }
+}
+```
+
 ### `email.incoming`
 -----
 An incoming email was received.

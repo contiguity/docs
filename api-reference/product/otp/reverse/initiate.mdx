@@ -1,0 +1,47 @@
+---
+title: "Initiate a Reverse OTP session"
+openapi: 'openapi-otp POST /reverse/initiate'
+sidebarTitle: 'Initiate Verification'
+icon: "key"
+iconType: "solid"
+---
+
+## What is a Reverse OTP?
+A reverse OTP verifies a user's phone number by having the user send a code to you via SMS, rather than you sending it to them. This approach offers several key benefits compared to traditional SMS OTPs:
+
+- Receiving SMS messages is easy and often free, so attackers may abuse online services to receive codes and bypass standard verification.
+- Sending an SMS, however, requires the user to use their own phone and carrier plan, making it more difficult to fake and providing greater confidence in the user's authenticity.
+- You save on operational costs, since you’re not paying to send SMS codes to your users.
+- Message delivery rates are often higher. Outbound SMS can be blocked, delayed, or filtered by carriers—especially for international users or high-volume senders. When users initiate the message themselves, it is much more likely to be delivered, as their carrier typically supports sending SMS to the US from anywhere in the world.
+
+<Tip>
+    **Streamline the experience with a QR code**
+
+    Once you've initiated a reverse OTP session, Contiguity provides a payload that you can turn into a QR code. Display this QR code to your user, who can then scan it with their phone to automatically populate their phone number and code fields.
+
+    ```typescript
+    const session = await contiguity.otp.reverse.initiate({
+        number: "+15551234567",
+        language: "en"
+    });
+    ```
+
+    Next:
+
+    ```typescript
+    await generateQRCode(session.ui.qr_code);
+    ```
+
+    <Frame caption="Result">
+    <img src="data:image/gif;base64,R0lGODdhUgBSAIAAAAAAAP///ywAAAAAUgBSAAAC/4yPqcvtD6OctNqLs968+w+G4kiW5mkC6sqyRtsiqrwqbgDnAKXDb0+jzRK3XmwyZAx9uOMveWBCbTtkVVmVOptTbq3p6Iazx24xNz4/v+LGsnyNstFu+PrNI6u9N2G87/VzR5Y3KMj35acoh4d4KPG2x7SG1WhpZ2UI5sgYt3ip2YY1dmhU6bkpugmJGpQKtABY2iqXZwT6Oqv7ekt7apobjHvZm/JH+DCJEgHVmJa43Hz8mAzrF+nLPF27Wq1DdaYKvn0N7UrZjS5tS94py62OukddyBnvHJhfvmiBLY1NLZy8Le9Ynes06Fs6InPoVVjH0B8sVZKyjVooEd/Fi///LDJ0mBEZqToBzXmbA3EfLz3HzGyBoCWlO2QC+c3sZxJQzF4iu2m04rJjSIUyf8IcOJRWRYezCpKMyFLZJ5pKo3qkMq6kFldB4Yh7OrUcvp9ETeIcRxalVVZfR6rses9sLLlsee5KilXfQnbFhFl9BxCetnk+2ylzeRDDVsFFCQ5M/EEiWkzxuPbUIBnq4srcjD7MaRh0wnboFItmfFohSLpzIQrUKTdz4LYIO6uF3UY2S6YnLb9+uVJqZGi6Vds27sE1aMKjeTb87Bvpc7HOp48g7LRkXuHJrWcvvB34M2Bu8ynfhdlutbC20Weg2JKqTeTgoYM13xM3cJkGOQlqVbvRTIBddZx3dDjVlXC0NfVcYO4Bw9xeTy3mYDDN7YYRgQyO9VhtHU3mGUeUZcheaQJett597k3Fn15nqWghVCbC9Z56M2KoXGMLnngYcThuA5tNywxJZJFGHolkkkouyWSTTj4JpQEFAAA7" />
+    </Frame>
+</Tip>
+
+
+<Warning>
+    In most cases, it's helpful to present both the QR code and written instructions to the user. That said, if you want to maximize the chance the message is sent from a mobile device, you may prefer to display only the QR code, since scanning it typically requires using a phone.
+</Warning>
+
+import Snippet from '/snippets/mintlify.mdx';
+
+<Snippet />

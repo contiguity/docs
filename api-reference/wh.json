@@ -1,0 +1,932 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+        "title": "Contiguity Webhooks (v2)",
+        "description": "OpenAPI 3.1 webhooks for Contiguity v2 event payloads.",
+        "version": "v2"
+    },
+    "paths": {},
+    "webhooks": {
+        "text.incoming.sms": {
+            "post": {
+                "summary": "Incoming SMS",
+                "description": "An incoming SMS message was received.",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TextIncomingSMSEvent"
+                            },
+                            "example": {
+                                "id": "evt_d61aCHRo18",
+                                "type": "text.incoming.sms",
+                                "timestamp": 1726502400,
+                                "api_version": "v2025.9.7",
+                                "data": {
+                                    "from": "+15551234567",
+                                    "to": "+15559876543",
+                                    "body": "Hello world",
+                                    "timestamp": 1726502400
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Webhook received"
+                    }
+                }
+            }
+        },
+        "text.incoming.mms": {
+            "post": {
+                "summary": "Incoming MMS",
+                "description": "An incoming MMS message with attachments was received.",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TextIncomingMMSEvent"
+                            },
+                            "example": {
+                                "id": "evt_d61aCHRo18",
+                                "type": "text.incoming.mms",
+                                "timestamp": 1726502400,
+                                "api_version": "v2025.9.7",
+                                "data": {
+                                    "from": "+15551234567",
+                                    "to": "+15559876543",
+                                    "body": "Check out this image!",
+                                    "timestamp": 1726502400,
+                                    "attachments": [
+                                        {
+                                            "url": "https://api.contiguity.com/attachments/15551234567/15559876543/image.jpg",
+                                            "mime": "image/jpeg",
+                                            "filename": "image.jpg"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Webhook received"
+                    }
+                }
+            }
+        },
+        "text.delivery.confirmed": {
+            "post": {
+                "summary": "Delivery confirmed",
+                "description": "SMS/MMS delivery was confirmed by the carrier.",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TextDeliveryConfirmedEvent"
+                            },
+                            "example": {
+                                "id": "evt_d61aCHRo18",
+                                "type": "text.delivery.confirmed",
+                                "timestamp": 1726502400,
+                                "api_version": "v2025.9.7",
+                                "data": {
+                                    "from": "+15551234567",
+                                    "to": "+15559876543",
+                                    "message_id": "msg_abc123",
+                                    "timestamp": 1726502400
+                    }
+                }
+            }
+        }
+    },
+                "responses": {
+                    "200": {
+                        "description": "Webhook received"
+                    }
+                }
+            }
+        },
+        "text.delivery.failed": {
+            "post": {
+                "summary": "Delivery failed",
+                "description": "SMS/MMS delivery failed or timed out.",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TextDeliveryFailedEvent"
+                            },
+                            "example": {
+                                "id": "evt_d61aCHRo18",
+                                "type": "text.delivery.failed",
+                                "timestamp": 1726502400,
+                                "api_version": "v2025.9.7",
+                                "data": {
+                                    "from": "+15551234567",
+                                    "to": "+15559876543",
+                                    "message_id": "msg_abc123",
+                                    "timestamp": 1726502400,
+                                    "error": "Carrier never provided delivery confirmation. Your message may have delivered, but Contiguity has no idea if it did."
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Webhook received"
+                    }
+                }
+            }
+        },
+        "imessage.incoming": {
+            "post": {
+                "summary": "Incoming iMessage",
+                "description": "An incoming iMessage was received.",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/IMessageIncomingEvent"
+                            },
+                            "example": {
+                                "id": "evt_d61aCHRo18",
+                                "type": "imessage.incoming",
+                                "timestamp": 1726502400,
+                                "api_version": "v2025.9.7",
+                                "data": {
+                                    "from": "+15551234567",
+                                    "to": "+15559876543",
+                                    "body": "Hello from iMessage",
+                                    "timestamp": 1726502400,
+                                    "attachments": []
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Webhook received"
+                    }
+                }
+            }
+        },
+        "numbers.substitution": {
+            "post": {
+                "summary": "Number substitution",
+                "description": "When the requested number is unavailable, a random number is used instead.",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NumbersSubstitutionEvent"
+                            },
+                            "example": {
+                                "id": "evt_d61aCHRo18",
+                                "type": "numbers.substitution",
+                                "timestamp": 1726502400,
+                                "api_version": "v2025.9.7",
+                                "data": {
+                                    "original_number": "+15551111111",
+                                    "used_number": "+15552222222",
+                                    "reason": "requested_unavailable_random_used",
+                                    "message_id": "msg_abc123",
+                                    "timestamp": 1726502400
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Webhook received"
+                    }
+                }
+            }
+        },
+        "otp.reverse.verified": {
+            "post": {
+                "summary": "Reverse OTP verified",
+                "description": "A user has verified their phone number using a Reverse OTP.",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/OTPReverseVerifiedEvent"
+                            },
+                            "example": {
+                                "id": "evt_dgUIkRo18",
+                                "type": "otp.reverse.verified",
+                                "timestamp": 1726502400,
+                                "api_version": "v2025.12.10",
+                                "data": {
+                                    "otp_id": "r_otp_123456",
+                                    "number": "+15551234567",
+                                    "status": "verified"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Webhook received"
+                    }
+                }
+            }
+        },
+        "email.incoming": {
+            "post": {
+                "summary": "Incoming email",
+                "description": "An incoming email was received.",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/EmailIncomingEvent"
+                            },
+                            "example": {
+                                "id": "evt_d61aCHRo18",
+                                "type": "email.incoming",
+                                "timestamp": 1726502400,
+                                "api_version": "v2025.12.7",
+                                "data": {
+                                    "email_id": "in_email_xxx",
+                                    "from": {
+                                        "name": "Sender",
+                                        "address": "sender@example.com",
+                                        "complete": "Sender <sender@example.com>"
+                                    },
+                                    "to": {
+                                        "name": null,
+                                        "address": "user@example.com",
+                                        "complete": "<user@example.com>"
+                                    },
+                                    "cc": [],
+                                    "bcc": [],
+                                    "reply_to": null,
+                                    "subject": "Hello",
+                                    "body": {
+                                        "text": "Hello world",
+                                        "html": "<p>Hello world</p>",
+                                        "raw": "raw MIME email"
+                                    },
+                                    "timestamp": 1726502400,
+                                    "headers": {
+                                        "return-path": [
+                                            {
+                                                "address": "sender@example.com",
+                                                "name": ""
+                                            }
+                                        ]
+                                    },
+                                    "in_reply_to": "<msg_prior@example.com>",
+                                    "references": [
+                                        "<msg_prior@example.com>"
+                                    ],
+                                    "attachments": [
+                                        {
+                                            "id": "att_abc",
+                                            "filename": "file.png",
+                                            "content_type": "image/png",
+                                            "size": 12345,
+                                            "url": "https://api.contiguity.com/attachments/email/in_email_xxx/file.png"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Webhook received"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "WebhookEvent": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string"
+                    },
+                    "timestamp": {
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Unix timestamp (seconds)."
+                    },
+                    "api_version": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "type": "object"
+                    }
+                },
+                "required": [
+                    "id",
+                    "type",
+                    "timestamp",
+                    "api_version",
+                    "data"
+                ],
+                "additionalProperties": false
+            },
+            "Attachment": {
+                "type": "object",
+                "properties": {
+                    "url": {
+                        "type": "string",
+                        "format": "uri"
+                    },
+                    "mime": {
+                        "type": "string"
+                    },
+                    "filename": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "url",
+                    "mime",
+                    "filename"
+                ],
+                "additionalProperties": false
+            },
+            "TextIncomingSMSData": {
+                "type": "object",
+                "properties": {
+                    "from": {
+                        "type": "string"
+                    },
+                    "to": {
+                        "type": "string"
+                    },
+                    "body": {
+                        "type": "string"
+                    },
+                    "timestamp": {
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                },
+                "required": [
+                    "from",
+                    "to",
+                    "body",
+                    "timestamp"
+                ]
+            },
+            "TextIncomingMMSData": {
+                "type": "object",
+                "properties": {
+                    "from": {
+                        "type": "string"
+                    },
+                    "to": {
+                        "type": "string"
+                    },
+                    "body": {
+                        "type": "string"
+                    },
+                    "timestamp": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "attachments": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Attachment"
+                        }
+                    }
+                },
+                "required": [
+                    "from",
+                    "to",
+                    "body",
+                    "timestamp",
+                    "attachments"
+                ],
+                "additionalProperties": false
+            },
+            "TextDeliveryConfirmedData": {
+                "type": "object",
+                "properties": {
+                    "from": {
+                        "type": "string"
+                    },
+                    "to": {
+                        "type": "string"
+                    },
+                    "message_id": {
+                        "type": "string"
+                    },
+                    "timestamp": {
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                },
+                "required": [
+                    "from",
+                    "to",
+                    "message_id",
+                    "timestamp"
+                ]
+            },
+            "TextDeliveryFailedData": {
+                "type": "object",
+                "properties": {
+                    "from": {
+                        "type": "string"
+                    },
+                    "to": {
+                        "type": "string"
+                    },
+                    "message_id": {
+                        "type": "string"
+                    },
+                    "timestamp": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "error": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "from",
+                    "to",
+                    "message_id",
+                    "timestamp",
+                    "error"
+                ],
+                "additionalProperties": false
+            },
+            "IMessageIncomingData": {
+                "type": "object",
+                "properties": {
+                    "from": {
+                        "type": "string"
+                    },
+                    "to": {
+                        "type": "string"
+                    },
+                    "body": {
+                        "type": "string"
+                    },
+                    "timestamp": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "attachments": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Attachment"
+                        }
+                    }
+                },
+                "required": [
+                    "from",
+                    "to",
+                    "body",
+                    "timestamp",
+                    "attachments"
+                ],
+                "additionalProperties": false
+            },
+            "NumbersSubstitutionData": {
+                "type": "object",
+                "properties": {
+                    "original_number": {
+                        "type": "string"
+                    },
+                    "used_number": {
+                        "type": "string"
+                    },
+                    "reason": {
+                        "type": "string"
+                    },
+                    "message_id": {
+                        "type": "string"
+                    },
+                    "timestamp": {
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                },
+                "required": [
+                    "original_number",
+                    "used_number",
+                    "reason",
+                    "message_id",
+                    "timestamp"
+                ],
+                "additionalProperties": false
+            },
+            "OTPReverseVerifiedData": {
+                "type": "object",
+                "properties": {
+                    "otp_id": {
+                        "type": "string"
+                    },
+                    "number": {
+                        "type": "string"
+                    },
+                    "status": {
+                        "type": "string",
+                        "enum": [
+                            "verified"
+                        ]
+                    }
+                },
+                "required": [
+                    "otp_id",
+                    "number",
+                    "status"
+                ],
+                "additionalProperties": false
+            },
+            "EmailContact": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "address": {
+                        "type": "string"
+                    },
+                    "complete": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "name",
+                    "address",
+                    "complete"
+                ],
+                "additionalProperties": false
+            },
+            "EmailHeaderContact": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "address": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "name",
+                    "address"
+                ],
+                "additionalProperties": false
+            },
+            "EmailBody": {
+                "type": "object",
+                "properties": {
+                    "text": {
+                        "type": "string"
+                    },
+                    "html": {
+                        "type": "string"
+                    },
+                    "raw": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "text",
+                    "html",
+                    "raw"
+                ],
+                "additionalProperties": false
+            },
+            "EmailAttachment": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "filename": {
+                        "type": "string"
+                    },
+                    "content_type": {
+                        "type": "string"
+                    },
+                    "size": {
+                        "type": "integer"
+                    },
+                    "url": {
+                        "type": "string",
+                        "format": "uri"
+                    }
+                },
+                "required": [
+                    "id",
+                    "filename",
+                    "content_type",
+                    "size",
+                    "url"
+                ],
+                "additionalProperties": false
+            },
+            "EmailHeaders": {
+                "type": "object",
+                "properties": {
+                    "return-path": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/EmailHeaderContact"
+                        }
+                    }
+                },
+                "additionalProperties": true
+            },
+            "EmailIncomingData": {
+                "type": "object",
+                "properties": {
+                    "email_id": {
+                        "type": "string"
+                    },
+                    "from": {
+                        "$ref": "#/components/schemas/EmailContact"
+                    },
+                    "to": {
+                        "$ref": "#/components/schemas/EmailContact"
+                    },
+                    "cc": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/EmailContact"
+                        }
+                    },
+                    "bcc": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/EmailContact"
+                        }
+                    },
+                    "reply_to": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/EmailContact"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "subject": {
+                        "type": "string"
+                    },
+                    "body": {
+                        "$ref": "#/components/schemas/EmailBody"
+                    },
+                    "timestamp": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "headers": {
+                        "$ref": "#/components/schemas/EmailHeaders"
+                    },
+                    "in_reply_to": {
+                        "type": "string"
+                    },
+                    "references": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "attachments": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/EmailAttachment"
+                        }
+                    }
+                },
+                "required": [
+                    "email_id",
+                    "from",
+                    "to",
+                    "cc",
+                    "bcc",
+                    "reply_to",
+                    "subject",
+                    "body",
+                    "timestamp",
+                    "headers",
+                    "attachments"
+                ],
+                "additionalProperties": false
+            },
+            "TextIncomingSMSEvent": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/WebhookEvent"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "type": {
+                                "const": "text.incoming.sms"
+                            },
+                            "data": {
+                                "$ref": "#/components/schemas/TextIncomingSMSData"
+                            }
+                        },
+                        "required": [
+                            "type",
+                            "data"
+                        ],
+                        "additionalProperties": false
+                    }
+                ]
+            },
+            "TextIncomingMMSEvent": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/WebhookEvent"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "type": {
+                                "const": "text.incoming.mms"
+                            },
+                            "data": {
+                                "$ref": "#/components/schemas/TextIncomingMMSData"
+                            }
+                        },
+                        "required": [
+                            "type",
+                            "data"
+                        ],
+                        "additionalProperties": false
+                    }
+                ]
+            },
+            "TextDeliveryConfirmedEvent": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/WebhookEvent"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "type": {
+                                "const": "text.delivery.confirmed"
+                            },
+                            "data": {
+                                "$ref": "#/components/schemas/TextDeliveryConfirmedData"
+                            }
+                        },
+                        "required": [
+                            "type",
+                            "data"
+                        ],
+                        "additionalProperties": false
+                    }
+                ]
+            },
+            "TextDeliveryFailedEvent": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/WebhookEvent"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "type": {
+                                "const": "text.delivery.failed"
+                            },
+                            "data": {
+                                "$ref": "#/components/schemas/TextDeliveryFailedData"
+                            }
+                        },
+                        "required": [
+                            "type",
+                            "data"
+                        ],
+                        "additionalProperties": false
+                    }
+                ]
+            },
+            "IMessageIncomingEvent": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/WebhookEvent"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "type": {
+                                "const": "imessage.incoming"
+                            },
+                            "data": {
+                                "$ref": "#/components/schemas/IMessageIncomingData"
+                            }
+                        },
+                        "required": [
+                            "type",
+                            "data"
+                        ],
+                        "additionalProperties": false
+                    }
+                ]
+            },
+            "NumbersSubstitutionEvent": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/WebhookEvent"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "type": {
+                                "const": "numbers.substitution"
+                            },
+                            "data": {
+                                "$ref": "#/components/schemas/NumbersSubstitutionData"
+                            }
+                        },
+                        "required": [
+                            "type",
+                            "data"
+                        ],
+                        "additionalProperties": false
+                    }
+                ]
+            },
+            "OTPReverseVerifiedEvent": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/WebhookEvent"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "type": {
+                                "const": "otp.reverse.verified"
+                            },
+                            "data": {
+                                "$ref": "#/components/schemas/OTPReverseVerifiedData"
+                            }
+                        },
+                        "required": [
+                            "type",
+                            "data"
+                        ],
+                        "additionalProperties": false
+                    }
+                ]
+            },
+            "EmailIncomingEvent": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/WebhookEvent"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "type": {
+                                "const": "email.incoming"
+                            },
+                            "data": {
+                                "$ref": "#/components/schemas/EmailIncomingData"
+                            }
+                        },
+                        "required": [
+                            "type",
+                            "data"
+                        ],
+                        "additionalProperties": false
+                    }
+                ]
+            }
+        }
+    }
+}

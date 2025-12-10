@@ -1,0 +1,15 @@
+---
+title: "Check the session's verification status"
+openapi: 'openapi-otp GET /reverse/verify/{otp_id}'
+sidebarTitle: 'Poll Status'
+icon: "clock"
+iconType: "solid"
+---
+
+<Info title="Note">
+    Rapidly polling this endpoint in production is not recommended. It is recommended to await the `otp.reverse.verified` webhook event, or adjust your polling interval to 20 seconds or more.
+</Info>
+
+import Snippet from '/snippets/mintlify.mdx';
+
+<Snippet />

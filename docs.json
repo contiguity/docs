@@ -158,9 +158,31 @@
                             "style": "solid"
                         },
                         "pages": [
-                            "api-reference/product/otp/send",
-                            "api-reference/product/otp/verify",
-                            "api-reference/product/otp/resend"
+                            {
+                                "group": "SMS OTP",
+                                "icon": {
+                                    "name": "message",
+                                    "style": "solid"
+                                },
+                                "pages": [
+                                    "api-reference/product/otp/send",
+                                    "api-reference/product/otp/verify",
+                                    "api-reference/product/otp/resend"
+                                ]
+                            },
+                            {
+                                "group": "Reverse OTP",
+                                "icon": {
+                                    "name": "inbox",
+                                    "style": "solid"
+                                },
+                                "pages": [
+                                    "api-reference/product/otp/reverse/initiate",
+                                    "api-reference/product/otp/reverse/verify",
+                                    "api-reference/product/otp/reverse/cancel",
+                                    "api-reference/product/otp/reverse/success"
+                                ]
+                            }
                         ]
                     },
                     {
