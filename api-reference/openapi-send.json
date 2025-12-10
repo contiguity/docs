@@ -6,7 +6,7 @@
         }
     ],
     "info": {
-        "version": "v2025.10.31",
+        "version": "v2025.12.9",
         "title": "Sending API"
     },
     "components": {
@@ -40,6 +40,7 @@
                                     },
                                     "from": {
                                         "type": "string",
+                                        "nullable": true,
                                         "description": "If you lease a phone number from Contiguity, you can use a specific one by providing it here.",
                                         "example": "+15555555555"
                                     },
@@ -50,6 +51,7 @@
                                     },
                                     "attachments": {
                                         "type": "array",
+                                        "nullable": true,
                                         "items": {
                                             "type": "string"
                                         },
@@ -82,11 +84,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1761968887641
+                                            "example": 1765331254902
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.10.31"
+                                            "example": "v2025.12.9"
                                         },
                                         "object": {
                                             "type": "string",
@@ -130,11 +132,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1761968887641
+                                            "example": 1765331254902
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.10.31"
+                                            "example": "v2025.12.9"
                                         },
                                         "object": {
                                             "type": "string",
@@ -182,11 +184,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1761968887641
+                                            "example": 1765331254902
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.10.31"
+                                            "example": "v2025.12.9"
                                         },
                                         "object": {
                                             "type": "string",
@@ -234,11 +236,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1761968887641
+                                            "example": 1765331254902
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.10.31"
+                                            "example": "v2025.12.9"
                                         },
                                         "object": {
                                             "type": "string",
@@ -286,11 +288,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1761968887641
+                                            "example": 1765331254902
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.10.31"
+                                            "example": "v2025.12.9"
                                         },
                                         "object": {
                                             "type": "string",
@@ -359,7 +361,7 @@
                                     },
                                     "from": {
                                         "type": "string",
-                                        "description": "Accepts: \"Example <email@domain.com>\" or \"Contiguity\" or \"email@domain.com\"",
+                                        "description": "Accepts: `\"Example <email@domain.com>\"` or `\"Contiguity\"` or `\"email@domain.com\"`",
                                         "example": "Contiguity <no-reply@contiguity.com>"
                                     },
                                     "subject": {
@@ -372,11 +374,13 @@
                                         "properties": {
                                             "text": {
                                                 "type": "string",
+                                                "nullable": true,
                                                 "description": "Text content of the email",
                                                 "example": "Hello, world!"
                                             },
                                             "html": {
                                                 "type": "string",
+                                                "nullable": true,
                                                 "description": "HTML content of the email",
                                                 "example": "<p>Hello, world!</p>"
                                             }
@@ -384,6 +388,7 @@
                                     },
                                     "reply_to": {
                                         "type": "string",
+                                        "nullable": true,
                                         "description": "Reply-to email address",
                                         "example": "john.doe@example.com"
                                     },
@@ -398,6 +403,9 @@
                                                     "type": "string"
                                                 },
                                                 "maxItems": 10
+                                            },
+                                            {
+                                                "nullable": true
                                             }
                                         ],
                                         "description": "Carbon copy email address(es). Can be a string or array of up to 10 addresses",
@@ -417,6 +425,9 @@
                                                     "type": "string"
                                                 },
                                                 "maxItems": 10
+                                            },
+                                            {
+                                                "nullable": true
                                             }
                                         ],
                                         "description": "Blind carbon copy email address(es). Can be a string or array of up to 10 addresses",
@@ -425,33 +436,15 @@
                                         ]
                                     },
                                     "headers": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "object",
-                                            "properties": {
-                                                "name": {
-                                                    "type": "string",
-                                                    "description": "Header name",
-                                                    "example": "X-Custom-Header"
-                                                },
-                                                "value": {
-                                                    "type": "string",
-                                                    "description": "Header value",
-                                                    "example": "Custom Value"
-                                                }
-                                            },
-                                            "required": [
-                                                "name",
-                                                "value"
-                                            ]
+                                        "type": "object",
+                                        "nullable": true,
+                                        "additionalProperties": {
+                                            "type": "string"
                                         },
-                                        "description": "Custom email headers",
-                                        "example": [
-                                            {
-                                                "name": "X-Priority",
-                                                "value": "1"
-                                            }
-                                        ]
+                                        "description": "Custom email headers as key-value object",
+                                        "example": {
+                                            "X-Priority": "1"
+                                        }
                                     }
                                 },
                                 "required": [
@@ -478,11 +471,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1761968887641
+                                            "example": 1765331254902
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.10.31"
+                                            "example": "v2025.12.9"
                                         },
                                         "object": {
                                             "type": "string",
@@ -526,11 +519,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1761968887641
+                                            "example": 1765331254902
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.10.31"
+                                            "example": "v2025.12.9"
                                         },
                                         "object": {
                                             "type": "string",
@@ -578,11 +571,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1761968887641
+                                            "example": 1765331254902
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.10.31"
+                                            "example": "v2025.12.9"
                                         },
                                         "object": {
                                             "type": "string",
@@ -630,11 +623,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1761968887641
+                                            "example": 1765331254902
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.10.31"
+                                            "example": "v2025.12.9"
                                         },
                                         "object": {
                                             "type": "string",
@@ -682,11 +675,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1761968887641
+                                            "example": 1765331254902
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.10.31"
+                                            "example": "v2025.12.9"
                                         },
                                         "object": {
                                             "type": "string",
@@ -744,6 +737,7 @@
                                     },
                                     "from": {
                                         "type": "string",
+                                        "nullable": true,
                                         "description": "Your leased WhatsApp number. If none is provided, we will use a random WhatsApp number of yours.",
                                         "example": "+15555555555"
                                     },
@@ -754,6 +748,7 @@
                                     },
                                     "fallback": {
                                         "type": "object",
+                                        "nullable": true,
                                         "properties": {
                                             "when": {
                                                 "type": "array",
@@ -772,6 +767,7 @@
                                             },
                                             "from": {
                                                 "type": "string",
+                                                "nullable": true,
                                                 "description": "Your leased SMS/RCS number. If none is provided, we will use a random SMS/RCS number of yours. In some instances, your WhatsApp number may support SMS/RCS, and we will fallback to that if left blank.",
                                                 "example": "+15555555555"
                                             }
@@ -790,6 +786,7 @@
                                     },
                                     "attachments": {
                                         "type": "array",
+                                        "nullable": true,
                                         "items": {
                                             "type": "string"
                                         },
@@ -822,11 +819,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1761968887641
+                                            "example": 1765331254902
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.10.31"
+                                            "example": "v2025.12.9"
                                         },
                                         "object": {
                                             "type": "string",
@@ -870,11 +867,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1761968887641
+                                            "example": 1765331254902
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.10.31"
+                                            "example": "v2025.12.9"
                                         },
                                         "object": {
                                             "type": "string",
@@ -922,11 +919,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1761968887641
+                                            "example": 1765331254902
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.10.31"
+                                            "example": "v2025.12.9"
                                         },
                                         "object": {
                                             "type": "string",
@@ -974,11 +971,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1761968887641
+                                            "example": 1765331254902
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.10.31"
+                                            "example": "v2025.12.9"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1026,11 +1023,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1761968887641
+                                            "example": 1765331254902
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.10.31"
+                                            "example": "v2025.12.9"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1088,6 +1085,7 @@
                                     },
                                     "from": {
                                         "type": "string",
+                                        "nullable": true,
                                         "description": "Your leased WhatsApp number. If none is provided, we will use a random WhatsApp number of yours.",
                                         "example": "+15555555555"
                                     },
@@ -1123,11 +1121,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1761968887641
+                                            "example": 1765331254902
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.10.31"
+                                            "example": "v2025.12.9"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1171,11 +1169,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1761968887641
+                                            "example": 1765331254902
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.10.31"
+                                            "example": "v2025.12.9"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1223,11 +1221,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1761968887641
+                                            "example": 1765331254902
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.10.31"
+                                            "example": "v2025.12.9"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1275,11 +1273,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1761968887641
+                                            "example": 1765331254902
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.10.31"
+                                            "example": "v2025.12.9"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1327,11 +1325,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1761968887641
+                                            "example": 1765331254902
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.10.31"
+                                            "example": "v2025.12.9"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1398,11 +1396,13 @@
                                     },
                                     "reaction": {
                                         "type": "string",
+                                        "nullable": true,
                                         "description": "The emoji reaction to send (e.g., '👍', '❤️', or :thumbs_up:, :heart:, :haha: etc.)",
                                         "example": "👍"
                                     },
                                     "message": {
                                         "type": "string",
+                                        "nullable": true,
                                         "description": "Provide either a WhatsApp ID, or complete content of the message to react to.",
                                         "example": "wa_1234567890"
                                     }
@@ -1429,11 +1429,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1761968887641
+                                            "example": 1765331254902
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.10.31"
+                                            "example": "v2025.12.9"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1483,11 +1483,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1761968887641
+                                            "example": 1765331254902
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.10.31"
+                                            "example": "v2025.12.9"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1535,11 +1535,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1761968887641
+                                            "example": 1765331254902
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.10.31"
+                                            "example": "v2025.12.9"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1587,11 +1587,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1761968887641
+                                            "example": 1765331254902
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.10.31"
+                                            "example": "v2025.12.9"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1639,11 +1639,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1761968887641
+                                            "example": 1765331254902
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.10.31"
+                                            "example": "v2025.12.9"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1701,6 +1701,7 @@
                                     },
                                     "from": {
                                         "type": "string",
+                                        "nullable": true,
                                         "description": "Your leased iMessage number. If none is provided, we will use a random iMessage number of yours.",
                                         "example": "+15555555555"
                                     },
@@ -1711,6 +1712,7 @@
                                     },
                                     "fallback": {
                                         "type": "object",
+                                        "nullable": true,
                                         "properties": {
                                             "when": {
                                                 "type": "array",
@@ -1729,6 +1731,7 @@
                                             },
                                             "from": {
                                                 "type": "string",
+                                                "nullable": true,
                                                 "description": "Your leased SMS/RCS number. If none is provided, we will use a random SMS/RCS number of yours. In some instances, your iMessage number may support SMS/RCS, and we will fallback to that if left blank.",
                                                 "example": "+15555555555"
                                             }
@@ -1747,6 +1750,7 @@
                                     },
                                     "attachments": {
                                         "type": "array",
+                                        "nullable": true,
                                         "items": {
                                             "type": "string"
                                         },
@@ -1779,11 +1783,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1761968887641
+                                            "example": 1765331254902
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.10.31"
+                                            "example": "v2025.12.9"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1827,11 +1831,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1761968887641
+                                            "example": 1765331254902
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.10.31"
+                                            "example": "v2025.12.9"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1879,11 +1883,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1761968887641
+                                            "example": 1765331254902
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.10.31"
+                                            "example": "v2025.12.9"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1931,11 +1935,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1761968887641
+                                            "example": 1765331254902
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.10.31"
+                                            "example": "v2025.12.9"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1983,11 +1987,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1761968887641
+                                            "example": 1765331254902
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.10.31"
+                                            "example": "v2025.12.9"
                                         },
                                         "object": {
                                             "type": "string",
@@ -2045,6 +2049,7 @@
                                     },
                                     "from": {
                                         "type": "string",
+                                        "nullable": true,
                                         "description": "Your leased iMessage number. If none is provided, we will use a random iMessage number of yours.",
                                         "example": "+15555555555"
                                     },
@@ -2080,11 +2085,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1761968887641
+                                            "example": 1765331254902
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.10.31"
+                                            "example": "v2025.12.9"
                                         },
                                         "object": {
                                             "type": "string",
@@ -2128,11 +2133,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1761968887641
+                                            "example": 1765331254902
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.10.31"
+                                            "example": "v2025.12.9"
                                         },
                                         "object": {
                                             "type": "string",
@@ -2180,11 +2185,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1761968887641
+                                            "example": 1765331254902
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.10.31"
+                                            "example": "v2025.12.9"
                                         },
                                         "object": {
                                             "type": "string",
@@ -2232,11 +2237,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1761968887641
+                                            "example": 1765331254902
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.10.31"
+                                            "example": "v2025.12.9"
                                         },
                                         "object": {
                                             "type": "string",
@@ -2284,11 +2289,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1761968887641
+                                            "example": 1765331254902
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.10.31"
+                                            "example": "v2025.12.9"
                                         },
                                         "object": {
                                             "type": "string",
@@ -2372,11 +2377,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1761968887641
+                                            "example": 1765331254902
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.10.31"
+                                            "example": "v2025.12.9"
                                         },
                                         "object": {
                                             "type": "string",
@@ -2426,11 +2431,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1761968887641
+                                            "example": 1765331254902
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.10.31"
+                                            "example": "v2025.12.9"
                                         },
                                         "object": {
                                             "type": "string",
@@ -2478,11 +2483,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1761968887641
+                                            "example": 1765331254902
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.10.31"
+                                            "example": "v2025.12.9"
                                         },
                                         "object": {
                                             "type": "string",
@@ -2530,11 +2535,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1761968887641
+                                            "example": 1765331254902
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.10.31"
+                                            "example": "v2025.12.9"
                                         },
                                         "object": {
                                             "type": "string",
@@ -2582,11 +2587,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1761968887641
+                                            "example": 1765331254902
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.10.31"
+                                            "example": "v2025.12.9"
                                         },
                                         "object": {
                                             "type": "string",
@@ -2700,11 +2705,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1761968887641
+                                            "example": 1765331254902
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.10.31"
+                                            "example": "v2025.12.9"
                                         },
                                         "object": {
                                             "type": "string",
@@ -2754,11 +2759,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1761968887641
+                                            "example": 1765331254902
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.10.31"
+                                            "example": "v2025.12.9"
                                         },
                                         "object": {
                                             "type": "string",
@@ -2806,11 +2811,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1761968887641
+                                            "example": 1765331254902
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.10.31"
+                                            "example": "v2025.12.9"
                                         },
                                         "object": {
                                             "type": "string",
@@ -2858,11 +2863,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1761968887641
+                                            "example": 1765331254902
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.10.31"
+                                            "example": "v2025.12.9"
                                         },
                                         "object": {
                                             "type": "string",
@@ -2910,11 +2915,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1761968887641
+                                            "example": 1765331254902
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.10.31"
+                                            "example": "v2025.12.9"
                                         },
                                         "object": {
                                             "type": "string",
