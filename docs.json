@@ -303,7 +303,7 @@
             "anchors": [
                 {
                     "anchor": "Website",
-                    "href": "https://contiguity.co",
+                    "href": "https://contiguity.com",
                     "icon": "globe"
                 },
                 {
@@ -331,7 +331,7 @@
         ],
         "primary": {
             "type": "button",
-            "label": "Dashboard",
+            "label": "Console",
             "href": "https://console.contiguity.com"
         }
     },
