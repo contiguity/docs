@@ -15,9 +15,9 @@ A reverse OTP verifies a user's phone number by having the user send a code to y
 - Message delivery rates are often higher. Outbound SMS can be blocked, delayed, or filtered by carriers—especially for international users or high-volume senders. When users initiate the message themselves, it is much more likely to be delivered, as their carrier typically supports sending SMS to the US from anywhere in the world.
 
 <Tip>
-    **Streamline the experience with a QR code**
+    **Streamline the experience with a QR code & button**
 
-    Once you've initiated a reverse OTP session, Contiguity provides a payload that you can turn into a QR code. Display this QR code to your user, who can then scan it with their phone to automatically populate their phone number and code fields.
+    Once you've initiated a reverse OTP session, Contiguity provides a payload that you can turn into a QR code. Display this QR code to your user, who can then scan it with their phone to automatically populate the phone number and body fields.
 
     ```typescript
     const session = await contiguity.otp.reverse.initiate({
@@ -35,11 +35,37 @@ A reverse OTP verifies a user's phone number by having the user send a code to y
     <Frame caption="Result">
     <img src="data:image/gif;base64,R0lGODdhUgBSAIAAAAAAAP///ywAAAAAUgBSAAAC/4yPqcvtD6OctNqLs968+w+G4kiW5mkC6sqyRtsiqrwqbgDnAKXDb0+jzRK3XmwyZAx9uOMveWBCbTtkVVmVOptTbq3p6Iazx24xNz4/v+LGsnyNstFu+PrNI6u9N2G87/VzR5Y3KMj35acoh4d4KPG2x7SG1WhpZ2UI5sgYt3ip2YY1dmhU6bkpugmJGpQKtABY2iqXZwT6Oqv7ekt7apobjHvZm/JH+DCJEgHVmJa43Hz8mAzrF+nLPF27Wq1DdaYKvn0N7UrZjS5tS94py62OukddyBnvHJhfvmiBLY1NLZy8Le9Ynes06Fs6InPoVVjH0B8sVZKyjVooEd/Fi///LDJ0mBEZqToBzXmbA3EfLz3HzGyBoCWlO2QC+c3sZxJQzF4iu2m04rJjSIUyf8IcOJRWRYezCpKMyFLZJ5pKo3qkMq6kFldB4Yh7OrUcvp9ETeIcRxalVVZfR6rses9sLLlsee5KilXfQnbFhFl9BxCetnk+2ylzeRDDVsFFCQ5M/EEiWkzxuPbUIBnq4srcjD7MaRh0wnboFItmfFohSLpzIQrUKTdz4LYIO6uF3UY2S6YnLb9+uVJqZGi6Vds27sE1aMKjeTb87Bvpc7HOp48g7LRkXuHJrWcvvB34M2Bu8ynfhdlutbC20Weg2JKqTeTgoYM13xM3cJkGOQlqVbvRTIBddZx3dDjVlXC0NfVcYO4Bw9xeTy3mYDDN7YYRgQyO9VhtHU3mGUeUZcheaQJett597k3Fn15nqWghVCbC9Z56M2KoXGMLnngYcThuA5tNywxJZJFGHolkkkouyWSTTj4JpQEFAAA7" />
     </Frame>
+
+    **Add a button or anchor tag to your UI**
+
+    Obviously, a QR code to someone on a phone is pretty useless. But, the `qr_code` payload can also be placed into a button or anchor tag's `href` attribute, which will automatically open the user's messaging app with the phone number and body fields populated!
+
+    ```html
+    <!-- add styling to the button -->
+    <a href="sms:+15551234567?body=1234">Tap to Verify</a>
+    ```
+
+    Result:
+
+    <a
+      style={{
+        cursor: "pointer",
+        backgroundColor: "black",
+        padding: "10px 20px",
+        color: "white",
+        borderRadius: "5px",
+        border: "none"
+      }}
+      onClick={() => window.location.href = "sms:+15551234567?body=1234"}
+    >
+      Tap to Verify
+    </a>
+
 </Tip>
 
 
 <Warning>
-    In most cases, it's helpful to present both the QR code and written instructions to the user. That said, if you want to maximize the chance the message is sent from a mobile device, you may prefer to display only the QR code, since scanning it typically requires using a phone.
+    In most cases, it's helpful to present both the QR code and written instructions to the user. That said, if you want to maximize the chance the message is sent from a mobile device, you may prefer to display only the QR code on Desktop/Laptop devices, since scanning it typically requires using a phone.
 </Warning>
 
 import Snippet from '/snippets/mintlify.mdx';
