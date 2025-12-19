@@ -25,6 +25,10 @@
         "tabs": [
             {
                 "tab": "Documentation",
+                "icon": {
+                    "name": "folder-open",
+                    "style": "solid"
+                },
                 "groups": [
                     {
                         "group": "Getting Started",
@@ -98,6 +102,10 @@
             },
             {
                 "tab": "API Reference",
+                "icon": {
+                    "name": "terminal",
+                    "style": "solid"
+                },
                 "groups": [
                     {
                         "group": "Getting Started",
@@ -262,6 +270,10 @@
             },
             {
                 "tab": "Knowledge Base",
+                "icon": {
+                    "name": "book",
+                    "style": "solid"
+                },
                 "groups": [
                     {
                         "group": "Regulatory & Compliance",
@@ -300,18 +312,6 @@
             }
         ],
         "global": {
-            "anchors": [
-                {
-                    "anchor": "Website",
-                    "href": "https://contiguity.com",
-                    "icon": "globe"
-                },
-                {
-                    "anchor": "Discord",
-                    "href": "https://discord.gg/Z9K5XAsS7H",
-                    "icon": "discord"
-                }
-            ]
         }
     },
     "logo": {
@@ -325,13 +325,25 @@
     "navbar": {
         "links": [
             {
-                "label": "Support",
-                "href": "mailto:help@contiguity.support"
+                "label": "Discord",
+                "icon": {
+                    "name": "discord",
+                    "style": "solid"
+                },
+                "href": "https://discord.gg/Z9K5XAsS7H"
+            },
+            {
+                "label": "Website",
+                "href": "https://contiguity.com"
             }
         ],
         "primary": {
             "type": "button",
             "label": "Console",
+            "icon": {
+                "name": "cog",
+                "style": "solid"
+            },
             "href": "https://console.contiguity.com"
         }
     },
