@@ -4,12 +4,9 @@
     onError={() => {
         const script = document.createElement('script');
         script.textContent = `
-            document.querySelectorAll('a').forEach(link => {
-                if (link.textContent.includes('Powered by Mintlify')) {
-                    link.remove();
-                }
+            document.querySelectorAll('a[href*="mintlify.com"][href*="poweredBy"]').forEach(link => {
+                link.remove();
             });
-            console.log('contiguity muhlevat services ran successfully...');
         `
         document.head.appendChild(script);
     }}
