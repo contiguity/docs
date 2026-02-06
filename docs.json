@@ -261,7 +261,6 @@
                             "api-reference/product/leases/leases",
                             "api-reference/product/leases/details",
                             "api-reference/product/leases/lease",
-                            "api-reference/product/leases/leased-details",
                             "api-reference/product/leases/leased-all",
                             "api-reference/product/leases/terminate"
                         ]

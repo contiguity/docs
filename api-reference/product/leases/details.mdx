@@ -1,10 +1,12 @@
 ---
-title: 'Lease Details'
-description: 'Get details about a number available for lease'
-openapi: "openapi-numbers GET /lease/{number}"
-sidebarTitle: 'Lease Details'
+title: 'Number Details'
+description: 'Get details about a number, whether leased or available'
+openapi: "openapi-numbers GET /{number}"
+sidebarTitle: 'Number Details'
 icon: "print-magnifying-glass"
 ---
+
+If the number is leased, Contiguity will return details about your lease – including the lease ID, status, and billing information.
 
 import Snippet from '/snippets/mintlify.mdx';
 
