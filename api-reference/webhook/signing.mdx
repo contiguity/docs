@@ -1,0 +1,237 @@
+---
+title: "Webhook Signing"
+description: "Verify webhook payloads using HMAC-SHA256 and the Contiguity-Signature header."
+---
+
+Contiguity signs webhook payloads so you can verify that each request came from us and was not altered. Use the **raw request body** (before JSON parsing), the `Contiguity-Signature` header, and your webhook secret to verify each delivery.
+
+## Signing scheme
+
+- **Signed payload:** `t + "." + raw_body` (timestamp `t` + `.` + raw body string/bytes)
+- **Algorithm:** HMAC-SHA256
+- **Signature encoding:** hex
+
+The header format is: `t=<unix_timestamp>,v1=<hex_signature>` (e.g. `t=1707321600,v1=a1b2c3...`). You verify by computing HMAC-SHA256 of the signed payload with your secret and comparing the result to `v1` using a constant-time comparison.
+
+## Set up signing
+
+1. Open the [Console](https://console.contiguity.com).
+2. Go to **Tokens** → **Webhook Signing**.
+3. Generate a webhook secret. It will look like `whsec_9974ab26f9cfa06e...`. Store it securely (e.g. in env vars)
+4. Use this secret in your verification logic on the server.
+
+You can **rotate** the secret from the same page. After rotating, use the new secret for verification; old secrets may still be valid for a short period depending on your configuration.
+
+## Verification samples
+
+Use the **exact** raw body bytes/string as received — never re-serialize parsed JSON (e.g. do not use `JSON.stringify(req.body)`). Each framework below shows how to read the raw body and verify.
+
+<Tabs>
+  <Tab title="Express">
+    ```javascript
+    import crypto from "node:crypto"
+    import express from "express"
+
+    const app = express()
+
+    function verify_webhook_signature(raw_body, signature_header, secret) {
+      if (!secret || !signature_header || raw_body == null) return false
+      const match = signature_header.match(/t=(\d+),v1=([a-f0-9]+)/)
+      if (!match) return false
+      const [, t, v1] = match
+      const signed_payload = `${t}.${raw_body}`
+      const expected = crypto.createHmac("sha256", secret).update(signed_payload).digest("hex")
+      return crypto.timingSafeEqual(Buffer.from(v1, "hex"), Buffer.from(expected, "hex"))
+    }
+
+    // Use raw body for this route only — do not use express.json() here
+    app.post("/contiguity/webhook", express.raw({ type: "application/json" }), (req, res) => {
+      const raw_body = req.body.toString("utf-8")
+      const secret = process.env.WEBHOOK_SECRET
+      if (!verify_webhook_signature(raw_body, req.headers["contiguity-signature"], secret)) {
+        return res.status(401).send("Invalid signature")
+      }
+      const event = JSON.parse(raw_body)
+      // handle event...
+      res.status(200).send("OK")
+    })
+    ```
+  </Tab>
+
+  <Tab title="Hono">
+    ```javascript
+    import crypto from "node:crypto"
+    import { Hono } from "hono"
+
+    const app = new Hono()
+
+    function verify_webhook_signature(raw_body, signature_header, secret) {
+      if (!secret || !signature_header || raw_body == null) return false
+      const match = signature_header.match(/t=(\d+),v1=([a-f0-9]+)/)
+      if (!match) return false
+      const [, t, v1] = match
+      const signed_payload = `${t}.${raw_body}`
+      const expected = crypto.createHmac("sha256", secret).update(signed_payload).digest("hex")
+      return crypto.timingSafeEqual(Buffer.from(v1, "hex"), Buffer.from(expected, "hex"))
+    }
+
+    app.post("/contiguity/webhook", async (c) => {
+      const raw_body = await c.req.text()
+      const secret = process.env.WEBHOOK_SECRET
+      if (!verify_webhook_signature(raw_body, c.req.header("contiguity-signature"), secret)) {
+        return c.json({ error: "Invalid signature" }, 401)
+      }
+      const event = JSON.parse(raw_body)
+      // handle event...
+      return c.text("OK", 200)
+    })
+    ```
+  </Tab>
+
+  <Tab title="Bun">
+    ```javascript
+    import crypto from "node:crypto"
+
+    function verify_webhook_signature(raw_body, signature_header, secret) {
+      if (!secret || !signature_header || raw_body == null) return false
+      const match = signature_header.match(/t=(\d+),v1=([a-f0-9]+)/)
+      if (!match) return false
+      const [, t, v1] = match
+      const signed_payload = `${t}.${raw_body}`
+      const expected = crypto.createHmac("sha256", secret).update(signed_payload).digest("hex")
+      return crypto.timingSafeEqual(Buffer.from(v1, "hex"), Buffer.from(expected, "hex"))
+    }
+
+    export default {
+      port: 3000,
+      async fetch(req) {
+        if (req.method !== "POST" || new URL(req.url).pathname !== "/contiguity/webhook") {
+          return new Response("Not Found", { status: 404 })
+        }
+        const raw_body = await req.text()
+        const secret = process.env.WEBHOOK_SECRET
+        if (!verify_webhook_signature(raw_body, req.headers.get("contiguity-signature"), secret)) {
+          return new Response("Invalid signature", { status: 401 })
+        }
+        const event = JSON.parse(raw_body)
+        // handle event...
+        return new Response("OK", { status: 200 })
+      },
+    }
+    ```
+  </Tab>
+
+  <Tab title="Flask">
+    ```python
+    import json
+    import os
+    import hmac
+    import hashlib
+    import re
+    from flask import Flask, request
+
+    app = Flask(__name__)
+
+    def verify_webhook_signature(raw_body: bytes | str, signature_header: str, secret: str) -> bool:
+        if not secret or not signature_header or raw_body is None:
+            return False
+        m = re.match(r"t=(\d+),v1=([a-f0-9]+)", signature_header.strip())
+        if not m:
+            return False
+        t, v1 = m.group(1), m.group(2)
+        body_str = raw_body.decode("utf-8") if isinstance(raw_body, bytes) else raw_body
+        signed_payload = f"{t}.{body_str}".encode("utf-8")
+        expected = hmac.new(
+            secret.encode("utf-8"),
+            signed_payload,
+            hashlib.sha256,
+        ).hexdigest()
+        return hmac.compare_digest(v1, expected)
+
+    @app.route("/contiguity/webhook", methods=["POST"])
+    def webhook():
+        raw_body = request.get_data(as_text=True)
+        sig = request.headers.get("Contiguity-Signature")
+        secret = os.environ.get("WEBHOOK_SECRET")
+        if not verify_webhook_signature(raw_body, sig, secret):
+            return "", 401
+        event = json.loads(raw_body)
+        # handle event...
+        return "OK", 200
+    ```
+  </Tab>
+
+  <Tab title="FastAPI">
+    ```python
+    import json
+    import os
+    import hmac
+    import hashlib
+    import re
+    from fastapi import FastAPI, Request, Response
+
+    app = FastAPI()
+
+    def verify_webhook_signature(raw_body: bytes | str, signature_header: str, secret: str) -> bool:
+        if not secret or not signature_header or raw_body is None:
+            return False
+        m = re.match(r"t=(\d+),v1=([a-f0-9]+)", signature_header.strip())
+        if not m:
+            return False
+        t, v1 = m.group(1), m.group(2)
+        body_str = raw_body.decode("utf-8") if isinstance(raw_body, bytes) else raw_body
+        signed_payload = f"{t}.{body_str}".encode("utf-8")
+        expected = hmac.new(
+            secret.encode("utf-8"),
+            signed_payload,
+            hashlib.sha256,
+        ).hexdigest()
+        return hmac.compare_digest(v1, expected)
+
+    @app.post("/contiguity/webhook")
+    async def webhook(request: Request):
+        raw_body = await request.body()
+        sig = request.headers.get("contiguity-signature")
+        secret = os.environ.get("WEBHOOK_SECRET")
+        if not verify_webhook_signature(raw_body, sig, secret):
+            return Response(status_code=401)
+        event = json.loads(raw_body)
+        # handle event...
+        return Response(status_code=200)
+    ```
+  </Tab>
+</Tabs>
+
+### Replay protection (optional)
+
+Reject requests that are too old by checking the timestamp `t` in the header. Require `abs(now - t)` to be within your tolerance (e.g. 300 seconds).
+
+<Tabs>
+  <Tab title="JavaScript">
+    ```javascript
+    function verify_with_tolerance(raw_body, signature_header, secret, tolerance_seconds = 300) {
+      if (!verify_webhook_signature(raw_body, signature_header, secret)) return false
+      const m = signature_header.match(/t=(\d+)/)
+      if (!m) return false
+      const ts = parseInt(m[1], 10)
+      const now = Math.floor(Date.now() / 1000)
+      return Math.abs(now - ts) <= tolerance_seconds
+    }
+    ```
+  </Tab>
+  <Tab title="Python">
+    ```python
+    import time
+
+    def verify_with_tolerance(raw_body, signature_header, secret, tolerance_seconds=300):
+        if not verify_webhook_signature(raw_body, signature_header, secret):
+            return False
+        m = re.search(r"t=(\d+)", signature_header)
+        if not m:
+            return False
+        ts = int(m.group(1))
+        now = int(time.time())
+        return abs(now - ts) <= tolerance_seconds
+    ```
+  </Tab>
+</Tabs>

@@ -119,6 +119,7 @@
                                 },
                                 "pages": [
                                     "api-reference/webhook/overview",
+                                    "api-reference/webhook/signing",
                                     "api-reference/webhook/example",
                                     "api-reference/webhook/example-v2"
                                 ]
