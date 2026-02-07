@@ -134,7 +134,8 @@
                         },
                         "pages": [
                             "api-reference/product/text/sms",
-                            "api-reference/product/text/mms"
+                            "api-reference/product/text/mms",
+                            "api-reference/product/text/history"
                         ]
                     },
                     {

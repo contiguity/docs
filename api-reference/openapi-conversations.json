@@ -6,7 +6,7 @@
         }
     ],
     "info": {
-        "version": "v2025.10.31",
+        "version": "v2026.2.7",
         "title": "Conversations API"
     },
     "components": {
@@ -77,11 +77,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1761968887641
+                                            "example": 1770502850155
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.10.31"
+                                            "example": "v2026.2.7"
                                         },
                                         "object": {
                                             "type": "string",
@@ -294,11 +294,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1761968887641
+                                            "example": 1770502850155
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.10.31"
+                                            "example": "v2026.2.7"
                                         },
                                         "object": {
                                             "type": "string",
@@ -346,11 +346,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1761968887641
+                                            "example": 1770502850155
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.10.31"
+                                            "example": "v2026.2.7"
                                         },
                                         "object": {
                                             "type": "string",
@@ -398,11 +398,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1761968887641
+                                            "example": 1770502850155
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.10.31"
+                                            "example": "v2026.2.7"
                                         },
                                         "object": {
                                             "type": "string",
@@ -450,11 +450,445 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1761968887641
+                                            "example": 1770502850155
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.10.31"
+                                            "example": "v2026.2.7"
+                                        },
+                                        "object": {
+                                            "type": "string",
+                                            "example": "error"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "error": {
+                                                    "type": "string",
+                                                    "example": "Internal Server Error"
+                                                },
+                                                "status": {
+                                                    "type": "number",
+                                                    "example": 500
+                                                }
+                                            },
+                                            "required": [
+                                                "error",
+                                                "status"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "timestamp",
+                                        "api_version",
+                                        "object",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/history/text/{to}/{from}/{limit}": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "type": "string",
+                            "description": "Other party's phone number. Must be in E.164 format.",
+                            "example": "+1234567890"
+                        },
+                        "required": true,
+                        "description": "Other party's phone number. Must be in E.164 format.",
+                        "name": "to",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "type": "string",
+                            "description": "Your leased number used in this thread. Must be in E.164 format.",
+                            "example": "+15555555555"
+                        },
+                        "required": true,
+                        "description": "Your leased number used in this thread. Must be in E.164 format.",
+                        "name": "from",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "type": "string",
+                            "default": 20,
+                            "description": "Limit of how many messages to return, default is 20. Should never exceed 200.",
+                            "example": 20
+                        },
+                        "required": false,
+                        "description": "Limit of how many messages to return, default is 20. Should never exceed 200.",
+                        "name": "limit",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Get SMS/MMS conversation history for a thread. Queries your sent messages and incoming webhook events only.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "req_xxxxxxxxxxxxxxxx"
+                                        },
+                                        "timestamp": {
+                                            "type": "number",
+                                            "example": 1770502850155
+                                        },
+                                        "api_version": {
+                                            "type": "string",
+                                            "example": "v2026.2.7"
+                                        },
+                                        "object": {
+                                            "type": "string",
+                                            "example": "response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "conversation": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "to": {
+                                                                "type": "string",
+                                                                "description": "Recipient phone number (E.164).",
+                                                                "example": "+1234567890"
+                                                            },
+                                                            "from": {
+                                                                "type": "string",
+                                                                "description": "Sender phone number (E.164).",
+                                                                "example": "+15555555555"
+                                                            },
+                                                            "message": {
+                                                                "type": "string",
+                                                                "description": "Message content.",
+                                                                "example": "Hello, world!"
+                                                            },
+                                                            "timestamp": {
+                                                                "type": "number",
+                                                                "description": "Timestamp when the message was sent or received (Unix ms).",
+                                                                "example": 1757550304652
+                                                            },
+                                                            "delivery": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "status": {
+                                                                        "type": "string",
+                                                                        "description": "Delivery status (e.g. delivered, failed, delayed).",
+                                                                        "example": "delivered"
+                                                                    },
+                                                                    "delayed": {
+                                                                        "type": "boolean",
+                                                                        "description": "Whether the message was delayed.",
+                                                                        "example": false
+                                                                    },
+                                                                    "timestamp": {
+                                                                        "type": "number",
+                                                                        "description": "Timestamp when the message was delivered (Unix ms).",
+                                                                        "example": 1757550304652
+                                                                    }
+                                                                },
+                                                                "required": [
+                                                                    "status",
+                                                                    "delayed",
+                                                                    "timestamp"
+                                                                ]
+                                                            },
+                                                            "attachments": {
+                                                                "type": "array",
+                                                                "items": {
+                                                                    "type": "string"
+                                                                },
+                                                                "description": "URLs of attachments (MMS).",
+                                                                "example": []
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "to",
+                                                            "from",
+                                                            "message",
+                                                            "timestamp",
+                                                            "delivery",
+                                                            "attachments"
+                                                        ]
+                                                    }
+                                                },
+                                                "reactions": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "reaction": {
+                                                                "type": "string",
+                                                                "description": "Reaction type (e.g. love, thumbsup, thumbsdown, haha, emphasized, questioned).",
+                                                                "example": "love"
+                                                            },
+                                                            "on": {
+                                                                "type": "string",
+                                                                "description": "Message content that was reacted to.",
+                                                                "example": "Hello, world!"
+                                                            },
+                                                            "timestamp": {
+                                                                "type": "number",
+                                                                "description": "Timestamp of the reaction (Unix ms).",
+                                                                "example": 1757550304652
+                                                            },
+                                                            "action": {
+                                                                "type": "string",
+                                                                "description": "Whether the reaction was added or removed.",
+                                                                "example": "added"
+                                                            },
+                                                            "from": {
+                                                                "type": "string",
+                                                                "description": "Phone number that sent the reaction (E.164).",
+                                                                "example": "+15555555555"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "reaction",
+                                                            "on",
+                                                            "timestamp",
+                                                            "action",
+                                                            "from"
+                                                        ]
+                                                    }
+                                                },
+                                                "chat": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "limit": {
+                                                            "type": "number",
+                                                            "description": "Message return limit.",
+                                                            "example": 20
+                                                        },
+                                                        "total": {
+                                                            "type": "number",
+                                                            "description": "Number of messages in this response.",
+                                                            "example": 20
+                                                        },
+                                                        "count": {
+                                                            "type": "number",
+                                                            "description": "Number of messages returned.",
+                                                            "example": 20
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "limit",
+                                                        "total",
+                                                        "count"
+                                                    ]
+                                                }
+                                            },
+                                            "required": [
+                                                "conversation",
+                                                "reactions",
+                                                "chat"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "timestamp",
+                                        "api_version",
+                                        "object",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "err_xxxxxxxxxxxxxxxx"
+                                        },
+                                        "timestamp": {
+                                            "type": "number",
+                                            "example": 1770502850155
+                                        },
+                                        "api_version": {
+                                            "type": "string",
+                                            "example": "v2026.2.7"
+                                        },
+                                        "object": {
+                                            "type": "string",
+                                            "example": "error"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "error": {
+                                                    "type": "string",
+                                                    "example": "Bad Request"
+                                                },
+                                                "status": {
+                                                    "type": "number",
+                                                    "example": 400
+                                                }
+                                            },
+                                            "required": [
+                                                "error",
+                                                "status"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "timestamp",
+                                        "api_version",
+                                        "object",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "err_xxxxxxxxxxxxxxxx"
+                                        },
+                                        "timestamp": {
+                                            "type": "number",
+                                            "example": 1770502850155
+                                        },
+                                        "api_version": {
+                                            "type": "string",
+                                            "example": "v2026.2.7"
+                                        },
+                                        "object": {
+                                            "type": "string",
+                                            "example": "error"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "error": {
+                                                    "type": "string",
+                                                    "example": "Unauthorized"
+                                                },
+                                                "status": {
+                                                    "type": "number",
+                                                    "example": 401
+                                                }
+                                            },
+                                            "required": [
+                                                "error",
+                                                "status"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "timestamp",
+                                        "api_version",
+                                        "object",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "err_xxxxxxxxxxxxxxxx"
+                                        },
+                                        "timestamp": {
+                                            "type": "number",
+                                            "example": 1770502850155
+                                        },
+                                        "api_version": {
+                                            "type": "string",
+                                            "example": "v2026.2.7"
+                                        },
+                                        "object": {
+                                            "type": "string",
+                                            "example": "error"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "error": {
+                                                    "type": "string",
+                                                    "example": "Forbidden"
+                                                },
+                                                "status": {
+                                                    "type": "number",
+                                                    "example": 403
+                                                }
+                                            },
+                                            "required": [
+                                                "error",
+                                                "status"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "timestamp",
+                                        "api_version",
+                                        "object",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "err_xxxxxxxxxxxxxxxx"
+                                        },
+                                        "timestamp": {
+                                            "type": "number",
+                                            "example": 1770502850155
+                                        },
+                                        "api_version": {
+                                            "type": "string",
+                                            "example": "v2026.2.7"
                                         },
                                         "object": {
                                             "type": "string",
