@@ -1,0 +1,86 @@
+---
+title: "Changelog"
+description: "Product updates and what we're shipping."
+icon: "list-check"
+iconType: "solid"
+rss: true
+---
+
+<Update label="February 7, 2026" tags={["API", "Website"]}>
+**New legal page** — [contiguity.com/legal](https://contiguity.com/legal)
+
+**New contiguity.com/bill** – shows up as our descriptor on your bank statements.
+
+**Get a message by ID** — Long overdue. Fetch any message by its ID. [Get Message](/api-reference/product/text/fetch)
+</Update>
+
+<Update label="February 6, 2026" tags={["API", "SMS/MMS"]}>
+**SMS/MMS conversation history** — Full thread history; we even parse reactions. [History](/api-reference/product/text/history)
+
+**Webhook signing** — Verify payloads with HMAC-SHA256 and the `Contiguity-Signature` header. [Webhook Signing](/api-reference/webhook/signing)
+
+**Message tracking** — See each hop a message takes, from API to the receiver's device.
+</Update>
+
+<Update label="February 5, 2026" tags={["API", "Console"]}>
+**Lease & domain QOL** — Number details and related defaults are now default in prod. [Number Details](/api-reference/product/leases/details)
+</Update>
+
+<Update label="January 20, 2026" tags={["Website"]}>
+**contiguity.com** — New launch, new designs. [contiguity.com](https://contiguity.com)
+</Update>
+
+<Update label="December 14, 2025" tags={["Voice", "OTP", "Email", "Console", "SDK", "API"]}>
+**Contiguity Voice** — Coming to more customers soon. Docs and edge-case fixes in progress.
+
+**Reverse OTP** — New product. Free on all plans. Users message you to verify their phone; no number leasing. We use it in production for onboarding. [Reverse OTP](/api-reference/product/otp/reverse/initiate)
+
+**Onboarding latency** — Initial load reduced by 6x.
+
+**Incoming Emails** — Verify a domain, set a webhook URL, receive incoming emails. Free and unlimited during beta.
+
+**Console** — High-volume senders: "recent messages" tables now support pagination. Uptime visibility in the sidebar so you can see if Contiguity is having issues.
+
+**Message tracking (early beta)** — Updates at each hop, API to device.
+
+**Python SDK v2** — Shipped. Docs coming soon.
+
+**Coming** — Fetch webhook events via the API; API errors will link to relevant docs when available.
+</Update>
+
+<Update label="November 1, 2025" tags={["Console", "SMS/MMS", "Voice", "API", "iMessage"]}>
+**Console** — Feature development in progress. MMS out of beta.
+
+**Contiguity Voice** — Preview next week.
+
+**Incoming iMessage attachments** — On the way.
+
+**Message path tracking** — Timeline of a message's path (e.g. given to API, sent to carrier, delivered).
+
+**Uptime visibility** — See status directly in the Console.
+
+**API errors** — Will return links to relevant docs when available.
+
+**Risk calculation** — Revamped; accuracy improved ~30% using real-world Console data. More transparent (what contributed to your score, similar to Stripe's fraud risk visuals).
+</Update>
+
+<Update label="September 15, 2025" tags={["SMS/MMS"]}>
+**MMS shipped early** — Public beta, no entitlements required. [MMS docs](/api-reference/product/text/mms)
+
+Customers who lease numbers from Contiguity can now receive attachments. We receive them from the carrier and host them for you.
+
+MMS supports longer messages — up to 1500 characters before splitting (no more 160-character chunks). Billing for MMS is still being finalized; currently priced as text.
+</Update>
+
+<Update label="September 12, 2025" tags={["SMS/MMS"]}>
+**MMS for all** — Long messages and attachments (&lt;5MB) rolling out to all customers. Started around September 17th.
+</Update>
+
+<Update label="September 9, 2025" tags={["Console"]}>
+**Track our progress** — [Linear is public](https://lindie.app/share/3f803599c532327729c93febbaf157cfeb0065b9). See what errors are being fixed and what else is being cooked.
+</Update>
+
+
+import Snippet from '/snippets/mintlify.mdx';
+
+<Snippet />
