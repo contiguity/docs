@@ -136,6 +136,7 @@
                         "pages": [
                             "api-reference/product/text/sms",
                             "api-reference/product/text/mms",
+                            "api-reference/product/text/reactions",
                             "api-reference/product/text/history",
                             "api-reference/product/text/fetch"
                         ]

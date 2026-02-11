@@ -6,7 +6,7 @@
         }
     ],
     "info": {
-        "version": "v2025.12.9",
+        "version": "v2026.2.11",
         "title": "Sending API"
     },
     "components": {
@@ -20,316 +20,6 @@
         "parameters": {}
     },
     "paths": {
-        "/text": {
-            "post": {
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "to": {
-                                        "type": "string",
-                                        "description": "Recipient's phone number. Must be in E.164 format",
-                                        "example": "+1234567890"
-                                    },
-                                    "from": {
-                                        "type": "string",
-                                        "nullable": true,
-                                        "description": "If you lease a phone number from Contiguity, you can use a specific one by providing it here.",
-                                        "example": "+15555555555"
-                                    },
-                                    "message": {
-                                        "type": "string",
-                                        "description": "The text message to send",
-                                        "example": "Hello, world!"
-                                    },
-                                    "attachments": {
-                                        "type": "array",
-                                        "nullable": true,
-                                        "items": {
-                                            "type": "string"
-                                        },
-                                        "maxItems": 3,
-                                        "description": "Attachments to send. Must be HTTPS-secured URLs with file extensions. Max 3 attachments, 5MB cumulative size.",
-                                        "example": [
-                                            "https://example.com/image.png"
-                                        ]
-                                    }
-                                },
-                                "required": [
-                                    "to",
-                                    "message"
-                                ]
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Send a text message",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "id": {
-                                            "type": "string",
-                                            "example": "req_xxxxxxxxxxxxxxxx"
-                                        },
-                                        "timestamp": {
-                                            "type": "number",
-                                            "example": 1765331254902
-                                        },
-                                        "api_version": {
-                                            "type": "string",
-                                            "example": "v2025.12.9"
-                                        },
-                                        "object": {
-                                            "type": "string",
-                                            "example": "response"
-                                        },
-                                        "data": {
-                                            "type": "object",
-                                            "properties": {
-                                                "message_id": {
-                                                    "type": "string",
-                                                    "description": "The message's ID. Use it to refer to this message in the future, when checking the status of the message or finding it in the Console.",
-                                                    "example": "text_1234567890"
-                                                }
-                                            },
-                                            "required": [
-                                                "message_id"
-                                            ]
-                                        }
-                                    },
-                                    "required": [
-                                        "id",
-                                        "timestamp",
-                                        "api_version",
-                                        "object",
-                                        "data"
-                                    ]
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "id": {
-                                            "type": "string",
-                                            "example": "err_xxxxxxxxxxxxxxxx"
-                                        },
-                                        "timestamp": {
-                                            "type": "number",
-                                            "example": 1765331254902
-                                        },
-                                        "api_version": {
-                                            "type": "string",
-                                            "example": "v2025.12.9"
-                                        },
-                                        "object": {
-                                            "type": "string",
-                                            "example": "error"
-                                        },
-                                        "data": {
-                                            "type": "object",
-                                            "properties": {
-                                                "error": {
-                                                    "type": "string",
-                                                    "example": "Bad Request"
-                                                },
-                                                "status": {
-                                                    "type": "number",
-                                                    "example": 400
-                                                }
-                                            },
-                                            "required": [
-                                                "error",
-                                                "status"
-                                            ]
-                                        }
-                                    },
-                                    "required": [
-                                        "id",
-                                        "timestamp",
-                                        "api_version",
-                                        "object",
-                                        "data"
-                                    ]
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "id": {
-                                            "type": "string",
-                                            "example": "err_xxxxxxxxxxxxxxxx"
-                                        },
-                                        "timestamp": {
-                                            "type": "number",
-                                            "example": 1765331254902
-                                        },
-                                        "api_version": {
-                                            "type": "string",
-                                            "example": "v2025.12.9"
-                                        },
-                                        "object": {
-                                            "type": "string",
-                                            "example": "error"
-                                        },
-                                        "data": {
-                                            "type": "object",
-                                            "properties": {
-                                                "error": {
-                                                    "type": "string",
-                                                    "example": "Unauthorized"
-                                                },
-                                                "status": {
-                                                    "type": "number",
-                                                    "example": 401
-                                                }
-                                            },
-                                            "required": [
-                                                "error",
-                                                "status"
-                                            ]
-                                        }
-                                    },
-                                    "required": [
-                                        "id",
-                                        "timestamp",
-                                        "api_version",
-                                        "object",
-                                        "data"
-                                    ]
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "Forbidden",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "id": {
-                                            "type": "string",
-                                            "example": "err_xxxxxxxxxxxxxxxx"
-                                        },
-                                        "timestamp": {
-                                            "type": "number",
-                                            "example": 1765331254902
-                                        },
-                                        "api_version": {
-                                            "type": "string",
-                                            "example": "v2025.12.9"
-                                        },
-                                        "object": {
-                                            "type": "string",
-                                            "example": "error"
-                                        },
-                                        "data": {
-                                            "type": "object",
-                                            "properties": {
-                                                "error": {
-                                                    "type": "string",
-                                                    "example": "Forbidden"
-                                                },
-                                                "status": {
-                                                    "type": "number",
-                                                    "example": 403
-                                                }
-                                            },
-                                            "required": [
-                                                "error",
-                                                "status"
-                                            ]
-                                        }
-                                    },
-                                    "required": [
-                                        "id",
-                                        "timestamp",
-                                        "api_version",
-                                        "object",
-                                        "data"
-                                    ]
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "id": {
-                                            "type": "string",
-                                            "example": "err_xxxxxxxxxxxxxxxx"
-                                        },
-                                        "timestamp": {
-                                            "type": "number",
-                                            "example": 1765331254902
-                                        },
-                                        "api_version": {
-                                            "type": "string",
-                                            "example": "v2025.12.9"
-                                        },
-                                        "object": {
-                                            "type": "string",
-                                            "example": "error"
-                                        },
-                                        "data": {
-                                            "type": "object",
-                                            "properties": {
-                                                "error": {
-                                                    "type": "string",
-                                                    "example": "Internal Server Error"
-                                                },
-                                                "status": {
-                                                    "type": "number",
-                                                    "example": 500
-                                                }
-                                            },
-                                            "required": [
-                                                "error",
-                                                "status"
-                                            ]
-                                        }
-                                    },
-                                    "required": [
-                                        "id",
-                                        "timestamp",
-                                        "api_version",
-                                        "object",
-                                        "data"
-                                    ]
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
         "/email": {
             "post": {
                 "security": [
@@ -471,11 +161,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1765331254902
+                                            "example": 1770839449684
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.12.9"
+                                            "example": "v2026.2.11"
                                         },
                                         "object": {
                                             "type": "string",
@@ -519,11 +209,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1765331254902
+                                            "example": 1770839449684
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.12.9"
+                                            "example": "v2026.2.11"
                                         },
                                         "object": {
                                             "type": "string",
@@ -571,11 +261,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1765331254902
+                                            "example": 1770839449684
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.12.9"
+                                            "example": "v2026.2.11"
                                         },
                                         "object": {
                                             "type": "string",
@@ -623,11 +313,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1765331254902
+                                            "example": 1770839449684
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.12.9"
+                                            "example": "v2026.2.11"
                                         },
                                         "object": {
                                             "type": "string",
@@ -675,11 +365,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1765331254902
+                                            "example": 1770839449684
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.12.9"
+                                            "example": "v2026.2.11"
                                         },
                                         "object": {
                                             "type": "string",
@@ -819,11 +509,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1765331254902
+                                            "example": 1770839449684
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.12.9"
+                                            "example": "v2026.2.11"
                                         },
                                         "object": {
                                             "type": "string",
@@ -867,11 +557,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1765331254902
+                                            "example": 1770839449684
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.12.9"
+                                            "example": "v2026.2.11"
                                         },
                                         "object": {
                                             "type": "string",
@@ -919,11 +609,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1765331254902
+                                            "example": 1770839449684
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.12.9"
+                                            "example": "v2026.2.11"
                                         },
                                         "object": {
                                             "type": "string",
@@ -971,11 +661,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1765331254902
+                                            "example": 1770839449684
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.12.9"
+                                            "example": "v2026.2.11"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1023,11 +713,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1765331254902
+                                            "example": 1770839449684
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.12.9"
+                                            "example": "v2026.2.11"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1121,11 +811,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1765331254902
+                                            "example": 1770839449684
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.12.9"
+                                            "example": "v2026.2.11"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1169,11 +859,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1765331254902
+                                            "example": 1770839449684
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.12.9"
+                                            "example": "v2026.2.11"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1221,11 +911,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1765331254902
+                                            "example": 1770839449684
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.12.9"
+                                            "example": "v2026.2.11"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1273,11 +963,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1765331254902
+                                            "example": 1770839449684
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.12.9"
+                                            "example": "v2026.2.11"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1325,11 +1015,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1765331254902
+                                            "example": 1770839449684
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.12.9"
+                                            "example": "v2026.2.11"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1429,11 +1119,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1765331254902
+                                            "example": 1770839449684
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.12.9"
+                                            "example": "v2026.2.11"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1483,11 +1173,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1765331254902
+                                            "example": 1770839449684
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.12.9"
+                                            "example": "v2026.2.11"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1535,11 +1225,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1765331254902
+                                            "example": 1770839449684
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.12.9"
+                                            "example": "v2026.2.11"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1587,11 +1277,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1765331254902
+                                            "example": 1770839449684
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.12.9"
+                                            "example": "v2026.2.11"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1639,11 +1329,649 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1765331254902
+                                            "example": 1770839449684
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.12.9"
+                                            "example": "v2026.2.11"
+                                        },
+                                        "object": {
+                                            "type": "string",
+                                            "example": "error"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "error": {
+                                                    "type": "string",
+                                                    "example": "Internal Server Error"
+                                                },
+                                                "status": {
+                                                    "type": "number",
+                                                    "example": 500
+                                                }
+                                            },
+                                            "required": [
+                                                "error",
+                                                "status"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "timestamp",
+                                        "api_version",
+                                        "object",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/text": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "to": {
+                                        "type": "string",
+                                        "description": "Recipient's phone number. Must be in E.164 format",
+                                        "example": "+1234567890"
+                                    },
+                                    "from": {
+                                        "type": "string",
+                                        "nullable": true,
+                                        "description": "If you lease a phone number from Contiguity, you can use a specific one by providing it here.",
+                                        "example": "+15555555555"
+                                    },
+                                    "message": {
+                                        "type": "string",
+                                        "description": "The text message to send",
+                                        "example": "Hello, world!"
+                                    },
+                                    "attachments": {
+                                        "type": "array",
+                                        "nullable": true,
+                                        "items": {
+                                            "type": "string"
+                                        },
+                                        "maxItems": 3,
+                                        "description": "Attachments to send. Must be HTTPS-secured URLs with file extensions. Max 3 attachments, 5MB cumulative size.",
+                                        "example": [
+                                            "https://example.com/image.png"
+                                        ]
+                                    }
+                                },
+                                "required": [
+                                    "to",
+                                    "message"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Send a text message",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "req_xxxxxxxxxxxxxxxx"
+                                        },
+                                        "timestamp": {
+                                            "type": "number",
+                                            "example": 1770839449684
+                                        },
+                                        "api_version": {
+                                            "type": "string",
+                                            "example": "v2026.2.11"
+                                        },
+                                        "object": {
+                                            "type": "string",
+                                            "example": "response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "message_id": {
+                                                    "type": "string",
+                                                    "description": "The message's ID. Use it to refer to this message in the future, when checking the status of the message or finding it in the Console.",
+                                                    "example": "text_1234567890"
+                                                }
+                                            },
+                                            "required": [
+                                                "message_id"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "timestamp",
+                                        "api_version",
+                                        "object",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "err_xxxxxxxxxxxxxxxx"
+                                        },
+                                        "timestamp": {
+                                            "type": "number",
+                                            "example": 1770839449684
+                                        },
+                                        "api_version": {
+                                            "type": "string",
+                                            "example": "v2026.2.11"
+                                        },
+                                        "object": {
+                                            "type": "string",
+                                            "example": "error"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "error": {
+                                                    "type": "string",
+                                                    "example": "Bad Request"
+                                                },
+                                                "status": {
+                                                    "type": "number",
+                                                    "example": 400
+                                                }
+                                            },
+                                            "required": [
+                                                "error",
+                                                "status"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "timestamp",
+                                        "api_version",
+                                        "object",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "err_xxxxxxxxxxxxxxxx"
+                                        },
+                                        "timestamp": {
+                                            "type": "number",
+                                            "example": 1770839449684
+                                        },
+                                        "api_version": {
+                                            "type": "string",
+                                            "example": "v2026.2.11"
+                                        },
+                                        "object": {
+                                            "type": "string",
+                                            "example": "error"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "error": {
+                                                    "type": "string",
+                                                    "example": "Unauthorized"
+                                                },
+                                                "status": {
+                                                    "type": "number",
+                                                    "example": 401
+                                                }
+                                            },
+                                            "required": [
+                                                "error",
+                                                "status"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "timestamp",
+                                        "api_version",
+                                        "object",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "err_xxxxxxxxxxxxxxxx"
+                                        },
+                                        "timestamp": {
+                                            "type": "number",
+                                            "example": 1770839449684
+                                        },
+                                        "api_version": {
+                                            "type": "string",
+                                            "example": "v2026.2.11"
+                                        },
+                                        "object": {
+                                            "type": "string",
+                                            "example": "error"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "error": {
+                                                    "type": "string",
+                                                    "example": "Forbidden"
+                                                },
+                                                "status": {
+                                                    "type": "number",
+                                                    "example": 403
+                                                }
+                                            },
+                                            "required": [
+                                                "error",
+                                                "status"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "timestamp",
+                                        "api_version",
+                                        "object",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "err_xxxxxxxxxxxxxxxx"
+                                        },
+                                        "timestamp": {
+                                            "type": "number",
+                                            "example": 1770839449684
+                                        },
+                                        "api_version": {
+                                            "type": "string",
+                                            "example": "v2026.2.11"
+                                        },
+                                        "object": {
+                                            "type": "string",
+                                            "example": "error"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "error": {
+                                                    "type": "string",
+                                                    "example": "Internal Server Error"
+                                                },
+                                                "status": {
+                                                    "type": "number",
+                                                    "example": 500
+                                                }
+                                            },
+                                            "required": [
+                                                "error",
+                                                "status"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "timestamp",
+                                        "api_version",
+                                        "object",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/text/reactions": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "message_id": {
+                                        "type": "string",
+                                        "nullable": true,
+                                        "description": "Option A: ID of the message to react to (e.g. text_xxx). Contiguity auto-fills the required fields.",
+                                        "example": "text_abc123"
+                                    },
+                                    "to": {
+                                        "type": "string",
+                                        "nullable": true,
+                                        "description": "Option B: Recipient phone (E.164). Required when not using message_id.",
+                                        "example": "+1234567890"
+                                    },
+                                    "from": {
+                                        "type": "string",
+                                        "nullable": true,
+                                        "description": "Option B: Your number to send from (E.164). Optional if you provide a message_id.",
+                                        "example": "+15555555555"
+                                    },
+                                    "message": {
+                                        "type": "string",
+                                        "nullable": true,
+                                        "description": "Option B: Exact content of the message you are reacting to. Required when not using message_id.",
+                                        "example": "Hello there!"
+                                    },
+                                    "reaction": {
+                                        "type": "string",
+                                        "enum": [
+                                            "love",
+                                            "thumbsup",
+                                            "thumbsdown",
+                                            "haha",
+                                            "emphasized",
+                                            "questioned"
+                                        ],
+                                        "description": "Reaction type.",
+                                        "example": "love"
+                                    },
+                                    "action": {
+                                        "type": "string",
+                                        "enum": [
+                                            "add",
+                                            "remove"
+                                        ],
+                                        "description": "Add or remove the reaction.",
+                                        "example": "add"
+                                    }
+                                },
+                                "required": [
+                                    "reaction",
+                                    "action"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Send an SMS reaction (e.g. Loved \"message\") to a message – most iOS & Android clients parse this into a real reaction. Use either message_id to react to a message you sent, or provide information manually.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "req_xxxxxxxxxxxxxxxx"
+                                        },
+                                        "timestamp": {
+                                            "type": "number",
+                                            "example": 1770839449684
+                                        },
+                                        "api_version": {
+                                            "type": "string",
+                                            "example": "v2026.2.11"
+                                        },
+                                        "object": {
+                                            "type": "string",
+                                            "example": "response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "message_id": {
+                                                    "type": "string",
+                                                    "description": "ID of the sent reaction message.",
+                                                    "example": "text_xyz7fsdlkv89"
+                                                }
+                                            },
+                                            "required": [
+                                                "message_id"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "timestamp",
+                                        "api_version",
+                                        "object",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "err_xxxxxxxxxxxxxxxx"
+                                        },
+                                        "timestamp": {
+                                            "type": "number",
+                                            "example": 1770839449684
+                                        },
+                                        "api_version": {
+                                            "type": "string",
+                                            "example": "v2026.2.11"
+                                        },
+                                        "object": {
+                                            "type": "string",
+                                            "example": "error"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "error": {
+                                                    "type": "string",
+                                                    "example": "Bad Request"
+                                                },
+                                                "status": {
+                                                    "type": "number",
+                                                    "example": 400
+                                                }
+                                            },
+                                            "required": [
+                                                "error",
+                                                "status"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "timestamp",
+                                        "api_version",
+                                        "object",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "err_xxxxxxxxxxxxxxxx"
+                                        },
+                                        "timestamp": {
+                                            "type": "number",
+                                            "example": 1770839449684
+                                        },
+                                        "api_version": {
+                                            "type": "string",
+                                            "example": "v2026.2.11"
+                                        },
+                                        "object": {
+                                            "type": "string",
+                                            "example": "error"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "error": {
+                                                    "type": "string",
+                                                    "example": "Unauthorized"
+                                                },
+                                                "status": {
+                                                    "type": "number",
+                                                    "example": 401
+                                                }
+                                            },
+                                            "required": [
+                                                "error",
+                                                "status"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "timestamp",
+                                        "api_version",
+                                        "object",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "err_xxxxxxxxxxxxxxxx"
+                                        },
+                                        "timestamp": {
+                                            "type": "number",
+                                            "example": 1770839449684
+                                        },
+                                        "api_version": {
+                                            "type": "string",
+                                            "example": "v2026.2.11"
+                                        },
+                                        "object": {
+                                            "type": "string",
+                                            "example": "error"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "error": {
+                                                    "type": "string",
+                                                    "example": "Forbidden"
+                                                },
+                                                "status": {
+                                                    "type": "number",
+                                                    "example": 403
+                                                }
+                                            },
+                                            "required": [
+                                                "error",
+                                                "status"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "timestamp",
+                                        "api_version",
+                                        "object",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "err_xxxxxxxxxxxxxxxx"
+                                        },
+                                        "timestamp": {
+                                            "type": "number",
+                                            "example": 1770839449684
+                                        },
+                                        "api_version": {
+                                            "type": "string",
+                                            "example": "v2026.2.11"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1783,11 +2111,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1765331254902
+                                            "example": 1770839449684
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.12.9"
+                                            "example": "v2026.2.11"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1831,11 +2159,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1765331254902
+                                            "example": 1770839449684
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.12.9"
+                                            "example": "v2026.2.11"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1883,11 +2211,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1765331254902
+                                            "example": 1770839449684
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.12.9"
+                                            "example": "v2026.2.11"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1935,11 +2263,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1765331254902
+                                            "example": 1770839449684
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.12.9"
+                                            "example": "v2026.2.11"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1987,11 +2315,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1765331254902
+                                            "example": 1770839449684
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.12.9"
+                                            "example": "v2026.2.11"
                                         },
                                         "object": {
                                             "type": "string",
@@ -2085,11 +2413,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1765331254902
+                                            "example": 1770839449684
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.12.9"
+                                            "example": "v2026.2.11"
                                         },
                                         "object": {
                                             "type": "string",
@@ -2133,11 +2461,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1765331254902
+                                            "example": 1770839449684
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.12.9"
+                                            "example": "v2026.2.11"
                                         },
                                         "object": {
                                             "type": "string",
@@ -2185,11 +2513,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1765331254902
+                                            "example": 1770839449684
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.12.9"
+                                            "example": "v2026.2.11"
                                         },
                                         "object": {
                                             "type": "string",
@@ -2237,11 +2565,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1765331254902
+                                            "example": 1770839449684
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.12.9"
+                                            "example": "v2026.2.11"
                                         },
                                         "object": {
                                             "type": "string",
@@ -2289,11 +2617,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1765331254902
+                                            "example": 1770839449684
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.12.9"
+                                            "example": "v2026.2.11"
                                         },
                                         "object": {
                                             "type": "string",
@@ -2377,11 +2705,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1765331254902
+                                            "example": 1770839449684
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.12.9"
+                                            "example": "v2026.2.11"
                                         },
                                         "object": {
                                             "type": "string",
@@ -2431,11 +2759,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1765331254902
+                                            "example": 1770839449684
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.12.9"
+                                            "example": "v2026.2.11"
                                         },
                                         "object": {
                                             "type": "string",
@@ -2483,11 +2811,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1765331254902
+                                            "example": 1770839449684
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.12.9"
+                                            "example": "v2026.2.11"
                                         },
                                         "object": {
                                             "type": "string",
@@ -2535,11 +2863,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1765331254902
+                                            "example": 1770839449684
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.12.9"
+                                            "example": "v2026.2.11"
                                         },
                                         "object": {
                                             "type": "string",
@@ -2587,11 +2915,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1765331254902
+                                            "example": 1770839449684
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.12.9"
+                                            "example": "v2026.2.11"
                                         },
                                         "object": {
                                             "type": "string",
@@ -2705,11 +3033,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1765331254902
+                                            "example": 1770839449684
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.12.9"
+                                            "example": "v2026.2.11"
                                         },
                                         "object": {
                                             "type": "string",
@@ -2759,11 +3087,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1765331254902
+                                            "example": 1770839449684
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.12.9"
+                                            "example": "v2026.2.11"
                                         },
                                         "object": {
                                             "type": "string",
@@ -2811,11 +3139,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1765331254902
+                                            "example": 1770839449684
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.12.9"
+                                            "example": "v2026.2.11"
                                         },
                                         "object": {
                                             "type": "string",
@@ -2863,11 +3191,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1765331254902
+                                            "example": 1770839449684
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.12.9"
+                                            "example": "v2026.2.11"
                                         },
                                         "object": {
                                             "type": "string",
@@ -2915,11 +3243,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1765331254902
+                                            "example": 1770839449684
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2025.12.9"
+                                            "example": "v2026.2.11"
                                         },
                                         "object": {
                                             "type": "string",

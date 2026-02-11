@@ -1,0 +1,20 @@
+---
+title: 'Add or Remove Reactions'
+openapi: "openapi-send POST /text/reactions"
+sidebarTitle: 'Reactions'
+description: 'Add or remove a reaction to an SMS/MMS message'
+icon: "thumbs-up"
+---
+
+<Frame caption={`Contiguity delivers reactions by sending a special message to the recipient’s device. On older devices that do not support reaction messages, the recipient will instead receive a regular text in the format: <br/> \`{Reaction} "{Message}"\` — for example, \`Loved "Hello, world!"\``}>
+  <img src="/images/sms-reaction.gif" alt="Sending an SMS and adding a reaction." />
+</Frame>
+
+
+<Warning>
+Reactions are billed as a single SMS on the Usage tier, included in the Unlimited plan, and deducted from your quota on the Free tier. <br/><br/> There are no additional charges. Both adding and removing reactions count toward your quota.
+</Warning>
+
+import Snippet from '/snippets/mintlify.mdx';
+
+<Snippet />
