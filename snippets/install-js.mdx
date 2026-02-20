@@ -27,9 +27,20 @@
   </Step>
 
   <Step title="Initialize the Client">
-    ```typescript
-    import { Contiguity } from "contiguity";
-    const contiguity = new Contiguity("contiguity_sk_...your_token...");
-    ```
+    <Tabs>
+      <Tab title="With API key">
+        ```typescript
+        import { Contiguity } from "contiguity";
+        const contiguity = new Contiguity("contiguity_sk_...your_key...");
+        ```
+      </Tab>
+      <Tab title="From env">
+        ```typescript
+        import { Contiguity } from "contiguity";
+        // Reads CONTIGUITY_API_KEY or CONTIGUITY_TOKEN
+        const contiguity = new Contiguity();
+        ```
+      </Tab>
+    </Tabs>
   </Step>
 </Steps>

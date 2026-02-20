@@ -36,15 +36,13 @@ No parameters required.
 Get detailed information about a specific phone number, including capabilities and pricing.
 
 ```typescript
-const res = await contiguity.lease.get({ 
-  number: "+1234567890" 
-});
+const res = await contiguity.lease.get("+1234567890");
 ```
 
 ### Parameters
 
 <ParamField body="number" type="string" required>
-  The phone number to get details for, in E.164 format (e.g., "+1234567890").
+  Phone number in E.164 format. First argument.
 </ParamField>
 
 ### Response
@@ -73,28 +71,23 @@ const res = await contiguity.lease.get({
 Create a lease for a phone number to use it as a sender.
 
 ```typescript
-const res = await contiguity.lease.create({ 
-  number: "+1234567890",
-  billing_method: "monthly" // or "service_contract"
-});
+const res = await contiguity.lease.create("+1234567890", { billing_method: "monthly" });
 ```
 
 You can also lease a number with default billing:
 
 ```typescript
-const res = await contiguity.lease.create({ 
-  number: "+1234567890"
-});
+const res = await contiguity.lease.create("+1234567890");
 ```
 
 ### Parameters
 
 <ParamField body="number" type="string" required>
-  The phone number to lease, in E.164 format (e.g., "+1234567890").
+  Phone number in E.164 format. First argument.
 </ParamField>
 
-<ParamField body="billing_method" type="string">
-  The billing method for the lease. Options: `"monthly"` for recurring monthly charges, `"service_contract"` for contract-based billing.
+<ParamField body="options" type="object">
+  Optional. e.g. `{ billing_method: "monthly" }`.
 </ParamField>
 
 ### Response
@@ -141,15 +134,13 @@ No parameters required.
 Get detailed information about a specific lease.
 
 ```typescript
-const res = await contiguity.lease.details({ 
-  number: "+1234567890" 
-});
+const res = await contiguity.lease.details("+1234567890");
 ```
 
 ### Parameters
 
 <ParamField body="number" type="string" required>
-  The leased phone number to get details for, in E.164 format (e.g., "+1234567890").
+  Leased phone number in E.164. First argument.
 </ParamField>
 
 ### Response
@@ -173,15 +164,13 @@ const res = await contiguity.lease.details({
 End a lease for a phone number when you no longer need it.
 
 ```typescript
-const res = await contiguity.lease.terminate({ 
-  number: "+1234567890" 
-});
+await contiguity.lease.terminate("+1234567890");
 ```
 
 ### Parameters
 
 <ParamField body="number" type="string" required>
-  The leased phone number to terminate, in E.164 format (e.g., "+1234567890").
+  Leased phone number in E.164. First argument.
 </ParamField>
 
 ### Response

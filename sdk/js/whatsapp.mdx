@@ -53,6 +53,16 @@ const res = await contiguity.whatsapp.typing({
 });
 ```
 
+## Reactions
+
+```typescript
+await contiguity.whatsapp.react("add", {
+  reaction: "👍",
+  message_id: "msg_..."
+});
+await contiguity.whatsapp.react("remove", { reaction: "👍", to: "+1234567890", from: "+15555555555", message: "Hello" });
+```
+
 ## Parameters
 
 ### whatsapp.send(params)
@@ -110,13 +120,27 @@ const res = await contiguity.whatsapp.typing({
   Optional leased phone number to use as the sender.
 </ParamField>
 
-### Response
-<ResponseField name="status" type="string">
-  Current status of the typing indicator action (e.g., "started", "stopped").
+### whatsapp.react(action, params)
+
+<ParamField body="action" type="string" required>
+  `"add"` or `"remove"`.
+</ParamField>
+
+<ParamField body="reaction" type="string" required>
+  Emoji string (e.g. `"👍"`).
+</ParamField>
+
+<ParamField body="message_id" type="string">
+  Message ID, or use `to` + `from` + `message`.
+</ParamField>
+
+### Response (send / react)
+<ResponseField name="message_id" type="string">
+  Message ID (send/react).
 </ResponseField>
 
 <ResponseField name="metadata" type="object">
-  Request metadata including ID, timestamp, and API version.
+  Request metadata: id, timestamp, api_version, object.
 </ResponseField>
 
 import Snippet from '/snippets/mintlify.mdx';

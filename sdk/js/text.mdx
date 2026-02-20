@@ -6,15 +6,46 @@ description: "Send text messages using the Contiguity JavaScript SDK."
 ---
 
 <Note>
-  Contiguity expects the recipient phone number to be formatted in E.164. You can attempt to pass numbers in formats like NANP, and the SDKs will try their best to convert it.
+  Contiguity expects the recipient phone number to be formatted in E.164. The SDK does not convert formats.
 </Note>
+
+## Send SMS/MMS
 
 ```typescript
 const res = await contiguity.text.send({
   to: "+1234567890",
   message: "Hello from Contiguity!",
-  // from: "+15555555555" // if you lease a number from Contiguity, you can provide it here
+  // from: "+15555555555",
+  // attachments: ["https://example.com/image.png"]  // optional, max 3
 });
+```
+
+## Fetch a message
+
+```typescript
+const res = await contiguity.text.get("msg_...");
+```
+
+## Conversation history
+
+```typescript
+const res = await contiguity.text.history({
+  to: "+1234567890",
+  from: "+15555555555",
+  limit: 20   // optional, default 20
+});
+```
+
+## Reactions
+
+```typescript
+// Add or remove a tapback
+const res = await contiguity.text.react("add", {
+  reaction: "love",   // "love" | "thumbsup" | "thumbsdown" | "haha" | "emphasized" | "questioned"
+  message_id: "msg_..."
+});
+// Or reference by to + from + message
+await contiguity.text.react("remove", { reaction: "thumbsup", to: "+1234567890", from: "+15555555555", message: "Hello" });
 ```
 
 ## Parameters
@@ -22,24 +53,62 @@ const res = await contiguity.text.send({
 ### text.send(params)
 
 <ParamField body="to" type="string" required>
-  The recipient's phone number in E.164 format (e.g., "+1234567890").
+  Recipient phone number in E.164 format.
 </ParamField>
 
 <ParamField body="message" type="string" required>
-  The text message content to send to the recipient.
+  The text message content.
 </ParamField>
 
 <ParamField body="from" type="string">
-  Optionally, if you lease a number from Contiguity, you can provide it here to send from.
+  Optional sender number (e.g. a leased number).
 </ParamField>
 
-### Response
+<ParamField body="attachments" type="string[]">
+  Optional array of attachment URLs (max 3) for MMS.
+</ParamField>
+
+### text.get(id)
+
+<ParamField body="id" type="string" required>
+  Message ID returned from send or webhooks.
+</ParamField>
+
+### text.history(params)
+
+<ParamField body="to" type="string" required>
+  Recipient phone number (E.164).
+</ParamField>
+
+<ParamField body="from" type="string" required>
+  Sender phone number (E.164).
+</ParamField>
+
+<ParamField body="limit" type="number" default="20">
+  Max number of messages to return.
+</ParamField>
+
+### text.react(action, params)
+
+<ParamField body="action" type="string" required>
+  `"add"` or `"remove"`.
+</ParamField>
+
+<ParamField body="reaction" type="string" required>
+  One of: `"love"`, `"thumbsup"`, `"thumbsdown"`, `"haha"`, `"emphasized"`, `"questioned"`.
+</ParamField>
+
+<ParamField body="message_id" type="string">
+  Message ID, or use `to` + `from` + `message` to reference the message.
+</ParamField>
+
+### Response (send / get / history / react)
 <ResponseField name="message_id" type="string">
-  Unique identifier for the sent text message, used for tracking and delivery status.
+  Unique identifier for the message (send/react).
 </ResponseField>
 
 <ResponseField name="metadata" type="object">
-  Request metadata including ID, timestamp, and API version.
+  Request metadata: id, timestamp, api_version, object.
 </ResponseField>
 
 import Snippet from '/snippets/mintlify.mdx';

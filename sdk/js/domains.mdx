@@ -32,15 +32,13 @@ No parameters required.
 Get detailed information about a specific domain, including verification status and DNS records.
 
 ```typescript
-const res = await contiguity.domains.get({ 
-  domain: "example.com" 
-});
+const res = await contiguity.domains.get("example.com");
 ```
 
 ### Parameters
 
 <ParamField body="domain" type="string" required>
-  The domain name to get details for (e.g., "example.com").
+  Domain name (e.g. `"example.com"`). Passed as first argument.
 </ParamField>
 
 ### Response
@@ -64,33 +62,26 @@ const res = await contiguity.domains.get({
 Add a new domain to your account for sending emails.
 
 ```typescript
-const res = await contiguity.domains.register({ 
-  domain: "example.com", 
-  region: "us-east-1", 
-  custom_return_path: "mail" 
+const res = await contiguity.domains.register("example.com", {
+  region: "us-east-1",
+  custom_return_path: "mail"
 });
 ```
 
-You can also register a domain with minimal configuration:
+Minimal:
 
 ```typescript
-const res = await contiguity.domains.register({ 
-  domain: "example.com"
-});
+const res = await contiguity.domains.register("example.com");
 ```
 
 ### Parameters
 
 <ParamField body="domain" type="string" required>
-  The domain name to register (e.g., "example.com"). Must be a valid domain you own.
+  Domain name to register (e.g. `"example.com"`). First argument.
 </ParamField>
 
-<ParamField body="region" type="string">
-  AWS region for domain setup. Common options: `"us-east-1"`, `"us-west-2"`, `"eu-west-1"`. Defaults to `"us-east-1"` if not specified.
-</ParamField>
-
-<ParamField body="custom_return_path" type="string">
-  Custom return path subdomain for bounce handling. If set to `"mail"`, bounce emails will be handled at `mail.yourdomain.com`.
+<ParamField body="options" type="object">
+  Optional. `region`, `custom_return_path`, etc.
 </ParamField>
 
 ### Response
@@ -124,15 +115,13 @@ const res = await contiguity.domains.register({
 Remove a domain from your account when it's no longer needed.
 
 ```typescript
-const res = await contiguity.domains.delete({ 
-  domain: "example.com" 
-});
+await contiguity.domains.delete("example.com");
 ```
 
 ### Parameters
 
 <ParamField body="domain" type="string" required>
-  The domain name to delete from your account (e.g., "example.com").
+  Domain name to delete. Passed as first argument.
 </ParamField>
 
 ### Response

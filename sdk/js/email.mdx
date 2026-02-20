@@ -32,7 +32,7 @@ const res = await contiguity.email.send({
 ### email.send(params)
 
 <ParamField body="to" type="string | string[]" required>
-  The recipient's email address or an array of email addresses.
+  Recipient email or array of recipients (max 10).
 </ParamField>
 
 <ParamField body="from" type="string" required>

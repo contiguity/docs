@@ -34,6 +34,39 @@ const res = await contiguity.imessage.send({
 });
 ```
 
+## Fetch a message
+
+```typescript
+const res = await contiguity.imessage.get("msg_...");
+```
+
+## Conversation history
+
+```typescript
+const res = await contiguity.imessage.history({
+  to: "+1234567890",
+  from: "+15555555555",
+  limit: 20   // optional
+});
+```
+
+## Reactions
+
+```typescript
+await contiguity.imessage.react("add", {
+  tapback: "love",
+  message_id: "msg_..."
+});
+// Or: to + from + message
+await contiguity.imessage.react("remove", { tapback: "thumbsup", to: "+1234567890", from: "+15555555555", message: "Hello" });
+```
+
+## Mark as read
+
+```typescript
+await contiguity.imessage.read({ to: "+1234567890", from: "+15555555555" });
+```
+
 ## Typing Indicators
 Show typing indicators to create a more interactive messaging experience.
 
@@ -110,13 +143,57 @@ const res = await contiguity.imessage.typing({
   Optional leased phone number to use as the sender.
 </ParamField>
 
-### Response
-<ResponseField name="status" type="string">
-  Current status of the typing indicator action (e.g., "started", "stopped").
+### imessage.get(id)
+
+<ParamField body="id" type="string" required>
+  Message ID (same endpoint as text get; conversations).
+</ParamField>
+
+### imessage.history(params)
+
+<ParamField body="to" type="string" required>
+  Recipient E.164.
+</ParamField>
+
+<ParamField body="from" type="string" required>
+  Sender E.164.
+</ParamField>
+
+<ParamField body="limit" type="number">
+  Optional. Max messages to return.
+</ParamField>
+
+### imessage.react(action, params)
+
+<ParamField body="action" type="string" required>
+  `"add"` or `"remove"`.
+</ParamField>
+
+<ParamField body="tapback" type="string" required>
+  e.g. `"love"`, `"thumbsup"`, etc.
+</ParamField>
+
+<ParamField body="message_id" type="string">
+  Message ID, or use `to` + `from` + `message`.
+</ParamField>
+
+### imessage.read(params)
+
+<ParamField body="to" type="string" required>
+  Recipient E.164.
+</ParamField>
+
+<ParamField body="from" type="string" required>
+  Sender E.164.
+</ParamField>
+
+### Response (send / get / history / react)
+<ResponseField name="message_id" type="string">
+  Message ID (send/react).
 </ResponseField>
 
 <ResponseField name="metadata" type="object">
-  Request metadata including ID, timestamp, and API version.
+  Request metadata: id, timestamp, api_version, object.
 </ResponseField>
 
 import Snippet from '/snippets/mintlify.mdx';

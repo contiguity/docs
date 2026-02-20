@@ -1,0 +1,70 @@
+---
+title: 'Webhooks'
+icon: "webhook"
+iconType: "solid"
+description: "Verify and parse webhook payloads with the Contiguity JavaScript SDK."
+---
+
+Use the SDK to verify webhook signatures and parse incoming events. You do not need an API key in the constructor for verification; you only need the raw request body, the signature header, and your webhook secret.
+
+## Verify signature
+
+**`contiguity.webhook.verify(rawBody, signatureHeader, secret, toleranceSeconds?)`**
+
+- **rawBody:** The exact raw request body (string or buffer). Never re-serialize JSON (e.g. do not use `JSON.stringify(req.body)`).
+- **signatureHeader:** Value of the `Contiguity-Signature` header. Format: `t=<timestamp>,v1=<hex>`.
+- **secret:** Your webhook signing secret.
+- **toleranceSeconds:** Optional. If set (e.g. `300`), rejects if `|now - t| > toleranceSeconds`.
+
+Returns `true` if the signature is valid, `false` otherwise. Verification uses HMAC-SHA256 of `t + "." + raw_body` with the secret and constant-time comparison to `v1`.
+
+## Parse payload
+
+**`contiguity.webhook.parse(rawBody)`**
+
+Parses the raw body as JSON and validates `id`, `type`, `timestamp`. Returns a typed event (v2 format). Throws if invalid.
+
+## Example
+
+```typescript
+import { Contiguity } from "contiguity";
+const contiguity = new Contiguity("contiguity_sk_..."); // or new Contiguity() for env
+
+// In your route: use raw body only (e.g. express.raw for this route)
+const raw_body = req.body; // buffer or string, unparsed
+const ok = contiguity.webhook.verify(
+  raw_body,
+  req.headers["contiguity-signature"],
+  process.env.WEBHOOK_SECRET,
+  300
+);
+if (!ok) return res.status(401).send("Invalid signature");
+const event = contiguity.webhook.parse(raw_body);
+// event.id, event.type, event.timestamp, event.data
+```
+
+## Webhook payload format (v2)
+
+All events include:
+
+- **id:** string (e.g. `evt_...`)
+- **type:** string (event type)
+- **timestamp:** number (Unix)
+- **api_version:** string
+- **data:** object (event-specific)
+
+**Event types (examples):**  
+`text.incoming.sms`, `text.incoming.mms`, `text.delivery.confirmed`, `text.delivery.failed`, `imessage.incoming`, `numbers.substitution`, `otp.reverse.verified`, `email.incoming`, `identity.verification_session.started`, `identity.verification_session.processing`, `identity.verification_session.verified`, `identity.verification_session.failed`, `identity.verification_session.requires_input`, `identity.verification_session.manually_approved`, `identity.verification_session.manually_denied`, `identity.verification_report.generated`.
+
+## Signing reference
+
+- **Signed payload:** `t + "." + raw_body` (timestamp `t` + `.` + raw body).
+- **Algorithm:** HMAC-SHA256.
+- **Signature:** hex-encoded in header as `t=<t>,v1=<hex>`.
+- **Verification:** Compute HMAC-SHA256 of signed payload with webhook secret; compare to `v1` with constant-time comparison. Optionally enforce timestamp tolerance (e.g. 300 seconds).
+
+See [Webhook signing](/api-reference/webhook/signing) for framework-specific examples.
+
+import Snippet from '/snippets/mintlify.mdx';
+
+<Snippet />

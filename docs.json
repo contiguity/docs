@@ -93,7 +93,8 @@
                                     "sdk/js/domains",
                                     "sdk/js/imessage",
                                     "sdk/js/whatsapp",
-                                    "sdk/js/leases"
+                                    "sdk/js/leases",
+                                    "sdk/js/webhooks"
                                 ]
                             },
                             "sdk/python"

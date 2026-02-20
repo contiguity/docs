@@ -16,24 +16,22 @@ The SDK accepts a token and optional configuration:
 ```typescript
 import { Contiguity } from "contiguity";
 
-// Basic initialization
-const contiguity = new Contiguity("contiguity_sk_...your_token...");
+// With API key
+const contiguity = new Contiguity("contiguity_sk_...your_key...");
+
+// Omit key: SDK reads CONTIGUITY_API_KEY or CONTIGUITY_TOKEN from env
+const contiguity = new Contiguity();
 
 // With options
-const contiguity = new Contiguity("contiguity_sk_...your_token...", {
-    raw: false,    // Return data in top level of response (default)
-    debug: false   // Disable debug logging (default)
+const contiguity = new Contiguity("contiguity_sk_...", {
+  debug: true   // request logging (default: false)
 });
 ```
 
-### Options
-
-<ParamField body="raw" type="boolean" default="false">
-  When `true`, returns raw API responses with metadata at the top level and data nested inside a `data` object. When `false`, returns cleaned responses with metadata separate.
-</ParamField>
+### Config
 
 <ParamField body="debug" type="boolean" default="false">
-  When `true`, enables extra logging for debugging purposes.
+  When `true`, enables request logging for debugging.
 </ParamField>
 
 ## Quick Start
@@ -58,51 +56,46 @@ await contiguity.email.send({
 
 ## Response Format
 
-The SDK returns different response formats depending on the `raw` option:
+All API responses are normalized to a single shape:
 
-### Default Format (`raw: false`)
+- **Top level:** method-specific fields (e.g. `message_id`, `email_id`, `domains`, `metadata`).
+- **`metadata`:** `{ id, timestamp, api_version, object }` on every response.
 
 Clean responses with metadata separate from the main data:
 
 ```typescript
 {
-    // Method-specific response data
-    message_id?: string,
-    email_id?: string,
-    otp_id?: string,
-    // ... other response fields
-    
-    // Metadata included with every response
-    metadata: {
-        id: string,
-        timestamp: string,
-        api_version: string,
-        object: string,
-    }
-}
-```
-
-### Raw Format (`raw: true`)
-
-Raw API responses with metadata at the top level and data nested:
-
-```typescript
-{
-    // Metadata at top level
+  message_id?: string,
+  email_id?: string,
+  otp_id?: string,
+  // ... other method-specific fields
+  metadata: {
     id: string,
     timestamp: string,
     api_version: string,
     object: string,
-    
-    // All response data nested in data object
-    data: {
-        message_id?: string,
-        email_id?: string,
-        otp_id?: string,
-        // ... other response fields
-    }
+  }
 }
 ```
+
+## Errors
+
+On API errors the SDK throws `ContiguityError` (subclass of `Error`) with `message`, `status` (HTTP status), and optional `code`.
+
+```typescript
+import { ContiguityError } from "contiguity";
+try {
+  await contiguity.text.send({ to: "+1234567890", message: "Hi" });
+} catch (e) {
+  if (e instanceof ContiguityError) {
+    console.error(e.status, e.message);
+  }
+}
+```
+
+## Webhooks
+
+To verify and parse webhook payloads, use `contiguity.webhook.verify()` and `contiguity.webhook.parse()`. See [Webhooks](/sdk/js/webhooks) for the full reference.
 
 import Snippet from '/snippets/mintlify.mdx';
 

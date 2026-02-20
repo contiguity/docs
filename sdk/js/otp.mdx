@@ -74,8 +74,8 @@ Contiguity offers a free OTP API that simplifies phone number verification using
   The language code for the OTP message. See supported languages below.
 </ParamField>
 
-<ParamField body="name" type="string" required>
-  The name of your application or service. This will be included in the OTP message as "Your [name] code is...".
+<ParamField body="name" type="string">
+  Optional app name shown in the OTP message as "Your [name] code is...".
 </ParamField>
 
 ### Response
@@ -120,6 +120,16 @@ Contiguity offers a free OTP API that simplifies phone number verification using
 <ResponseField name="metadata" type="object">
   Request metadata including ID, timestamp, and API version.
 </ResponseField>
+
+## Reverse OTP
+
+For reverse OTP flows use:
+
+- **`contiguity.otp.reverseInitiate(params)`**
+- **`contiguity.otp.reverseVerify(params)`**
+- **`contiguity.otp.reverseCancel(params)`**
+
+See the [Reverse OTP API reference](/api-reference/product/otp/reverse/initiate) for parameters and behavior.
 
 ## Supported Languages
 Contiguity currently supports 33 languages for OTPs, including:
