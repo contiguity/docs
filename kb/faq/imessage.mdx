@@ -1,0 +1,81 @@
+---
+title: "iMessage Questions"
+sidebarTitle: "iMessage Questions"
+description: "Last updated: February 22nd, 2025"
+icon: "apple"
+iconType: "solid"
+mode: "wide"
+---
+
+## Getting Started with iMessage
+
+<AccordionGroup>
+  <Accordion title="How do I get access to the iMessage API?" icon="apple">
+    iMessage is available only when you **lease a phone number** from Contiguity that supports iMessage.
+
+    Leasing is the only way to get iMessage access. Currently, we require customers to manually request iMessage access – using any of our available support channels.
+
+    Once you're approved to lease iMessage numbers, you'll be able to lease them on-demand via the [Leasing](/api-reference/product/leases/leases) API.
+  </Accordion>
+
+  <Accordion title="Do I need Apple Business Chat or Apple for Business?" icon="building">
+    No. Contiguity does not require Apple Business registration, human staff, per-contact fees, or long verification waits. You can start sending blue bubbles as soon as you have a leased number with iMessage capability.
+  </Accordion>
+
+  <Accordion title="What can I send with iMessage?" icon="paper-plane">
+    You can send text (with [markdown-style formatting](/api-reference/product/imessage/send#message-formatting): bold, italics, strikethrough, underline), [attachments](/products/imessage) (images and other media via URLs), and use the same API patterns as SMS. You can also send [typing indicators](/api-reference/product/imessage/typing), [tapback reactions](/api-reference/product/imessage/reactions), and [mark conversations as read](/api-reference/product/imessage/read). Automatic SMS fallback is supported when iMessage isn't available.
+  </Accordion>
+</AccordionGroup>
+
+## Delivery & Fallback
+
+<AccordionGroup>
+  <Accordion title="What if the recipient doesn't have iMessage?" icon="mobile-screen">
+    iMessage requires the recipient to have an Apple device with iMessage enabled. You can configure **automatic fallback to SMS** using the `fallback` option when sending:
+
+    - `imessage_unsupported` – fall back when the recipient can't receive iMessage
+    - `imessage_fails` – fall back when iMessage delivery fails
+
+    Provide a `fallback.from` number (e.g. a leased SMS number) for the fallback message. See the [iMessage product docs](/products/imessage) for examples.
+  </Accordion>
+
+  <Accordion title="Do you support iCloud email addresses?" icon="envelope">
+    iCloud emails are technically supported, but behavior can be unpredictable. We recommend using E.164 phone numbers for reliable delivery. Phone numbers must include country codes.
+  </Accordion>
+
+  <Accordion title="Where can I deliver iMessages?" icon="globe">
+    Contiguity delivers iMessages in **180+ countries** to over 1.3B iMessage users, with device-level delivery confirmation and read receipts—not just carrier-level estimates.
+  </Accordion>
+</AccordionGroup>
+
+## Compliance & Cost
+
+<AccordionGroup>
+  <Accordion title="Do I need A2P 10DLC or carrier registration for iMessage?" icon="scale-balanced">
+    No. iMessage is exempt from A2P 10DLC, carrier vetting, and carrier per-segment fees. You're not required to register for 10DLC or include opt-out language specifically for iMessage. You are still responsible for complying with applicable laws (e.g. TCPA, GDPR, CASL) in your jurisdiction—see our [compliance overview](/kb/compliance/overview).
+  </Accordion>
+
+  <Accordion title="Are there carrier fees for iMessage?" icon="dollar-sign">
+    No. Unlike SMS, iMessage does not incur carrier fees. You pay for Contiguity usage; there are no carrier surcharges for iMessage delivery.
+  </Accordion>
+</AccordionGroup>
+
+## API & SDK
+
+<AccordionGroup>
+  <Accordion title="Is the iMessage API the same as SMS?" icon="code">
+    Yes. The API shape is the same—you use `contiguity.imessage.send()` instead of `contiguity.text.send()` and pass a leased number as `from`. You can fetch messages, get conversation history, react, and mark as read. See the [JavaScript SDK iMessage docs](/sdk/js/imessage) and [API reference](/api-reference/product/imessage/send).
+  </Accordion>
+
+  <Accordion title="What features does the API support?" icon="list-check">
+    Beyond sending text and attachments: **typing indicators** (start/stop), **tapback reactions** (add/remove), **mark as read**, **conversation history**, and **message fetch**. Webhooks and delivery/read status work with the same event model as other Contiguity products.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+Still have questions? Join our [Discord community](https://discord.gg/Z9K5XAsS7H) or email us at help@contiguity.support.
+
+import Snippet from '/snippets/mintlify.mdx';
+
+<Snippet />

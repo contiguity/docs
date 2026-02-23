@@ -1,0 +1,89 @@
+---
+title: "SMS/MMS Questions"
+sidebarTitle: "SMS/MMS"
+description: "Last updated: February 22nd, 2025"
+icon: "messages-question"
+iconType: "solid"
+mode: "wide"
+---
+
+## Getting Started
+
+<AccordionGroup>
+  <Accordion title="How do I send my first SMS?" icon="paper-plane">
+    You can send in under ten lines of code. Sign up at [console.contiguity.com](https://console.contiguity.com), create an API key, install the SDK (`contiguity` via npm or pip), then call the API:
+
+    ```javascript
+    await contiguity.text.send({
+      to: "+1234567890",
+      message: "Hello from Contiguity!"
+    });
+    ```
+
+    Phone numbers must be in **E.164 format** (with country code). The API may attempt to convert formats like NANP but can throw if conversion fails. See [Text](/products/text) and the [API reference](/api-reference/product/text/sms).
+  </Accordion>
+
+  <Accordion title="Do I need to lease a number or register for A2P 10DLC?" icon="sim-card">
+    No. With Contiguity you can start sending **without** leasing a number or registering for A2P 10DLC. Our approach means you can go from signup to production in minutes—no carrier vetting, no multi-week approval, no mandatory opt-out language from us.
+
+    If you want a dedicated sender (e.g. for branding or inbound), you can [lease numbers](/products/leases) from us; leased numbers include Unlimited and access to [iMessage](/api-reference/product/imessage) and [WhatsApp](/api-reference/product/whatsapp). Consumer plans are outbound-only.
+  </Accordion>
+
+  <Accordion title="What's the free tier for SMS/MMS?" icon="gift">
+    The Free tier includes **500 SMS** and **100 MMS** per month (limits reset monthly). Once you exceed them, you can wait for the cycle to reset or move to Usage, Unlimited ($19.99/mo), or Enterprise. See the full breakdown at [contiguity.com/pricing](https://contiguity.com/pricing).
+  </Accordion>
+</AccordionGroup>
+
+## Pricing & Fees
+
+<AccordionGroup>
+  <Accordion title="What does SMS/MMS cost on Usage?" icon="dollar-sign">
+    On the Usage plan you pay a flat rate per message. There are no carrier-specific fees, no per-country price tiers, and no international surcharges. The Unlimited plan includes unlimited outbound SMS/MMS for a fixed monthly price.
+  </Accordion>
+
+  <Accordion title="Are there carrier or other hidden fees?" icon="receipt">
+    No. Contiguity does not pass through carrier surcharges or extra fees. You pay our stated pricing only (or Unlimited). No A2P 10DLC registration fees, no "Contiguity Signature" upsell—what you see is what you pay.
+  </Accordion>
+</AccordionGroup>
+
+## Delivery & Reach
+
+<AccordionGroup>
+  <Accordion title="Where can I send SMS/MMS?" icon="globe">
+    Contiguity delivers to **180+ countries** with delivery in under 10 seconds. Same simple API and pricing whether you're sending domestically or internationally.
+  </Accordion>
+
+  <Accordion title="How do I send MMS (images, files)?" icon="image">
+    Use the same [send endpoint](/api-reference/product/text/sms) as SMS and add an `attachments` array (URLs). **Max 3 attachments**, **5MB cumulative**. We fully support JPEG, PNG, GIF; we accept and attempt MP4, MOV, MP3, PDF—delivery may vary by carrier and device. Avoid shortened links and see [best practices](/kb/compliance/text/best-practices) and [prohibited content](/kb/compliance/text/prohibited) for deliverability.
+
+    MMS is in public beta; if you hit issues, reach out on [Discord](https://discord.gg/Z9K5XAsS7H).
+  </Accordion>
+</AccordionGroup>
+
+## Compliance & Best Practices
+
+<AccordionGroup>
+  <Accordion title="Am I still responsible for TCPA, consent, etc.?" icon="scale-balanced">
+    Yes. Contiguity does not require A2P 10DLC registration or carrier vetting, but **you** must comply with the laws that apply to you (e.g. TCPA and CAN-SPAM in the US, GDPR/ePrivacy in the EU, CASL in Canada, Spam Act in Australia). See our [compliance overview](/kb/compliance/overview).
+  </Accordion>
+
+  <Accordion title="What can get my messages blocked or flagged?" icon="ban">
+    Carriers often block or filter messages with shortened links, certain [prohibited topics or keywords](/kb/compliance/text/prohibited), and low-reputation or non-HTTPS domains. Sending links before the user has replied can increase spam risk. Follow our [best practices](/kb/compliance/text/best-practices) to maximize deliverability.
+  </Accordion>
+</AccordionGroup>
+
+## API & Features
+
+<AccordionGroup>
+  <Accordion title="What can I do besides send?" icon="code">
+    You can **fetch** a message by ID, get **conversation history** (with optional limit), and **add/remove reactions** (love, thumbsup, thumbsdown, haha, emphasized, questioned). Use a leased number as `from` for dedicated sender and inbound. See the [JavaScript SDK Text docs](/sdk/js/text) and [API reference](/api-reference/product/text/sms).
+  </Accordion>
+</AccordionGroup>
+
+---
+
+Still have questions? Join our [Discord community](https://discord.gg/Z9K5XAsS7H) or email us at help@contiguity.support.
+
+import Snippet from '/snippets/mintlify.mdx';
+
+<Snippet />
