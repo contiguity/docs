@@ -200,38 +200,6 @@
                         ]
                     },
                     {
-                        "group": "Identity",
-                        "icon": {
-                            "name": "fingerprint",
-                            "style": "solid"
-                        },
-                        "pages": [
-                            {
-                                "group": "Verification Sessions",
-                                "icon": {
-                                    "name": "magnifying-glass",
-                                    "style": "solid"
-                                },
-                                "pages": [
-                                    "api-reference/product/identity/vs/create",
-                                    "api-reference/product/identity/vs/get",
-                                    "api-reference/product/identity/vs/cancel"
-                                ]
-                            },
-                            {
-                                "group": "Verification Reports",
-                                "icon": {
-                                    "name": "file",
-                                    "style": "solid"
-                                },
-                                "pages": [
-                                    "api-reference/product/identity/vr/get",
-                                    "api-reference/product/identity/vr/redact"
-                                ]
-                            }
-                        ]
-                    },
-                    {
                         "group": "iMessage",
                         "icon": {
                             "name": "apple",
@@ -270,6 +238,38 @@
                             "api-reference/product/leases/lease",
                             "api-reference/product/leases/leased-all",
                             "api-reference/product/leases/terminate"
+                        ]
+                    },
+                    {
+                        "group": "Identity",
+                        "icon": {
+                            "name": "fingerprint",
+                            "style": "solid"
+                        },
+                        "pages": [
+                            {
+                                "group": "Verification Sessions",
+                                "icon": {
+                                    "name": "magnifying-glass",
+                                    "style": "solid"
+                                },
+                                "pages": [
+                                    "api-reference/product/identity/vs/create",
+                                    "api-reference/product/identity/vs/get",
+                                    "api-reference/product/identity/vs/cancel"
+                                ]
+                            },
+                            {
+                                "group": "Verification Reports",
+                                "icon": {
+                                    "name": "file",
+                                    "style": "solid"
+                                },
+                                "pages": [
+                                    "api-reference/product/identity/vr/get",
+                                    "api-reference/product/identity/vr/redact"
+                                ]
+                            }
                         ]
                     }
                 ]
