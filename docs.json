@@ -16,10 +16,7 @@
             "claude"
         ]
     },
-    "banner": {
-        "content": "**Action required:** We're beginning to shutdown our old platform. Please migrate to our new platform ASAP. Instructions available in our [migration guide](/getting-started/migration).",
-        "dismissible": true
-    },
+
     "favicon": "/favicon.svg",
     "navigation": {
         "tabs": [
@@ -36,7 +33,6 @@
                             "getting-started/overview",
                             "getting-started/support",
                             "getting-started/uptime",
-                            "getting-started/migration",
                             "changelog"
                         ]
                     },
