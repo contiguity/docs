@@ -90,6 +90,7 @@
                                     "sdk/js/imessage",
                                     "sdk/js/whatsapp",
                                     "sdk/js/leases",
+                                    "sdk/js/entitlements",
                                     "sdk/js/webhooks"
                                 ]
                             },

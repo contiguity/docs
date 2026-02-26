@@ -120,6 +120,10 @@ const res = await contiguity.imessage.typing({
   Array of attachment URLs to include with the message. Supports images and other media.
 </ParamField>
 
+<ParamField body="fast_track" type="boolean">
+  Optional. Bypass recommended rate limiting on leased numbers. Requires Fast Track entitlement.
+</ParamField>
+
 ### Response
 <ResponseField name="message_id" type="string">
   Unique identifier for the sent iMessage, used for tracking delivery status.

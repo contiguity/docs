@@ -68,6 +68,10 @@ await contiguity.text.react("remove", { reaction: "thumbsup", to: "+1234567890",
   Optional array of attachment URLs (max 3) for MMS.
 </ParamField>
 
+<ParamField body="fast_track" type="boolean">
+  Optional. Bypass recommended rate limiting on leased numbers. Requires Fast Track entitlement.
+</ParamField>
+
 ### text.get(id)
 
 <ParamField body="id" type="string" required>

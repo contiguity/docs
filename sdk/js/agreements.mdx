@@ -1,0 +1,40 @@
+---
+title: 'Agreements'
+sidebarTitle: "Agreements"
+icon: "file-signature"
+iconType: "solid"
+description: "Accept agreements via the API when errors include agreement_url."
+---
+
+## Accepting Agreements via API
+
+When an API error includes `agreement_url` (e.g. entitlement required), use `agreements.accept()` to apply via the API instead of opening the URL:
+
+```typescript
+import { ContiguityError } from "contiguity";
+
+try {
+    await contiguity.text.send({ to: "+1234567890", message: "Hi" });
+} catch (e) {
+    if (e instanceof ContiguityError && e.data?.agreement_url) {
+        await contiguity.agreements.accept(e.data.agreement_url);
+    }
+    throw e;
+}
+```
+
+### Parameters
+
+<ParamField body="agreement_url" type="string" required>
+  URL from the API error's `agreement_url` field. Pass to `accept()` to apply the agreement.
+</ParamField>
+
+### Response
+
+<ResponseField name="metadata" type="object">
+  Request metadata: id, timestamp, api_version, object.
+</ResponseField>
+
+import Snippet from '/snippets/mintlify.mdx';
+
+<Snippet />

@@ -1,0 +1,55 @@
+---
+title: 'Entitlements'
+sidebarTitle: "Entitlements"
+icon: "ticket"
+iconType: "solid"
+description: "Manage entitlements with the Contiguity JavaScript SDK."
+---
+
+## Managing Entitlements
+
+Manage entitlements such as `fast_track`, `lease`, and `identity`:
+
+```typescript
+const list = await contiguity.entitlements.list();
+const one = await contiguity.entitlements.get("fast_track");
+const applied = await contiguity.entitlements.apply("fast_track");
+const revoked = await contiguity.entitlements.revoke("fast_track");
+```
+
+### Parameters
+
+<ParamField body="id" type="string" required>
+  Entitlement identifier (e.g. `fast_track`, `lease`, `identity`). Used in `get`, `apply`, and `revoke`.
+</ParamField>
+
+### Response
+
+<ResponseField name="entitlements" type="object[]">
+  Array of entitlements with status. Returned by `list()`.
+</ResponseField>
+
+<ResponseField name="metadata" type="object">
+  Request metadata: id, timestamp, api_version, object.
+</ResponseField>
+
+## Applying via API
+
+When an API error includes `agreement_url`, `agreements.accept()` lets you apply for the entitlement automatically in your error handling code.
+
+```typescript
+import { ContiguityError } from "contiguity";
+
+try {
+    await contiguity.text.send({ to: "+1234567890", message: "Hi", fast_track: true });
+} catch (e) {
+    if (e instanceof ContiguityError && e.data?.agreement_url) {
+        await contiguity.agreements.accept(e.data.agreement_url); // agrees to fast track terms
+    }
+    throw e;
+}
+```
+
+import Snippet from '/snippets/mintlify.mdx';
+
+<Snippet />

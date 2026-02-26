@@ -5,9 +5,63 @@ iconType: "solid"
 description: "Verify and parse webhook payloads with the Contiguity JavaScript SDK."
 ---
 
-Use the SDK to verify webhook signatures and parse incoming events. You do not need an API key in the constructor for verification; you only need the raw request body, the signature header, and your webhook secret.
+## Reply
 
-## Verify signature
+Parse webhooks and reply to incoming messages. `reply()` prefills `to`/`from` from the event.
+
+<Tabs>
+  <Tab title="Express">
+    ```typescript
+    import express from "express";
+    import { Contiguity } from "contiguity";
+
+    const app = express();
+    const contiguity = new Contiguity();
+
+    app.post("/webhook", express.raw({ type: "application/json" }), async (req, res) => {
+        if (!contiguity.webhook.verify(req, process.env.CONTIGUITY_WEBHOOK_SECRET)) {
+            return res.sendStatus(401);
+        }
+        const event = contiguity.webhook.parse(req.body);
+        if (event.type === "text.incoming.sms" || event.type === "text.incoming.mms") {
+            await contiguity.text.reply(event, { message: "Got it, thanks!" });
+        }
+        if (event.type === "imessage.incoming") {
+            await contiguity.imessage.reply(event, { message: "Hi back!" });
+        }
+        res.sendStatus(200);
+    });
+    ```
+  </Tab>
+  <Tab title="Hono">
+    ```typescript
+    import { Hono } from "hono";
+    import { Contiguity } from "contiguity";
+
+    const app = new Hono();
+    const contiguity = new Contiguity();
+
+    app.post("/webhook", async (c) => {
+        const raw = await c.req.text();
+        if (!contiguity.webhook.verify(raw, c.req.header("contiguity-signature"), process.env.CONTIGUITY_WEBHOOK_SECRET)) {
+            return c.text("Invalid signature", 401);
+        }
+        const event = contiguity.webhook.parse(raw);
+        if (event.type === "text.incoming.sms" || event.type === "text.incoming.mms") {
+            await contiguity.text.reply(event, { message: "Got it, thanks!" });
+        }
+        if (event.type === "imessage.incoming") {
+            await contiguity.imessage.reply(event, { message: "Hi back!" });
+        }
+        return c.text("ok", 200);
+    });
+    ```
+  </Tab>
+</Tabs>
+
+---
+
+## Verify
 
 **`contiguity.webhook.verify(rawBody, signatureHeader, secret, toleranceSeconds?)`**
 
@@ -18,7 +72,9 @@ Use the SDK to verify webhook signatures and parse incoming events. You do not n
 
 Returns `true` if the signature is valid, `false` otherwise. Verification uses HMAC-SHA256 of `t + "." + raw_body` with the secret and constant-time comparison to `v1`.
 
-## Parse payload
+---
+
+## Parse
 
 **`contiguity.webhook.parse(rawBody)`**
 
@@ -43,7 +99,9 @@ const event = contiguity.webhook.parse(raw_body);
 // event.id, event.type, event.timestamp, event.data
 ```
 
-## Webhook payload format (v2)
+---
+
+## Payload format (v2)
 
 All events include:
 
@@ -55,6 +113,8 @@ All events include:
 
 **Event types (examples):**  
 `text.incoming.sms`, `text.incoming.mms`, `text.delivery.confirmed`, `text.delivery.failed`, `imessage.incoming`, `numbers.substitution`, `otp.reverse.verified`, `email.incoming`, `identity.verification_session.started`, `identity.verification_session.processing`, `identity.verification_session.verified`, `identity.verification_session.failed`, `identity.verification_session.requires_input`, `identity.verification_session.manually_approved`, `identity.verification_session.manually_denied`, `identity.verification_report.generated`.
+
+---
 
 ## Signing reference
 
