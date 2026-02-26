@@ -267,6 +267,19 @@
                                 ]
                             }
                         ]
+                    },
+                    {
+                        "group": "Entitlements",
+                        "icon": {
+                            "name": "ticket",
+                            "style": "solid"
+                        },
+                        "pages": [
+                            "api-reference/product/entitlements/list",
+                            "api-reference/product/entitlements/apply",
+                            "api-reference/product/entitlements/get",
+                            "api-reference/product/entitlements/revoke"
+                        ]
                     }
                 ]
             },
