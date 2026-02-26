@@ -19,6 +19,27 @@ The sender email configuration depends on your account setup:
   - Or still use Contiguity's email address (e.g. 'Contiguity \<random-hash@contiguity.email\>')
 </Info>
 
+<Note>
+**Deprecated:** `body`
+```json
+{
+    "body": {,
+        "html": "<p>Hello, world!</p>",
+        "text": "Hello, world!"
+    }
+}
+```
+
+**Instead, provide top-level `html` / `text` properties.**
+```json
+{
+    ...,
+    "html": "<p>Hello, world!</p>",
+    "text": "Hello, world!"
+}
+```
+</Note>
+
 import Snippet from '/snippets/mintlify.mdx';
 
 <Snippet />
