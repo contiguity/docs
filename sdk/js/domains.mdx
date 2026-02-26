@@ -148,10 +148,8 @@ const res = await contiguity.email.send({
   to: "user@example.com",
   from: "Your App <hello@yourdomain.com>", // Use your verified domain
   subject: "Welcome to our platform!",
-  body: { 
-    html: "<h1>Welcome!</h1><p>Thanks for joining us.</p>",
-    text: "Welcome! Thanks for joining us."
-  },
+  html: "<h1>Welcome!</h1><p>Thanks for joining us.</p>",
+  text: "Welcome! Thanks for joining us.",
   reply_to: "support@yourdomain.com"
 });
 ```

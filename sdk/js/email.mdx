@@ -5,25 +5,79 @@ iconType: "solid"
 description: "Send emails using the Contiguity JavaScript SDK."
 ---
 
+Send with `html`, `text`, or both at the top level:
+
 ```typescript
 const res = await contiguity.email.send({
   to: ["user@example.com", "ops@example.com"],
   from: "Your App <no-reply@yourapp.com>",
   subject: "Welcome!",
-  body: { html: "<h1>Hello</h1>" },
+  html: "<h1>Hello</h1>",
   reply_to: "support@yourapp.com",
   cc: "manager@example.com"
 });
 ```
 
-You can also send a simple email with just the required fields:
+<Note>
+  Providing content via `body: { text, html, react }` is deprecated but still supported. Prefer top-level `html`, `text`, and `react`.
+</Note>
+
+## React Email
+
+Pass a React Email component as `react`; the SDK renders it to HTML and plain text before sending. Install `@react-email/render` and its peer deps when using this:
+
+<Tabs>
+  <Tab title="Bun">
+    ```bash
+    bun add @react-email/render react react-dom
+    ```
+  </Tab>
+  <Tab title="pnpm">
+    ```bash
+    pnpm add @react-email/render react react-dom
+    ```
+  </Tab>
+  <Tab title="npm">
+    ```bash
+    npm install @react-email/render react react-dom
+    ```
+  </Tab>
+  <Tab title="Yarn">
+    ```bash
+    yarn add @react-email/render react react-dom
+    ```
+  </Tab>
+</Tabs>
+
+Define a component (e.g. `Email.tsx`):
+
+```tsx
+import * as React from 'react';
+import { Html, Button } from "@react-email/components";
+
+export function Email(props) {
+  const { url } = props;
+
+  return (
+    <Html lang="en">
+      <Button href={url}>Click me</Button>
+    </Html>
+  );
+}
+
+export default Email;
+```
+
+Then pass it to `react`:
 
 ```typescript
-const res = await contiguity.email.send({
+import { Email } from "./Email";
+
+await contiguity.email.send({
   to: "user@example.com",
   from: "Your App <no-reply@yourapp.com>",
-  subject: "Hello from Contiguity!",
-  body: { text: "This is a plain text email." }
+  subject: "Welcome",
+  react: <Email url="https://example.com" />,
 });
 ```
 
@@ -43,18 +97,20 @@ const res = await contiguity.email.send({
   The email subject line.
 </ParamField>
 
-<ParamField body="body" type="object" required>
-  The email content. Must contain either `text`, `html`, or both.
-  
-  <Expandable title="Body object properties">
-    <ParamField body="body.text" type="string">
-      Plain text version of the email content.
-    </ParamField>
-    
-    <ParamField body="body.html" type="string">
-      HTML version of the email content.
-    </ParamField>
-  </Expandable>
+<ParamField body="html" type="string">
+  HTML version of the email content. Use `html`, `text`, and/or `react` (one or more required).
+</ParamField>
+
+<ParamField body="text" type="string">
+  Plain text version of the email content.
+</ParamField>
+
+<ParamField body="react" type="ReactNode">
+  A React Email component; the SDK renders it to HTML and plain text. Requires `@react-email/render`, `react`, and `react-dom`.
+</ParamField>
+
+<ParamField body="body" type="object">
+  Deprecated. Use top-level `html`, `text`, and `react` instead. Still supported: `body: { text?, html?, react? }`.
 </ParamField>
 
 <ParamField body="reply_to" type="string">

@@ -14,12 +14,15 @@ import InstallPY from '/snippets/install-py.mdx';
     ## Sending an email
     Various email parameters can be configured in the [Console](https://console.contiguity.com/dashboard/emails) such as tracking, custom domains, and more.
 
+    Send with `html`, `text`, or both at the top level:
+
     ```typescript
     const res = await contiguity.email.send({
       to: ["user@example.com", "ops@example.com"],
       from: "Your App <no-reply@yourapp.com>",
-      subject: "Welcome!",
-      body: { html: "<h1>Hello</h1>" },
+      subject: "Welcome",
+      html: "<p>Hello!</p>",
+      text: "Hello!",
       reply_to: "support@yourapp.com",
       cc: "manager@example.com"
     });
@@ -34,16 +37,7 @@ import InstallPY from '/snippets/install-py.mdx';
       Request metadata including ID, timestamp, and API version.
     </ResponseField>
 
-    You can also send a simple email with just the required fields:
-
-    ```typescript
-    const res = await contiguity.email.send({
-      to: "user@example.com",
-      from: "Your App <no-reply@yourapp.com>",
-      subject: "Hello from Contiguity!",
-      body: { text: "This is a plain text email." }
-    });
-    ```
+    For **React Email** (render a React component to HTML/text), use the top-level `react` option and see the [JS SDK Email](/sdk/js/email) docs.
   </Tab>
   
   <Tab title="Python" icon="python">
@@ -98,18 +92,20 @@ import InstallPY from '/snippets/install-py.mdx';
   The email subject line.
 </ParamField>
 
-<ParamField body="body" type="object" required>
-  The email content. Must contain either `text`, `html`, or both.
-  
-  <Expandable title="Body object properties">
-    <ParamField body="body.text" type="string">
-      Plain text version of the email content.
-    </ParamField>
-    
-    <ParamField body="body.html" type="string">
-      HTML version of the email content.
-    </ParamField>
-  </Expandable>
+<ParamField body="html" type="string">
+  HTML version of the email (JS: top-level; Python: top-level). Use with `text` and/or `react` (JS) as needed.
+</ParamField>
+
+<ParamField body="text" type="string">
+  Plain text version of the email.
+</ParamField>
+
+<ParamField body="react" type="ReactNode">
+  **JS only.** A React Email component; the SDK renders it to HTML and plain text. See [JS SDK Email](/sdk/js/email).
+</ParamField>
+
+<ParamField body="body" type="object">
+  **JS only, deprecated.** Use top-level `html`, `text`, and `react` instead. Still supported: `body: { text?, html?, react? }`.
 </ParamField>
 
 <ParamField body="reply_to" type="string">
