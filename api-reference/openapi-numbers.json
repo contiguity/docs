@@ -6,7 +6,7 @@
         }
     ],
     "info": {
-        "version": "v2026.2.6",
+        "version": "v2026.3.3",
         "title": "Leasing API"
     },
     "components": {
@@ -41,11 +41,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1770363397691
+                                            "example": 1772568052124
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.2.6"
+                                            "example": "v2026.3.3"
                                         },
                                         "object": {
                                             "type": "string",
@@ -308,11 +308,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1770363397691
+                                            "example": 1772568052124
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.2.6"
+                                            "example": "v2026.3.3"
                                         },
                                         "object": {
                                             "type": "string",
@@ -360,11 +360,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1770363397691
+                                            "example": 1772568052124
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.2.6"
+                                            "example": "v2026.3.3"
                                         },
                                         "object": {
                                             "type": "string",
@@ -412,11 +412,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1770363397691
+                                            "example": 1772568052124
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.2.6"
+                                            "example": "v2026.3.3"
                                         },
                                         "object": {
                                             "type": "string",
@@ -464,11 +464,1591 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1770363397691
+                                            "example": 1772568052124
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.2.6"
+                                            "example": "v2026.3.3"
+                                        },
+                                        "object": {
+                                            "type": "string",
+                                            "example": "error"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "error": {
+                                                    "type": "string",
+                                                    "example": "Internal Server Error"
+                                                },
+                                                "status": {
+                                                    "type": "number",
+                                                    "example": 500
+                                                }
+                                            },
+                                            "required": [
+                                                "error",
+                                                "status"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "timestamp",
+                                        "api_version",
+                                        "object",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/lease/{number}": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "type": "string",
+                            "description": "Phone number in E.164 format",
+                            "example": "+13059478667"
+                        },
+                        "required": true,
+                        "description": "Phone number in E.164 format",
+                        "name": "number",
+                        "in": "path"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "billing_method": {
+                                        "type": "string",
+                                        "enum": [
+                                            "monthly",
+                                            "service_contract"
+                                        ],
+                                        "description": "Billing method (service_contract only works if active). Defaults to monthly."
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Lease a specific phone number",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "req_xxxxxxxxxxxxxxxx"
+                                        },
+                                        "timestamp": {
+                                            "type": "number",
+                                            "example": 1772568052124
+                                        },
+                                        "api_version": {
+                                            "type": "string",
+                                            "example": "v2026.3.3"
+                                        },
+                                        "object": {
+                                            "type": "string",
+                                            "example": "response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "lease_id": {
+                                                    "type": "string",
+                                                    "description": "Lease ID",
+                                                    "example": "lsd_1234567890"
+                                                },
+                                                "number": {
+                                                    "type": "string",
+                                                    "description": "Phone number ID",
+                                                    "example": "+13059478667"
+                                                },
+                                                "status": {
+                                                    "type": "string",
+                                                    "enum": [
+                                                        "active",
+                                                        "expired",
+                                                        "terminated"
+                                                    ],
+                                                    "description": "Lease status",
+                                                    "example": "active"
+                                                },
+                                                "billing": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "method": {
+                                                            "type": "string",
+                                                            "enum": [
+                                                                "monthly",
+                                                                "service_contract",
+                                                                "goodwill"
+                                                            ],
+                                                            "description": "Billing method",
+                                                            "example": "monthly"
+                                                        },
+                                                        "price": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "currency": {
+                                                                    "type": "string",
+                                                                    "enum": [
+                                                                        "USD",
+                                                                        "EUR",
+                                                                        "GBP",
+                                                                        "CAD",
+                                                                        "AUD"
+                                                                    ],
+                                                                    "description": "Currency",
+                                                                    "example": "USD"
+                                                                },
+                                                                "monthly_rate": {
+                                                                    "type": "number",
+                                                                    "description": "Monthly rate",
+                                                                    "example": 19.99
+                                                                },
+                                                                "upfront_fee": {
+                                                                    "type": "number",
+                                                                    "description": "One-time fee",
+                                                                    "example": 2.99
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "currency",
+                                                                "monthly_rate",
+                                                                "upfront_fee"
+                                                            ]
+                                                        },
+                                                        "period": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "start": {
+                                                                    "type": "number",
+                                                                    "description": "Lease start timestamp",
+                                                                    "example": 1718851200
+                                                                },
+                                                                "end": {
+                                                                    "nullable": true,
+                                                                    "description": "Always null for month-to-month leases",
+                                                                    "example": null
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "start",
+                                                                "end"
+                                                            ]
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "method",
+                                                        "price",
+                                                        "period"
+                                                    ]
+                                                }
+                                            },
+                                            "required": [
+                                                "lease_id",
+                                                "number",
+                                                "status",
+                                                "billing"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "timestamp",
+                                        "api_version",
+                                        "object",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "err_xxxxxxxxxxxxxxxx"
+                                        },
+                                        "timestamp": {
+                                            "type": "number",
+                                            "example": 1772568052124
+                                        },
+                                        "api_version": {
+                                            "type": "string",
+                                            "example": "v2026.3.3"
+                                        },
+                                        "object": {
+                                            "type": "string",
+                                            "example": "error"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "error": {
+                                                    "type": "string",
+                                                    "example": "Bad Request"
+                                                },
+                                                "status": {
+                                                    "type": "number",
+                                                    "example": 400
+                                                }
+                                            },
+                                            "required": [
+                                                "error",
+                                                "status"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "timestamp",
+                                        "api_version",
+                                        "object",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "err_xxxxxxxxxxxxxxxx"
+                                        },
+                                        "timestamp": {
+                                            "type": "number",
+                                            "example": 1772568052124
+                                        },
+                                        "api_version": {
+                                            "type": "string",
+                                            "example": "v2026.3.3"
+                                        },
+                                        "object": {
+                                            "type": "string",
+                                            "example": "error"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "error": {
+                                                    "type": "string",
+                                                    "example": "Unauthorized"
+                                                },
+                                                "status": {
+                                                    "type": "number",
+                                                    "example": 401
+                                                }
+                                            },
+                                            "required": [
+                                                "error",
+                                                "status"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "timestamp",
+                                        "api_version",
+                                        "object",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "err_xxxxxxxxxxxxxxxx"
+                                        },
+                                        "timestamp": {
+                                            "type": "number",
+                                            "example": 1772568052124
+                                        },
+                                        "api_version": {
+                                            "type": "string",
+                                            "example": "v2026.3.3"
+                                        },
+                                        "object": {
+                                            "type": "string",
+                                            "example": "error"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "error": {
+                                                    "type": "string",
+                                                    "example": "Forbidden"
+                                                },
+                                                "status": {
+                                                    "type": "number",
+                                                    "example": 403
+                                                }
+                                            },
+                                            "required": [
+                                                "error",
+                                                "status"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "timestamp",
+                                        "api_version",
+                                        "object",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "err_xxxxxxxxxxxxxxxx"
+                                        },
+                                        "timestamp": {
+                                            "type": "number",
+                                            "example": 1772568052124
+                                        },
+                                        "api_version": {
+                                            "type": "string",
+                                            "example": "v2026.3.3"
+                                        },
+                                        "object": {
+                                            "type": "string",
+                                            "example": "error"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "error": {
+                                                    "type": "string",
+                                                    "example": "Internal Server Error"
+                                                },
+                                                "status": {
+                                                    "type": "number",
+                                                    "example": 500
+                                                }
+                                            },
+                                            "required": [
+                                                "error",
+                                                "status"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "timestamp",
+                                        "api_version",
+                                        "object",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/leased": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Get all phone numbers currently leased by the user",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "req_xxxxxxxxxxxxxxxx"
+                                        },
+                                        "timestamp": {
+                                            "type": "number",
+                                            "example": 1772568052124
+                                        },
+                                        "api_version": {
+                                            "type": "string",
+                                            "example": "v2026.3.3"
+                                        },
+                                        "object": {
+                                            "type": "string",
+                                            "example": "response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "leased": {
+                                                    "type": "number",
+                                                    "description": "Number of leased numbers",
+                                                    "example": 1
+                                                },
+                                                "numbers": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "string",
+                                                                "description": "Phone number in E.164 format",
+                                                                "example": "+13059478667"
+                                                            },
+                                                            "status": {
+                                                                "type": "string",
+                                                                "enum": [
+                                                                    "available",
+                                                                    "g-available",
+                                                                    "leased",
+                                                                    "unavailable"
+                                                                ],
+                                                                "description": "Number status (leased)"
+                                                            },
+                                                            "number": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "e164": {
+                                                                        "type": "string",
+                                                                        "description": "E.164 format",
+                                                                        "example": "+13059478667"
+                                                                    },
+                                                                    "formatted": {
+                                                                        "type": "string",
+                                                                        "description": "Formatted phone number",
+                                                                        "example": "+1 (305) 947-8667"
+                                                                    }
+                                                                },
+                                                                "required": [
+                                                                    "e164",
+                                                                    "formatted"
+                                                                ],
+                                                                "description": "Number formats"
+                                                            },
+                                                            "location": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "country": {
+                                                                        "type": "string",
+                                                                        "description": "2-letter country code",
+                                                                        "example": "US"
+                                                                    },
+                                                                    "region": {
+                                                                        "type": "string",
+                                                                        "description": "Region/state",
+                                                                        "example": "FL"
+                                                                    },
+                                                                    "city": {
+                                                                        "type": "string",
+                                                                        "description": "City",
+                                                                        "example": "Miami"
+                                                                    }
+                                                                },
+                                                                "required": [
+                                                                    "country",
+                                                                    "region",
+                                                                    "city"
+                                                                ],
+                                                                "description": "Geographic location"
+                                                            },
+                                                            "carrier": {
+                                                                "type": "string",
+                                                                "enum": [
+                                                                    "T-Mobile",
+                                                                    "AT&T",
+                                                                    "Verizon",
+                                                                    "Twilio",
+                                                                    "Contiguity",
+                                                                    "International Partner"
+                                                                ],
+                                                                "description": "Carrier name",
+                                                                "example": "T-Mobile"
+                                                            },
+                                                            "capabilities": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "intl_sms": {
+                                                                        "type": "boolean",
+                                                                        "description": "International SMS support",
+                                                                        "example": true
+                                                                    },
+                                                                    "channels": {
+                                                                        "type": "array",
+                                                                        "items": {
+                                                                            "type": "string",
+                                                                            "enum": [
+                                                                                "sms",
+                                                                                "mms",
+                                                                                "rcs",
+                                                                                "imessage",
+                                                                                "whatsapp"
+                                                                            ]
+                                                                        },
+                                                                        "description": "Supported channels",
+                                                                        "example": [
+                                                                            "sms",
+                                                                            "mms",
+                                                                            "imessage"
+                                                                        ]
+                                                                    }
+                                                                },
+                                                                "required": [
+                                                                    "intl_sms",
+                                                                    "channels"
+                                                                ],
+                                                                "description": "Number capabilities"
+                                                            },
+                                                            "health": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "reputation": {
+                                                                        "type": "number",
+                                                                        "minimum": 0,
+                                                                        "maximum": 1,
+                                                                        "description": "Reputation score 0.00-0.99",
+                                                                        "example": 0.9
+                                                                    },
+                                                                    "previous_owners": {
+                                                                        "type": "number",
+                                                                        "description": "Number of previous owners",
+                                                                        "example": 1
+                                                                    }
+                                                                },
+                                                                "required": [
+                                                                    "reputation",
+                                                                    "previous_owners"
+                                                                ],
+                                                                "description": "Number health metrics"
+                                                            },
+                                                            "data": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "requirements": {
+                                                                        "type": "array",
+                                                                        "items": {
+                                                                            "type": "string",
+                                                                            "enum": [
+                                                                                "imessage_entitlement_required",
+                                                                                "whatsapp_entitlement_required",
+                                                                                "enterprise_plan_required"
+                                                                            ]
+                                                                        },
+                                                                        "description": "Entitlements required to lease this number",
+                                                                        "example": [
+                                                                            "imessage_entitlement_required"
+                                                                        ]
+                                                                    },
+                                                                    "e911_capable": {
+                                                                        "type": "boolean",
+                                                                        "description": "E911 capability",
+                                                                        "example": true
+                                                                    }
+                                                                },
+                                                                "required": [
+                                                                    "requirements",
+                                                                    "e911_capable"
+                                                                ],
+                                                                "description": "Additional data"
+                                                            },
+                                                            "created_at": {
+                                                                "type": "number",
+                                                                "description": "Creation timestamp",
+                                                                "example": 1718851200
+                                                            },
+                                                            "pricing": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "currency": {
+                                                                        "type": "string",
+                                                                        "enum": [
+                                                                            "USD",
+                                                                            "EUR",
+                                                                            "GBP",
+                                                                            "CAD",
+                                                                            "AUD"
+                                                                        ],
+                                                                        "description": "Currency",
+                                                                        "example": "USD"
+                                                                    },
+                                                                    "upfront_fee": {
+                                                                        "type": "number",
+                                                                        "description": "One-time fee",
+                                                                        "example": 2.99
+                                                                    },
+                                                                    "monthly_rate": {
+                                                                        "type": "number",
+                                                                        "description": "Monthly rate",
+                                                                        "example": 19.99
+                                                                    }
+                                                                },
+                                                                "required": [
+                                                                    "currency",
+                                                                    "upfront_fee",
+                                                                    "monthly_rate"
+                                                                ],
+                                                                "description": "Pricing information"
+                                                            },
+                                                            "lease_id": {
+                                                                "type": "string",
+                                                                "description": "Lease ID",
+                                                                "example": "lsd_1234567890"
+                                                            },
+                                                            "lease_status": {
+                                                                "type": "string",
+                                                                "enum": [
+                                                                    "active",
+                                                                    "paused",
+                                                                    "expired",
+                                                                    "terminated"
+                                                                ],
+                                                                "description": "Lease status",
+                                                                "example": "active"
+                                                            },
+                                                            "billing": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "method": {
+                                                                        "type": "string",
+                                                                        "enum": [
+                                                                            "monthly",
+                                                                            "service_contract",
+                                                                            "goodwill"
+                                                                        ],
+                                                                        "description": "Billing method",
+                                                                        "example": "monthly"
+                                                                    },
+                                                                    "period": {
+                                                                        "type": "object",
+                                                                        "properties": {
+                                                                            "start": {
+                                                                                "type": "number",
+                                                                                "description": "Lease start timestamp",
+                                                                                "example": 1718851200
+                                                                            },
+                                                                            "end": {
+                                                                                "type": "number",
+                                                                                "nullable": true,
+                                                                                "description": "Lease end timestamp. Null if month-to-month with no set cancellation date",
+                                                                                "example": null
+                                                                            }
+                                                                        },
+                                                                        "required": [
+                                                                            "start",
+                                                                            "end"
+                                                                        ]
+                                                                    }
+                                                                },
+                                                                "required": [
+                                                                    "method",
+                                                                    "period"
+                                                                ],
+                                                                "description": "Lease billing information"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "id",
+                                                            "status",
+                                                            "number",
+                                                            "location",
+                                                            "carrier",
+                                                            "capabilities",
+                                                            "health",
+                                                            "data",
+                                                            "created_at",
+                                                            "pricing",
+                                                            "lease_id",
+                                                            "lease_status",
+                                                            "billing"
+                                                        ]
+                                                    },
+                                                    "description": "User's leased numbers"
+                                                }
+                                            },
+                                            "required": [
+                                                "leased",
+                                                "numbers"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "timestamp",
+                                        "api_version",
+                                        "object",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "err_xxxxxxxxxxxxxxxx"
+                                        },
+                                        "timestamp": {
+                                            "type": "number",
+                                            "example": 1772568052124
+                                        },
+                                        "api_version": {
+                                            "type": "string",
+                                            "example": "v2026.3.3"
+                                        },
+                                        "object": {
+                                            "type": "string",
+                                            "example": "error"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "error": {
+                                                    "type": "string",
+                                                    "example": "Bad Request"
+                                                },
+                                                "status": {
+                                                    "type": "number",
+                                                    "example": 400
+                                                }
+                                            },
+                                            "required": [
+                                                "error",
+                                                "status"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "timestamp",
+                                        "api_version",
+                                        "object",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "err_xxxxxxxxxxxxxxxx"
+                                        },
+                                        "timestamp": {
+                                            "type": "number",
+                                            "example": 1772568052124
+                                        },
+                                        "api_version": {
+                                            "type": "string",
+                                            "example": "v2026.3.3"
+                                        },
+                                        "object": {
+                                            "type": "string",
+                                            "example": "error"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "error": {
+                                                    "type": "string",
+                                                    "example": "Unauthorized"
+                                                },
+                                                "status": {
+                                                    "type": "number",
+                                                    "example": 401
+                                                }
+                                            },
+                                            "required": [
+                                                "error",
+                                                "status"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "timestamp",
+                                        "api_version",
+                                        "object",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "err_xxxxxxxxxxxxxxxx"
+                                        },
+                                        "timestamp": {
+                                            "type": "number",
+                                            "example": 1772568052124
+                                        },
+                                        "api_version": {
+                                            "type": "string",
+                                            "example": "v2026.3.3"
+                                        },
+                                        "object": {
+                                            "type": "string",
+                                            "example": "error"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "error": {
+                                                    "type": "string",
+                                                    "example": "Forbidden"
+                                                },
+                                                "status": {
+                                                    "type": "number",
+                                                    "example": 403
+                                                }
+                                            },
+                                            "required": [
+                                                "error",
+                                                "status"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "timestamp",
+                                        "api_version",
+                                        "object",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "err_xxxxxxxxxxxxxxxx"
+                                        },
+                                        "timestamp": {
+                                            "type": "number",
+                                            "example": 1772568052124
+                                        },
+                                        "api_version": {
+                                            "type": "string",
+                                            "example": "v2026.3.3"
+                                        },
+                                        "object": {
+                                            "type": "string",
+                                            "example": "error"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "error": {
+                                                    "type": "string",
+                                                    "example": "Internal Server Error"
+                                                },
+                                                "status": {
+                                                    "type": "number",
+                                                    "example": 500
+                                                }
+                                            },
+                                            "required": [
+                                                "error",
+                                                "status"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "timestamp",
+                                        "api_version",
+                                        "object",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/leased/{number}": {
+            "delete": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "type": "string",
+                            "description": "Phone number in E.164 format",
+                            "example": "+13059478667"
+                        },
+                        "required": true,
+                        "description": "Phone number in E.164 format",
+                        "name": "number",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Terminate your lease for a number",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "req_xxxxxxxxxxxxxxxx"
+                                        },
+                                        "timestamp": {
+                                            "type": "number",
+                                            "example": 1772568052124
+                                        },
+                                        "api_version": {
+                                            "type": "string",
+                                            "example": "v2026.3.3"
+                                        },
+                                        "object": {
+                                            "type": "string",
+                                            "example": "response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "lease_id": {
+                                                    "type": "string",
+                                                    "description": "Terminated lease ID",
+                                                    "example": "lsd_1234567890"
+                                                },
+                                                "number_id": {
+                                                    "type": "string",
+                                                    "description": "Number ID",
+                                                    "example": "+13059478667"
+                                                },
+                                                "status": {
+                                                    "type": "string",
+                                                    "enum": [
+                                                        "active",
+                                                        "expired",
+                                                        "terminated"
+                                                    ],
+                                                    "description": "The lease's new status",
+                                                    "example": "terminated"
+                                                },
+                                                "terminated_at": {
+                                                    "type": "number",
+                                                    "description": "Termination timestamp",
+                                                    "example": 1718851200
+                                                }
+                                            },
+                                            "required": [
+                                                "lease_id",
+                                                "number_id",
+                                                "status",
+                                                "terminated_at"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "timestamp",
+                                        "api_version",
+                                        "object",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "err_xxxxxxxxxxxxxxxx"
+                                        },
+                                        "timestamp": {
+                                            "type": "number",
+                                            "example": 1772568052124
+                                        },
+                                        "api_version": {
+                                            "type": "string",
+                                            "example": "v2026.3.3"
+                                        },
+                                        "object": {
+                                            "type": "string",
+                                            "example": "error"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "error": {
+                                                    "type": "string",
+                                                    "example": "Bad Request"
+                                                },
+                                                "status": {
+                                                    "type": "number",
+                                                    "example": 400
+                                                }
+                                            },
+                                            "required": [
+                                                "error",
+                                                "status"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "timestamp",
+                                        "api_version",
+                                        "object",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "err_xxxxxxxxxxxxxxxx"
+                                        },
+                                        "timestamp": {
+                                            "type": "number",
+                                            "example": 1772568052124
+                                        },
+                                        "api_version": {
+                                            "type": "string",
+                                            "example": "v2026.3.3"
+                                        },
+                                        "object": {
+                                            "type": "string",
+                                            "example": "error"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "error": {
+                                                    "type": "string",
+                                                    "example": "Unauthorized"
+                                                },
+                                                "status": {
+                                                    "type": "number",
+                                                    "example": 401
+                                                }
+                                            },
+                                            "required": [
+                                                "error",
+                                                "status"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "timestamp",
+                                        "api_version",
+                                        "object",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "err_xxxxxxxxxxxxxxxx"
+                                        },
+                                        "timestamp": {
+                                            "type": "number",
+                                            "example": 1772568052124
+                                        },
+                                        "api_version": {
+                                            "type": "string",
+                                            "example": "v2026.3.3"
+                                        },
+                                        "object": {
+                                            "type": "string",
+                                            "example": "error"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "error": {
+                                                    "type": "string",
+                                                    "example": "Forbidden"
+                                                },
+                                                "status": {
+                                                    "type": "number",
+                                                    "example": 403
+                                                }
+                                            },
+                                            "required": [
+                                                "error",
+                                                "status"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "timestamp",
+                                        "api_version",
+                                        "object",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "err_xxxxxxxxxxxxxxxx"
+                                        },
+                                        "timestamp": {
+                                            "type": "number",
+                                            "example": 1772568052124
+                                        },
+                                        "api_version": {
+                                            "type": "string",
+                                            "example": "v2026.3.3"
+                                        },
+                                        "object": {
+                                            "type": "string",
+                                            "example": "error"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "error": {
+                                                    "type": "string",
+                                                    "example": "Internal Server Error"
+                                                },
+                                                "status": {
+                                                    "type": "number",
+                                                    "example": 500
+                                                }
+                                            },
+                                            "required": [
+                                                "error",
+                                                "status"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "timestamp",
+                                        "api_version",
+                                        "object",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/{number}/configure": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "type": "string",
+                            "description": "Phone number in E.164 format",
+                            "example": "+13059478667"
+                        },
+                        "required": true,
+                        "description": "Phone number in E.164 format",
+                        "name": "number",
+                        "in": "path"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "failover": {
+                                        "type": "object",
+                                        "properties": {
+                                            "enabled": {
+                                                "type": "boolean",
+                                                "description": "Enable this number as a failover target"
+                                            },
+                                            "mode": {
+                                                "type": "string",
+                                                "enum": [
+                                                    "all",
+                                                    "selective"
+                                                ],
+                                                "description": "'all' = any number can fail over to this one. 'selective' = only specified numbers."
+                                            },
+                                            "numbers": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "string"
+                                                },
+                                                "description": "E.164 numbers this number will cover (selective mode only)"
+                                            }
+                                        },
+                                        "required": [
+                                            "enabled"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Configure a leased number (failover, etc.)",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "req_xxxxxxxxxxxxxxxx"
+                                        },
+                                        "timestamp": {
+                                            "type": "number",
+                                            "example": 1772568052124
+                                        },
+                                        "api_version": {
+                                            "type": "string",
+                                            "example": "v2026.3.3"
+                                        },
+                                        "object": {
+                                            "type": "string",
+                                            "example": "response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "number": {
+                                                    "type": "string",
+                                                    "description": "Number that was configured"
+                                                },
+                                                "failover": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "enabled": {
+                                                            "type": "boolean"
+                                                        },
+                                                        "mode": {
+                                                            "type": "string",
+                                                            "enum": [
+                                                                "all",
+                                                                "selective"
+                                                            ]
+                                                        },
+                                                        "numbers": {
+                                                            "type": "array",
+                                                            "items": {
+                                                                "type": "string"
+                                                            }
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "enabled",
+                                                        "mode",
+                                                        "numbers"
+                                                    ]
+                                                }
+                                            },
+                                            "required": [
+                                                "number"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "timestamp",
+                                        "api_version",
+                                        "object",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "err_xxxxxxxxxxxxxxxx"
+                                        },
+                                        "timestamp": {
+                                            "type": "number",
+                                            "example": 1772568052124
+                                        },
+                                        "api_version": {
+                                            "type": "string",
+                                            "example": "v2026.3.3"
+                                        },
+                                        "object": {
+                                            "type": "string",
+                                            "example": "error"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "error": {
+                                                    "type": "string",
+                                                    "example": "Bad Request"
+                                                },
+                                                "status": {
+                                                    "type": "number",
+                                                    "example": 400
+                                                }
+                                            },
+                                            "required": [
+                                                "error",
+                                                "status"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "timestamp",
+                                        "api_version",
+                                        "object",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "err_xxxxxxxxxxxxxxxx"
+                                        },
+                                        "timestamp": {
+                                            "type": "number",
+                                            "example": 1772568052124
+                                        },
+                                        "api_version": {
+                                            "type": "string",
+                                            "example": "v2026.3.3"
+                                        },
+                                        "object": {
+                                            "type": "string",
+                                            "example": "error"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "error": {
+                                                    "type": "string",
+                                                    "example": "Unauthorized"
+                                                },
+                                                "status": {
+                                                    "type": "number",
+                                                    "example": 401
+                                                }
+                                            },
+                                            "required": [
+                                                "error",
+                                                "status"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "timestamp",
+                                        "api_version",
+                                        "object",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "err_xxxxxxxxxxxxxxxx"
+                                        },
+                                        "timestamp": {
+                                            "type": "number",
+                                            "example": 1772568052124
+                                        },
+                                        "api_version": {
+                                            "type": "string",
+                                            "example": "v2026.3.3"
+                                        },
+                                        "object": {
+                                            "type": "string",
+                                            "example": "error"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "error": {
+                                                    "type": "string",
+                                                    "example": "Forbidden"
+                                                },
+                                                "status": {
+                                                    "type": "number",
+                                                    "example": 403
+                                                }
+                                            },
+                                            "required": [
+                                                "error",
+                                                "status"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "timestamp",
+                                        "api_version",
+                                        "object",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "err_xxxxxxxxxxxxxxxx"
+                                        },
+                                        "timestamp": {
+                                            "type": "number",
+                                            "example": 1772568052124
+                                        },
+                                        "api_version": {
+                                            "type": "string",
+                                            "example": "v2026.3.3"
                                         },
                                         "object": {
                                             "type": "string",
@@ -540,11 +2120,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1770363397691
+                                            "example": 1772568052124
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.2.6"
+                                            "example": "v2026.3.3"
                                         },
                                         "object": {
                                             "type": "string",
@@ -846,11 +2426,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1770363397691
+                                            "example": 1772568052124
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.2.6"
+                                            "example": "v2026.3.3"
                                         },
                                         "object": {
                                             "type": "string",
@@ -898,11 +2478,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1770363397691
+                                            "example": 1772568052124
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.2.6"
+                                            "example": "v2026.3.3"
                                         },
                                         "object": {
                                             "type": "string",
@@ -950,11 +2530,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1770363397691
+                                            "example": 1772568052124
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.2.6"
+                                            "example": "v2026.3.3"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1002,1249 +2582,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1770363397691
+                                            "example": 1772568052124
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.2.6"
-                                        },
-                                        "object": {
-                                            "type": "string",
-                                            "example": "error"
-                                        },
-                                        "data": {
-                                            "type": "object",
-                                            "properties": {
-                                                "error": {
-                                                    "type": "string",
-                                                    "example": "Internal Server Error"
-                                                },
-                                                "status": {
-                                                    "type": "number",
-                                                    "example": 500
-                                                }
-                                            },
-                                            "required": [
-                                                "error",
-                                                "status"
-                                            ]
-                                        }
-                                    },
-                                    "required": [
-                                        "id",
-                                        "timestamp",
-                                        "api_version",
-                                        "object",
-                                        "data"
-                                    ]
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/lease/{number}": {
-            "post": {
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ],
-                "parameters": [
-                    {
-                        "schema": {
-                            "type": "string",
-                            "description": "Phone number in E.164 format",
-                            "example": "+13059478667"
-                        },
-                        "required": true,
-                        "description": "Phone number in E.164 format",
-                        "name": "number",
-                        "in": "path"
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "billing_method": {
-                                        "type": "string",
-                                        "nullable": true,
-                                        "enum": [
-                                            "monthly",
-                                            "service_contract"
-                                        ],
-                                        "default": "monthly",
-                                        "description": "Billing method (service_contract only works if active)"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Lease a specific phone number",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "id": {
-                                            "type": "string",
-                                            "example": "req_xxxxxxxxxxxxxxxx"
-                                        },
-                                        "timestamp": {
-                                            "type": "number",
-                                            "example": 1770363397691
-                                        },
-                                        "api_version": {
-                                            "type": "string",
-                                            "example": "v2026.2.6"
-                                        },
-                                        "object": {
-                                            "type": "string",
-                                            "example": "response"
-                                        },
-                                        "data": {
-                                            "type": "object",
-                                            "properties": {
-                                                "lease_id": {
-                                                    "type": "string",
-                                                    "description": "Lease ID",
-                                                    "example": "lsd_1234567890"
-                                                },
-                                                "number": {
-                                                    "type": "string",
-                                                    "description": "Phone number ID",
-                                                    "example": "+13059478667"
-                                                },
-                                                "status": {
-                                                    "type": "string",
-                                                    "enum": [
-                                                        "active",
-                                                        "expired",
-                                                        "terminated"
-                                                    ],
-                                                    "description": "Lease status",
-                                                    "example": "active"
-                                                },
-                                                "billing": {
-                                                    "type": "object",
-                                                    "properties": {
-                                                        "method": {
-                                                            "type": "string",
-                                                            "enum": [
-                                                                "monthly",
-                                                                "service_contract",
-                                                                "goodwill"
-                                                            ],
-                                                            "description": "Billing method",
-                                                            "example": "monthly"
-                                                        },
-                                                        "price": {
-                                                            "type": "object",
-                                                            "properties": {
-                                                                "currency": {
-                                                                    "type": "string",
-                                                                    "enum": [
-                                                                        "USD",
-                                                                        "EUR",
-                                                                        "GBP",
-                                                                        "CAD",
-                                                                        "AUD"
-                                                                    ],
-                                                                    "description": "Currency",
-                                                                    "example": "USD"
-                                                                },
-                                                                "monthly_rate": {
-                                                                    "type": "number",
-                                                                    "description": "Monthly rate",
-                                                                    "example": 19.99
-                                                                },
-                                                                "upfront_fee": {
-                                                                    "type": "number",
-                                                                    "description": "One-time fee",
-                                                                    "example": 2.99
-                                                                }
-                                                            },
-                                                            "required": [
-                                                                "currency",
-                                                                "monthly_rate",
-                                                                "upfront_fee"
-                                                            ]
-                                                        },
-                                                        "period": {
-                                                            "type": "object",
-                                                            "properties": {
-                                                                "start": {
-                                                                    "type": "number",
-                                                                    "description": "Lease start timestamp",
-                                                                    "example": 1718851200
-                                                                },
-                                                                "end": {
-                                                                    "nullable": true,
-                                                                    "description": "Always null for month-to-month leases",
-                                                                    "example": null
-                                                                }
-                                                            },
-                                                            "required": [
-                                                                "start",
-                                                                "end"
-                                                            ]
-                                                        }
-                                                    },
-                                                    "required": [
-                                                        "method",
-                                                        "price",
-                                                        "period"
-                                                    ]
-                                                }
-                                            },
-                                            "required": [
-                                                "lease_id",
-                                                "number",
-                                                "status",
-                                                "billing"
-                                            ]
-                                        }
-                                    },
-                                    "required": [
-                                        "id",
-                                        "timestamp",
-                                        "api_version",
-                                        "object",
-                                        "data"
-                                    ]
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "id": {
-                                            "type": "string",
-                                            "example": "err_xxxxxxxxxxxxxxxx"
-                                        },
-                                        "timestamp": {
-                                            "type": "number",
-                                            "example": 1770363397691
-                                        },
-                                        "api_version": {
-                                            "type": "string",
-                                            "example": "v2026.2.6"
-                                        },
-                                        "object": {
-                                            "type": "string",
-                                            "example": "error"
-                                        },
-                                        "data": {
-                                            "type": "object",
-                                            "properties": {
-                                                "error": {
-                                                    "type": "string",
-                                                    "example": "Bad Request"
-                                                },
-                                                "status": {
-                                                    "type": "number",
-                                                    "example": 400
-                                                }
-                                            },
-                                            "required": [
-                                                "error",
-                                                "status"
-                                            ]
-                                        }
-                                    },
-                                    "required": [
-                                        "id",
-                                        "timestamp",
-                                        "api_version",
-                                        "object",
-                                        "data"
-                                    ]
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "id": {
-                                            "type": "string",
-                                            "example": "err_xxxxxxxxxxxxxxxx"
-                                        },
-                                        "timestamp": {
-                                            "type": "number",
-                                            "example": 1770363397691
-                                        },
-                                        "api_version": {
-                                            "type": "string",
-                                            "example": "v2026.2.6"
-                                        },
-                                        "object": {
-                                            "type": "string",
-                                            "example": "error"
-                                        },
-                                        "data": {
-                                            "type": "object",
-                                            "properties": {
-                                                "error": {
-                                                    "type": "string",
-                                                    "example": "Unauthorized"
-                                                },
-                                                "status": {
-                                                    "type": "number",
-                                                    "example": 401
-                                                }
-                                            },
-                                            "required": [
-                                                "error",
-                                                "status"
-                                            ]
-                                        }
-                                    },
-                                    "required": [
-                                        "id",
-                                        "timestamp",
-                                        "api_version",
-                                        "object",
-                                        "data"
-                                    ]
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "Forbidden",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "id": {
-                                            "type": "string",
-                                            "example": "err_xxxxxxxxxxxxxxxx"
-                                        },
-                                        "timestamp": {
-                                            "type": "number",
-                                            "example": 1770363397691
-                                        },
-                                        "api_version": {
-                                            "type": "string",
-                                            "example": "v2026.2.6"
-                                        },
-                                        "object": {
-                                            "type": "string",
-                                            "example": "error"
-                                        },
-                                        "data": {
-                                            "type": "object",
-                                            "properties": {
-                                                "error": {
-                                                    "type": "string",
-                                                    "example": "Forbidden"
-                                                },
-                                                "status": {
-                                                    "type": "number",
-                                                    "example": 403
-                                                }
-                                            },
-                                            "required": [
-                                                "error",
-                                                "status"
-                                            ]
-                                        }
-                                    },
-                                    "required": [
-                                        "id",
-                                        "timestamp",
-                                        "api_version",
-                                        "object",
-                                        "data"
-                                    ]
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "id": {
-                                            "type": "string",
-                                            "example": "err_xxxxxxxxxxxxxxxx"
-                                        },
-                                        "timestamp": {
-                                            "type": "number",
-                                            "example": 1770363397691
-                                        },
-                                        "api_version": {
-                                            "type": "string",
-                                            "example": "v2026.2.6"
-                                        },
-                                        "object": {
-                                            "type": "string",
-                                            "example": "error"
-                                        },
-                                        "data": {
-                                            "type": "object",
-                                            "properties": {
-                                                "error": {
-                                                    "type": "string",
-                                                    "example": "Internal Server Error"
-                                                },
-                                                "status": {
-                                                    "type": "number",
-                                                    "example": 500
-                                                }
-                                            },
-                                            "required": [
-                                                "error",
-                                                "status"
-                                            ]
-                                        }
-                                    },
-                                    "required": [
-                                        "id",
-                                        "timestamp",
-                                        "api_version",
-                                        "object",
-                                        "data"
-                                    ]
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/leased": {
-            "get": {
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Get all phone numbers currently leased by the user",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "id": {
-                                            "type": "string",
-                                            "example": "req_xxxxxxxxxxxxxxxx"
-                                        },
-                                        "timestamp": {
-                                            "type": "number",
-                                            "example": 1770363397691
-                                        },
-                                        "api_version": {
-                                            "type": "string",
-                                            "example": "v2026.2.6"
-                                        },
-                                        "object": {
-                                            "type": "string",
-                                            "example": "response"
-                                        },
-                                        "data": {
-                                            "type": "object",
-                                            "properties": {
-                                                "leased": {
-                                                    "type": "number",
-                                                    "description": "Number of leased numbers",
-                                                    "example": 1
-                                                },
-                                                "numbers": {
-                                                    "type": "array",
-                                                    "items": {
-                                                        "type": "object",
-                                                        "properties": {
-                                                            "id": {
-                                                                "type": "string",
-                                                                "description": "Phone number in E.164 format",
-                                                                "example": "+13059478667"
-                                                            },
-                                                            "status": {
-                                                                "type": "string",
-                                                                "enum": [
-                                                                    "available",
-                                                                    "g-available",
-                                                                    "leased",
-                                                                    "unavailable"
-                                                                ],
-                                                                "description": "Number status (leased)"
-                                                            },
-                                                            "number": {
-                                                                "type": "object",
-                                                                "properties": {
-                                                                    "e164": {
-                                                                        "type": "string",
-                                                                        "description": "E.164 format",
-                                                                        "example": "+13059478667"
-                                                                    },
-                                                                    "formatted": {
-                                                                        "type": "string",
-                                                                        "description": "Formatted phone number",
-                                                                        "example": "+1 (305) 947-8667"
-                                                                    }
-                                                                },
-                                                                "required": [
-                                                                    "e164",
-                                                                    "formatted"
-                                                                ],
-                                                                "description": "Number formats"
-                                                            },
-                                                            "location": {
-                                                                "type": "object",
-                                                                "properties": {
-                                                                    "country": {
-                                                                        "type": "string",
-                                                                        "description": "2-letter country code",
-                                                                        "example": "US"
-                                                                    },
-                                                                    "region": {
-                                                                        "type": "string",
-                                                                        "description": "Region/state",
-                                                                        "example": "FL"
-                                                                    },
-                                                                    "city": {
-                                                                        "type": "string",
-                                                                        "description": "City",
-                                                                        "example": "Miami"
-                                                                    }
-                                                                },
-                                                                "required": [
-                                                                    "country",
-                                                                    "region",
-                                                                    "city"
-                                                                ],
-                                                                "description": "Geographic location"
-                                                            },
-                                                            "carrier": {
-                                                                "type": "string",
-                                                                "enum": [
-                                                                    "T-Mobile",
-                                                                    "AT&T",
-                                                                    "Verizon",
-                                                                    "Twilio",
-                                                                    "Contiguity",
-                                                                    "International Partner"
-                                                                ],
-                                                                "description": "Carrier name",
-                                                                "example": "T-Mobile"
-                                                            },
-                                                            "capabilities": {
-                                                                "type": "object",
-                                                                "properties": {
-                                                                    "intl_sms": {
-                                                                        "type": "boolean",
-                                                                        "description": "International SMS support",
-                                                                        "example": true
-                                                                    },
-                                                                    "channels": {
-                                                                        "type": "array",
-                                                                        "items": {
-                                                                            "type": "string",
-                                                                            "enum": [
-                                                                                "sms",
-                                                                                "mms",
-                                                                                "rcs",
-                                                                                "imessage",
-                                                                                "whatsapp"
-                                                                            ]
-                                                                        },
-                                                                        "description": "Supported channels",
-                                                                        "example": [
-                                                                            "sms",
-                                                                            "mms",
-                                                                            "imessage"
-                                                                        ]
-                                                                    }
-                                                                },
-                                                                "required": [
-                                                                    "intl_sms",
-                                                                    "channels"
-                                                                ],
-                                                                "description": "Number capabilities"
-                                                            },
-                                                            "health": {
-                                                                "type": "object",
-                                                                "properties": {
-                                                                    "reputation": {
-                                                                        "type": "number",
-                                                                        "minimum": 0,
-                                                                        "maximum": 1,
-                                                                        "description": "Reputation score 0.00-0.99",
-                                                                        "example": 0.9
-                                                                    },
-                                                                    "previous_owners": {
-                                                                        "type": "number",
-                                                                        "description": "Number of previous owners",
-                                                                        "example": 1
-                                                                    }
-                                                                },
-                                                                "required": [
-                                                                    "reputation",
-                                                                    "previous_owners"
-                                                                ],
-                                                                "description": "Number health metrics"
-                                                            },
-                                                            "data": {
-                                                                "type": "object",
-                                                                "properties": {
-                                                                    "requirements": {
-                                                                        "type": "array",
-                                                                        "items": {
-                                                                            "type": "string",
-                                                                            "enum": [
-                                                                                "imessage_entitlement_required",
-                                                                                "whatsapp_entitlement_required",
-                                                                                "enterprise_plan_required"
-                                                                            ]
-                                                                        },
-                                                                        "description": "Entitlements required to lease this number",
-                                                                        "example": [
-                                                                            "imessage_entitlement_required"
-                                                                        ]
-                                                                    },
-                                                                    "e911_capable": {
-                                                                        "type": "boolean",
-                                                                        "description": "E911 capability",
-                                                                        "example": true
-                                                                    }
-                                                                },
-                                                                "required": [
-                                                                    "requirements",
-                                                                    "e911_capable"
-                                                                ],
-                                                                "description": "Additional data"
-                                                            },
-                                                            "created_at": {
-                                                                "type": "number",
-                                                                "description": "Creation timestamp",
-                                                                "example": 1718851200
-                                                            },
-                                                            "pricing": {
-                                                                "type": "object",
-                                                                "properties": {
-                                                                    "currency": {
-                                                                        "type": "string",
-                                                                        "enum": [
-                                                                            "USD",
-                                                                            "EUR",
-                                                                            "GBP",
-                                                                            "CAD",
-                                                                            "AUD"
-                                                                        ],
-                                                                        "description": "Currency",
-                                                                        "example": "USD"
-                                                                    },
-                                                                    "upfront_fee": {
-                                                                        "type": "number",
-                                                                        "description": "One-time fee",
-                                                                        "example": 2.99
-                                                                    },
-                                                                    "monthly_rate": {
-                                                                        "type": "number",
-                                                                        "description": "Monthly rate",
-                                                                        "example": 19.99
-                                                                    }
-                                                                },
-                                                                "required": [
-                                                                    "currency",
-                                                                    "upfront_fee",
-                                                                    "monthly_rate"
-                                                                ],
-                                                                "description": "Pricing information"
-                                                            },
-                                                            "lease_id": {
-                                                                "type": "string",
-                                                                "description": "Lease ID",
-                                                                "example": "lsd_1234567890"
-                                                            },
-                                                            "lease_status": {
-                                                                "type": "string",
-                                                                "enum": [
-                                                                    "active",
-                                                                    "expired",
-                                                                    "terminated"
-                                                                ],
-                                                                "description": "Lease status",
-                                                                "example": "active"
-                                                            },
-                                                            "billing": {
-                                                                "type": "object",
-                                                                "properties": {
-                                                                    "method": {
-                                                                        "type": "string",
-                                                                        "enum": [
-                                                                            "monthly",
-                                                                            "service_contract",
-                                                                            "goodwill"
-                                                                        ],
-                                                                        "description": "Billing method",
-                                                                        "example": "monthly"
-                                                                    },
-                                                                    "period": {
-                                                                        "type": "object",
-                                                                        "properties": {
-                                                                            "start": {
-                                                                                "type": "number",
-                                                                                "description": "Lease start timestamp",
-                                                                                "example": 1718851200
-                                                                            },
-                                                                            "end": {
-                                                                                "type": "number",
-                                                                                "nullable": true,
-                                                                                "description": "Lease end timestamp. Null if month-to-month with no set cancellation date",
-                                                                                "example": null
-                                                                            }
-                                                                        },
-                                                                        "required": [
-                                                                            "start",
-                                                                            "end"
-                                                                        ]
-                                                                    }
-                                                                },
-                                                                "required": [
-                                                                    "method",
-                                                                    "period"
-                                                                ],
-                                                                "description": "Lease billing information"
-                                                            }
-                                                        },
-                                                        "required": [
-                                                            "id",
-                                                            "status",
-                                                            "number",
-                                                            "location",
-                                                            "carrier",
-                                                            "capabilities",
-                                                            "health",
-                                                            "data",
-                                                            "created_at",
-                                                            "pricing",
-                                                            "lease_id",
-                                                            "lease_status",
-                                                            "billing"
-                                                        ]
-                                                    },
-                                                    "description": "User's leased numbers"
-                                                }
-                                            },
-                                            "required": [
-                                                "leased",
-                                                "numbers"
-                                            ]
-                                        }
-                                    },
-                                    "required": [
-                                        "id",
-                                        "timestamp",
-                                        "api_version",
-                                        "object",
-                                        "data"
-                                    ]
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "id": {
-                                            "type": "string",
-                                            "example": "err_xxxxxxxxxxxxxxxx"
-                                        },
-                                        "timestamp": {
-                                            "type": "number",
-                                            "example": 1770363397691
-                                        },
-                                        "api_version": {
-                                            "type": "string",
-                                            "example": "v2026.2.6"
-                                        },
-                                        "object": {
-                                            "type": "string",
-                                            "example": "error"
-                                        },
-                                        "data": {
-                                            "type": "object",
-                                            "properties": {
-                                                "error": {
-                                                    "type": "string",
-                                                    "example": "Bad Request"
-                                                },
-                                                "status": {
-                                                    "type": "number",
-                                                    "example": 400
-                                                }
-                                            },
-                                            "required": [
-                                                "error",
-                                                "status"
-                                            ]
-                                        }
-                                    },
-                                    "required": [
-                                        "id",
-                                        "timestamp",
-                                        "api_version",
-                                        "object",
-                                        "data"
-                                    ]
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "id": {
-                                            "type": "string",
-                                            "example": "err_xxxxxxxxxxxxxxxx"
-                                        },
-                                        "timestamp": {
-                                            "type": "number",
-                                            "example": 1770363397691
-                                        },
-                                        "api_version": {
-                                            "type": "string",
-                                            "example": "v2026.2.6"
-                                        },
-                                        "object": {
-                                            "type": "string",
-                                            "example": "error"
-                                        },
-                                        "data": {
-                                            "type": "object",
-                                            "properties": {
-                                                "error": {
-                                                    "type": "string",
-                                                    "example": "Unauthorized"
-                                                },
-                                                "status": {
-                                                    "type": "number",
-                                                    "example": 401
-                                                }
-                                            },
-                                            "required": [
-                                                "error",
-                                                "status"
-                                            ]
-                                        }
-                                    },
-                                    "required": [
-                                        "id",
-                                        "timestamp",
-                                        "api_version",
-                                        "object",
-                                        "data"
-                                    ]
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "Forbidden",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "id": {
-                                            "type": "string",
-                                            "example": "err_xxxxxxxxxxxxxxxx"
-                                        },
-                                        "timestamp": {
-                                            "type": "number",
-                                            "example": 1770363397691
-                                        },
-                                        "api_version": {
-                                            "type": "string",
-                                            "example": "v2026.2.6"
-                                        },
-                                        "object": {
-                                            "type": "string",
-                                            "example": "error"
-                                        },
-                                        "data": {
-                                            "type": "object",
-                                            "properties": {
-                                                "error": {
-                                                    "type": "string",
-                                                    "example": "Forbidden"
-                                                },
-                                                "status": {
-                                                    "type": "number",
-                                                    "example": 403
-                                                }
-                                            },
-                                            "required": [
-                                                "error",
-                                                "status"
-                                            ]
-                                        }
-                                    },
-                                    "required": [
-                                        "id",
-                                        "timestamp",
-                                        "api_version",
-                                        "object",
-                                        "data"
-                                    ]
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "id": {
-                                            "type": "string",
-                                            "example": "err_xxxxxxxxxxxxxxxx"
-                                        },
-                                        "timestamp": {
-                                            "type": "number",
-                                            "example": 1770363397691
-                                        },
-                                        "api_version": {
-                                            "type": "string",
-                                            "example": "v2026.2.6"
-                                        },
-                                        "object": {
-                                            "type": "string",
-                                            "example": "error"
-                                        },
-                                        "data": {
-                                            "type": "object",
-                                            "properties": {
-                                                "error": {
-                                                    "type": "string",
-                                                    "example": "Internal Server Error"
-                                                },
-                                                "status": {
-                                                    "type": "number",
-                                                    "example": 500
-                                                }
-                                            },
-                                            "required": [
-                                                "error",
-                                                "status"
-                                            ]
-                                        }
-                                    },
-                                    "required": [
-                                        "id",
-                                        "timestamp",
-                                        "api_version",
-                                        "object",
-                                        "data"
-                                    ]
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/leased/{number}": {
-            "delete": {
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ],
-                "parameters": [
-                    {
-                        "schema": {
-                            "type": "string",
-                            "description": "Phone number in E.164 format",
-                            "example": "+13059478667"
-                        },
-                        "required": true,
-                        "description": "Phone number in E.164 format",
-                        "name": "number",
-                        "in": "path"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Terminate your lease for a number",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "id": {
-                                            "type": "string",
-                                            "example": "req_xxxxxxxxxxxxxxxx"
-                                        },
-                                        "timestamp": {
-                                            "type": "number",
-                                            "example": 1770363397691
-                                        },
-                                        "api_version": {
-                                            "type": "string",
-                                            "example": "v2026.2.6"
-                                        },
-                                        "object": {
-                                            "type": "string",
-                                            "example": "response"
-                                        },
-                                        "data": {
-                                            "type": "object",
-                                            "properties": {
-                                                "lease_id": {
-                                                    "type": "string",
-                                                    "description": "Terminated lease ID",
-                                                    "example": "lsd_1234567890"
-                                                },
-                                                "number_id": {
-                                                    "type": "string",
-                                                    "description": "Number ID",
-                                                    "example": "+13059478667"
-                                                },
-                                                "status": {
-                                                    "type": "string",
-                                                    "enum": [
-                                                        "active",
-                                                        "expired",
-                                                        "terminated"
-                                                    ],
-                                                    "description": "The lease's new status",
-                                                    "example": "terminated"
-                                                },
-                                                "terminated_at": {
-                                                    "type": "number",
-                                                    "description": "Termination timestamp",
-                                                    "example": 1718851200
-                                                }
-                                            },
-                                            "required": [
-                                                "lease_id",
-                                                "number_id",
-                                                "status",
-                                                "terminated_at"
-                                            ]
-                                        }
-                                    },
-                                    "required": [
-                                        "id",
-                                        "timestamp",
-                                        "api_version",
-                                        "object",
-                                        "data"
-                                    ]
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "id": {
-                                            "type": "string",
-                                            "example": "err_xxxxxxxxxxxxxxxx"
-                                        },
-                                        "timestamp": {
-                                            "type": "number",
-                                            "example": 1770363397691
-                                        },
-                                        "api_version": {
-                                            "type": "string",
-                                            "example": "v2026.2.6"
-                                        },
-                                        "object": {
-                                            "type": "string",
-                                            "example": "error"
-                                        },
-                                        "data": {
-                                            "type": "object",
-                                            "properties": {
-                                                "error": {
-                                                    "type": "string",
-                                                    "example": "Bad Request"
-                                                },
-                                                "status": {
-                                                    "type": "number",
-                                                    "example": 400
-                                                }
-                                            },
-                                            "required": [
-                                                "error",
-                                                "status"
-                                            ]
-                                        }
-                                    },
-                                    "required": [
-                                        "id",
-                                        "timestamp",
-                                        "api_version",
-                                        "object",
-                                        "data"
-                                    ]
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "id": {
-                                            "type": "string",
-                                            "example": "err_xxxxxxxxxxxxxxxx"
-                                        },
-                                        "timestamp": {
-                                            "type": "number",
-                                            "example": 1770363397691
-                                        },
-                                        "api_version": {
-                                            "type": "string",
-                                            "example": "v2026.2.6"
-                                        },
-                                        "object": {
-                                            "type": "string",
-                                            "example": "error"
-                                        },
-                                        "data": {
-                                            "type": "object",
-                                            "properties": {
-                                                "error": {
-                                                    "type": "string",
-                                                    "example": "Unauthorized"
-                                                },
-                                                "status": {
-                                                    "type": "number",
-                                                    "example": 401
-                                                }
-                                            },
-                                            "required": [
-                                                "error",
-                                                "status"
-                                            ]
-                                        }
-                                    },
-                                    "required": [
-                                        "id",
-                                        "timestamp",
-                                        "api_version",
-                                        "object",
-                                        "data"
-                                    ]
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "Forbidden",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "id": {
-                                            "type": "string",
-                                            "example": "err_xxxxxxxxxxxxxxxx"
-                                        },
-                                        "timestamp": {
-                                            "type": "number",
-                                            "example": 1770363397691
-                                        },
-                                        "api_version": {
-                                            "type": "string",
-                                            "example": "v2026.2.6"
-                                        },
-                                        "object": {
-                                            "type": "string",
-                                            "example": "error"
-                                        },
-                                        "data": {
-                                            "type": "object",
-                                            "properties": {
-                                                "error": {
-                                                    "type": "string",
-                                                    "example": "Forbidden"
-                                                },
-                                                "status": {
-                                                    "type": "number",
-                                                    "example": 403
-                                                }
-                                            },
-                                            "required": [
-                                                "error",
-                                                "status"
-                                            ]
-                                        }
-                                    },
-                                    "required": [
-                                        "id",
-                                        "timestamp",
-                                        "api_version",
-                                        "object",
-                                        "data"
-                                    ]
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "id": {
-                                            "type": "string",
-                                            "example": "err_xxxxxxxxxxxxxxxx"
-                                        },
-                                        "timestamp": {
-                                            "type": "number",
-                                            "example": 1770363397691
-                                        },
-                                        "api_version": {
-                                            "type": "string",
-                                            "example": "v2026.2.6"
+                                            "example": "v2026.3.3"
                                         },
                                         "object": {
                                             "type": "string",

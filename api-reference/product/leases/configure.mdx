@@ -1,0 +1,18 @@
+---
+title: 'Configure a number'
+openapi: "openapi-numbers POST /{number}/configure"
+sidebarTitle: 'Configure'
+description: "Customize a leased number's behavior"
+icon: "gear"
+---
+
+<Tip>
+The `failover` configuration lets you set up this number to act as a failover target..
+- Set `enabled` to `true` to activate failover.
+- The `mode` can be either `all` (any number can fail over) or `selective` (only specific numbers are allowed. Useful for multi-tenant failover setups).
+- If you're using `selective` mode, provide the list of allowed leased numbers in `numbers`.
+</Tip>
+
+import Snippet from '/snippets/mintlify.mdx';
+
+<Snippet />
