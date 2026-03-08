@@ -65,6 +65,16 @@ import InstallPY from '/snippets/install-py.mdx';
     });
     ```
 
+    ## Configure a lease
+    Customize a leased number's failover behavior.
+
+    ```typescript
+    const res = await contiguity.lease.configure({
+      number: "+13059478667",
+      failover: { enabled: true, mode: "selective", numbers: ["+15551234567"] }
+    });
+    ```
+
     ## Terminate a Lease
     End a lease for a phone number when you no longer need it.
 
@@ -104,6 +114,16 @@ import InstallPY from '/snippets/install-py.mdx';
 
     <ParamField body="number" type="string" required>
       The leased phone number to get details for, in E.164 format (e.g., "+1234567890").
+    </ParamField>
+
+    ### lease.configure(params)
+
+    <ParamField body="number" type="string" required>
+      The leased phone number to configure, in E.164 format.
+    </ParamField>
+
+    <ParamField body="failover" type="object" required>
+      Failover config: `enabled`, `mode` (`"all"` or `"selective"`), `numbers` (E.164[] when selective).
     </ParamField>
 
     ### lease.terminate(params)

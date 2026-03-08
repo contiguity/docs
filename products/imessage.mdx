@@ -49,6 +49,12 @@ import InstallPY from '/snippets/install-py.mdx';
     });
     ```
 
+    ## Check iMessage availability
+
+    ```typescript
+    const res = await contiguity.imessage.availability({ to: "+1234567890" });
+    ```
+
     ## Typing Indicators
     Show typing indicators to create a more interactive messaging experience.
 
@@ -111,10 +117,16 @@ import InstallPY from '/snippets/install-py.mdx';
   Array of attachment URLs to include with the message. Supports images and other media.
 </ParamField>
 
+### imessage.availability(params)
+
+<ParamField body="to" type="string" required>
+  Recipient phone number in E.164 format.
+</ParamField>
+
 ### imessage.typing(params)
 
 <ParamField body="to" type="string" required>
-  The recipient's phone number in E.164 format (e.g., "+1234567890").
+  The recipient's phone number in E.164 format (e.g. "+1234567890").
 </ParamField>
 
 <ParamField body="action" type="string" required>

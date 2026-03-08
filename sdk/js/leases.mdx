@@ -160,6 +160,50 @@ const res = await contiguity.lease.details("+1234567890");
   Request metadata including ID, timestamp, and API version.
 </ResponseField>
 
+## Configure a lease
+Customize a leased number's failover behavior.
+
+```typescript
+const res = await contiguity.lease.configure({
+  number: "+13059478667",
+  failover: { enabled: true, mode: "selective", numbers: ["+15551234567"] }
+});
+```
+
+### Parameters
+
+<ParamField body="number" type="string" required>
+  Leased phone number in E.164 format.
+</ParamField>
+
+<ParamField body="failover" type="object" required>
+  Failover configuration.
+  <Expandable title="Failover object properties">
+    <ParamField body="failover.enabled" type="boolean">
+      Whether failover is active.
+    </ParamField>
+    <ParamField body="failover.mode" type="string">
+      `"all"` (any number can fail over) or `"selective"` (only listed numbers).
+    </ParamField>
+    <ParamField body="failover.numbers" type="string[]">
+      E.164 numbers allowed to fail over when mode is `"selective"`.
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+### Response
+<ResponseField name="number" type="string">
+  The configured number.
+</ResponseField>
+
+<ResponseField name="failover" type="object">
+  Applied failover config: enabled, mode, numbers.
+</ResponseField>
+
+<ResponseField name="metadata" type="object">
+  Request metadata: id, timestamp, api_version, object.
+</ResponseField>
+
 ## Terminate a Lease
 End a lease for a phone number when you no longer need it.
 

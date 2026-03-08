@@ -67,6 +67,27 @@ await contiguity.imessage.react("remove", { tapback: "thumbsup", to: "+123456789
 await contiguity.imessage.read({ to: "+1234567890", from: "+15555555555" });
 ```
 
+## Check iMessage availability
+
+```typescript
+const res = await contiguity.imessage.availability({ to: "+1234567890" });
+```
+
+### Parameters
+
+<ParamField body="to" type="string" required>
+  Recipient phone number in E.164 format.
+</ParamField>
+
+### Response
+<ResponseField name="available" type="boolean">
+  Whether the number supports iMessage.
+</ResponseField>
+
+<ResponseField name="metadata" type="object">
+  Request metadata: id, timestamp, api_version, object.
+</ResponseField>
+
 ## Typing Indicators
 Show typing indicators to create a more interactive messaging experience.
 
@@ -191,7 +212,13 @@ const res = await contiguity.imessage.typing({
   Sender E.164.
 </ParamField>
 
-### Response (send / get / history / react)
+### imessage.availability(params)
+
+<ParamField body="to" type="string" required>
+  Recipient E.164 phone number.
+</ParamField>
+
+### Response (send / get / history / react / availability)
 <ResponseField name="message_id" type="string">
   Message ID (send/react).
 </ResponseField>
