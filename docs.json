@@ -208,7 +208,8 @@
                             "api-reference/product/imessage/reactions",
                             "api-reference/product/imessage/read",
                             "api-reference/product/imessage/history",
-                            "api-reference/product/text/fetch"
+                            "api-reference/product/text/fetch",
+                            "api-reference/product/imessage/availability"
                         ]
                     },
                     {
