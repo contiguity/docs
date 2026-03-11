@@ -1,0 +1,167 @@
+---
+title: MCP Server
+description: Connect AI agents to Contiguity's API using the Model Context Protocol.
+icon: "brain-circuit"
+iconType: "solid"
+---
+
+Use Contiguity's MCP server to give AI agents — in Cursor, Claude, ChatGPT, and more — the ability to send messages, emails, configure your account, and lease numbers on your behalf.
+
+The server is hosted at `console.contiguity.com/mcp` and uses OAuth to authenticate with your Contiguity account.
+
+
+## How it works
+
+When you connect a client, you're taken through a OAuth flow that links the session to your Contiguity account. After authorization, the client receives a short-lived token that it uses on every tool call. All requests are proxied to the Contiguity API and billed against your existing account quota.
+
+<Note>
+  On some plans, Contiguity may bill you for using the API via MCP. Confirm pricing at [contiguity.com/pricing](https://contiguity.com/pricing).
+</Note>
+
+## Quick connect
+
+<CardGroup cols={3}>
+  <Card
+    title="Add to Cursor"
+    href="cursor://anysphere.cursor-deeplink/mcp/install?name=Contiguity&config=eyJ0eXBlIjoiaHR0cCIsInVybCI6Imh0dHBzOi8vY29uc29sZS5jb250aWd1aXR5LmNvbS9tY3AifQ=="
+    cta="Open in Cursor"
+    arrow={false}
+  >
+    One-click install. Cursor will open an OAuth flow to connect your account.
+  </Card>
+  <Card
+    title="Add to Claude"
+    href="https://claude.ai/customize/connectors"
+    cta="Open in Claude"
+    arrow={false}
+  >
+    Click "Add custom connector," enter the MCP server URL, and login. Click "Add" to finish setup.
+  </Card>
+  <Card
+    title="Add to ChatGPT"
+    href="https://chatgpt.com/apps#settings/Connectors/Advanced"
+    cta="Open ChatGPT"
+    arrow={false}
+  >
+    Go to Settings → Apps → Advanced, enter the name and URL, then click Auth to connect.
+  </Card>
+</CardGroup>
+
+---
+
+## Setup by client
+
+<Tabs>
+  <Tab title="Cursor">
+    Click the **Add to Cursor** button above, or follow these steps manually:
+
+    <Steps>
+      <Step title="Open MCP settings">
+        In Cursor, go to **Settings → Tools & MCP → New MCP Server**.
+      </Step>
+      <Step title="Add the server">
+        Paste this into your `mcp.json`:
+
+        ```json
+        {
+          "mcpServers": {
+            "contiguity": {
+              "url": "https://console.contiguity.com/mcp"
+            }
+          }
+        }
+        ```
+      </Step>
+      <Step title="Authenticate">
+        Cursor will detect the server and prompt you to sign in with GitHub via your Contiguity account. Approve the OAuth request.
+      </Step>
+      <Step title="Start using it">
+        Open Cursor's agent and try: *"Send an SMS to +1 555 000 1234 saying hello."*
+      </Step>
+    </Steps>
+  </Tab>
+
+  <Tab title="Claude">
+    
+    <>
+    <Step title="Coming soon...">
+        We're working on adding instructions for adding the MCP server to Claude.
+      </Step>
+    </>
+  </Tab>
+
+  <Tab title="ChatGPT">
+    <Steps>
+      <Step title="Open ChatGPT Apps settings">
+        Go to [Settings → Apps → Advanced](https://chatgpt.com/apps#settings/Connectors/Advanced).
+
+        <Note>
+          Requires ChatGPT Pro, Team, Enterprise, or Edu. You may need to enable **Developer Mode** in Advanced settings first.
+        </Note>
+      </Step>
+      <Step title="Add a new app">
+        Enter a name (e.g. `Contiguity`) and the URL:
+        ```
+        https://console.contiguity.com/mcp
+        ```
+      </Step>
+      <Step title="Authenticate">
+        Click **Auth** — ChatGPT will redirect you through OAuth flow to connect your Contiguity account.
+      </Step>
+      <Step title="Enable in chat">
+        Start a new chat, and ask it something like "Send an SMS to +1 555 000 1234 saying hello."
+      </Step>
+    </Steps>
+  </Tab>
+
+  <Tab title="Other clients">
+    Any MCP client that supports **Streamable HTTP** and **OAuth 2.0 with PKCE** can connect.
+
+    | Setting | Value |
+    |---|---|
+    | Server URL | `https://console.contiguity.com/mcp` |
+    | Transport | Streamable HTTP |
+    | Auth | OAuth 2.0 (PKCE, S256) |
+    | Discovery | `https://console.contiguity.com/.well-known/oauth-authorization-server` |
+
+  </Tab>
+</Tabs>
+
+---
+
+## Available tools
+
+| Tool | Description |
+|---|---|
+| `send_sms` | Send an SMS or MMS to any phone number |
+| `send_email` | Send a transactional email |
+| `send_imessage` | Send an iMessage (requires leased iMessage number) |
+| `get_text_history` | Get SMS/MMS conversation history for a thread |
+| `get_imessage_history` | Get iMessage conversation history for a thread |
+| `get_text_message` | Fetch a single message by ID |
+| `check_imessage_availability` | Check if a number supports iMessage |
+| `text_reaction` | Add or remove a reaction to an SMS/MMS message |
+| `imessage_reaction` | Add or remove a tapback reaction to an iMessage |
+| `imessage_mark_read` | Send a read receipt in an iMessage conversation |
+| `imessage_typing` | Start or stop a typing indicator in an iMessage chat |
+| `send_otp` | Send a one-time passcode via SMS |
+| `verify_otp` | Verify an OTP using its ID |
+| `resend_otp` | Resend an OTP |
+| `reverse_otp_initiate` | Start a reverse OTP session (user sends code to you) |
+| `reverse_otp_verify` | Poll a reverse OTP session for status |
+| `reverse_otp_cancel` | Cancel an active reverse OTP session |
+| `list_domains` | List email domains on your account |
+| `register_domain` | Register a domain for email sending |
+| `get_domain` | Get details about a registered domain |
+| `delete_domain` | Delete a domain from your account |
+| `list_entitlements` | List entitlements and their status |
+| `apply_entitlement` | Apply for an entitlement |
+| `revoke_entitlement` | Revoke an entitlement |
+| `list_leased_numbers` | List your leased phone numbers |
+| `list_available_numbers` | List numbers available to lease |
+| `lease_number` | Lease a phone number |
+| `terminate_lease` | Surrender a leased number |
+| `configure_number` | Configure a leased number (e.g. failover) |
+| `get_number_details` | Get details about a leased or available number |
+
+Full parameter reference for each tool is at [docs.contiguity.com/api-reference](https://docs.contiguity.com/api-reference/introduction).
