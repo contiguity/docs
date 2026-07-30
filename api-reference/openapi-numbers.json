@@ -6,7 +6,7 @@
         }
     ],
     "info": {
-        "version": "v2026.3.3",
+        "version": "v2026.7.29",
         "title": "Leasing API"
     },
     "components": {
@@ -41,11 +41,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1772568052124
+                                            "example": 1785380854155
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.3.3"
+                                            "example": "v2026.7.29"
                                         },
                                         "object": {
                                             "type": "string",
@@ -308,11 +308,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1772568052124
+                                            "example": 1785380854155
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.3.3"
+                                            "example": "v2026.7.29"
                                         },
                                         "object": {
                                             "type": "string",
@@ -360,11 +360,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1772568052124
+                                            "example": 1785380854155
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.3.3"
+                                            "example": "v2026.7.29"
                                         },
                                         "object": {
                                             "type": "string",
@@ -412,11 +412,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1772568052124
+                                            "example": 1785380854155
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.3.3"
+                                            "example": "v2026.7.29"
                                         },
                                         "object": {
                                             "type": "string",
@@ -464,11 +464,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1772568052124
+                                            "example": 1785380854155
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.3.3"
+                                            "example": "v2026.7.29"
                                         },
                                         "object": {
                                             "type": "string",
@@ -527,6 +527,7 @@
                     }
                 ],
                 "requestBody": {
+                    "required": false,
                     "content": {
                         "application/json": {
                             "schema": {
@@ -559,11 +560,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1772568052124
+                                            "example": 1785380854155
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.3.3"
+                                            "example": "v2026.7.29"
                                         },
                                         "object": {
                                             "type": "string",
@@ -696,11 +697,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1772568052124
+                                            "example": 1785380854155
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.3.3"
+                                            "example": "v2026.7.29"
                                         },
                                         "object": {
                                             "type": "string",
@@ -748,11 +749,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1772568052124
+                                            "example": 1785380854155
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.3.3"
+                                            "example": "v2026.7.29"
                                         },
                                         "object": {
                                             "type": "string",
@@ -800,11 +801,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1772568052124
+                                            "example": 1785380854155
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.3.3"
+                                            "example": "v2026.7.29"
                                         },
                                         "object": {
                                             "type": "string",
@@ -852,11 +853,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1772568052124
+                                            "example": 1785380854155
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.3.3"
+                                            "example": "v2026.7.29"
                                         },
                                         "object": {
                                             "type": "string",
@@ -915,11 +916,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1772568052124
+                                            "example": 1785380854155
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.3.3"
+                                            "example": "v2026.7.29"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1242,11 +1243,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1772568052124
+                                            "example": 1785380854155
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.3.3"
+                                            "example": "v2026.7.29"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1294,11 +1295,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1772568052124
+                                            "example": 1785380854155
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.3.3"
+                                            "example": "v2026.7.29"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1346,11 +1347,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1772568052124
+                                            "example": 1785380854155
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.3.3"
+                                            "example": "v2026.7.29"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1398,11 +1399,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1772568052124
+                                            "example": 1785380854155
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.3.3"
+                                            "example": "v2026.7.29"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1474,11 +1475,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1772568052124
+                                            "example": 1785380854155
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.3.3"
+                                            "example": "v2026.7.29"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1545,11 +1546,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1772568052124
+                                            "example": 1785380854155
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.3.3"
+                                            "example": "v2026.7.29"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1597,11 +1598,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1772568052124
+                                            "example": 1785380854155
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.3.3"
+                                            "example": "v2026.7.29"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1649,11 +1650,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1772568052124
+                                            "example": 1785380854155
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.3.3"
+                                            "example": "v2026.7.29"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1701,11 +1702,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1772568052124
+                                            "example": 1785380854155
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.3.3"
+                                            "example": "v2026.7.29"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1764,6 +1765,7 @@
                     }
                 ],
                 "requestBody": {
+                    "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
@@ -1815,11 +1817,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1772568052124
+                                            "example": 1785380854155
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.3.3"
+                                            "example": "v2026.7.29"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1888,11 +1890,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1772568052124
+                                            "example": 1785380854155
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.3.3"
+                                            "example": "v2026.7.29"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1940,11 +1942,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1772568052124
+                                            "example": 1785380854155
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.3.3"
+                                            "example": "v2026.7.29"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1992,11 +1994,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1772568052124
+                                            "example": 1785380854155
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.3.3"
+                                            "example": "v2026.7.29"
                                         },
                                         "object": {
                                             "type": "string",
@@ -2044,11 +2046,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1772568052124
+                                            "example": 1785380854155
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.3.3"
+                                            "example": "v2026.7.29"
                                         },
                                         "object": {
                                             "type": "string",
@@ -2120,11 +2122,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1772568052124
+                                            "example": 1785380854155
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.3.3"
+                                            "example": "v2026.7.29"
                                         },
                                         "object": {
                                             "type": "string",
@@ -2426,11 +2428,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1772568052124
+                                            "example": 1785380854155
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.3.3"
+                                            "example": "v2026.7.29"
                                         },
                                         "object": {
                                             "type": "string",
@@ -2478,11 +2480,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1772568052124
+                                            "example": 1785380854155
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.3.3"
+                                            "example": "v2026.7.29"
                                         },
                                         "object": {
                                             "type": "string",
@@ -2530,11 +2532,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1772568052124
+                                            "example": 1785380854155
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.3.3"
+                                            "example": "v2026.7.29"
                                         },
                                         "object": {
                                             "type": "string",
@@ -2582,11 +2584,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1772568052124
+                                            "example": 1785380854155
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.3.3"
+                                            "example": "v2026.7.29"
                                         },
                                         "object": {
                                             "type": "string",

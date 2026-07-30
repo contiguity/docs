@@ -1,0 +1,26 @@
+---
+title: 'Use Reverse OTP with iMessage'
+openapi: "openapi-send POST /not/a/route"
+sidebarTitle: 'Verify'
+description: 'Have a user send you a text to verify their phone number'
+icon: "user-check"
+---
+
+Reverse OTP with iMessage verifies a user's phone number by having the user initiate a message to you over iMessage, rather than you reaching out first. Compared to traditional SMS OTPs, this workflow offers several advantages:
+
+- Sending an iMessage requires the user to use their own Apple device, making it much more difficult for attackers to fake and giving you greater confidence in the user's authenticity.
+- You save on operational costs because you’re not paying to have potentially dozens of lines to send outbound OTPs to users.
+- iMessage generally has high delivery and reliability rates, especially compared to international SMS, where texts may be blocked or filtered.
+- Ratelimits don't apply to inbound iMessage, so you can verify millions of users using just one iMessage-capable line.
+
+<Info>
+Reverse OTP with iMessage requires a leased iMessage-capable line, and an iMessage entitlement.
+</Info>
+
+<Card title="Implement Reverse OTP with iMessage" icon="arrow-up-right" href="/api-reference/product/otp/reverse/initiate">
+  Read the API documentation for initiating, verifying, and cancelling a Reverse OTP with iMessage session.
+</Card>
+
+import Snippet from '/snippets/mintlify.mdx';
+
+<Snippet />

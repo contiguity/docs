@@ -6,7 +6,7 @@
         }
     ],
     "info": {
-        "version": "v2026.2.6",
+        "version": "v2026.7.29",
         "title": "Domains API"
     },
     "components": {
@@ -20,29 +20,16 @@
         "parameters": {}
     },
     "paths": {
-        "/{domain}": {
-            "delete": {
+        "/": {
+            "get": {
                 "security": [
                     {
                         "bearerAuth": []
                     }
                 ],
-                "parameters": [
-                    {
-                        "schema": {
-                            "type": "string",
-                            "description": "The domain to delete",
-                            "example": "example.com"
-                        },
-                        "required": true,
-                        "description": "The domain to delete",
-                        "name": "domain",
-                        "in": "path"
-                    }
-                ],
                 "responses": {
                     "200": {
-                        "description": "Delete a domain from your account",
+                        "description": "List all domains registered by you",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -54,11 +41,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1770363397691
+                                            "example": 1785380854155
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.2.6"
+                                            "example": "v2026.7.29"
                                         },
                                         "object": {
                                             "type": "string",
@@ -67,18 +54,56 @@
                                         "data": {
                                             "type": "object",
                                             "properties": {
-                                                "success": {
-                                                    "type": "boolean",
-                                                    "description": "Whether the deletion was successful"
-                                                },
-                                                "message": {
-                                                    "type": "string",
-                                                    "description": "Success message"
+                                                "domains": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "domain": {
+                                                                "type": "string",
+                                                                "description": "The domain name",
+                                                                "example": "example.com"
+                                                            },
+                                                            "status": {
+                                                                "type": "string",
+                                                                "description": "Domain verification status",
+                                                                "example": "verified"
+                                                            },
+                                                            "created_at": {
+                                                                "type": "number",
+                                                                "description": "Domain creation timestamp",
+                                                                "example": 1755637604526
+                                                            },
+                                                            "id": {
+                                                                "type": "string",
+                                                                "description": "Domain ID",
+                                                                "example": "d_1234567890"
+                                                            },
+                                                            "region": {
+                                                                "type": "string",
+                                                                "description": "AWS region",
+                                                                "example": "us-east-1"
+                                                            },
+                                                            "sending_allowed": {
+                                                                "type": "boolean",
+                                                                "description": "Whether sending is allowed",
+                                                                "example": true
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "domain",
+                                                            "status",
+                                                            "created_at",
+                                                            "id",
+                                                            "region",
+                                                            "sending_allowed"
+                                                        ]
+                                                    },
+                                                    "description": "List of user's domains"
                                                 }
                                             },
                                             "required": [
-                                                "success",
-                                                "message"
+                                                "domains"
                                             ]
                                         }
                                     },
@@ -106,11 +131,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1770363397691
+                                            "example": 1785380854155
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.2.6"
+                                            "example": "v2026.7.29"
                                         },
                                         "object": {
                                             "type": "string",
@@ -158,11 +183,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1770363397691
+                                            "example": 1785380854155
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.2.6"
+                                            "example": "v2026.7.29"
                                         },
                                         "object": {
                                             "type": "string",
@@ -210,11 +235,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1770363397691
+                                            "example": 1785380854155
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.2.6"
+                                            "example": "v2026.7.29"
                                         },
                                         "object": {
                                             "type": "string",
@@ -262,11 +287,295 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1770363397691
+                                            "example": 1785380854155
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.2.6"
+                                            "example": "v2026.7.29"
+                                        },
+                                        "object": {
+                                            "type": "string",
+                                            "example": "error"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "error": {
+                                                    "type": "string",
+                                                    "example": "Internal Server Error"
+                                                },
+                                                "status": {
+                                                    "type": "number",
+                                                    "example": 500
+                                                }
+                                            },
+                                            "required": [
+                                                "error",
+                                                "status"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "timestamp",
+                                        "api_version",
+                                        "object",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/{domain}": {
+            "delete": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "type": "string",
+                            "description": "The domain to delete",
+                            "example": "example.com"
+                        },
+                        "required": true,
+                        "description": "The domain to delete",
+                        "name": "domain",
+                        "in": "path"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Delete a domain from your account",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "req_xxxxxxxxxxxxxxxx"
+                                        },
+                                        "timestamp": {
+                                            "type": "number",
+                                            "example": 1785380854155
+                                        },
+                                        "api_version": {
+                                            "type": "string",
+                                            "example": "v2026.7.29"
+                                        },
+                                        "object": {
+                                            "type": "string",
+                                            "example": "response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "success": {
+                                                    "type": "boolean",
+                                                    "description": "Whether the deletion was successful"
+                                                },
+                                                "message": {
+                                                    "type": "string",
+                                                    "description": "Success message"
+                                                }
+                                            },
+                                            "required": [
+                                                "success",
+                                                "message"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "timestamp",
+                                        "api_version",
+                                        "object",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "err_xxxxxxxxxxxxxxxx"
+                                        },
+                                        "timestamp": {
+                                            "type": "number",
+                                            "example": 1785380854155
+                                        },
+                                        "api_version": {
+                                            "type": "string",
+                                            "example": "v2026.7.29"
+                                        },
+                                        "object": {
+                                            "type": "string",
+                                            "example": "error"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "error": {
+                                                    "type": "string",
+                                                    "example": "Bad Request"
+                                                },
+                                                "status": {
+                                                    "type": "number",
+                                                    "example": 400
+                                                }
+                                            },
+                                            "required": [
+                                                "error",
+                                                "status"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "timestamp",
+                                        "api_version",
+                                        "object",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "err_xxxxxxxxxxxxxxxx"
+                                        },
+                                        "timestamp": {
+                                            "type": "number",
+                                            "example": 1785380854155
+                                        },
+                                        "api_version": {
+                                            "type": "string",
+                                            "example": "v2026.7.29"
+                                        },
+                                        "object": {
+                                            "type": "string",
+                                            "example": "error"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "error": {
+                                                    "type": "string",
+                                                    "example": "Unauthorized"
+                                                },
+                                                "status": {
+                                                    "type": "number",
+                                                    "example": 401
+                                                }
+                                            },
+                                            "required": [
+                                                "error",
+                                                "status"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "timestamp",
+                                        "api_version",
+                                        "object",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "err_xxxxxxxxxxxxxxxx"
+                                        },
+                                        "timestamp": {
+                                            "type": "number",
+                                            "example": 1785380854155
+                                        },
+                                        "api_version": {
+                                            "type": "string",
+                                            "example": "v2026.7.29"
+                                        },
+                                        "object": {
+                                            "type": "string",
+                                            "example": "error"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "error": {
+                                                    "type": "string",
+                                                    "example": "Forbidden"
+                                                },
+                                                "status": {
+                                                    "type": "number",
+                                                    "example": 403
+                                                }
+                                            },
+                                            "required": [
+                                                "error",
+                                                "status"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "timestamp",
+                                        "api_version",
+                                        "object",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "err_xxxxxxxxxxxxxxxx"
+                                        },
+                                        "timestamp": {
+                                            "type": "number",
+                                            "example": 1785380854155
+                                        },
+                                        "api_version": {
+                                            "type": "string",
+                                            "example": "v2026.7.29"
                                         },
                                         "object": {
                                             "type": "string",
@@ -323,6 +632,7 @@
                     }
                 ],
                 "requestBody": {
+                    "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
@@ -359,11 +669,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1770363397691
+                                            "example": 1785380854155
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.2.6"
+                                            "example": "v2026.7.29"
                                         },
                                         "object": {
                                             "type": "string",
@@ -478,11 +788,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1770363397691
+                                            "example": 1785380854155
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.2.6"
+                                            "example": "v2026.7.29"
                                         },
                                         "object": {
                                             "type": "string",
@@ -530,11 +840,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1770363397691
+                                            "example": 1785380854155
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.2.6"
+                                            "example": "v2026.7.29"
                                         },
                                         "object": {
                                             "type": "string",
@@ -582,11 +892,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1770363397691
+                                            "example": 1785380854155
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.2.6"
+                                            "example": "v2026.7.29"
                                         },
                                         "object": {
                                             "type": "string",
@@ -634,11 +944,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1770363397691
+                                            "example": 1785380854155
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.2.6"
+                                            "example": "v2026.7.29"
                                         },
                                         "object": {
                                             "type": "string",
@@ -708,11 +1018,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1770363397691
+                                            "example": 1785380854155
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.2.6"
+                                            "example": "v2026.7.29"
                                         },
                                         "object": {
                                             "type": "string",
@@ -854,11 +1164,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1770363397691
+                                            "example": 1785380854155
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.2.6"
+                                            "example": "v2026.7.29"
                                         },
                                         "object": {
                                             "type": "string",
@@ -906,11 +1216,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1770363397691
+                                            "example": 1785380854155
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.2.6"
+                                            "example": "v2026.7.29"
                                         },
                                         "object": {
                                             "type": "string",
@@ -958,11 +1268,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1770363397691
+                                            "example": 1785380854155
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.2.6"
+                                            "example": "v2026.7.29"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1010,320 +1320,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1770363397691
+                                            "example": 1785380854155
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.2.6"
-                                        },
-                                        "object": {
-                                            "type": "string",
-                                            "example": "error"
-                                        },
-                                        "data": {
-                                            "type": "object",
-                                            "properties": {
-                                                "error": {
-                                                    "type": "string",
-                                                    "example": "Internal Server Error"
-                                                },
-                                                "status": {
-                                                    "type": "number",
-                                                    "example": 500
-                                                }
-                                            },
-                                            "required": [
-                                                "error",
-                                                "status"
-                                            ]
-                                        }
-                                    },
-                                    "required": [
-                                        "id",
-                                        "timestamp",
-                                        "api_version",
-                                        "object",
-                                        "data"
-                                    ]
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/": {
-            "get": {
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "List all domains registered by you",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "id": {
-                                            "type": "string",
-                                            "example": "req_xxxxxxxxxxxxxxxx"
-                                        },
-                                        "timestamp": {
-                                            "type": "number",
-                                            "example": 1770363397691
-                                        },
-                                        "api_version": {
-                                            "type": "string",
-                                            "example": "v2026.2.6"
-                                        },
-                                        "object": {
-                                            "type": "string",
-                                            "example": "response"
-                                        },
-                                        "data": {
-                                            "type": "object",
-                                            "properties": {
-                                                "domains": {
-                                                    "type": "array",
-                                                    "items": {
-                                                        "type": "object",
-                                                        "properties": {
-                                                            "domain": {
-                                                                "type": "string",
-                                                                "description": "The domain name",
-                                                                "example": "example.com"
-                                                            },
-                                                            "status": {
-                                                                "type": "string",
-                                                                "description": "Domain verification status",
-                                                                "example": "verified"
-                                                            },
-                                                            "created_at": {
-                                                                "type": "number",
-                                                                "description": "Domain creation timestamp",
-                                                                "example": 1755637604526
-                                                            },
-                                                            "id": {
-                                                                "type": "string",
-                                                                "description": "Domain ID",
-                                                                "example": "d_1234567890"
-                                                            },
-                                                            "region": {
-                                                                "type": "string",
-                                                                "description": "AWS region",
-                                                                "example": "us-east-1"
-                                                            },
-                                                            "sending_allowed": {
-                                                                "type": "boolean",
-                                                                "description": "Whether sending is allowed",
-                                                                "example": true
-                                                            }
-                                                        },
-                                                        "required": [
-                                                            "domain",
-                                                            "status",
-                                                            "created_at",
-                                                            "id",
-                                                            "region",
-                                                            "sending_allowed"
-                                                        ]
-                                                    },
-                                                    "description": "List of user's domains"
-                                                }
-                                            },
-                                            "required": [
-                                                "domains"
-                                            ]
-                                        }
-                                    },
-                                    "required": [
-                                        "id",
-                                        "timestamp",
-                                        "api_version",
-                                        "object",
-                                        "data"
-                                    ]
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "id": {
-                                            "type": "string",
-                                            "example": "err_xxxxxxxxxxxxxxxx"
-                                        },
-                                        "timestamp": {
-                                            "type": "number",
-                                            "example": 1770363397691
-                                        },
-                                        "api_version": {
-                                            "type": "string",
-                                            "example": "v2026.2.6"
-                                        },
-                                        "object": {
-                                            "type": "string",
-                                            "example": "error"
-                                        },
-                                        "data": {
-                                            "type": "object",
-                                            "properties": {
-                                                "error": {
-                                                    "type": "string",
-                                                    "example": "Bad Request"
-                                                },
-                                                "status": {
-                                                    "type": "number",
-                                                    "example": 400
-                                                }
-                                            },
-                                            "required": [
-                                                "error",
-                                                "status"
-                                            ]
-                                        }
-                                    },
-                                    "required": [
-                                        "id",
-                                        "timestamp",
-                                        "api_version",
-                                        "object",
-                                        "data"
-                                    ]
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "id": {
-                                            "type": "string",
-                                            "example": "err_xxxxxxxxxxxxxxxx"
-                                        },
-                                        "timestamp": {
-                                            "type": "number",
-                                            "example": 1770363397691
-                                        },
-                                        "api_version": {
-                                            "type": "string",
-                                            "example": "v2026.2.6"
-                                        },
-                                        "object": {
-                                            "type": "string",
-                                            "example": "error"
-                                        },
-                                        "data": {
-                                            "type": "object",
-                                            "properties": {
-                                                "error": {
-                                                    "type": "string",
-                                                    "example": "Unauthorized"
-                                                },
-                                                "status": {
-                                                    "type": "number",
-                                                    "example": 401
-                                                }
-                                            },
-                                            "required": [
-                                                "error",
-                                                "status"
-                                            ]
-                                        }
-                                    },
-                                    "required": [
-                                        "id",
-                                        "timestamp",
-                                        "api_version",
-                                        "object",
-                                        "data"
-                                    ]
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "Forbidden",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "id": {
-                                            "type": "string",
-                                            "example": "err_xxxxxxxxxxxxxxxx"
-                                        },
-                                        "timestamp": {
-                                            "type": "number",
-                                            "example": 1770363397691
-                                        },
-                                        "api_version": {
-                                            "type": "string",
-                                            "example": "v2026.2.6"
-                                        },
-                                        "object": {
-                                            "type": "string",
-                                            "example": "error"
-                                        },
-                                        "data": {
-                                            "type": "object",
-                                            "properties": {
-                                                "error": {
-                                                    "type": "string",
-                                                    "example": "Forbidden"
-                                                },
-                                                "status": {
-                                                    "type": "number",
-                                                    "example": 403
-                                                }
-                                            },
-                                            "required": [
-                                                "error",
-                                                "status"
-                                            ]
-                                        }
-                                    },
-                                    "required": [
-                                        "id",
-                                        "timestamp",
-                                        "api_version",
-                                        "object",
-                                        "data"
-                                    ]
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "id": {
-                                            "type": "string",
-                                            "example": "err_xxxxxxxxxxxxxxxx"
-                                        },
-                                        "timestamp": {
-                                            "type": "number",
-                                            "example": 1770363397691
-                                        },
-                                        "api_version": {
-                                            "type": "string",
-                                            "example": "v2026.2.6"
+                                            "example": "v2026.7.29"
                                         },
                                         "object": {
                                             "type": "string",
