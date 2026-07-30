@@ -2,6 +2,7 @@
 If you notice any issues, feel free to let us know – or submit a PR!
 
 ---
+
 Previous Alerts/Banners:
 
 ```json
