@@ -99,6 +99,136 @@ Contiguity offers a free OTP API that simplifies phone number verification using
     <ParamField body="otp_id" type="string" required>
       The unique OTP identifier from the original `otp.new()` call.
     </ParamField>
+
+    ## Reverse OTP
+
+    Reverse OTP verifies a phone number by having the user send a code to you. Start a session with `otp.reverse.initiate()`:
+
+    ```javascript
+    const session = await contiguity.otp.reverse.initiate({
+        number: "+1234567890",
+        service: "sms"
+    });
+    ```
+
+    The `service` can be `"sms"` or `"imessage"` and defaults to `"sms"`. Using iMessage requires an active iMessage-capable leased number and an iMessage entitlement.
+
+    Check the session's status or cancel it using the returned `otp_id`:
+
+    ```javascript
+    const status = await contiguity.otp.reverse.verify(session.otp_id);
+    await contiguity.otp.reverse.cancel(session.otp_id);
+    ```
+
+    ### otp.reverse.initiate(params)
+
+    <ParamField body="number" type="string" required>
+      The expected sender's phone number in E.164 format.
+    </ParamField>
+
+    <ParamField body="factor" type="string">
+      The code or phrase the user sends. It can contain up to 16 characters and defaults to a random four-digit code.
+    </ParamField>
+
+    <ParamField body="to" type="string">
+      The number the user sends the code to. It defaults to a random Contiguity-owned number. When using iMessage, provide an iMessage-capable number leased through Contiguity.
+    </ParamField>
+
+    <ParamField body="service" type="string" default="sms">
+      The messaging service used to receive the code. Accepts `"sms"` or `"imessage"`.
+    </ParamField>
+
+    <ParamField body="language" type="string" default="en">
+      The language code used for the returned UI instructions.
+    </ParamField>
+
+    <ParamField body="success_url" type="string">
+      A webhook URL called after successful verification. If omitted, Contiguity uses your configured webhook preferences.
+    </ParamField>
+
+    #### Response
+
+    <ResponseField name="otp_id" type="string">
+      The Reverse OTP session ID used to check or cancel the session.
+    </ResponseField>
+
+    <ResponseField name="number" type="string">
+      The expected sender's phone number.
+    </ResponseField>
+
+    <ResponseField name="factor" type="string">
+      The code or phrase the user must send.
+    </ResponseField>
+
+    <ResponseField name="to" type="string">
+      The number the user must message.
+    </ResponseField>
+
+    <ResponseField name="service" type="string">
+      The messaging service receiving the code: `"sms"` or `"imessage"`.
+    </ResponseField>
+
+    <ResponseField name="expires_at" type="string">
+      The session expiration time in ISO 8601 format.
+    </ResponseField>
+
+    <ResponseField name="ui" type="object">
+      Localized `text` instructions and a `qr_code` payload for opening the user's messaging app.
+    </ResponseField>
+
+    <ResponseField name="success_url" type="string | null">
+      The webhook URL used for successful verification.
+    </ResponseField>
+
+    <ResponseField name="metadata" type="object">
+      Request metadata including ID, timestamp, and API version.
+    </ResponseField>
+
+    ### otp.reverse.verify(otp_id)
+
+    <ParamField body="otp_id" type="string" required>
+      The Reverse OTP session ID returned by `otp.reverse.initiate()`.
+    </ParamField>
+
+    #### Response
+
+    <ResponseField name="otp_id" type="string">
+      The Reverse OTP session ID.
+    </ResponseField>
+
+    <ResponseField name="status" type="string">
+      The session's current status: `"pending"`, `"verified"`, `"cancelled"`, or `"expired"`.
+    </ResponseField>
+
+    <ResponseField name="expires_at" type="string">
+      The session expiration time in ISO 8601 format.
+    </ResponseField>
+
+    <ResponseField name="metadata" type="object">
+      Request metadata including ID, timestamp, and API version.
+    </ResponseField>
+
+    ### otp.reverse.cancel(otp_id)
+
+    <ParamField body="otp_id" type="string" required>
+      The Reverse OTP session ID returned by `otp.reverse.initiate()`.
+    </ParamField>
+
+    #### Response
+
+    <ResponseField name="otp_id" type="string">
+      The cancelled Reverse OTP session ID.
+    </ResponseField>
+
+    <ResponseField name="status" type="string">
+      Confirms that the session was cancelled.
+    </ResponseField>
+
+    <ResponseField name="metadata" type="object">
+      Request metadata including ID, timestamp, and API version.
+    </ResponseField>
+
+    See the [Reverse OTP API reference](/api-reference/product/otp/reverse/initiate) for API behavior, or learn more about [Reverse OTP with iMessage](/api-reference/product/imessage/verify).
   </Tab>
   
   <Tab title="Python" icon="python">

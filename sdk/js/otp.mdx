@@ -123,13 +123,25 @@ Contiguity offers a free OTP API that simplifies phone number verification using
 
 ## Reverse OTP
 
-For reverse OTP flows use:
+Reverse OTP verifies a phone number by having the user send a code to you. Initiate a session with `contiguity.otp.reverse.initiate()`:
 
-- **`contiguity.otp.reverseInitiate(params)`**
-- **`contiguity.otp.reverseVerify(params)`**
-- **`contiguity.otp.reverseCancel(params)`**
+```javascript
+const session = await contiguity.otp.reverse.initiate({
+    number: "+1234567890",
+    service: "sms"
+});
+```
 
-See the [Reverse OTP API reference](/api-reference/product/otp/reverse/initiate) for parameters and behavior.
+Set `service` to `"sms"` or `"imessage"`. It defaults to `"sms"` when omitted. iMessage requires an active iMessage-capable leased number and an iMessage entitlement.
+
+Use the returned `otp_id` to check or cancel the session:
+
+```javascript
+const status = await contiguity.otp.reverse.verify(session.otp_id);
+await contiguity.otp.reverse.cancel(session.otp_id);
+```
+
+See the [Reverse OTP API reference](/api-reference/product/otp/reverse/initiate) for all parameters and response fields, or read more about [Reverse OTP with iMessage](/api-reference/product/imessage/verify).
 
 ## Supported Languages
 Contiguity currently supports 33 languages for OTPs, including:
