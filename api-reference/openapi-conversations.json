@@ -6,7 +6,7 @@
         }
     ],
     "info": {
-        "version": "v2026.7.29",
+        "version": "v2026.8.2",
         "title": "Conversations API"
     },
     "components": {
@@ -38,6 +38,19 @@
                         "description": "Message ID",
                         "name": "id",
                         "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "type": "string",
+                            "nullable": true,
+                            "default": "false",
+                            "description": "Set to true to include the tracking timeline. Defaults to false.",
+                            "example": "false"
+                        },
+                        "required": false,
+                        "description": "Set to true to include the tracking timeline. Defaults to false.",
+                        "name": "tracking",
+                        "in": "query"
                     }
                 ],
                 "responses": {
@@ -54,11 +67,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1785380854155
+                                            "example": 1785698220563
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.7.29"
+                                            "example": "v2026.8.2"
                                         },
                                         "object": {
                                             "type": "string",
@@ -104,6 +117,35 @@
                                                     },
                                                     "description": "URLs of attachments",
                                                     "example": []
+                                                },
+                                                "tracking": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "event": {
+                                                                "type": "string",
+                                                                "description": "Event name",
+                                                                "example": "text.delivery.confirmed"
+                                                            },
+                                                            "title": {
+                                                                "type": "string",
+                                                                "description": "Human-readable title",
+                                                                "example": "Message Delivered"
+                                                            },
+                                                            "timestamp": {
+                                                                "type": "string",
+                                                                "description": "Timestamp in ISO 8601 format",
+                                                                "example": "2026-08-01T19:20:34.757Z"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "event",
+                                                            "title",
+                                                            "timestamp"
+                                                        ]
+                                                    },
+                                                    "description": "Message tracking timeline. Included only when requested."
                                                 }
                                             },
                                             "required": [
@@ -141,11 +183,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1785380854155
+                                            "example": 1785698220563
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.7.29"
+                                            "example": "v2026.8.2"
                                         },
                                         "object": {
                                             "type": "string",
@@ -193,11 +235,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1785380854155
+                                            "example": 1785698220563
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.7.29"
+                                            "example": "v2026.8.2"
                                         },
                                         "object": {
                                             "type": "string",
@@ -245,11 +287,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1785380854155
+                                            "example": 1785698220563
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.7.29"
+                                            "example": "v2026.8.2"
                                         },
                                         "object": {
                                             "type": "string",
@@ -297,11 +339,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1785380854155
+                                            "example": 1785698220563
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.7.29"
+                                            "example": "v2026.8.2"
                                         },
                                         "object": {
                                             "type": "string",
@@ -380,6 +422,19 @@
                         "description": "Limit of how many messages to return, default is 20. Should never exceed 200.",
                         "name": "limit",
                         "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "type": "string",
+                            "nullable": true,
+                            "default": "false",
+                            "description": "Set to true to include detailed internal tracking information for the request. Defaults to false.",
+                            "example": "false"
+                        },
+                        "required": false,
+                        "description": "Set to true to include detailed internal tracking information for the request. Defaults to false.",
+                        "name": "tracking",
+                        "in": "query"
                     }
                 ],
                 "responses": {
@@ -396,11 +451,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1785380854155
+                                            "example": 1785698220563
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.7.29"
+                                            "example": "v2026.8.2"
                                         },
                                         "object": {
                                             "type": "string",
@@ -490,6 +545,35 @@
                                                                 },
                                                                 "description": "URLs of the attachments.",
                                                                 "example": []
+                                                            },
+                                                            "tracking": {
+                                                                "type": "array",
+                                                                "items": {
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "event": {
+                                                                            "type": "string",
+                                                                            "description": "Event name",
+                                                                            "example": "imessage.delivery.confirmed"
+                                                                        },
+                                                                        "title": {
+                                                                            "type": "string",
+                                                                            "description": "Human-readable title",
+                                                                            "example": "Message Delivered"
+                                                                        },
+                                                                        "timestamp": {
+                                                                            "type": "string",
+                                                                            "description": "Timestamp in ISO 8601 format",
+                                                                            "example": "2026-08-01T19:20:34.757Z"
+                                                                        }
+                                                                    },
+                                                                    "required": [
+                                                                        "event",
+                                                                        "title",
+                                                                        "timestamp"
+                                                                    ]
+                                                                },
+                                                                "description": "Message tracking timeline."
                                                             }
                                                         },
                                                         "required": [
@@ -613,11 +697,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1785380854155
+                                            "example": 1785698220563
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.7.29"
+                                            "example": "v2026.8.2"
                                         },
                                         "object": {
                                             "type": "string",
@@ -665,11 +749,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1785380854155
+                                            "example": 1785698220563
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.7.29"
+                                            "example": "v2026.8.2"
                                         },
                                         "object": {
                                             "type": "string",
@@ -717,11 +801,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1785380854155
+                                            "example": 1785698220563
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.7.29"
+                                            "example": "v2026.8.2"
                                         },
                                         "object": {
                                             "type": "string",
@@ -769,11 +853,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1785380854155
+                                            "example": 1785698220563
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.7.29"
+                                            "example": "v2026.8.2"
                                         },
                                         "object": {
                                             "type": "string",
@@ -852,6 +936,19 @@
                         "description": "Limit of how many messages to return, default is 20. Should never exceed 200.",
                         "name": "limit",
                         "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "type": "string",
+                            "nullable": true,
+                            "default": "false",
+                            "description": "Set to true to include tracking timelines. Defaults to false.",
+                            "example": "false"
+                        },
+                        "required": false,
+                        "description": "Set to true to include tracking timelines. Defaults to false.",
+                        "name": "tracking",
+                        "in": "query"
                     }
                 ],
                 "responses": {
@@ -868,11 +965,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1785380854155
+                                            "example": 1785698220563
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.7.29"
+                                            "example": "v2026.8.2"
                                         },
                                         "object": {
                                             "type": "string",
@@ -938,6 +1035,35 @@
                                                                 },
                                                                 "description": "URLs of attachments (MMS).",
                                                                 "example": []
+                                                            },
+                                                            "tracking": {
+                                                                "type": "array",
+                                                                "items": {
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "event": {
+                                                                            "type": "string",
+                                                                            "description": "Event name",
+                                                                            "example": "text.delivery.confirmed"
+                                                                        },
+                                                                        "title": {
+                                                                            "type": "string",
+                                                                            "description": "Human-readable title",
+                                                                            "example": "Message Delivered"
+                                                                        },
+                                                                        "timestamp": {
+                                                                            "type": "string",
+                                                                            "description": "Timestamp in ISO 8601 format",
+                                                                            "example": "2026-08-01T19:20:34.757Z"
+                                                                        }
+                                                                    },
+                                                                    "required": [
+                                                                        "event",
+                                                                        "title",
+                                                                        "timestamp"
+                                                                    ]
+                                                                },
+                                                                "description": "Message tracking timeline. Included only when requested."
                                                             }
                                                         },
                                                         "required": [
@@ -1047,11 +1173,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1785380854155
+                                            "example": 1785698220563
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.7.29"
+                                            "example": "v2026.8.2"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1099,11 +1225,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1785380854155
+                                            "example": 1785698220563
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.7.29"
+                                            "example": "v2026.8.2"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1151,11 +1277,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1785380854155
+                                            "example": 1785698220563
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.7.29"
+                                            "example": "v2026.8.2"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1203,11 +1329,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1785380854155
+                                            "example": 1785698220563
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.7.29"
+                                            "example": "v2026.8.2"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1279,11 +1405,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1785380854155
+                                            "example": 1785698220563
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.7.29"
+                                            "example": "v2026.8.2"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1327,11 +1453,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1785380854155
+                                            "example": 1785698220563
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.7.29"
+                                            "example": "v2026.8.2"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1379,11 +1505,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1785380854155
+                                            "example": 1785698220563
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.7.29"
+                                            "example": "v2026.8.2"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1431,11 +1557,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1785380854155
+                                            "example": 1785698220563
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.7.29"
+                                            "example": "v2026.8.2"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1483,11 +1609,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1785380854155
+                                            "example": 1785698220563
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.7.29"
+                                            "example": "v2026.8.2"
                                         },
                                         "object": {
                                             "type": "string",

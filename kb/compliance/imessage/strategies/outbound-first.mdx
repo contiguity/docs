@@ -1,0 +1,58 @@
+---
+title: "Outbound-first"
+sidebarTitle: "Outbound-first"
+description: "When you have to message someone first, and how to do it safely."
+icon: "paper-plane"
+iconType: "solid"
+mode: "wide"
+---
+
+You message someone before they've texted you. Appointment reminders, shipping updates, and marketing all start this way.
+
+<CardGroup>
+  <Card title="Why you sometimes need it" icon="thumbs-up">
+  - It's the only option for proactive, time-sensitive messages like appointment reminders, order updates, and alerts.
+  - You control the timing
+  </Card>
+  <Card title="Where the risk comes from" icon="thumbs-down">
+  - It looks like spam to Apple's detection systems, regardless of whether you have consent on file
+  - It needs gradual ramp-up on new numbers, careful pacing, and carries a higher risk of getting flagged, especially at volume or to brand-new contacts
+  </Card>
+</CardGroup>
+
+<Warning>
+  Opt-in status is a legal and compliance concern, not a signal Apple's automated systems can see. A cold send to an opted-in list behaves identically to a cold send to a purchased or scraped one, from Apple's side. Minimize outbound-first sends where you can, even to consenting users.
+</Warning>
+
+If you need to send outbound-first, follow the personalization, pacing, and ramp-up guidance in [Best Practices](/kb/compliance/imessage/best-practices).
+
+## Scaling with number pooling
+
+Each leased number is capped at 1 message per second sustained, with short bursts allowed up to 5 messages per second. See [Caveats & Limits](/kb/compliance/imessage/caveats-limits#rate-limits) for the full details. To send faster than that, pool multiple leased numbers together to reach the throughput you need. If you need to sustain 10 messages per second, you'll need 10 numbers to do it. Pooling doesn't make any individual number faster, it just gives your business more numbers to send from at once.
+
+It's entirely your decision on how many numbers to pool together, which numbers to use, and how to distribute them. Contiguity enforces hard limits, but ultimately leaves everything else up to you.
+
+<Tip>
+  When picking a number for a fresh, never-before-contacted recipient, distribute the choice across your pool (round-robin or random) so no single line gets all the new-contact volume. Once that recipient has been assigned a number, keep using the same one for every message you send them.
+</Tip>
+
+## Filter number lists beforehand
+
+Before messaging customers, use the Contiguity iMessage Availability Lookup API to check if their phone number supports iMessage. This helps you avoid handling SMS fallback and ensures that, if needed, you only send to recipients using Apple devices.
+
+---
+
+<CardGroup>
+  <Card title="Inbound-first" icon="inbox" href="/kb/compliance/imessage/strategies/inbound-first">
+    Let the customer message you first, then reply freely.
+  </Card>
+  <Card title="Hybrid" icon="shuffle" href="/kb/compliance/imessage/strategies/overview#hybrid-what-most-products-actually-do">
+    What most real products actually do.
+  </Card>
+</CardGroup>
+
+Still have questions? Join our [Discord community](https://discord.gg/Z9K5XAsS7H) or email us at help@contiguity.support.
+
+import Snippet from '/snippets/mintlify.mdx';
+
+<Snippet />

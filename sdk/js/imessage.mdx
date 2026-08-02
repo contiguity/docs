@@ -38,6 +38,8 @@ const res = await contiguity.imessage.send({
 
 ```typescript
 const res = await contiguity.imessage.get("msg_...");
+// Get a message by ID, optionally with tracking
+const res = await contiguity.imessage.get("msg_...", { tracking: true });
 ```
 
 ## Conversation history
@@ -46,6 +48,7 @@ const res = await contiguity.imessage.get("msg_...");
 const res = await contiguity.imessage.history({
   to: "+1234567890",
   from: "+15555555555",
+  tracking: true, // optional, defaults to false
   limit: 20   // optional
 });
 ```

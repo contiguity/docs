@@ -1,0 +1,82 @@
+---
+title: "Caveats & Limits"
+sidebarTitle: "Caveats & Limits"
+description: "Rate limits, link preview quirks, and behavior that can get a number flagged."
+icon: "triangle-exclamation"
+iconType: "solid"
+mode: "wide"
+---
+
+## Rate limits
+
+Each leased number is capped at **1 message per second sustained**, with short bursts allowed up to **5 messages per second**. This limit applies per line, not per account, so the way to send faster overall is to lease and [pool more numbers](/kb/compliance/imessage/strategies/outbound-first#scaling-with-number-pooling) rather than push harder on one.
+
+While Contiguity doesn't enforce contact restrictions, we recommend the following: 
+
+| Strategy         | Limit Type                                     | Limit                        |
+|------------------|------------------------------------------------|------------------------------|
+| **Outbound-first**  | New contacts / line / day                      | Up to 100*                   |
+|                  | New contacts / line / hour                     | 20                           |
+| &nbsp; |
+| **Inbound-first**   | Reply to new contacts within 24h / line / day   | Unlimited                    |
+|                  | Reply to contacts after 24h of inactivity / line / day | 1,000                  |
+
+\* 100 new contacts per line per day is based on a warmed up number with a good reputation. Contiguity recommends ramping volume slowly over the course of a few weeks.
+
+Furthermore, we recommend sending during normal daytime hours in the recipient's timezone.
+
+<Note>
+  Need to send faster than this on a single number? The `fast_track` option on `imessage.send` bypasses the recommended rate limit, but requires the Fast Track entitlement.
+</Note>
+
+## Links
+
+Apple only expands link previews when the sender is already in the recipient's contacts. Until then, your links show up as plain, unstyled text. This is a limitation of iMessage itself, not something Contiguity can change.
+
+Since the limitation is "not in contacts," the fix is to get yourself into their contacts. Send an Apple contact card (a `.vcf` file) early in the conversation. The recipient can save it with one tap, and from then on your links preview normally and your messages show your name instead of a bare number. If you don't already have a `.vcf` for your business, [vcard.free](https://vcard.free/) generates one for free, in your browser, with no signup.
+
+A contact card is just another attachment on a normal send:
+
+```typescript
+await contiguity.imessage.send({
+  to: "+1234567890",
+  message: "Save my info so links and previews show up correctly:",
+  attachments: ["https://example.com/business-card.vcf"]
+});
+```
+
+## What can get a number flagged or restricted
+
+<AccordionGroup>
+  <Accordion title="Mass unsolicited blasts" icon="ban">
+    Sending unsolicited marketing messages to a purchased or scraped contact list is the single fastest way to get a number flagged. This applies even if the content itself would otherwise be fine.
+  </Accordion>
+
+  <Accordion title="Identical broadcast content" icon="copy">
+    Sending the same message body to a large number of recipients in a short window, with no personalization, reads as a broadcast rather than a conversation.
+  </Accordion>
+
+  <Accordion title="High volume to brand-new contacts" icon="user-plus">
+    Messaging a large number of people you've never had a conversation with, especially in a short window, is a strong spam signal, even if each message is unique.
+  </Accordion>
+
+  <Accordion title="Rapid recipient switching" icon="shuffle">
+    Real conversations happen over time with pauses in between. Sending to a long list of sequential or unrelated numbers back-to-back, with no replies in between, looks like automation rather than a human having conversations.
+  </Accordion>
+
+  <Accordion title="Ignoring opt-outs" icon="hand">
+    Continuing to message a recipient after they've asked you to stop is both a compliance issue and a strong negative signal for your number's health. Recipients who feel spammed are also more likely to report messages as junk.
+  </Accordion>
+</AccordionGroup>
+
+<Note>
+  The rule of thumb: if a message would be welcome and expected by the person receiving it, it's almost certainly fine. These guidelines exist for behavior that looks like spam, not for legitimate, opted-in business communication.
+</Note>
+
+---
+
+Still have questions? Join our [Discord community](https://discord.gg/Z9K5XAsS7H) or email us at help@contiguity.support.
+
+import Snippet from '/snippets/mintlify.mdx';
+
+<Snippet />

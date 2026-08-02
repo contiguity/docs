@@ -16,8 +16,49 @@ View available phone numbers that can be leased for your account.
 const res = await contiguity.lease.available();
 ```
 
+You can also filter the results by status, capabilities, and location:
+
+```typescript
+const res = await contiguity.lease.available({
+  filter: {
+    status: "available",
+    capabilities: ["sms", "imessage"],
+    location: {
+      country: "US",
+      region: "FL",
+      city: "Miami",
+    },
+  },
+});
+```
+
 ### Parameters
-No parameters required.
+
+<ParamField body="filter" type="object">
+  Optional. Narrows down the returned numbers. Omit to get all available numbers.
+  <Expandable title="Filter object properties">
+    <ParamField body="filter.status" type="string">
+      Only return numbers with this status.
+    </ParamField>
+    <ParamField body="filter.capabilities" type="string[]">
+      Only return numbers that support all listed channels (e.g. `["sms", "imessage"]`).
+    </ParamField>
+    <ParamField body="filter.location" type="object">
+      Only return numbers matching this location. Fields are matched independently, so provide any subset.
+      <Expandable title="Location object properties">
+        <ParamField body="filter.location.country" type="string">
+          2-letter country code (e.g. `"US"`).
+        </ParamField>
+        <ParamField body="filter.location.region" type="string">
+          Region/state (e.g. `"FL"`).
+        </ParamField>
+        <ParamField body="filter.location.city" type="string">
+          City (e.g. `"Miami"`).
+        </ParamField>
+      </Expandable>
+    </ParamField>
+  </Expandable>
+</ParamField>
 
 ### Response
 <ResponseField name="available" type="boolean">
@@ -114,8 +155,49 @@ Get a list of all numbers you currently have leased.
 const res = await contiguity.lease.leased();
 ```
 
+You can also filter the results by status, capabilities, and location:
+
+```typescript
+const res = await contiguity.lease.leased({
+  filter: {
+    status: "active",
+    capabilities: ["sms", "imessage"],
+    location: {
+      country: "US",
+      region: "FL",
+      city: "Miami",
+    },
+  },
+});
+```
+
 ### Parameters
-No parameters required.
+
+<ParamField body="filter" type="object">
+  Optional. Narrows down the returned numbers. Omit to get all leased numbers.
+  <Expandable title="Filter object properties">
+    <ParamField body="filter.status" type="string">
+      Only return numbers with this lease status (e.g. `"active"`, `"paused"`, `"expired"`, `"terminated"`).
+    </ParamField>
+    <ParamField body="filter.capabilities" type="string[]">
+      Only return numbers that support all listed channels (e.g. `["sms", "imessage"]`).
+    </ParamField>
+    <ParamField body="filter.location" type="object">
+      Only return numbers matching this location. Fields are matched independently, so provide any subset.
+      <Expandable title="Location object properties">
+        <ParamField body="filter.location.country" type="string">
+          2-letter country code (e.g. `"US"`).
+        </ParamField>
+        <ParamField body="filter.location.region" type="string">
+          Region/state (e.g. `"FL"`).
+        </ParamField>
+        <ParamField body="filter.location.city" type="string">
+          City (e.g. `"Miami"`).
+        </ParamField>
+      </Expandable>
+    </ParamField>
+  </Expandable>
+</ParamField>
 
 ### Response
 <ResponseField name="leased" type="boolean">

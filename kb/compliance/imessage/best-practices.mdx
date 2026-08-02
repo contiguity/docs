@@ -1,0 +1,76 @@
+---
+title: "Best Practices"
+sidebarTitle: "Best Practices"
+description: "Contiguity's recommended best practices for keeping your iMessage number healthy and deliverable."
+icon: "lightbulb"
+iconType: "solid"
+mode: "wide"
+---
+
+iMessage isn't filtered by carriers the way SMS/MMS is. There's no keyword filtering, content scanning, or per-segment fees to worry about.
+Instead, Apple protects the network by watching for sending patterns that look automated or spammy, and can flag or restrict a number that trips those signals.
+There's no carrier in the middle to appeal to, so staying in good standing with Apple's detection systems matters even more than it does for SMS.
+To keep your messages landing as blue bubbles, and your number in good health, follow these guidelines.
+
+<Info>
+  Rate limits, link preview quirks, and a full list of what can get a number flagged live on the separate [Caveats & Limits](/kb/compliance/imessage/caveats-limits) page.
+</Info>
+
+### Pick a sending strategy first
+Whether you or the customer sends the first message in a conversation is the single biggest factor in how risky your sending looks to Apple. See [Strategies](/kb/compliance/imessage/strategies/overview) for a full breakdown of inbound-first, outbound-first, and hybrid approaches, with pros, cons, and code examples.
+
+### Personalize every message
+<CardGroup>
+  <Card title="Never send identical content" icon="copy">
+    Sending the exact same text to many recipients is one of the clearest spam signals there is. Vary greetings, names, and context per recipient rather than reusing one template verbatim.
+  </Card>
+  <Card title="Reference something specific" icon="user">
+    Mention the recipient's name, order, appointment, or last interaction. Generic blasts undercut the personal feel that makes iMessage effective in the first place.
+  </Card>
+</CardGroup>
+
+### Send like a human, not a script
+<CardGroup>
+  <Card title="Avoid fixed intervals" icon="clock">
+    A message sent every exact 10 seconds is an obvious automation fingerprint. Add randomized delays between sends instead of a fixed cadence.
+  </Card>
+  <Card title="Cluster and pause" icon="hourglass-half">
+    Humans send a few messages, pause, then come back later. Avoid blasting an entire list in one continuous run. Break volume into smaller bursts with gaps in between.
+  </Card>
+  <Card title="Respect the clock" icon="moon">
+    Send during normal daytime hours in the recipient's timezone. iMessage notifications are immediate and prominent, so late-night messages are more likely to be flagged or reported.
+  </Card>
+  <Card title="Vary your daily volume" icon="chart-line">
+    Sending exactly the same number of messages every single day is another pattern detection systems look for. Natural variation looks more human than a constant, mechanical rate.
+  </Card>
+</CardGroup>
+
+### Ramp up gradually
+New or newly-leased numbers should ramp volume up gradually rather than sending at full throughput on day one. A sudden spike in sending from a number with little prior activity is a strong risk signal to Apple.
+If you're expecting to send meaningfully higher volume, reach out on [Discord](https://discord.gg/Z9K5XAsS7H) or email help@contiguity.support so we can help you scale safely. Also consider [leasing multiple numbers](/products/leases) to distribute volume rather than pushing it all through one line.
+
+### Get consent, and honor opt-outs anyway
+iMessage is exempt from A2P 10DLC, carrier vetting, and mandatory opt-out language. See our [compliance overview](/kb/compliance/overview). That doesn't mean consent stops mattering: you're still responsible for complying with applicable laws in your jurisdiction (e.g. TCPA, GDPR, CASL), and honoring opt-outs promptly is one of the strongest signals of legitimate use. If a recipient asks to stop, stop.
+
+### Use rich features, not just plain text
+Part of what makes iMessage worth using over SMS is the feature set. Leaning on it makes your messages feel like they're coming from an attentive person, not a script.
+
+<CardGroup>
+  <Card title='Use reactions' icon="heart">
+    A tapback on the customer's message acknowledges it instantly, and looks infinitely more human. <br/><br/> [See docs >](/api-reference/product/imessage/reactions) 
+  </Card>
+  <Card title="Mark messages as read" icon="check-double">
+    Marking a conversation as read as soon as you've seen it (or your system has processed it) matches how a real person uses iMessage.
+  </Card>
+  <Card title="Show typing indicators" icon="ellipsis">
+    Start a typing indicator before your reply lands, especially if there's any processing delay (an AI agent thinking, a lookup running). <br/><br/> [See docs >](/api-reference/product/imessage/typing)
+  </Card>
+</CardGroup>
+
+---
+
+Still have questions? Join our [Discord community](https://discord.gg/Z9K5XAsS7H) or email us at help@contiguity.support.
+
+import Snippet from '/snippets/mintlify.mdx';
+
+<Snippet />

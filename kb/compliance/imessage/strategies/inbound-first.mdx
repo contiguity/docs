@@ -1,0 +1,164 @@
+---
+title: "Inbound-first"
+sidebarTitle: "Inbound-first"
+description: "Let the customer message you first, then reply freely."
+icon: "inbox"
+iconType: "solid"
+mode: "wide"
+---
+
+<CardGroup>
+  <Card title="Why it's the safest option" icon="thumbs-up">
+  - There's no fundamental limit once the conversation is open
+  - You can connect with as many contacts per day as you want, as inbound-first conversations are not ratelimited by Apple
+  - Users lose the ability to mark the conversation as spam
+  </Card>
+  <Card title="Where it falls short" icon="thumbs-down">
+  - It requires the customer to take the first step, so you have to design for it
+  - It's not usable for proactive notifications (reminders, alerts) to someone who hasn't texted you yet
+  - It's not usable for some types of leads
+  </Card>
+</CardGroup>
+
+To make inbound-first frictionless, make the experience for the customer as easy as possible. A simple form that opens the customer's Messages app with your number and a prefilled message already in the compose box is a good way to do this.
+
+## Example: a form that opens Messages
+
+export const TextUsDemo = () => {
+  const [name, setName] = useState("");
+
+  const openText = (event) => {
+    event.preventDefault();
+    const body = encodeURIComponent(`Hi, I'm ${name || "a visitor"} and I'd like to chat!`);
+    window.location.href = `sms:+15555550123?body=${body}`;
+  };
+
+  return (
+    <form onSubmit={openText} className="not-prose flex flex-col sm:flex-row gap-2 p-4 border dark:border-zinc-950/80 rounded-xl">
+      <input
+        type="text"
+        value={name}
+        onChange={(event) => setName(event.target.value)}
+        placeholder="Your name"
+        className="flex-1 px-3 py-2 rounded-lg border dark:border-zinc-950/80 bg-transparent text-sm"
+      />
+      <button type="submit" className="px-4 py-2 rounded-lg bg-zinc-950 text-white dark:bg-white dark:text-zinc-950 text-sm font-medium">
+        Submit
+      </button>
+    </form>
+  );
+};
+
+<CodeGroup>
+```html index.html
+<form id="text-us">
+  <input type="text" name="name" placeholder="Your name" required />
+  <button type="submit">Submit</button>
+</form>
+
+<script>
+  function openText(event) {
+    event.preventDefault();
+    const name = event.target.name.value;
+    const body = encodeURIComponent(`Hi, I'm ${name} and I'd like to chat!`);
+    window.location.href = `sms:+15555550123?body=${body}`;
+  }
+
+  document.getElementById("text-us").addEventListener("submit", openText);
+</script>
+```
+</CodeGroup>
+
+### Try it
+
+<TextUsDemo />
+
+Clicking submit opens the customer's Messages app with your number and a prefilled message already in the compose box. All they have to do is hit send.
+
+<Tip>
+  `sms:` is the correct URI scheme for both SMS and iMessage. Apple devices resolve it to a blue or green bubble automatically based on whether the recipient number supports iMessage. You don't need a separate `imessage:` link.
+</Tip>
+
+## Example: dynamically picking a number (React)
+
+If you [lease multiple numbers](/products/leases) to distribute volume, pick one dynamically instead of hardcoding a single number into your frontend. This looks up your leased numbers server-side (never expose your API key in the browser), filters for ones that are active and iMessage-capable, and hands one back to the button.
+
+<CodeGroup>
+```javascript api/imessage-number.js
+// Runs server-side (Express route, Next.js API route, etc.), keeping your API key off the client.
+import { Contiguity } from "contiguity";
+
+// Reads CONTIGUITY_API_KEY from env; see the SDK overview for other init options.
+const contiguity = new Contiguity();
+
+export async function getImessageNumber(req, res) {
+  const { numbers } = await contiguity.lease.leased({
+    filter: { status: "active", capabilities: ["imessage"] },
+  });
+
+  if (numbers.length === 0) {
+    return res.status(404).json({ error: "No iMessage-capable numbers available" });
+  }
+
+  // Spread load across lines instead of hammering one number.
+  const chosen = numbers[Math.floor(Math.random() * numbers.length)];
+  res.json({ number: chosen.number.e164 });
+}
+```
+
+```jsx TextUsButton.jsx
+import { useState } from "react";
+
+function TextUsButton() {
+  const [loading, setLoading] = useState(false);
+
+  async function getNumber() {
+    const res = await fetch("/api/imessage-number");
+    const data = await res.json();
+    return data.number;
+  }
+
+  async function openImessage() {
+    setLoading(true);
+    const number = await getNumber();
+    setLoading(false);
+
+    if (!number) return;
+
+    const body = encodeURIComponent("Hi! I'd like to chat.");
+    window.location.href = `sms:${number}?body=${body}`;
+  }
+
+  return (
+    <button onClick={openImessage} disabled={loading}>
+      {loading ? "Connecting…" : "Text us"}
+    </button>
+  );
+}
+
+export default TextUsButton;
+```
+</CodeGroup>
+
+This uses [`contiguity.lease.leased()`](/sdk/js/leases#view-leased-numbers)'s `filter` option to pull only your active, iMessage-capable numbers (backed by the [leased numbers API](/api-reference/product/leases/leased-all)), so you never have to keep a separate hardcoded list of numbers in sync with what you've actually leased.
+
+<Note>
+  This picks a random number per click, which is fine for a widget where each visitor is a new conversation. If you're pooling numbers for high-volume outbound sending instead, see [sticky sending](/kb/compliance/imessage/strategies/outbound-first#scaling-with-number-pooling), where each recipient sticks to one number.
+</Note>
+
+---
+
+<CardGroup>
+  <Card title="Outbound-first" icon="paper-plane" href="/kb/compliance/imessage/strategies/outbound-first">
+    When you have to message someone first, and how to do it safely.
+  </Card>
+  <Card title="Hybrid" icon="shuffle" href="/kb/compliance/imessage/strategies/overview#hybrid-what-most-products-actually-do">
+    What most real products actually do.
+  </Card>
+</CardGroup>
+
+Still have questions? Join our [Discord community](https://discord.gg/Z9K5XAsS7H) or email us at help@contiguity.support.
+
+import Snippet from '/snippets/mintlify.mdx';
+
+<Snippet />

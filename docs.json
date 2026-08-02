@@ -313,6 +313,29 @@
                                     "kb/compliance/text/best-practices",
                                     "kb/compliance/text/prohibited"
                                 ]
+                            },
+                            {
+                                "group": "iMessage",
+                                "icon": {
+                                    "name": "apple",
+                                    "style": "solid"
+                                },
+                                "pages": [
+                                    "kb/compliance/imessage/best-practices",
+                                    "kb/compliance/imessage/caveats-limits",
+                                    {
+                                        "group": "Strategies",
+                                        "icon": {
+                                            "name": "route",
+                                            "style": "solid"
+                                        },
+                                        "pages": [
+                                            "kb/compliance/imessage/strategies/overview",
+                                            "kb/compliance/imessage/strategies/inbound-first",
+                                            "kb/compliance/imessage/strategies/outbound-first"
+                                        ]
+                                    }
+                                ]
                             }
                         ]
                     },

@@ -1,0 +1,39 @@
+---
+title: "Overview"
+sidebarTitle: "Overview"
+description: "Inbound-first, outbound-first, and hybrid approaches for sending iMessages, with tradeoffs and examples."
+icon: "route"
+iconType: "solid"
+mode: "wide"
+---
+
+Every iMessage falls into one of two buckets: you're replying to someone who texted you first (inbound-first), or you're the one starting the conversation (outbound-first).
+Which one you pick for a given use case is the single biggest factor in how risky that message looks to Apple's detection systems.
+Most real products use both, just for different things.
+
+<CardGroup>
+  <Card title="Inbound-first" icon="inbox" href="/kb/compliance/imessage/strategies/inbound-first">
+    The customer messages you first. Lowest risk, best for support and sales conversations.
+  </Card>
+  <Card title="Outbound-first" icon="paper-plane" href="/kb/compliance/imessage/strategies/outbound-first">
+    You message someone before they've texted you. Needed for reminders, order updates, and alerts.
+  </Card>
+</CardGroup>
+
+## Hybrid: what most products actually do
+
+Use outbound-first sparingly, for messages the customer already expects: a reminder for an appointment they booked, a shipping update for an order they placed. Use inbound-first for everything else, especially first contact.
+
+It's also worth remembering that once a customer has replied to you, further messages in that thread aren't cold outbound anymore. A shipping update sent to someone who texted you last week about their order is a reply in an ongoing conversation, not a blast to a stranger.
+
+<Tip>
+  A good rule of thumb: if the recipient would be surprised to hear from you, treat it as outbound-first and follow the [outbound-first](/kb/compliance/imessage/strategies/outbound-first) guidance. If they're expecting it, or they've talked to you recently, it's safe to treat as a reply.
+</Tip>
+
+---
+
+Still have questions? Join our [Discord community](https://discord.gg/Z9K5XAsS7H) or email us at help@contiguity.support.
+
+import Snippet from '/snippets/mintlify.mdx';
+
+<Snippet />
