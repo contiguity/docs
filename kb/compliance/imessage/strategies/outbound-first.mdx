@@ -24,6 +24,16 @@ You message someone before they've texted you. Appointment reminders, shipping u
   Opt-in status is a legal and compliance concern, not a signal Apple's automated systems can see. A cold send to an opted-in list behaves identically to a cold send to a purchased or scraped one, from Apple's side. Minimize outbound-first sends where you can, even to consenting users.
 </Warning>
 
+## Use outbound-first selectively
+
+Most products use a hybrid approach. Reserve outbound-first for messages the customer already expects, such as a reminder for an appointment they booked or a shipping update for an order they placed. Use [inbound-first](/kb/compliance/imessage/strategies/inbound-first) for everything else, especially first contact.
+
+Once a customer replies, later messages in that thread are no longer cold outbound. A shipping update sent to someone who texted you last week about their order is part of an ongoing conversation, not a blast to a stranger.
+
+<Tip>
+  If the recipient would be surprised to hear from you, treat the message as outbound-first and follow the guidance below. If they're expecting it or have talked to you recently, it's safe to treat it as a reply.
+</Tip>
+
 If you need to send outbound-first, follow the personalization, pacing, and ramp-up guidance in [Best Practices](/kb/compliance/imessage/best-practices).
 
 ## Scaling with number pooling
@@ -45,9 +55,6 @@ Before messaging customers, use the Contiguity iMessage Availability Lookup API 
 <CardGroup>
   <Card title="Inbound-first" icon="inbox" href="/kb/compliance/imessage/strategies/inbound-first">
     Let the customer message you first, then reply freely.
-  </Card>
-  <Card title="Hybrid" icon="shuffle" href="/kb/compliance/imessage/strategies/overview#hybrid-what-most-products-actually-do">
-    What most real products actually do.
   </Card>
 </CardGroup>
 

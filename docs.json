@@ -330,7 +330,6 @@
                                             "style": "solid"
                                         },
                                         "pages": [
-                                            "kb/compliance/imessage/strategies/overview",
                                             "kb/compliance/imessage/strategies/inbound-first",
                                             "kb/compliance/imessage/strategies/outbound-first"
                                         ]
