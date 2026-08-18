@@ -1,0 +1,79 @@
+---
+title: 'Conversations'
+icon: "comments"
+iconType: "solid"
+description: "Cancel queued sends with the Contiguity JavaScript SDK."
+---
+
+## Cancel a queued send
+
+Cancel a queued SMS, iMessage, or WhatsApp send. Repeat calls are idempotent.
+
+```typescript
+await contiguity.conversations.cancel("text_abc");
+```
+
+<Warning>
+This does not unsend a message. If the send is already in flight, it may still go out. Delivery-confirmed messages throw with status `400`.
+</Warning>
+
+A successful cancel appends `text.cancelled` / `imessage.cancelled` / `whatsapp.cancelled` to the tracking timeline and fires the matching [webhook](/api-reference/webhook/example-v2#text-cancelled--imessage-cancelled--whatsapp-cancelled) once. See [Cancel a queued send](/api-reference/product/text/cancel) for retry backoff and other API details.
+
+### conversations.cancel(message)
+
+<ParamField body="message" type="string" required>
+  Message ID to cancel (`text_…`, `imessage_…`, or `whatsapp_…`). First argument.
+</ParamField>
+
+### Response
+
+<ResponseField name="cancelled" type="boolean">
+  Always `true` on success. Repeat calls are idempotent.
+</ResponseField>
+
+<ResponseField name="msg_id" type="string">
+  The cancelled message ID.
+</ResponseField>
+
+<ResponseField name="metadata" type="object">
+  Request metadata: id, timestamp, api_version, object.
+</ResponseField>
+
+```json
+{
+  "cancelled": true,
+  "msg_id": "text_abc",
+  "metadata": {
+    "id": "req_…",
+    "timestamp": "…",
+    "api_version": "v2026.7.29",
+    "object": "response"
+  }
+}
+```
+
+### Errors
+
+Throws `ContiguityError`.
+
+| Status | When |
+| --- | --- |
+| `400` | Delivery was already confirmed. In-flight sends cannot be unsent. |
+| `401` / `403` | Bad or unauthorized token |
+| `404` | Message not found / not owned by the caller |
+
+```typescript
+import { ContiguityError } from "contiguity";
+
+try {
+  await contiguity.conversations.cancel("text_abc");
+} catch (e) {
+  if (e instanceof ContiguityError) {
+    console.error(e.status, e.message);
+  }
+}
+```
+
+import Snippet from '/snippets/mintlify.mdx';
+
+<Snippet />

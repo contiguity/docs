@@ -28,6 +28,14 @@ const res = await contiguity.text.get("msg_...");
 const res = await contiguity.text.get("msg_...", { tracking: true });
 ```
 
+## Cancel a queued send
+
+Works for SMS, iMessage, and WhatsApp. See [Conversations](/sdk/js/conversations).
+
+```typescript
+await contiguity.conversations.cancel("text_abc");
+```
+
 ## Conversation history
 
 ```typescript

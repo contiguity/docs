@@ -34,6 +34,14 @@ const res = await contiguity.whatsapp.send({
 });
 ```
 
+## Cancel a queued send
+
+Works for SMS, iMessage, and WhatsApp. See [Conversations](/sdk/js/conversations).
+
+```typescript
+await contiguity.conversations.cancel("whatsapp_abc");
+```
+
 ## Typing Indicators
 Show typing indicators to create a more interactive messaging experience.
 
