@@ -137,7 +137,8 @@
                             "api-reference/product/text/mms",
                             "api-reference/product/text/reactions",
                             "api-reference/product/text/history",
-                            "api-reference/product/text/fetch"
+                            "api-reference/product/text/fetch",
+                            "api-reference/product/text/cancel"
                         ]
                     },
                     {
@@ -210,6 +211,7 @@
                             "api-reference/product/imessage/read",
                             "api-reference/product/imessage/history",
                             "api-reference/product/text/fetch",
+                            "api-reference/product/text/cancel",
                             "api-reference/product/imessage/availability",
                             "api-reference/product/imessage/verify"
                         ]
@@ -223,7 +225,8 @@
                         "pages": [
                             "api-reference/product/whatsapp/send",
                             "api-reference/product/whatsapp/typing",
-                            "api-reference/product/whatsapp/reactions"
+                            "api-reference/product/whatsapp/reactions",
+                            "api-reference/product/text/cancel"
                         ]
                     },
                     {

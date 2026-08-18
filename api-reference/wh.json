@@ -147,6 +147,105 @@
                 }
             }
         },
+        "text.cancelled": {
+            "post": {
+                "summary": "Queued SMS/MMS send cancelled",
+                "description": "Fired when you cancel a queued send (`POST /conversations/cancel/{msg_id}`). Does not mean the message was unsent — an in-flight send may still go out.",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TextCancelledEvent"
+                            },
+                            "example": {
+                                "id": "evt_d61aCHRo18",
+                                "type": "text.cancelled",
+                                "timestamp": 1726502400,
+                                "api_version": "v2025.9.7",
+                                "data": {
+                                    "from": "+15551234567",
+                                    "to": "+15559876543",
+                                    "message_id": "text_abc123",
+                                    "timestamp": 1726502400
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Webhook received"
+                    }
+                }
+            }
+        },
+        "imessage.cancelled": {
+            "post": {
+                "summary": "Queued iMessage send cancelled",
+                "description": "Fired when you cancel a queued send (`POST /conversations/cancel/{msg_id}`). Does not mean the message was unsent — an in-flight send may still go out.",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/IMessageCancelledEvent"
+                            },
+                            "example": {
+                                "id": "evt_d61aCHRo18",
+                                "type": "imessage.cancelled",
+                                "timestamp": 1726502400,
+                                "api_version": "v2025.9.7",
+                                "data": {
+                                    "from": "+15551234567",
+                                    "to": "+15559876543",
+                                    "message_id": "imessage_abc123",
+                                    "timestamp": 1726502400
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Webhook received"
+                    }
+                }
+            }
+        },
+        "whatsapp.cancelled": {
+            "post": {
+                "summary": "Queued WhatsApp send cancelled",
+                "description": "Fired when you cancel a queued send (`POST /conversations/cancel/{msg_id}`). Does not mean the message was unsent — an in-flight send may still go out.",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/WhatsAppCancelledEvent"
+                            },
+                            "example": {
+                                "id": "evt_d61aCHRo18",
+                                "type": "whatsapp.cancelled",
+                                "timestamp": 1726502400,
+                                "api_version": "v2025.9.7",
+                                "data": {
+                                    "from": "+15551234567",
+                                    "to": "+15559876543",
+                                    "message_id": "whatsapp_abc123",
+                                    "timestamp": 1726502400
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Webhook received"
+                    }
+                }
+            }
+        },
         "imessage.incoming": {
             "post": {
                 "summary": "Incoming iMessage",
@@ -825,6 +924,100 @@
                             },
                             "data": {
                                 "$ref": "#/components/schemas/TextDeliveryFailedData"
+                            }
+                        },
+                        "required": [
+                            "type",
+                            "data"
+                        ],
+                        "additionalProperties": false
+                    }
+                ]
+            },
+            "MessageCancelledData": {
+                "type": "object",
+                "properties": {
+                    "from": {
+                        "type": "string"
+                    },
+                    "to": {
+                        "type": "string"
+                    },
+                    "message_id": {
+                        "type": "string"
+                    },
+                    "timestamp": {
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                },
+                "required": [
+                    "from",
+                    "to",
+                    "message_id",
+                    "timestamp"
+                ],
+                "additionalProperties": false
+            },
+            "TextCancelledEvent": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/WebhookEvent"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "type": {
+                                "const": "text.cancelled"
+                            },
+                            "data": {
+                                "$ref": "#/components/schemas/MessageCancelledData"
+                            }
+                        },
+                        "required": [
+                            "type",
+                            "data"
+                        ],
+                        "additionalProperties": false
+                    }
+                ]
+            },
+            "IMessageCancelledEvent": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/WebhookEvent"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "type": {
+                                "const": "imessage.cancelled"
+                            },
+                            "data": {
+                                "$ref": "#/components/schemas/MessageCancelledData"
+                            }
+                        },
+                        "required": [
+                            "type",
+                            "data"
+                        ],
+                        "additionalProperties": false
+                    }
+                ]
+            },
+            "WhatsAppCancelledEvent": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/WebhookEvent"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "type": {
+                                "const": "whatsapp.cancelled"
+                            },
+                            "data": {
+                                "$ref": "#/components/schemas/MessageCancelledData"
                             }
                         },
                         "required": [

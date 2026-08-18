@@ -1,0 +1,19 @@
+---
+title: 'Cancel a queued send'
+openapi: "openapi-conversations POST /cancel/{msg_id}"
+sidebarTitle: 'Cancel'
+description: 'Cancel a queued SMS, iMessage, or WhatsApp send'
+icon: "ban"
+---
+
+<Warning>
+This does not unsend a message. If the send is already in flight, it may still go out. Messages whose delivery is already confirmed return `400`.
+</Warning>
+
+<Note>
+Repeat calls are idempotent — cancelling the same `msg_id` again still returns `cancelled: true`.
+</Note>
+
+import Snippet from '/snippets/mintlify.mdx';
+
+<Snippet />

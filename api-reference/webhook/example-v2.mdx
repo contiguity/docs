@@ -113,6 +113,25 @@ SMS/MMS delivery failed or timed out.
 }
 ```
 
+### `text.cancelled` / `imessage.cancelled` / `whatsapp.cancelled`
+-----
+Fired when you cancel a queued send ([`POST /conversations/cancel/{msg_id}`](/api-reference/product/text/cancel)). Does not mean the message was unsent — an in-flight send may still go out.
+
+```json
+{
+  "id": "evt_d61aCHRo18",
+  "type": "text.cancelled",
+  "timestamp": 1726502400,
+  "api_version": "v2025.9.7",
+  "data": {
+    "from": "+15551234567",
+    "to": "+15559876543",
+    "message_id": "text_abc123",
+    "timestamp": 1726502400
+  }
+}
+```
+
 ### `imessage.incoming`
 -----
 An incoming iMessage was received.
