@@ -6,7 +6,7 @@
         }
     ],
     "info": {
-        "version": "v2026.8.2",
+        "version": "v2026.8.18",
         "title": "Conversations API"
     },
     "components": {
@@ -67,11 +67,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1785698220563
+                                            "example": 1787071017019
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.8.2"
+                                            "example": "v2026.8.18"
                                         },
                                         "object": {
                                             "type": "string",
@@ -183,11 +183,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1785698220563
+                                            "example": 1787071017019
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.8.2"
+                                            "example": "v2026.8.18"
                                         },
                                         "object": {
                                             "type": "string",
@@ -235,11 +235,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1785698220563
+                                            "example": 1787071017019
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.8.2"
+                                            "example": "v2026.8.18"
                                         },
                                         "object": {
                                             "type": "string",
@@ -287,11 +287,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1785698220563
+                                            "example": 1787071017019
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.8.2"
+                                            "example": "v2026.8.18"
                                         },
                                         "object": {
                                             "type": "string",
@@ -339,11 +339,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1785698220563
+                                            "example": 1787071017019
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.8.2"
+                                            "example": "v2026.8.18"
                                         },
                                         "object": {
                                             "type": "string",
@@ -392,11 +392,11 @@
                     {
                         "schema": {
                             "type": "string",
-                            "description": "Recipient's iMessage address. Must be in E.164 format.",
+                            "description": "Recipient's iMessage address. E.164 phone number or email (e.g. name@icloud.com)",
                             "example": "+1234567890"
                         },
                         "required": true,
-                        "description": "Recipient's iMessage address. Must be in E.164 format.",
+                        "description": "Recipient's iMessage address. E.164 phone number or email (e.g. name@icloud.com)",
                         "name": "to",
                         "in": "path"
                     },
@@ -451,11 +451,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1785698220563
+                                            "example": 1787071017019
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.8.2"
+                                            "example": "v2026.8.18"
                                         },
                                         "object": {
                                             "type": "string",
@@ -471,7 +471,7 @@
                                                         "properties": {
                                                             "to": {
                                                                 "type": "string",
-                                                                "description": "Recipient's iMessage address. Must be in E.164 format.",
+                                                                "description": "Recipient's iMessage address. E.164 phone number or email (e.g. name@icloud.com).",
                                                                 "example": "+1234567890"
                                                             },
                                                             "from": {
@@ -697,11 +697,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1785698220563
+                                            "example": 1787071017019
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.8.2"
+                                            "example": "v2026.8.18"
                                         },
                                         "object": {
                                             "type": "string",
@@ -749,11 +749,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1785698220563
+                                            "example": 1787071017019
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.8.2"
+                                            "example": "v2026.8.18"
                                         },
                                         "object": {
                                             "type": "string",
@@ -801,11 +801,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1785698220563
+                                            "example": 1787071017019
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.8.2"
+                                            "example": "v2026.8.18"
                                         },
                                         "object": {
                                             "type": "string",
@@ -853,11 +853,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1785698220563
+                                            "example": 1787071017019
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.8.2"
+                                            "example": "v2026.8.18"
                                         },
                                         "object": {
                                             "type": "string",
@@ -965,11 +965,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1785698220563
+                                            "example": 1787071017019
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.8.2"
+                                            "example": "v2026.8.18"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1173,11 +1173,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1785698220563
+                                            "example": 1787071017019
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.8.2"
+                                            "example": "v2026.8.18"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1225,11 +1225,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1785698220563
+                                            "example": 1787071017019
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.8.2"
+                                            "example": "v2026.8.18"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1277,11 +1277,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1785698220563
+                                            "example": 1787071017019
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.8.2"
+                                            "example": "v2026.8.18"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1329,11 +1329,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1785698220563
+                                            "example": 1787071017019
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.8.2"
+                                            "example": "v2026.8.18"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1382,18 +1382,18 @@
                     {
                         "schema": {
                             "type": "string",
-                            "description": "Phone number to check. Must be in E.164 format.",
+                            "description": "Phone number (E.164) or email to check.",
                             "example": "+1234567890"
                         },
                         "required": true,
-                        "description": "Phone number to check. Must be in E.164 format.",
+                        "description": "Phone number (E.164) or email to check.",
                         "name": "to",
                         "in": "path"
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "Check if a phone number supports iMessage",
+                        "description": "Check if a phone number or email supports iMessage",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1405,11 +1405,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1785698220563
+                                            "example": 1787071017019
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.8.2"
+                                            "example": "v2026.8.18"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1420,7 +1420,7 @@
                                             "properties": {
                                                 "available": {
                                                     "type": "boolean",
-                                                    "description": "Whether the number supports iMessage.",
+                                                    "description": "Whether the address supports iMessage.",
                                                     "example": true
                                                 }
                                             },
@@ -1453,11 +1453,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1785698220563
+                                            "example": 1787071017019
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.8.2"
+                                            "example": "v2026.8.18"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1505,11 +1505,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1785698220563
+                                            "example": 1787071017019
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.8.2"
+                                            "example": "v2026.8.18"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1557,11 +1557,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1785698220563
+                                            "example": 1787071017019
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.8.2"
+                                            "example": "v2026.8.18"
                                         },
                                         "object": {
                                             "type": "string",
@@ -1609,11 +1609,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1785698220563
+                                            "example": 1787071017019
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.8.2"
+                                            "example": "v2026.8.18"
                                         },
                                         "object": {
                                             "type": "string",
