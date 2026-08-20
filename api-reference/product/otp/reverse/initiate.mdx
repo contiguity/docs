@@ -18,20 +18,29 @@ A reverse OTP verifies a user's phone number by having the user send a code to y
     Set `service` to `"sms"` or `"imessage"`. It defaults to `"sms"` when omitted. iMessage requires an active iMessage-capable leased number and an iMessage entitlement. [Learn more about Reverse OTP with iMessage](/api-reference/product/imessage/verify).
 </Info>
 
+```javascript
+const session = await contiguity.otp.reverse.initiate({
+    language: "en",
+    service: "sms"
+});
+```
+
+If you already know the phone number, in cases such as 2FA, pass `number` to require that exact sender for a successful verification:
+
+```javascript
+const session = await contiguity.otp.reverse.initiate({
+    number: "+15551234567",
+    language: "en",
+    service: "sms"
+});
+```
+
 <Tip>
     **Streamline the experience with a QR code & button**
 
     Once you've initiated a reverse OTP session, Contiguity provides a payload that you can turn into a QR code. Display this QR code to your user, who can then scan it with their phone to automatically populate the phone number and body fields.
 
-    ```javascript
-    const session = await contiguity.otp.reverse.initiate({
-        number: "+15551234567",
-        language: "en",
-        service: "sms"
-    });
-    ```
-
-    Next:
+    Use `session.ui.qr_code`. Do not hardcode an `sms:` URL.
 
     ```javascript
     await generateQRCode(session.ui.qr_code);
@@ -47,7 +56,8 @@ A reverse OTP verifies a user's phone number by having the user send a code to y
 
     ```html
     <!-- add styling to the button -->
-    <a href="sms:+15551234567?body=1234">Tap to Verify</a>
+    <a href={session.ui.qr_code}>Tap to Verify</a>
+    <!-- session.ui.qr_code is a string like "sms:+15551234567?body=ABC123">
     ```
 
     Result:
@@ -61,7 +71,7 @@ A reverse OTP verifies a user's phone number by having the user send a code to y
         borderRadius: "5px",
         border: "none"
       }}
-      onClick={() => window.location.href = "sms:+15551234567?body=1234"}
+      onClick={() => window.location.href = "sms:+15551234567?body=ABC123"}
     >
       Tap to Verify
     </a>

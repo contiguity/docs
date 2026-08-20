@@ -127,6 +127,14 @@ Reverse OTP verifies a phone number by having the user send a code to you. Initi
 
 ```javascript
 const session = await contiguity.otp.reverse.initiate({
+    service: "sms"
+});
+```
+
+If you already know the phone number, in cases such as 2FA, pass `number` to require that exact sender:
+
+```javascript
+const session = await contiguity.otp.reverse.initiate({
     number: "+1234567890",
     service: "sms"
 });

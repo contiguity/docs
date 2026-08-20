@@ -329,11 +329,16 @@
                                 "id": "evt_dgUIkRo18",
                                 "type": "otp.reverse.verified",
                                 "timestamp": 1726502400,
-                                "api_version": "v2025.12.10",
+                                "api_version": "v2026.8.20",
                                 "data": {
                                     "otp_id": "r_otp_123456",
                                     "number": "+15551234567",
-                                    "status": "verified"
+                                    "to": "+16465550123",
+                                    "service": "sms",
+                                    "factor": "ABC123",
+                                    "status": "verified",
+                                    "expires_at": "2026-08-20T19:30:00.000Z",
+                                    "verified_at": "2026-08-20T19:15:00.000Z"
                                 }
                             }
                         }
@@ -650,17 +655,43 @@
                     "number": {
                         "type": "string"
                     },
+                    "to": {
+                        "type": "string"
+                    },
+                    "service": {
+                        "type": "string",
+                        "enum": [
+                            "sms",
+                            "imessage"
+                        ]
+                    },
+                    "factor": {
+                        "type": "string"
+                    },
                     "status": {
                         "type": "string",
                         "enum": [
                             "verified"
                         ]
+                    },
+                    "expires_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "verified_at": {
+                        "type": "string",
+                        "format": "date-time"
                     }
                 },
                 "required": [
                     "otp_id",
                     "number",
-                    "status"
+                    "to",
+                    "service",
+                    "factor",
+                    "status",
+                    "expires_at",
+                    "verified_at"
                 ],
                 "additionalProperties": false
             },
