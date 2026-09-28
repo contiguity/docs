@@ -218,16 +218,18 @@
                         ]
                     },
                     {
-                        "group": "WhatsApp",
+                        "group": "FaceTime",
                         "icon": {
-                            "name": "whatsapp",
+                            "name": "video",
                             "style": "solid"
                         },
                         "pages": [
-                            "api-reference/product/whatsapp/send",
-                            "api-reference/product/whatsapp/typing",
-                            "api-reference/product/whatsapp/reactions",
-                            "api-reference/product/text/cancel"
+                            "api-reference/product/facetime/availability",
+                            "api-reference/product/facetime/dial",
+                            "api-reference/product/facetime/get",
+                            "api-reference/product/facetime/answer",
+                            "api-reference/product/facetime/reject",
+                            "api-reference/product/facetime/hangup"
                         ]
                     },
                     {
@@ -243,6 +245,29 @@
                             "api-reference/product/leases/leased-all",
                             "api-reference/product/leases/terminate",
                             "api-reference/product/leases/configure"
+                        ]
+                    },
+                    {
+                        "group": "Number Intelligence",
+                        "icon": {
+                            "name": "chart-mixed",
+                            "style": "solid"
+                        },
+                        "pages": [
+                            "api-reference/product/intelligence/lookup"
+                        ]
+                    },
+                    {
+                        "group": "Entitlements",
+                        "icon": {
+                            "name": "ticket",
+                            "style": "solid"
+                        },
+                        "pages": [
+                            "api-reference/product/entitlements/list",
+                            "api-reference/product/entitlements/apply",
+                            "api-reference/product/entitlements/get",
+                            "api-reference/product/entitlements/revoke"
                         ]
                     },
                     {
@@ -278,16 +303,16 @@
                         ]
                     },
                     {
-                        "group": "Entitlements",
+                        "group": "WhatsApp",
                         "icon": {
-                            "name": "ticket",
+                            "name": "whatsapp",
                             "style": "solid"
                         },
                         "pages": [
-                            "api-reference/product/entitlements/list",
-                            "api-reference/product/entitlements/apply",
-                            "api-reference/product/entitlements/get",
-                            "api-reference/product/entitlements/revoke"
+                            "api-reference/product/whatsapp/send",
+                            "api-reference/product/whatsapp/typing",
+                            "api-reference/product/whatsapp/reactions",
+                            "api-reference/product/text/cancel"
                         ]
                     }
                 ]

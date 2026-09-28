@@ -1,0 +1,733 @@
+{
+    "openapi": "3.0.0",
+    "servers": [
+        {
+            "url": "https://api.contiguity.com/intelligence"
+        }
+    ],
+    "info": {
+        "version": "v2026.9.27",
+        "title": "Number Intelligence API"
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer"
+            }
+        },
+        "schemas": {},
+        "parameters": {}
+    },
+    "paths": {
+        "/{number}": {
+            "get": {
+                "summary": "Look up a phone number",
+                "description": "Returns carrier, CNAM, and porting data for an E.164 number. Optional query flags add iMessage availability, FaceTime availability, and Contiguity risk scoring. Risk scoring requires both availability flags; when it is returned, imessage and facetime are booleans (never null). Requires the number_intelligence entitlement. Rate limited to 6 requests per minute.",
+                "tags": [
+                    "Number Intelligence"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "type": "string",
+                            "description": "Phone number in E.164 format.",
+                            "example": "+13129457420"
+                        },
+                        "required": true,
+                        "description": "Phone number in E.164 format.",
+                        "name": "number",
+                        "in": "path"
+                    },
+                    {
+                        "schema": {
+                            "type": "string",
+                            "nullable": true,
+                            "enum": [
+                                "true",
+                                "false"
+                            ],
+                            "default": "false",
+                            "description": "Set to true to include iMessage availability. Independent of facetime. Required (with facetime=true) for contiguity_risk_scoring_beta.",
+                            "example": "false"
+                        },
+                        "required": false,
+                        "description": "Set to true to include iMessage availability. Independent of facetime. Required (with facetime=true) for contiguity_risk_scoring_beta.",
+                        "name": "imessage",
+                        "in": "query"
+                    },
+                    {
+                        "schema": {
+                            "type": "string",
+                            "nullable": true,
+                            "enum": [
+                                "true",
+                                "false"
+                            ],
+                            "default": "false",
+                            "description": "Set to true to include FaceTime availability. Independent of imessage. Required (with imessage=true) for contiguity_risk_scoring_beta.",
+                            "example": "false"
+                        },
+                        "required": false,
+                        "description": "Set to true to include FaceTime availability. Independent of imessage. Required (with imessage=true) for contiguity_risk_scoring_beta.",
+                        "name": "facetime",
+                        "in": "query"
+                    },
+                    {
+                        "schema": {
+                            "type": "string",
+                            "nullable": true,
+                            "enum": [
+                                "true",
+                                "false"
+                            ],
+                            "default": "false",
+                            "description": "Set to true to include Contiguity risk scoring. Requires imessage=true and facetime=true; otherwise the request fails with 400. When this is returned, imessage and facetime are never null.",
+                            "example": "false"
+                        },
+                        "required": false,
+                        "description": "Set to true to include Contiguity risk scoring. Requires imessage=true and facetime=true; otherwise the request fails with 400. When this is returned, imessage and facetime are never null.",
+                        "name": "contiguity_risk_scoring_beta",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Returns carrier, CNAM, and porting data for an E.164 number. Optional query flags add iMessage availability, FaceTime availability, and Contiguity risk scoring. Risk scoring requires both availability flags; when it is returned, imessage and facetime are booleans (never null). Requires the number_intelligence entitlement. Rate limited to 6 requests per minute.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "req_xxxxxxxxxxxxxxxx"
+                                        },
+                                        "timestamp": {
+                                            "type": "number",
+                                            "example": 1790546990555
+                                        },
+                                        "api_version": {
+                                            "type": "string",
+                                            "example": "v2026.9.27"
+                                        },
+                                        "object": {
+                                            "type": "string",
+                                            "example": "response"
+                                        },
+                                        "data": {
+                                            "anyOf": [
+                                                {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "number": {
+                                                            "type": "string",
+                                                            "nullable": true,
+                                                            "description": "E.164 phone number.",
+                                                            "example": "+13129457420"
+                                                        },
+                                                        "formatted": {
+                                                            "type": "string",
+                                                            "nullable": true,
+                                                            "description": "Nationally formatted number.",
+                                                            "example": "(312) 945-7420"
+                                                        },
+                                                        "country": {
+                                                            "type": "string",
+                                                            "nullable": true,
+                                                            "description": "ISO 3166-1 alpha-2 country code.",
+                                                            "example": "US"
+                                                        },
+                                                        "caller_name": {
+                                                            "type": "string",
+                                                            "nullable": true,
+                                                            "description": "CNAM caller name, if the database has one.",
+                                                            "example": "JANE DOE"
+                                                        },
+                                                        "line_type": {
+                                                            "type": "string",
+                                                            "nullable": true,
+                                                            "description": "Portability line type (mobile, landline, voip).",
+                                                            "example": "voip"
+                                                        },
+                                                        "city": {
+                                                            "type": "string",
+                                                            "nullable": true,
+                                                            "description": "Rate center city.",
+                                                            "example": "CHICAGO"
+                                                        },
+                                                        "region": {
+                                                            "type": "string",
+                                                            "nullable": true,
+                                                            "description": "State or region.",
+                                                            "example": "Illinois"
+                                                        },
+                                                        "carrier": {
+                                                            "type": "object",
+                                                            "nullable": true,
+                                                            "properties": {
+                                                                "name": {
+                                                                    "type": "string",
+                                                                    "nullable": true,
+                                                                    "description": "Current carrier name.",
+                                                                    "example": "AT&T Wireless"
+                                                                },
+                                                                "type": {
+                                                                    "type": "string",
+                                                                    "nullable": true,
+                                                                    "description": "Carrier-reported line type (mobile, landline, voip).",
+                                                                    "example": "mobile"
+                                                                },
+                                                                "mcc": {
+                                                                    "type": "string",
+                                                                    "nullable": true,
+                                                                    "description": "Mobile country code.",
+                                                                    "example": "310"
+                                                                },
+                                                                "mnc": {
+                                                                    "type": "string",
+                                                                    "nullable": true,
+                                                                    "description": "Mobile network code.",
+                                                                    "example": "410"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "name",
+                                                                "type",
+                                                                "mcc",
+                                                                "mnc"
+                                                            ]
+                                                        },
+                                                        "ported": {
+                                                            "type": "object",
+                                                            "nullable": true,
+                                                            "properties": {
+                                                                "ported": {
+                                                                    "type": "boolean",
+                                                                    "description": "Whether the number has been ported.",
+                                                                    "example": true
+                                                                },
+                                                                "date": {
+                                                                    "type": "string",
+                                                                    "nullable": true,
+                                                                    "description": "Port date (YYYY-MM-DD), if known.",
+                                                                    "example": "2017-10-20"
+                                                                },
+                                                                "original_carrier": {
+                                                                    "type": "string",
+                                                                    "nullable": true,
+                                                                    "description": "Carrier before the port.",
+                                                                    "example": "Verizon Wireless"
+                                                                },
+                                                                "current_carrier": {
+                                                                    "type": "string",
+                                                                    "nullable": true,
+                                                                    "description": "Carrier after the port.",
+                                                                    "example": "AT&T Wireless"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "ported",
+                                                                "date",
+                                                                "original_carrier",
+                                                                "current_carrier"
+                                                            ]
+                                                        },
+                                                        "imessage": {
+                                                            "type": "boolean",
+                                                            "nullable": true,
+                                                            "description": "iMessage availability. Null unless imessage=true.",
+                                                            "example": null
+                                                        },
+                                                        "facetime": {
+                                                            "type": "boolean",
+                                                            "nullable": true,
+                                                            "description": "FaceTime availability. Null unless facetime=true.",
+                                                            "example": null
+                                                        },
+                                                        "contiguity_risk_scoring_beta": {
+                                                            "nullable": true,
+                                                            "description": "Always null unless contiguity_risk_scoring_beta=true."
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "number",
+                                                        "formatted",
+                                                        "country",
+                                                        "caller_name",
+                                                        "line_type",
+                                                        "city",
+                                                        "region",
+                                                        "carrier",
+                                                        "ported",
+                                                        "imessage",
+                                                        "facetime",
+                                                        "contiguity_risk_scoring_beta"
+                                                    ],
+                                                    "title": "Without risk scoring",
+                                                    "description": "Carrier lookup. imessage and facetime are booleans only when those query flags are true; otherwise null. contiguity_risk_scoring_beta is always null.",
+                                                    "example": {
+                                                        "number": "+13129457420",
+                                                        "formatted": "(312) 945-7420",
+                                                        "country": "US",
+                                                        "caller_name": "JANE DOE",
+                                                        "line_type": "voip",
+                                                        "city": "CHICAGO",
+                                                        "region": "Illinois",
+                                                        "carrier": {
+                                                            "name": "AT&T Wireless",
+                                                            "type": "mobile",
+                                                            "mcc": "310",
+                                                            "mnc": "410"
+                                                        },
+                                                        "ported": {
+                                                            "ported": true,
+                                                            "date": "2017-10-20",
+                                                            "original_carrier": "Verizon Wireless",
+                                                            "current_carrier": "AT&T Wireless"
+                                                        },
+                                                        "imessage": null,
+                                                        "facetime": null,
+                                                        "contiguity_risk_scoring_beta": null
+                                                    }
+                                                },
+                                                {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "number": {
+                                                            "type": "string",
+                                                            "nullable": true,
+                                                            "description": "E.164 phone number.",
+                                                            "example": "+13129457420"
+                                                        },
+                                                        "formatted": {
+                                                            "type": "string",
+                                                            "nullable": true,
+                                                            "description": "Nationally formatted number.",
+                                                            "example": "(312) 945-7420"
+                                                        },
+                                                        "country": {
+                                                            "type": "string",
+                                                            "nullable": true,
+                                                            "description": "ISO 3166-1 alpha-2 country code.",
+                                                            "example": "US"
+                                                        },
+                                                        "caller_name": {
+                                                            "type": "string",
+                                                            "nullable": true,
+                                                            "description": "CNAM caller name, if the database has one.",
+                                                            "example": "JANE DOE"
+                                                        },
+                                                        "line_type": {
+                                                            "type": "string",
+                                                            "nullable": true,
+                                                            "description": "Portability line type (mobile, landline, voip).",
+                                                            "example": "voip"
+                                                        },
+                                                        "city": {
+                                                            "type": "string",
+                                                            "nullable": true,
+                                                            "description": "Rate center city.",
+                                                            "example": "CHICAGO"
+                                                        },
+                                                        "region": {
+                                                            "type": "string",
+                                                            "nullable": true,
+                                                            "description": "State or region.",
+                                                            "example": "Illinois"
+                                                        },
+                                                        "carrier": {
+                                                            "type": "object",
+                                                            "nullable": true,
+                                                            "properties": {
+                                                                "name": {
+                                                                    "type": "string",
+                                                                    "nullable": true,
+                                                                    "description": "Current carrier name.",
+                                                                    "example": "AT&T Wireless"
+                                                                },
+                                                                "type": {
+                                                                    "type": "string",
+                                                                    "nullable": true,
+                                                                    "description": "Carrier-reported line type (mobile, landline, voip).",
+                                                                    "example": "mobile"
+                                                                },
+                                                                "mcc": {
+                                                                    "type": "string",
+                                                                    "nullable": true,
+                                                                    "description": "Mobile country code.",
+                                                                    "example": "310"
+                                                                },
+                                                                "mnc": {
+                                                                    "type": "string",
+                                                                    "nullable": true,
+                                                                    "description": "Mobile network code.",
+                                                                    "example": "410"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "name",
+                                                                "type",
+                                                                "mcc",
+                                                                "mnc"
+                                                            ]
+                                                        },
+                                                        "ported": {
+                                                            "type": "object",
+                                                            "nullable": true,
+                                                            "properties": {
+                                                                "ported": {
+                                                                    "type": "boolean",
+                                                                    "description": "Whether the number has been ported.",
+                                                                    "example": true
+                                                                },
+                                                                "date": {
+                                                                    "type": "string",
+                                                                    "nullable": true,
+                                                                    "description": "Port date (YYYY-MM-DD), if known.",
+                                                                    "example": "2017-10-20"
+                                                                },
+                                                                "original_carrier": {
+                                                                    "type": "string",
+                                                                    "nullable": true,
+                                                                    "description": "Carrier before the port.",
+                                                                    "example": "Verizon Wireless"
+                                                                },
+                                                                "current_carrier": {
+                                                                    "type": "string",
+                                                                    "nullable": true,
+                                                                    "description": "Carrier after the port.",
+                                                                    "example": "AT&T Wireless"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "ported",
+                                                                "date",
+                                                                "original_carrier",
+                                                                "current_carrier"
+                                                            ]
+                                                        },
+                                                        "imessage": {
+                                                            "type": "boolean",
+                                                            "description": "iMessage availability. Always present when risk scoring is returned.",
+                                                            "example": true
+                                                        },
+                                                        "facetime": {
+                                                            "type": "boolean",
+                                                            "description": "FaceTime availability. Always present when risk scoring is returned.",
+                                                            "example": true
+                                                        },
+                                                        "contiguity_risk_scoring_beta": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "score": {
+                                                                    "type": "number",
+                                                                    "minimum": 0,
+                                                                    "maximum": 0.99,
+                                                                    "description": "Risk from 0.00 (safe) to 0.99 (very high).",
+                                                                    "example": 0.18
+                                                                },
+                                                                "level": {
+                                                                    "type": "string",
+                                                                    "enum": [
+                                                                        "low",
+                                                                        "medium",
+                                                                        "high",
+                                                                        "very_high"
+                                                                    ],
+                                                                    "description": "Mapped from score: <0.2 low, <0.45 medium, <0.7 high, otherwise very_high.",
+                                                                    "example": "low"
+                                                                },
+                                                                "confidence": {
+                                                                    "type": "number",
+                                                                    "minimum": 0,
+                                                                    "maximum": 0.99,
+                                                                    "description": "Confidence from 0.00 to 0.99.",
+                                                                    "example": 0.86
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "score",
+                                                                "level",
+                                                                "confidence"
+                                                            ],
+                                                            "description": "Risk scoring. Only returned when contiguity_risk_scoring_beta=true, which requires imessage=true and facetime=true."
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "number",
+                                                        "formatted",
+                                                        "country",
+                                                        "caller_name",
+                                                        "line_type",
+                                                        "city",
+                                                        "region",
+                                                        "carrier",
+                                                        "ported",
+                                                        "imessage",
+                                                        "facetime",
+                                                        "contiguity_risk_scoring_beta"
+                                                    ],
+                                                    "title": "With risk scoring",
+                                                    "description": "Same carrier lookup, plus iMessage, FaceTime, and risk scoring. imessage and facetime are never null in this variant.",
+                                                    "example": {
+                                                        "number": "+13129457420",
+                                                        "formatted": "(312) 945-7420",
+                                                        "country": "US",
+                                                        "caller_name": "JANE DOE",
+                                                        "line_type": "voip",
+                                                        "city": "CHICAGO",
+                                                        "region": "Illinois",
+                                                        "carrier": {
+                                                            "name": "AT&T Wireless",
+                                                            "type": "mobile",
+                                                            "mcc": "310",
+                                                            "mnc": "410"
+                                                        },
+                                                        "ported": {
+                                                            "ported": true,
+                                                            "date": "2017-10-20",
+                                                            "original_carrier": "Verizon Wireless",
+                                                            "current_carrier": "AT&T Wireless"
+                                                        },
+                                                        "imessage": true,
+                                                        "facetime": true,
+                                                        "contiguity_risk_scoring_beta": {
+                                                            "score": 0.18,
+                                                            "level": "low",
+                                                            "confidence": 0.86
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "timestamp",
+                                        "api_version",
+                                        "object",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid E.164 number, or contiguity_risk_scoring_beta=true without imessage=true and facetime=true.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "err_xxxxxxxxxxxxxxxx"
+                                        },
+                                        "timestamp": {
+                                            "type": "number",
+                                            "example": 1790546990555
+                                        },
+                                        "api_version": {
+                                            "type": "string",
+                                            "example": "v2026.9.27"
+                                        },
+                                        "object": {
+                                            "type": "string",
+                                            "example": "error"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "error": {
+                                                    "type": "string",
+                                                    "example": "Bad Request"
+                                                },
+                                                "status": {
+                                                    "type": "number",
+                                                    "example": 400
+                                                }
+                                            },
+                                            "required": [
+                                                "error",
+                                                "status"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "timestamp",
+                                        "api_version",
+                                        "object",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "err_xxxxxxxxxxxxxxxx"
+                                        },
+                                        "timestamp": {
+                                            "type": "number",
+                                            "example": 1790546990555
+                                        },
+                                        "api_version": {
+                                            "type": "string",
+                                            "example": "v2026.9.27"
+                                        },
+                                        "object": {
+                                            "type": "string",
+                                            "example": "error"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "error": {
+                                                    "type": "string",
+                                                    "example": "Unauthorized"
+                                                },
+                                                "status": {
+                                                    "type": "number",
+                                                    "example": 401
+                                                }
+                                            },
+                                            "required": [
+                                                "error",
+                                                "status"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "timestamp",
+                                        "api_version",
+                                        "object",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Missing the number_intelligence entitlement.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "err_xxxxxxxxxxxxxxxx"
+                                        },
+                                        "timestamp": {
+                                            "type": "number",
+                                            "example": 1790546990555
+                                        },
+                                        "api_version": {
+                                            "type": "string",
+                                            "example": "v2026.9.27"
+                                        },
+                                        "object": {
+                                            "type": "string",
+                                            "example": "error"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "error": {
+                                                    "type": "string",
+                                                    "example": "Forbidden"
+                                                },
+                                                "status": {
+                                                    "type": "number",
+                                                    "example": 403
+                                                }
+                                            },
+                                            "required": [
+                                                "error",
+                                                "status"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "timestamp",
+                                        "api_version",
+                                        "object",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Lookup failed. Upstream carrier or availability data was unavailable.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "err_xxxxxxxxxxxxxxxx"
+                                        },
+                                        "timestamp": {
+                                            "type": "number",
+                                            "example": 1790546990555
+                                        },
+                                        "api_version": {
+                                            "type": "string",
+                                            "example": "v2026.9.27"
+                                        },
+                                        "object": {
+                                            "type": "string",
+                                            "example": "error"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "error": {
+                                                    "type": "string",
+                                                    "example": "Internal Server Error"
+                                                },
+                                                "status": {
+                                                    "type": "number",
+                                                    "example": 500
+                                                }
+                                            },
+                                            "required": [
+                                                "error",
+                                                "status"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "timestamp",
+                                        "api_version",
+                                        "object",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

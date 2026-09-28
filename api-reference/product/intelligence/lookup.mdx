@@ -1,0 +1,35 @@
+---
+title: 'Look up a phone number'
+openapi: "openapi-intelligence GET /{number}"
+sidebarTitle: 'Lookup'
+description: 'Carrier, CNAM, porting, and optional iMessage / FaceTime / risk data for an E.164 number'
+icon: "chart-mixed"
+iconType: "solid"
+---
+
+<Warning>
+    Requires the `number_intelligence` entitlement.
+</Warning>
+
+<Note>
+    The path parameter must be an E.164 number.
+</Note>
+
+By default this returns carrier, CNAM, and porting data. `imessage` and `facetime` are `null` unless you set those query flags to `true`. The two flags are independent.
+
+`contiguity_risk_scoring_beta=true` requires **both** `imessage=true` and `facetime=true`. Otherwise the request fails with `400`. When risk scoring is returned, `imessage` and `facetime` are booleans (never `null`).
+
+| `contiguity_risk_scoring_beta.level` | score |
+| --- | --- |
+| `low` | `< 0.2` |
+| `medium` | `< 0.45` |
+| `high` | `< 0.7` |
+| `very_high` | otherwise |
+
+Score and confidence both range from `0.00` to `0.99`.
+
+Useful in conjunction with other fraud signals to determine if a user is risky.
+
+import Snippet from '/snippets/mintlify.mdx';
+
+<Snippet />

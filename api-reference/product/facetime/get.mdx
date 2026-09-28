@@ -1,0 +1,44 @@
+---
+title: 'Get a FaceTime call'
+openapi: "openapi-facetime GET /{call_id}"
+sidebarTitle: 'Get'
+description: 'Fetch a FaceTime call by ID'
+icon: "print-magnifying-glass"
+iconType: "solid"
+---
+
+Returns the call object. FaceTime webhooks send this same object in `data`.
+
+## Status
+
+| `status` | meaning |
+| --- | --- |
+| `queued` | Outbound dial created the call |
+| `ringing` | Outbound is ringing, or an inbound call arrived |
+| `in_progress` | The call was answered |
+| `completed` | The call ended (you hung up, they hung up, or FaceTime disconnected) |
+| `failed` | Contiguity could not place the call |
+
+`cause` is `null` while the call is live. After hangup it is `dialer_hungup` if you [hang up](/api-reference/product/facetime/hangup), `recipient_hungup` if the remote party left, or another end reason.
+
+## Participants
+
+`participants` is the current roster while the call is live. After the call ends it is whoever remained, not everyone who was ever on the call.
+
+| stage | `participants` |
+| --- | --- |
+| initiated / ringing | `[]` |
+| answered | The remote party, e.g. `["+15559876543"]` |
+| ended | Remaining handles after hangup. If the recipient already left, this is often just your FaceTime Audio line. |
+
+## Media
+
+`link` is a FaceTime Web URL, once Apple has created it. It is `null` during `queued` and `ringing`. Opening it joins as a web participant.
+
+`webrtc` is present while the call is active and `null` after it ends. `webrtc.join` is a URL that connects you as the Contiguity FaceTime Audio line. `url`, `room`, and `token` are the raw WebRTC credentials.
+
+`duration` is seconds of connected time. It stays `null` until the call ends.
+
+import Snippet from '/snippets/mintlify.mdx';
+
+<Snippet />

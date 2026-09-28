@@ -101,11 +101,11 @@
                                     "to": "+15559876543",
                                     "message_id": "msg_abc123",
                                     "timestamp": 1726502400
+                                }
+                            }
+                        }
                     }
-                }
-            }
-        }
-    },
+                },
                 "responses": {
                     "200": {
                         "description": "Webhook received"
@@ -150,7 +150,7 @@
         "text.cancelled": {
             "post": {
                 "summary": "Queued SMS/MMS send cancelled",
-                "description": "Fired when you cancel a queued send (`POST /conversations/cancel/{msg_id}`). Does not mean the message was unsent — an in-flight send may still go out.",
+                "description": "Fired when you cancel a queued send (`POST /conversations/cancel/{msg_id}`). Does not mean the message was unsent \u2014 an in-flight send may still go out.",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -183,7 +183,7 @@
         "imessage.cancelled": {
             "post": {
                 "summary": "Queued iMessage send cancelled",
-                "description": "Fired when you cancel a queued send (`POST /conversations/cancel/{msg_id}`). Does not mean the message was unsent — an in-flight send may still go out.",
+                "description": "Fired when you cancel a queued send (`POST /conversations/cancel/{msg_id}`). Does not mean the message was unsent \u2014 an in-flight send may still go out.",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -216,7 +216,7 @@
         "whatsapp.cancelled": {
             "post": {
                 "summary": "Queued WhatsApp send cancelled",
-                "description": "Fired when you cancel a queued send (`POST /conversations/cancel/{msg_id}`). Does not mean the message was unsent — an in-flight send may still go out.",
+                "description": "Fired when you cancel a queued send (`POST /conversations/cancel/{msg_id}`). Does not mean the message was unsent \u2014 an in-flight send may still go out.",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -410,6 +410,289 @@
                                             "url": "https://api.contiguity.com/attachments/email/in_email_xxx/file.png"
                                         }
                                     ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Webhook received"
+                    }
+                }
+            }
+        },
+        "facetime.call.initiated": {
+            "post": {
+                "summary": "FaceTime call initiated",
+                "description": "Outbound dial created the call (`queued`).",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/FaceTimeCallEvent"
+                            },
+                            "example": {
+                                "id": "evt_d61aCHRo18",
+                                "type": "facetime.call.initiated",
+                                "timestamp": 1758998599994,
+                                "api_version": "v2026.9.27",
+                                "data": {
+                                    "call_id": "call_ftaAbCdEfGhIjKlMnOp",
+                                    "ft_audio_line": "+15551234567",
+                                    "to": "+15559876543",
+                                    "from": "+15551234567",
+                                    "caller_id": "+1 (555) 123-4567",
+                                    "direction": "outbound",
+                                    "status": "queued",
+                                    "cause": null,
+                                    "link": null,
+                                    "webrtc": {
+                                        "url": "wss://rtc.contiguity.cloud",
+                                        "room": "contiguity:facetime:call_ftaAbCdEfGhIjKlMnOp",
+                                        "token": "eyJhbGciOi...",
+                                        "join": "https://facetime.contiguity.com/call?j=example"
+                                    },
+                                    "participants": [],
+                                    "created_at": "2026-09-27T19:23:19.994Z",
+                                    "answered_at": null,
+                                    "ended_at": null,
+                                    "duration": null
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Webhook received"
+                    }
+                }
+            }
+        },
+        "facetime.call.ringing": {
+            "post": {
+                "summary": "FaceTime call ringing",
+                "description": "Outbound is ringing, or an inbound call arrived.",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/FaceTimeCallEvent"
+                            },
+                            "example": {
+                                "id": "evt_d61aCHRo18",
+                                "type": "facetime.call.ringing",
+                                "timestamp": 1758998605000,
+                                "api_version": "v2026.9.27",
+                                "data": {
+                                    "call_id": "call_ftaAbCdEfGhIjKlMnOp",
+                                    "ft_audio_line": "+15551234567",
+                                    "to": "+15559876543",
+                                    "from": "+15551234567",
+                                    "caller_id": "+1 (555) 123-4567",
+                                    "direction": "outbound",
+                                    "status": "ringing",
+                                    "cause": null,
+                                    "link": null,
+                                    "webrtc": {
+                                        "url": "wss://rtc.contiguity.cloud",
+                                        "room": "contiguity:facetime:call_ftaAbCdEfGhIjKlMnOp",
+                                        "token": "eyJhbGciOi...",
+                                        "join": "https://facetime.contiguity.com/call?j=example"
+                                    },
+                                    "participants": [],
+                                    "created_at": "2026-09-27T19:23:19.994Z",
+                                    "answered_at": null,
+                                    "ended_at": null,
+                                    "duration": null
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Webhook received"
+                    }
+                }
+            }
+        },
+        "facetime.call.answered": {
+            "post": {
+                "summary": "FaceTime call answered",
+                "description": "The call is in progress.",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/FaceTimeCallEvent"
+                            },
+                            "example": {
+                                "id": "evt_d61aCHRo18",
+                                "type": "facetime.call.answered",
+                                "timestamp": 1758998615578,
+                                "api_version": "v2026.9.27",
+                                "data": {
+                                    "call_id": "call_ftaAbCdEfGhIjKlMnOp",
+                                    "ft_audio_line": "+15551234567",
+                                    "to": "+15559876543",
+                                    "from": "+15551234567",
+                                    "caller_id": "+1 (555) 123-4567",
+                                    "direction": "outbound",
+                                    "status": "in_progress",
+                                    "cause": null,
+                                    "link": "https://facetime.apple.com/join#v=1&p=example&k=example",
+                                    "webrtc": {
+                                        "url": "wss://rtc.contiguity.cloud",
+                                        "room": "contiguity:facetime:call_ftaAbCdEfGhIjKlMnOp",
+                                        "token": "eyJhbGciOi...",
+                                        "join": "https://facetime.contiguity.com/call?j=example"
+                                    },
+                                    "participants": [
+                                        "+15559876543"
+                                    ],
+                                    "created_at": "2026-09-27T19:23:19.994Z",
+                                    "answered_at": "2026-09-27T19:23:35.578Z",
+                                    "ended_at": null,
+                                    "duration": null
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Webhook received"
+                    }
+                }
+            }
+        },
+        "facetime.call.rejected": {
+            "post": {
+                "summary": "FaceTime call rejected",
+                "description": "An inbound call was rejected.",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/FaceTimeCallEvent"
+                            },
+                            "example": {
+                                "id": "evt_d61aCHRo18",
+                                "type": "facetime.call.rejected",
+                                "timestamp": 1758998620000,
+                                "api_version": "v2026.9.27",
+                                "data": {
+                                    "call_id": "call_ftaAbCdEfGhIjKlMnOp",
+                                    "ft_audio_line": "+15551234567",
+                                    "to": "+15559876543",
+                                    "from": "+15551234567",
+                                    "caller_id": "+1 (555) 123-4567",
+                                    "direction": "inbound",
+                                    "status": "completed",
+                                    "cause": null,
+                                    "link": null,
+                                    "webrtc": null,
+                                    "participants": [],
+                                    "created_at": "2026-09-27T19:23:19.994Z",
+                                    "answered_at": null,
+                                    "ended_at": null,
+                                    "duration": null
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Webhook received"
+                    }
+                }
+            }
+        },
+        "facetime.call.failed": {
+            "post": {
+                "summary": "FaceTime call failed",
+                "description": "Contiguity could not place the call.",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/FaceTimeCallEvent"
+                            },
+                            "example": {
+                                "id": "evt_d61aCHRo18",
+                                "type": "facetime.call.failed",
+                                "timestamp": 1758998601000,
+                                "api_version": "v2026.9.27",
+                                "data": {
+                                    "call_id": "call_ftaAbCdEfGhIjKlMnOp",
+                                    "ft_audio_line": "+15551234567",
+                                    "to": "+15559876543",
+                                    "from": "+15551234567",
+                                    "caller_id": "+1 (555) 123-4567",
+                                    "direction": "outbound",
+                                    "status": "failed",
+                                    "cause": null,
+                                    "link": null,
+                                    "webrtc": null,
+                                    "participants": [],
+                                    "created_at": "2026-09-27T19:23:19.994Z",
+                                    "answered_at": null,
+                                    "ended_at": null,
+                                    "duration": null
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Webhook received"
+                    }
+                }
+            }
+        },
+        "facetime.call.ended": {
+            "post": {
+                "summary": "FaceTime call ended",
+                "description": "Dialer hangup, recipient hung up, or FaceTime disconnected.",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/FaceTimeCallEvent"
+                            },
+                            "example": {
+                                "id": "evt_d61aCHRo18",
+                                "type": "facetime.call.ended",
+                                "timestamp": 1758998689511,
+                                "api_version": "v2026.9.27",
+                                "data": {
+                                    "call_id": "call_ftaAbCdEfGhIjKlMnOp",
+                                    "ft_audio_line": "+15551234567",
+                                    "to": "+15559876543",
+                                    "from": "+15551234567",
+                                    "caller_id": "+1 (555) 123-4567",
+                                    "direction": "outbound",
+                                    "status": "completed",
+                                    "cause": null,
+                                    "link": "https://facetime.apple.com/join#v=1&p=example&k=example",
+                                    "webrtc": null,
+                                    "participants": [
+                                        "+15551234567"
+                                    ],
+                                    "created_at": "2026-09-27T19:23:19.994Z",
+                                    "answered_at": "2026-09-27T19:23:35.578Z",
+                                    "ended_at": "2026-09-27T19:24:49.511Z",
+                                    "duration": 74
                                 }
                             }
                         }
@@ -1141,6 +1424,168 @@
                             },
                             "data": {
                                 "$ref": "#/components/schemas/EmailIncomingData"
+                            }
+                        },
+                        "required": [
+                            "type",
+                            "data"
+                        ],
+                        "additionalProperties": false
+                    }
+                ]
+            },
+            "FaceTimeWebRTC": {
+                "type": "object",
+                "properties": {
+                    "url": {
+                        "type": "string"
+                    },
+                    "room": {
+                        "type": "string"
+                    },
+                    "token": {
+                        "type": "string"
+                    },
+                    "join": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "URL to join this call as the Contiguity FaceTime Audio line."
+                    }
+                },
+                "required": [
+                    "url",
+                    "room",
+                    "token",
+                    "join"
+                ],
+                "additionalProperties": false
+            },
+            "FaceTimeCallData": {
+                "type": "object",
+                "properties": {
+                    "call_id": {
+                        "type": "string"
+                    },
+                    "ft_audio_line": {
+                        "type": "string"
+                    },
+                    "to": {
+                        "type": "string"
+                    },
+                    "from": {
+                        "type": "string"
+                    },
+                    "caller_id": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "direction": {
+                        "type": "string",
+                        "enum": [
+                            "inbound",
+                            "outbound"
+                        ]
+                    },
+                    "status": {
+                        "type": "string"
+                    },
+                    "cause": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "link": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "webrtc": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/FaceTimeWebRTC"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "participants": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "answered_at": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
+                    },
+                    "ended_at": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
+                    },
+                    "duration": {
+                        "type": [
+                            "number",
+                            "null"
+                        ]
+                    }
+                },
+                "required": [
+                    "call_id",
+                    "ft_audio_line",
+                    "to",
+                    "from",
+                    "caller_id",
+                    "direction",
+                    "status",
+                    "cause",
+                    "link",
+                    "webrtc",
+                    "participants",
+                    "created_at",
+                    "answered_at",
+                    "ended_at",
+                    "duration"
+                ],
+                "additionalProperties": false
+            },
+            "FaceTimeCallEvent": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/WebhookEvent"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "type": {
+                                "type": "string",
+                                "enum": [
+                                    "facetime.call.initiated",
+                                    "facetime.call.ringing",
+                                    "facetime.call.answered",
+                                    "facetime.call.rejected",
+                                    "facetime.call.ended",
+                                    "facetime.call.failed"
+                                ]
+                            },
+                            "data": {
+                                "$ref": "#/components/schemas/FaceTimeCallData"
                             }
                         },
                         "required": [

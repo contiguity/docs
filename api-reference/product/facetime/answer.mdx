@@ -1,0 +1,18 @@
+---
+title: 'Answer a FaceTime call'
+openapi: "openapi-facetime POST /{call_id}/answer"
+sidebarTitle: 'Answer'
+description: 'Answer an inbound FaceTime call'
+icon: "phone-volume"
+iconType: "solid"
+---
+
+<Note>
+    This endpoint is for inbound calls. Answering moves the call to `in_progress` and fires [`facetime.call.answered`](/api-reference/webhook/example-v2#facetime-call-answered).
+</Note>
+
+`caller_id` is optional. Use it to present a name on the call.
+
+import Snippet from '/snippets/mintlify.mdx';
+
+<Snippet />

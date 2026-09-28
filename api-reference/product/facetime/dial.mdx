@@ -1,0 +1,35 @@
+---
+title: 'Dial a FaceTime call'
+openapi: "openapi-facetime POST /dial"
+sidebarTitle: 'Dial'
+description: 'Place an outbound FaceTime Audio call'
+icon: "phone"
+iconType: "solid"
+---
+
+<Note>
+    Only customers who lease numbers that support FaceTime Audio can use this endpoint.
+</Note>
+
+<Warning>
+    Phone numbers must be in E.164 format with country codes. `to` can also be a FaceTime email.
+</Warning>
+
+Dialing creates a call in `queued` and fires [`facetime.call.initiated`](/api-reference/webhook/example-v2#facetime-call-initiated). When the remote side starts ringing, status becomes `ringing` and Contiguity fires [`facetime.call.ringing`](/api-reference/webhook/example-v2#facetime-call-ringing).
+
+If you omit `from`, Contiguity picks one of your leased FaceTime Audio numbers at random. `caller_id` is optional and is presented as `Maybe: caller_id` to the recipient. If not provided, it will be a formatted version of your leased number, e.g., `Maybe: +1 (415) 555-1234`
+
+The response is the same call object returned by [Get a call](/api-reference/product/facetime/get). At dial time `link` is `null`, `participants` is `[]`, and `duration` is `null`.
+
+<CardGroup cols={2}>
+  <Card title="Join as the number" icon="phone" href="https://facetime.contiguity.com">
+    `webrtc.join` opens the call as the Contiguity FaceTime Audio line — not a third participant.
+  </Card>
+  <Card title="FaceTime Web" icon="arrow-up-right-from-square">
+    Once Apple creates it, `link` is a FaceTime Web URL. Opening it joins the call in the browser as a web participant.
+  </Card>
+</CardGroup>
+
+import Snippet from '/snippets/mintlify.mdx';
+
+<Snippet />

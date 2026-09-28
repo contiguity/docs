@@ -1,6 +1,6 @@
 ---
 title: "Overview"
-description: "Listen to events from Contiguity on your webhook endpoint, like incoming messages, completed Identity verifications, and more to automatically trigger reactions."
+description: "Listen to events from Contiguity on your webhook endpoint, like incoming messages, FaceTime calls, completed Identity verifications, and more to automatically trigger reactions."
 ---
 
 When building applications using Contiguity's API, you might want your applications to receive events as they occur. This way, you can automatically trigger reactions to certain events. 
@@ -46,6 +46,11 @@ To get started with Contiguity Webhooks, you'll need to:
           console.log('Identity verified:', event.data);
           break;
 
+        case 'facetime.call.answered':
+          // Handle an answered FaceTime call
+          console.log('FaceTime answered:', event.data);
+          break;
+
         default:
           console.log('Unhandled event:', event.type);
       }
@@ -80,6 +85,10 @@ To get started with Contiguity Webhooks, you'll need to:
             case 'identity.verification_session.verified':
                 # Handle verified identity session
                 print(f"Identity verified: {event['data']}")
+
+            case 'facetime.call.answered':
+                # Handle an answered FaceTime call
+                print(f"FaceTime answered: {event['data']}")
                 
             case _:
                 print(f"Unhandled event: {event['type']}")
@@ -125,6 +134,10 @@ To get started with Contiguity Webhooks, you'll need to:
         case "identity.verification_session.verified":
             // Handle verified identity session
             fmt.Printf("Identity verified: %v\n", event.Data)
+
+        case "facetime.call.answered":
+            // Handle an answered FaceTime call
+            fmt.Printf("FaceTime answered: %v\n", event.Data)
             
         default:
             fmt.Printf("Unhandled event: %v\n", event.Type)
@@ -162,6 +175,10 @@ To get started with Contiguity Webhooks, you'll need to:
       when 'identity.verification_session.verified'
         # Handle verified identity session
         puts "Identity verified: #{event['data']}"
+
+      when 'facetime.call.answered'
+        # Handle an answered FaceTime call
+        puts "FaceTime answered: #{event['data']}"
       
       else
         puts "Unhandled event: #{event['type']}"

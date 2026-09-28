@@ -1,0 +1,16 @@
+---
+title: 'Reject a FaceTime call'
+openapi: "openapi-facetime POST /{call_id}/reject"
+sidebarTitle: 'Reject'
+description: 'Reject a ringing inbound FaceTime call'
+icon: "phone-slash"
+iconType: "solid"
+---
+
+<Note>
+    This endpoint is for inbound calls that are still ringing. Rejecting fires [`facetime.call.rejected`](/api-reference/webhook/example-v2#facetime-call-rejected).
+</Note>
+
+import Snippet from '/snippets/mintlify.mdx';
+
+<Snippet />

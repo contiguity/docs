@@ -1,0 +1,16 @@
+---
+title: 'Hang up a FaceTime call'
+openapi: "openapi-facetime POST /{call_id}/hangup"
+sidebarTitle: 'Hang up'
+description: 'Hang up a FaceTime call'
+icon: "phone-hangup"
+iconType: "solid"
+---
+
+Ends the call from your side. `cause` becomes `dialer_hungup` and Contiguity fires [`facetime.call.ended`](/api-reference/webhook/example-v2#facetime-call-ended).
+
+If the remote party hangs up first, you still get `facetime.call.ended` with `cause` `recipient_hungup`. You do not need to call this endpoint in that case.
+
+import Snippet from '/snippets/mintlify.mdx';
+
+<Snippet />

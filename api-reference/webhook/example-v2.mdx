@@ -239,6 +239,126 @@ An incoming email was received.
 }
 ```
 
+### `facetime.call.initiated`
+-----
+An outbound FaceTime Audio dial created the call. `data.status` is `queued`. Posted to your `facetime` webhook URL, else catchall. `data` is the same call object as [Get a call](/api-reference/product/facetime/get).
+
+```json
+{
+  "id": "evt_d61aCHRo18",
+  "type": "facetime.call.initiated",
+  "timestamp": 1758998599994,
+  "api_version": "v2026.9.27",
+  "data": {
+    "call_id": "call_ftaAbCdEfGhIjKlMnOp",
+    "ft_audio_line": "+15551234567",
+    "to": "+15559876543",
+    "from": "+15551234567",
+    "caller_id": "+1 (555) 123-4567",
+    "direction": "outbound",
+    "status": "queued",
+    "cause": null,
+    "link": null,
+    "webrtc": {
+      "url": "wss://rtc.contiguity.cloud",
+      "room": "contiguity:facetime:call_ftaAbCdEfGhIjKlMnOp",
+      "token": "eyJhbGciOi...",
+      "join": "https://facetime.contiguity.com/call?j=example"
+    },
+    "participants": [],
+    "created_at": "2026-09-27T19:23:19.994Z",
+    "answered_at": null,
+    "ended_at": null,
+    "duration": null
+  }
+}
+```
+
+### `facetime.call.ringing`
+-----
+The outbound call is ringing, or an inbound call arrived. `data.status` is `ringing`. Same envelope and call object as initiated: `link` is still `null`, `participants` is `[]`, `webrtc` is present, `duration` is `null`.
+
+### `facetime.call.answered`
+-----
+The call is connected. `data.status` is `in_progress`. `link` is now the FaceTime join URL. `participants` is the remote party.
+
+```json
+{
+  "id": "evt_d61aCHRo18",
+  "type": "facetime.call.answered",
+  "timestamp": 1758998615578,
+  "api_version": "v2026.9.27",
+  "data": {
+    "call_id": "call_ftaAbCdEfGhIjKlMnOp",
+    "ft_audio_line": "+15551234567",
+    "to": "+15559876543",
+    "from": "+15551234567",
+    "caller_id": "+1 (555) 123-4567",
+    "direction": "outbound",
+    "status": "in_progress",
+    "cause": null,
+    "link": "https://facetime.apple.com/join#v=1&p=example&k=example",
+    "webrtc": {
+      "url": "wss://rtc.contiguity.cloud",
+      "room": "contiguity:facetime:call_ftaAbCdEfGhIjKlMnOp",
+      "token": "eyJhbGciOi...",
+      "join": "https://facetime.contiguity.com/call?j=example"
+    },
+    "participants": ["+15559876543"],
+    "created_at": "2026-09-27T19:23:19.994Z",
+    "answered_at": "2026-09-27T19:23:35.578Z",
+    "ended_at": null,
+    "duration": null
+  }
+}
+```
+
+### `facetime.call.rejected`
+-----
+You rejected an inbound ringing call via [`POST /{call_id}/reject`](/api-reference/product/facetime/reject). Same call object; `status` reflects the rejected call.
+
+### `facetime.call.failed`
+-----
+Contiguity could not place the call. `data.status` is `failed`.
+
+### `facetime.call.ended`
+-----
+The call ended: you hung up, the recipient hung up, or FaceTime disconnected. `data.status` is `completed`. `webrtc` is `null`. `duration` is seconds of connected time.
+
+`participants` at hangup is the remaining roster, not everyone who was on the call. If the recipient already left, this is often just your FaceTime Audio line.
+
+```json
+{
+  "id": "evt_d61aCHRo18",
+  "type": "facetime.call.ended",
+  "timestamp": 1758998689511,
+  "api_version": "v2026.9.27",
+  "data": {
+    "call_id": "call_ftaAbCdEfGhIjKlMnOp",
+    "ft_audio_line": "+15551234567",
+    "to": "+15559876543",
+    "from": "+15551234567",
+    "caller_id": "+1 (555) 123-4567",
+    "direction": "outbound",
+    "status": "completed",
+    "cause": null,
+    "link": "https://facetime.apple.com/join#v=1&p=example&k=example",
+    "webrtc": null,
+    "participants": ["+15551234567"],
+    "created_at": "2026-09-27T19:23:19.994Z",
+    "answered_at": "2026-09-27T19:23:35.578Z",
+    "ended_at": "2026-09-27T19:24:49.511Z",
+    "duration": 74
+  }
+}
+```
+
+| Event | `participants` |
+| --- | --- |
+| initiated / ringing | `[]` |
+| answered | Remote party, e.g. `["+15559876543", "your_number"]` |
+| ended | Remaining handles after hangup. If the recipient already left, this is often just your FaceTime Audio line. |
+
 ### `identity.verification_session.started`
 -----
 A user began verifying their identity.
