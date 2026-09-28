@@ -1,0 +1,75 @@
+---
+title: 'FaceTime Audio'
+icon: "video"
+iconType: "solid"
+description: "Place and control FaceTime Audio calls with Contiguity."
+---
+import InstallJS from '/snippets/install-js.mdx';
+import InstallPY from '/snippets/install-py.mdx';
+
+<Tabs>
+  <Tab title="JavaScript" icon="js">
+    <InstallJS />
+
+    <Note>
+      Only customers who lease numbers that support FaceTime Audio can use this.
+    </Note>
+
+    <Warning>
+      Phone numbers must be in E.164 format. `to` can also be a FaceTime email.
+    </Warning>
+
+    ## Dial
+
+    ```javascript
+    const call = await contiguity.facetime.dial({
+        to: "+15125550100",
+        from: "+18005551234",
+        caller_id: "Tesla Support",
+    });
+    ```
+
+    ## Answer, reject, hang up
+
+    `get`, `answer`, `reject`, and `hangup` take a call ID, a parsed webhook event, or `event.data`.
+
+    ```javascript
+    const event = contiguity.webhook.parse(raw_body);
+
+    if (event.type === "facetime.call.ringing" && event.data.direction === "inbound") {
+        await contiguity.facetime.answer(event, { caller_id: "Support" });
+    }
+
+    await contiguity.facetime.reject(event);
+    await contiguity.facetime.hangup(event);
+    const call = await contiguity.facetime.get(event);
+    ```
+
+    ## Availability
+
+    ```javascript
+    const { available } = await contiguity.facetime.availability("+15125550100");
+    ```
+
+    <CardGroup cols={2}>
+      <Card title="Join as the number" icon="phone" href="https://facetime.contiguity.com">
+        `webrtc.join` opens the call as the Contiguity FaceTime Audio line — not a third participant.
+      </Card>
+      <Card title="FaceTime Web" icon="arrow-up-right-from-square">
+        Once Apple creates it, `link` is a FaceTime Web URL. Opening it joins as a web participant.
+      </Card>
+    </CardGroup>
+
+    See the [JavaScript SDK](/sdk/js/facetime) for the full call object, webhook events, and types. See the [FaceTime API](/api-reference/product/facetime/dial) for HTTP endpoints.
+  </Tab>
+
+  <Tab title="Python" icon="python">
+    <InstallPY />
+
+    Python SDK documentation coming soon.
+  </Tab>
+</Tabs>
+
+import Snippet from '/snippets/mintlify.mdx';
+
+<Snippet />

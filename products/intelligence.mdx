@@ -1,0 +1,47 @@
+---
+title: 'Number Intelligence'
+icon: "chart-mixed"
+iconType: "solid"
+description: "Look up carrier, CNAM, porting, and optional iMessage / FaceTime / risk data."
+---
+import InstallJS from '/snippets/install-js.mdx';
+import InstallPY from '/snippets/install-py.mdx';
+
+<Tabs>
+  <Tab title="JavaScript" icon="js">
+    <InstallJS />
+
+    <Warning>
+      Requires the `number_intelligence` entitlement. Rate limited to 6 requests per minute.
+    </Warning>
+
+    ```javascript
+    const lookup = await contiguity.intelligence.lookup("+13129457420");
+
+    const with_availability = await contiguity.intelligence.lookup("+13129457420", {
+        imessage: true,
+        facetime: true,
+    });
+
+    const with_risk = await contiguity.intelligence.lookup("+13129457420", {
+        imessage: true,
+        facetime: true,
+        contiguity_risk_scoring_beta: true,
+    });
+    ```
+
+    If you only pass `contiguity_risk_scoring_beta: true`, the SDK also sends `imessage=true` and `facetime=true`.
+
+    See the [JavaScript SDK](/sdk/js/intelligence) for the full response shape. See the [Number Intelligence API](/api-reference/product/intelligence/lookup) for HTTP details.
+  </Tab>
+
+  <Tab title="Python" icon="python">
+    <InstallPY />
+
+    Python SDK documentation coming soon.
+  </Tab>
+</Tabs>
+
+import Snippet from '/snippets/mintlify.mdx';
+
+<Snippet />

@@ -1,0 +1,329 @@
+---
+title: 'FaceTime Audio'
+icon: "video"
+iconType: "solid"
+description: "Place and control FaceTime Audio calls with the Contiguity JavaScript SDK."
+---
+
+`contiguity.facetime`
+
+<Note>
+    Only customers who lease numbers that support FaceTime Audio can use this.
+</Note>
+
+<Warning>
+    Phone numbers must be in E.164 format. `to` can also be a FaceTime email.
+</Warning>
+
+If you omit `from` on dial, Contiguity picks one of your leased FaceTime Audio numbers at random. `caller_id` is optional and is presented as `Maybe: caller_id`. If not provided, it is a formatted version of your leased number, e.g. `Maybe: +1 (415) 555-1234`.
+
+<CardGroup cols={2}>
+  <Card title="Join as the number" icon="phone" href="https://facetime.contiguity.com">
+    `webrtc.join` opens the call as the Contiguity FaceTime Audio line — not a third participant.
+  </Card>
+  <Card title="FaceTime Web" icon="arrow-up-right-from-square">
+    Once Apple creates it, `link` is a FaceTime Web URL. Opening it joins the call in the browser as a web participant.
+  </Card>
+</CardGroup>
+
+## Dial
+
+Place an outbound FaceTime Audio call. Creates a call in `queued` and fires [`facetime.call.initiated`](/api-reference/webhook/example-v2#facetime-call-initiated). When the remote side starts ringing, status becomes `ringing` and Contiguity fires [`facetime.call.ringing`](/api-reference/webhook/example-v2#facetime-call-ringing).
+
+At dial time `link` is `null`, `participants` is `[]`, and `duration` is `null`.
+
+```javascript
+const call = await contiguity.facetime.dial({
+    to: "+15125550100",
+    from: "+18005551234",
+    caller_id: "Tesla Support",
+});
+```
+
+### facetime.dial(params)
+
+<ParamField body="to" type="string" required>
+  Recipient E.164 number or FaceTime email.
+</ParamField>
+
+<ParamField body="from" type="string">
+  Your leased FaceTime Audio number. If omitted, a random one of yours is used.
+</ParamField>
+
+<ParamField body="caller_id" type="string">
+  Presented as `Maybe: caller_id`.
+</ParamField>
+
+## Get
+
+Fetch a call by ID. FaceTime webhooks send this same object in `data`.
+
+```javascript
+const call = await contiguity.facetime.get("call_fta...");
+const call = await contiguity.facetime.get(event);
+```
+
+### facetime.get(ref)
+
+<ParamField body="ref" type="string | object" required>
+  Call ID string, a parsed webhook event, or `event.data`.
+</ParamField>
+
+## Answer
+
+Answer an inbound ringing call. Moves the call to `in_progress` and fires [`facetime.call.answered`](/api-reference/webhook/example-v2#facetime-call-answered).
+
+```javascript
+await contiguity.facetime.answer(event);
+await contiguity.facetime.answer(event, { caller_id: "Support" });
+await contiguity.facetime.answer("call_fta...");
+```
+
+### facetime.answer(ref, params?)
+
+<ParamField body="ref" type="string | object" required>
+  Call ID string, a parsed webhook event, or `event.data`.
+</ParamField>
+
+<ParamField body="caller_id" type="string">
+  Optional caller ID to present on the call.
+</ParamField>
+
+## Reject
+
+Reject a ringing inbound call. Fires [`facetime.call.rejected`](/api-reference/webhook/example-v2#facetime-call-rejected).
+
+```javascript
+await contiguity.facetime.reject(event);
+await contiguity.facetime.reject("call_fta...");
+```
+
+### facetime.reject(ref)
+
+<ParamField body="ref" type="string | object" required>
+  Call ID string, a parsed webhook event, or `event.data`.
+</ParamField>
+
+## Hang up
+
+Ends the call from your side. `cause` becomes `dialer_hungup` and Contiguity fires [`facetime.call.ended`](/api-reference/webhook/example-v2#facetime-call-ended).
+
+If the remote party hangs up first, you still get `facetime.call.ended` with `cause` `recipient_hungup`. You do not need to hang up in that case.
+
+```javascript
+await contiguity.facetime.hangup(event);
+await contiguity.facetime.hangup("call_fta...");
+```
+
+### facetime.hangup(ref)
+
+<ParamField body="ref" type="string | object" required>
+  Call ID string, a parsed webhook event, or `event.data`.
+</ParamField>
+
+## Availability
+
+Check if a phone number or email supports FaceTime.
+
+```javascript
+const { available } = await contiguity.facetime.availability("+15125550100");
+const { available } = await contiguity.facetime.availability("user@example.com");
+```
+
+### facetime.availability(to)
+
+<ParamField body="to" type="string" required>
+  E.164 phone number or FaceTime email.
+</ParamField>
+
+### Response
+
+<ResponseField name="available" type="boolean">
+  Whether the address supports FaceTime.
+</ResponseField>
+
+<ResponseField name="metadata" type="object">
+  Request metadata: id, timestamp, api_version, object.
+</ResponseField>
+
+## Webhook comfort
+
+`get`, `answer`, `reject`, and `hangup` take a call ID string, a parsed webhook event, or `event.data` — the same pattern as `text.reply(event)`.
+
+```javascript
+const event = contiguity.webhook.parse(raw_body);
+
+if (event.type === "facetime.call.ringing") {
+    await contiguity.facetime.answer(event, { caller_id: "Support" });
+}
+```
+
+Throws `FaceTime webhook data must have call_id` if neither the event nor the object has a `call_id`.
+
+See [Webhooks](/sdk/js/webhooks) for verify / parse, or the [v2 event payloads](/api-reference/webhook/example-v2#facetime-call-initiated).
+
+## Call object
+
+Returned by dial, get, answer, reject, hangup, and every `facetime.call.*` webhook in `data`.
+
+<ResponseField name="call_id" type="string">
+  FaceTime call ID.
+</ResponseField>
+
+<ResponseField name="ft_audio_line" type="string">
+  The FaceTime Audio number this call is on.
+</ResponseField>
+
+<ResponseField name="to" type="string">
+  Destination address.
+</ResponseField>
+
+<ResponseField name="from" type="string">
+  Originating address.
+</ResponseField>
+
+<ResponseField name="caller_id" type="string | null">
+  Caller ID presented on this call.
+</ResponseField>
+
+<ResponseField name="direction" type="string">
+  `inbound` or `outbound`.
+</ResponseField>
+
+<ResponseField name="status" type="string">
+  `queued`, `ringing`, `in_progress`, `completed`, or `failed`.
+</ResponseField>
+
+<ResponseField name="cause" type="string | null">
+  `null` while live. `dialer_hungup` if you hang up; `recipient_hungup` if they left; otherwise another end reason.
+</ResponseField>
+
+<ResponseField name="link" type="string | null">
+  FaceTime Web join URL once Apple creates it. `null` during `queued` and `ringing`.
+</ResponseField>
+
+<ResponseField name="webrtc" type="object | null">
+  Present while the call is active, `null` after it ends.
+
+  <Expandable title="WebRTC properties">
+    <ResponseField name="webrtc.join" type="string | null">
+      URL to join as the Contiguity FaceTime Audio line.
+    </ResponseField>
+    <ResponseField name="webrtc.url" type="string">
+      WebRTC server URL.
+    </ResponseField>
+    <ResponseField name="webrtc.room" type="string">
+      WebRTC room name.
+    </ResponseField>
+    <ResponseField name="webrtc.token" type="string">
+      WebRTC join token.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="participants" type="string[]">
+  Live roster while the call is up; remaining handles after it ends.
+</ResponseField>
+
+<ResponseField name="created_at" type="string">
+  When the call was created.
+</ResponseField>
+
+<ResponseField name="answered_at" type="string | null">
+  When the call was answered, else `null`.
+</ResponseField>
+
+<ResponseField name="ended_at" type="string | null">
+  When the call ended, else `null`.
+</ResponseField>
+
+<ResponseField name="duration" type="number | null">
+  Connected time in seconds. `null` until the call ends.
+</ResponseField>
+
+<ResponseField name="metadata" type="object">
+  Request metadata: id, timestamp, api_version, object.
+</ResponseField>
+
+| `status` | meaning |
+| --- | --- |
+| `queued` | Outbound dial created the call |
+| `ringing` | Outbound is ringing, or an inbound call arrived |
+| `in_progress` | The call was answered |
+| `completed` | The call ended (you hung up, they hung up, or FaceTime disconnected) |
+| `failed` | Contiguity could not place the call |
+
+| Stage | `participants` |
+| --- | --- |
+| initiated / ringing | `[]` |
+| answered | The remote party, e.g. `["+15559876543"]` |
+| ended | Remaining handles after hangup. Often just your FaceTime Audio line |
+
+## FaceTime webhooks
+
+Posted to your `facetime` webhook URL, else catchall. Envelope is the v2 webhook format. `data` is the same call object as `facetime.get()`.
+
+| `event.type` | when | `data.status` |
+| --- | --- | --- |
+| `facetime.call.initiated` | Outbound dial created the call | `queued` |
+| `facetime.call.ringing` | Outbound is ringing, or an inbound call arrived | `ringing` |
+| `facetime.call.answered` | The call is connected. `link` is now the FaceTime join URL | `in_progress` |
+| `facetime.call.rejected` | You rejected an inbound ringing call via `facetime.reject()` | — |
+| `facetime.call.failed` | Contiguity could not place the call | `failed` |
+| `facetime.call.ended` | You hung up, they hung up, or FaceTime disconnected. `webrtc` is `null`, `duration` is set | `completed` |
+
+```javascript
+import { Contiguity } from "contiguity";
+
+const contiguity = new Contiguity("contiguity_sk_...");
+
+export async function POST(req) {
+    const raw_body = await req.text();
+    if (!contiguity.webhook.verify(raw_body, req.headers.get("contiguity-signature"), process.env.CONTIGUITY_WEBHOOK_SECRET)) {
+        return new Response("invalid signature", { status: 401 });
+    }
+
+    const event = contiguity.webhook.parse(raw_body);
+    const call = event.data;
+
+    switch (event.type) {
+        case "facetime.call.ringing":
+            if (call.direction === "inbound") {
+                await contiguity.facetime.answer(event, { caller_id: "Support" });
+            }
+            break;
+        case "facetime.call.answered":
+            call.link;
+            call.webrtc.join;
+            break;
+        case "facetime.call.ended":
+            call.duration;
+            call.cause;
+            break;
+    }
+
+    return new Response("ok");
+}
+```
+
+## Types
+
+```typescript
+import type {
+    FacetimeCall,
+    FacetimeCallData,
+    FacetimeCallRef,
+    FacetimeDialParams,
+    FacetimeAnswerParams,
+    FacetimeAvailableResponse,
+    FacetimeWebRTC,
+    FacetimeCallStatus,
+    FacetimeCallDirection,
+} from "contiguity";
+```
+
+`FacetimeCallData` is an alias of `FacetimeCall` — the webhook `data` payload.
+
+import Snippet from '/snippets/mintlify.mdx';
+
+<Snippet />

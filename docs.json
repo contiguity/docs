@@ -58,7 +58,9 @@
                             },
                             "products/imessage",
                             "products/whatsapp",
+                            "products/facetime",
                             "products/leases",
+                            "products/intelligence",
                             {
                                 "group": "Base",
                                 "icon": {
@@ -90,8 +92,10 @@
                                     "sdk/js/domains",
                                     "sdk/js/imessage",
                                     "sdk/js/whatsapp",
+                                    "sdk/js/facetime",
                                     "sdk/js/conversations",
                                     "sdk/js/leases",
+                                    "sdk/js/intelligence",
                                     "sdk/js/entitlements",
                                     "sdk/js/webhooks"
                                 ]

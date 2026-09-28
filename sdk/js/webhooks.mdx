@@ -7,7 +7,7 @@ description: "Verify and parse webhook payloads with the Contiguity JavaScript S
 
 ## Reply
 
-Parse webhooks and reply to incoming messages. `reply()` prefills `to`/`from` from the event.
+Parse webhooks and reply to incoming messages. `reply()` prefills `to`/`from` from the event. `facetime.get()`, `answer()`, `reject()`, and `hangup()` take a parsed event the same way.
 
 <Tabs>
   <Tab title="Express">
@@ -28,6 +28,9 @@ Parse webhooks and reply to incoming messages. `reply()` prefills `to`/`from` fr
         }
         if (event.type === "imessage.incoming") {
             await contiguity.imessage.reply(event, { message: "Hi back!" });
+        }
+        if (event.type === "facetime.call.ringing" && event.data.direction === "inbound") {
+            await contiguity.facetime.answer(event, { caller_id: "Support" });
         }
         res.sendStatus(200);
     });
@@ -52,6 +55,9 @@ Parse webhooks and reply to incoming messages. `reply()` prefills `to`/`from` fr
         }
         if (event.type === "imessage.incoming") {
             await contiguity.imessage.reply(event, { message: "Hi back!" });
+        }
+        if (event.type === "facetime.call.ringing" && event.data.direction === "inbound") {
+            await contiguity.facetime.answer(event, { caller_id: "Support" });
         }
         return c.text("ok", 200);
     });

@@ -1,0 +1,171 @@
+---
+title: 'Number Intelligence'
+icon: "chart-mixed"
+iconType: "solid"
+description: "Look up carrier, CNAM, porting, and optional iMessage / FaceTime / risk data with the Contiguity JavaScript SDK."
+---
+
+`contiguity.intelligence.lookup`
+
+<Warning>
+    Requires the `number_intelligence` entitlement. Rate limited to 6 requests per minute.
+</Warning>
+
+<Note>
+    The number must be E.164.
+</Note>
+
+By default this returns carrier, CNAM, and porting data. `imessage` and `facetime` are `null` unless you set those flags. The two flags are independent.
+
+`contiguity_risk_scoring_beta: true` requires both availability flags. If you only pass the risk flag, the SDK also sends `imessage=true` and `facetime=true`. When risk scoring is returned, `imessage` and `facetime` are booleans (never `null`).
+
+```javascript
+const lookup = await contiguity.intelligence.lookup("+13129457420");
+
+const with_availability = await contiguity.intelligence.lookup("+13129457420", {
+    imessage: true,
+    facetime: true,
+});
+
+const with_risk = await contiguity.intelligence.lookup("+13129457420", {
+    imessage: true,
+    facetime: true,
+    contiguity_risk_scoring_beta: true,
+});
+```
+
+### intelligence.lookup(number, params?)
+
+<ParamField body="number" type="string" required>
+  Phone number in E.164 format.
+</ParamField>
+
+<ParamField body="imessage" type="boolean" default="false">
+  Include iMessage availability.
+</ParamField>
+
+<ParamField body="facetime" type="boolean" default="false">
+  Include FaceTime availability.
+</ParamField>
+
+<ParamField body="contiguity_risk_scoring_beta" type="boolean" default="false">
+  Include risk scoring. Requires both availability flags. The SDK sets them if you omit them.
+</ParamField>
+
+### Response
+
+<ResponseField name="number" type="string | null">
+  E.164 phone number.
+</ResponseField>
+
+<ResponseField name="formatted" type="string | null">
+  Nationally formatted number, e.g. `(312) 945-7420`.
+</ResponseField>
+
+<ResponseField name="country" type="string | null">
+  ISO 3166-1 alpha-2 country code.
+</ResponseField>
+
+<ResponseField name="caller_name" type="string | null">
+  CNAM caller name, if the database has one.
+</ResponseField>
+
+<ResponseField name="line_type" type="string | null">
+  Portability line type (`mobile`, `landline`, `voip`).
+</ResponseField>
+
+<ResponseField name="city" type="string | null">
+  Rate center city.
+</ResponseField>
+
+<ResponseField name="region" type="string | null">
+  State or region.
+</ResponseField>
+
+<ResponseField name="carrier" type="object | null">
+  Current carrier.
+
+  <Expandable title="Carrier properties">
+    <ResponseField name="carrier.name" type="string | null">
+      Current carrier name.
+    </ResponseField>
+    <ResponseField name="carrier.type" type="string | null">
+      Carrier-reported line type (`mobile`, `landline`, `voip`).
+    </ResponseField>
+    <ResponseField name="carrier.mcc" type="string | null">
+      Mobile country code.
+    </ResponseField>
+    <ResponseField name="carrier.mnc" type="string | null">
+      Mobile network code.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="ported" type="object | null">
+  Porting data.
+
+  <Expandable title="Ported properties">
+    <ResponseField name="ported.ported" type="boolean">
+      Whether the number has been ported.
+    </ResponseField>
+    <ResponseField name="ported.date" type="string | null">
+      Port date (`YYYY-MM-DD`), if known.
+    </ResponseField>
+    <ResponseField name="ported.original_carrier" type="string | null">
+      Carrier before the port.
+    </ResponseField>
+    <ResponseField name="ported.current_carrier" type="string | null">
+      Carrier after the port.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="imessage" type="boolean | null">
+  iMessage availability. `null` unless `imessage=true`.
+</ResponseField>
+
+<ResponseField name="facetime" type="boolean | null">
+  FaceTime availability. `null` unless `facetime=true`.
+</ResponseField>
+
+<ResponseField name="contiguity_risk_scoring_beta" type="object | null">
+  Risk scoring. Only returned when `contiguity_risk_scoring_beta=true`. Useful with other fraud signals to determine if a user is risky.
+
+  <Expandable title="Risk scoring properties">
+    <ResponseField name="contiguity_risk_scoring_beta.score" type="number">
+      Risk from `0.00` (safe) to `0.99` (very high).
+    </ResponseField>
+    <ResponseField name="contiguity_risk_scoring_beta.level" type="string">
+      `low`, `medium`, `high`, or `very_high`.
+    </ResponseField>
+    <ResponseField name="contiguity_risk_scoring_beta.confidence" type="number">
+      Confidence from `0.00` to `0.99`.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="metadata" type="object">
+  Request metadata: id, timestamp, api_version, object.
+</ResponseField>
+
+| `contiguity_risk_scoring_beta.level` | score |
+| --- | --- |
+| `low` | `< 0.2` |
+| `medium` | `< 0.45` |
+| `high` | `< 0.7` |
+| `very_high` | otherwise |
+
+## Types
+
+```typescript
+import type {
+    IntelligenceLookupParams,
+    IntelligenceLookupResponse,
+    IntelligenceRiskScore,
+    IntelligenceRiskLevel,
+} from "contiguity";
+```
+
+import Snippet from '/snippets/mintlify.mdx';
+
+<Snippet />
