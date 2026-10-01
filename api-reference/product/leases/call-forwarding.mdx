@@ -1,0 +1,18 @@
+---
+title: 'Get call forwarding'
+openapi: "openapi-numbers GET /lease/{number}/call_forwarding"
+sidebarTitle: 'Get Forwarding'
+description: 'Get the current call forwarding on a leased number'
+icon: "share-from-square"
+iconType: "solid"
+---
+
+<Note>
+    The path `number` must be a number you lease, in E.164.
+</Note>
+
+`call_forwarding.status` is `active` once the change is on the line. It is `queued` while the change is pending. `estimated_completion` is a millisecond timestamp while queued, and `null` once active. `to` is `null` when forwarding is disabled.
+
+import Snippet from '/snippets/mintlify.mdx';
+
+<Snippet />

@@ -1,0 +1,20 @@
+---
+title: 'Enable call forwarding'
+openapi: "openapi-numbers POST /lease/{number}/call_forwarding/enable"
+sidebarTitle: 'Enable Forwarding'
+description: 'Forward all calls to a leased number to another number'
+icon: "phone-arrow-right"
+iconType: "solid"
+---
+
+<Warning>
+    `to` must be E.164. The path `number` must be a number you lease.
+</Warning>
+
+<Tip>
+    Enabling is not always instant. If `call_forwarding.status` is `queued`, the change is still pending. `estimated_completion` is when it should land. [Get call forwarding](/api-reference/product/leases/call-forwarding) until status is `active`.
+</Tip>
+
+import Snippet from '/snippets/mintlify.mdx';
+
+<Snippet />
