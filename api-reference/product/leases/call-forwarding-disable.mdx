@@ -1,0 +1,20 @@
+---
+title: 'Disable call forwarding'
+openapi: "openapi-numbers POST /lease/{number}/call_forwarding/disable"
+sidebarTitle: 'Disable Forwarding'
+description: 'Stop forwarding calls on a leased number'
+icon: "phone-slash"
+iconType: "solid"
+---
+
+<Note>
+    The path `number` must be a number you lease, in E.164.
+</Note>
+
+<Tip>
+    Disabling can also queue. If `call_forwarding.status` is `queued`, wait for it to become `active` with `to` `null`. [Get call forwarding](/api-reference/product/leases/call-forwarding) to check.
+</Tip>
+
+import Snippet from '/snippets/mintlify.mdx';
+
+<Snippet />

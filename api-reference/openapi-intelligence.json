@@ -6,7 +6,7 @@
         }
     ],
     "info": {
-        "version": "v2026.9.27",
+        "version": "v2026.10.1",
         "title": "Number Intelligence API"
     },
     "components": {
@@ -110,11 +110,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1790546990555
+                                            "example": 1790897739135
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.9.27"
+                                            "example": "v2026.10.1"
                                         },
                                         "object": {
                                             "type": "string",
@@ -531,11 +531,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1790546990555
+                                            "example": 1790897739135
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.9.27"
+                                            "example": "v2026.10.1"
                                         },
                                         "object": {
                                             "type": "string",
@@ -583,11 +583,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1790546990555
+                                            "example": 1790897739135
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.9.27"
+                                            "example": "v2026.10.1"
                                         },
                                         "object": {
                                             "type": "string",
@@ -635,11 +635,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1790546990555
+                                            "example": 1790897739135
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.9.27"
+                                            "example": "v2026.10.1"
                                         },
                                         "object": {
                                             "type": "string",
@@ -687,11 +687,11 @@
                                         },
                                         "timestamp": {
                                             "type": "number",
-                                            "example": 1790546990555
+                                            "example": 1790897739135
                                         },
                                         "api_version": {
                                             "type": "string",
-                                            "example": "v2026.9.27"
+                                            "example": "v2026.10.1"
                                         },
                                         "object": {
                                             "type": "string",

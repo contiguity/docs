@@ -248,7 +248,10 @@
                             "api-reference/product/leases/lease",
                             "api-reference/product/leases/leased-all",
                             "api-reference/product/leases/terminate",
-                            "api-reference/product/leases/configure"
+                            "api-reference/product/leases/configure",
+                            "api-reference/product/leases/call-forwarding",
+                            "api-reference/product/leases/call-forwarding-enable",
+                            "api-reference/product/leases/call-forwarding-disable"
                         ]
                     },
                     {
