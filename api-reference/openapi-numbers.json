@@ -572,8 +572,7 @@
                                                         "to": {
                                                             "type": "string",
                                                             "nullable": true,
-                                                            "description": "Number calls are forwarded to, or null when disabled",
-                                                            "example": "+13059278337"
+                                                            "description": "Number calls are forwarded to, or null when disabled"
                                                         },
                                                         "status": {
                                                             "type": "string",
@@ -857,8 +856,7 @@
                                 "properties": {
                                     "to": {
                                         "type": "string",
-                                        "description": "Number to forward calls to, in E.164 format",
-                                        "example": "+13059278337"
+                                        "description": "Number to forward calls to, in E.164 format"
                                     }
                                 },
                                 "required": [
@@ -911,8 +909,7 @@
                                                         "to": {
                                                             "type": "string",
                                                             "nullable": true,
-                                                            "description": "Number calls are forwarded to, or null when disabled",
-                                                            "example": "+13059278337"
+                                                            "description": "Number calls are forwarded to, or null when disabled"
                                                         },
                                                         "status": {
                                                             "type": "string",
@@ -1586,8 +1583,7 @@
                                 "properties": {
                                     "to": {
                                         "type": "string",
-                                        "description": "Number to forward calls to, in E.164 format",
-                                        "example": "+13059278337"
+                                        "description": "Number to forward calls to, in E.164 format"
                                     }
                                 }
                             }
@@ -1637,8 +1633,7 @@
                                                         "to": {
                                                             "type": "string",
                                                             "nullable": true,
-                                                            "description": "Number calls are forwarded to, or null when disabled",
-                                                            "example": "+13059278337"
+                                                            "description": "Number calls are forwarded to, or null when disabled"
                                                         },
                                                         "status": {
                                                             "type": "string",
