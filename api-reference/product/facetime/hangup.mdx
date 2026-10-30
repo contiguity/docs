@@ -7,7 +7,7 @@ icon: "phone-hangup"
 iconType: "solid"
 ---
 
-Ends the call from your side. `cause` becomes `dialer_hungup` and Contiguity fires [`facetime.call.ended`](/api-reference/webhook/example-v2#facetime-call-ended).
+Ends the call from your side. `cause` becomes `dialer_hungup` and Contiguity fires [`facetime.call.ended`](/api-reference/webhook/events#facetime-call-ended).
 
 If the remote party hangs up first, you still get `facetime.call.ended` with `cause` `recipient_hungup`. You do not need to call this endpoint in that case.
 

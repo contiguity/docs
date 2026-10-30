@@ -28,7 +28,7 @@ If you omit `from` on dial, Contiguity picks one of your leased FaceTime Audio n
 
 ## Dial
 
-Place an outbound FaceTime Audio call. Creates a call in `queued` and fires [`facetime.call.initiated`](/api-reference/webhook/example-v2#facetime-call-initiated). When the remote side starts ringing, status becomes `ringing` and Contiguity fires [`facetime.call.ringing`](/api-reference/webhook/example-v2#facetime-call-ringing).
+Place an outbound FaceTime Audio call. Creates a call in `queued` and fires [`facetime.call.initiated`](/api-reference/webhook/events#facetime-call-initiated). When the remote side starts ringing, status becomes `ringing` and Contiguity fires [`facetime.call.ringing`](/api-reference/webhook/events#facetime-call-ringing).
 
 At dial time `link` is `null`, `participants` is `[]`, and `duration` is `null`.
 
@@ -71,7 +71,7 @@ const call = await contiguity.facetime.get(event);
 
 ## Answer
 
-Answer an inbound ringing call. Moves the call to `in_progress` and fires [`facetime.call.answered`](/api-reference/webhook/example-v2#facetime-call-answered).
+Answer an inbound ringing call. Moves the call to `in_progress` and fires [`facetime.call.answered`](/api-reference/webhook/events#facetime-call-answered).
 
 ```javascript
 await contiguity.facetime.answer(event);
@@ -91,7 +91,7 @@ await contiguity.facetime.answer("call_fta...");
 
 ## Reject
 
-Reject a ringing inbound call. Fires [`facetime.call.rejected`](/api-reference/webhook/example-v2#facetime-call-rejected).
+Reject a ringing inbound call. Fires [`facetime.call.rejected`](/api-reference/webhook/events#facetime-call-rejected).
 
 ```javascript
 await contiguity.facetime.reject(event);
@@ -106,7 +106,7 @@ await contiguity.facetime.reject("call_fta...");
 
 ## Hang up
 
-Ends the call from your side. `cause` becomes `dialer_hungup` and Contiguity fires [`facetime.call.ended`](/api-reference/webhook/example-v2#facetime-call-ended).
+Ends the call from your side. `cause` becomes `dialer_hungup` and Contiguity fires [`facetime.call.ended`](/api-reference/webhook/events#facetime-call-ended).
 
 If the remote party hangs up first, you still get `facetime.call.ended` with `cause` `recipient_hungup`. You do not need to hang up in that case.
 
@@ -160,7 +160,7 @@ if (event.type === "facetime.call.ringing") {
 
 Throws `FaceTime webhook data must have call_id` if neither the event nor the object has a `call_id`.
 
-See [Webhooks](/sdk/js/webhooks) for verify / parse, or the [v2 event payloads](/api-reference/webhook/example-v2#facetime-call-initiated).
+See [Webhooks](/sdk/js/webhooks) for verify / parse, or the [v2 event payloads](/api-reference/webhook/events#facetime-call-initiated).
 
 ## Call object
 

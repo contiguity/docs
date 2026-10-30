@@ -15,7 +15,7 @@ iconType: "solid"
     Phone numbers must be in E.164 format with country codes. `to` can also be a FaceTime email.
 </Warning>
 
-Dialing creates a call in `queued` and fires [`facetime.call.initiated`](/api-reference/webhook/example-v2#facetime-call-initiated). When the remote side starts ringing, status becomes `ringing` and Contiguity fires [`facetime.call.ringing`](/api-reference/webhook/example-v2#facetime-call-ringing).
+Dialing creates a call in `queued` and fires [`facetime.call.initiated`](/api-reference/webhook/events#facetime-call-initiated). When the remote side starts ringing, status becomes `ringing` and Contiguity fires [`facetime.call.ringing`](/api-reference/webhook/events#facetime-call-ringing).
 
 If you omit `from`, Contiguity picks one of your leased FaceTime Audio numbers at random. `caller_id` is optional and is presented as `Maybe: caller_id` to the recipient. If not provided, it will be a formatted version of your leased number, e.g., `Maybe: +1 (415) 555-1234`
 
