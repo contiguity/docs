@@ -17,7 +17,7 @@ await contiguity.conversations.cancel("text_abc");
 This does not unsend a message. If the send is already in flight, it may still go out. Delivery-confirmed messages throw with status `400`.
 </Warning>
 
-A successful cancel appends `text.cancelled` / `imessage.cancelled` / `whatsapp.cancelled` to the tracking timeline and fires the matching [webhook](/api-reference/webhook/events#text-cancelled--imessage-cancelled--whatsapp-cancelled) once. See [Cancel a queued send](/api-reference/product/text/cancel) for retry backoff and other API details.
+A successful cancel appends [`text.cancelled`](/api-reference/webhook/events#text-cancelled) or [`imessage.cancelled`](/api-reference/webhook/events#imessage-cancelled) to the tracking timeline and fires the matching webhook once. See [Cancel a queued send](/api-reference/product/text/cancel) for retry backoff and other API details.
 
 ### conversations.cancel(message)
 
